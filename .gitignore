@@ -1,0 +1,23 @@
+# WordPress core noise
+wp-config.php
+wp-config.php.php
+
+# Uploads / cache
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/backup*/
+wp-content/backups/
+
+# Logs
+*.log
+error_log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Env
+.env
