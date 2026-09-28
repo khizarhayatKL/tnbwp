@@ -1,0 +1,262 @@
+/* ============================================================
+   TechnBrains — Mobile App Development page (ma_* sections)
+   Net-new rules only. Relies on components.css for .dt-hero*,
+   .dt-section, .dt-head, .dt-h2, .dt-sub, .dt-btn, .dt-rev,
+   and the --dt-ink/--dt-muted/--dt-line/--dt-red/--dt-gray tokens.
+
+   Only the classes the 4 ma_* components actually render are
+   included here — the source mockup (mobile-app.css, ported from
+   a design-canvas export) also contains several alternate/unused
+   hero variants (.ma-device, .ma-render, .ma-statcard, .ma-circuit,
+   .ma-base, .ma-dev-grid) that no current markup references; they
+   are intentionally not ported to avoid shipping dead CSS.
+   ============================================================ */
+
+/* ---------- HERO visual (phone showcase image) ---------- */
+.ma-stack { position: relative; z-index: 2; width: 100%; min-height: 540px; display: flex; align-items: center; justify-content: center; overflow: visible; }
+.ma-grid-bg {
+  position: absolute; inset: -6% -4%; z-index: 1; opacity: 0; animation: maFadeIn 0.9s ease forwards 0.4s;
+  background:
+    radial-gradient(closest-side, rgba(120,150,220,0.28) 0%, transparent 72%) center/78% 78% no-repeat,
+    radial-gradient(rgba(255,255,255,0.10) 1.4px, transparent 1.4px);
+  background-position: center, 0 0;
+  background-size: 78% 78%, 26px 26px;
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 82%);
+  mask-image: radial-gradient(closest-side, #000 55%, transparent 82%);
+}
+.ma-showcase { position: relative; z-index: 2; width: 100%; max-width: 620px; margin: 0 auto; display: flex; justify-content: center; }
+.ma-showcase-img { width: 100%; height: auto; display: block; filter: drop-shadow(0 46px 80px rgba(0,0,0,0.5)); animation: maImgFloat 8s ease-in-out infinite; }
+@keyframes maFadeIn { to { opacity: 1; } }
+@keyframes maImgFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+@media (prefers-reduced-motion: reduce) { .ma-showcase-img { animation: none; } .ma-grid-bg { animation: none; opacity: 1; } }
+@media (max-width: 1040px) { .ma-showcase { max-width: 440px; } }
+
+/* ---------- PROBLEMS WE SOLVE (accordion) ---------- */
+.ma-acc { margin-top: 48px; display: flex; flex-direction: column; gap: 16px; }
+.ma-acc-row { background: #fff; border: 1px solid var(--dt-line); border-radius: 20px; overflow: hidden; transition: border-color .3s ease, box-shadow .3s ease; }
+.ma-acc-row.is-open { border-color: rgba(236,28,36,0.28); box-shadow: 0 34px 70px -46px rgba(12,35,64,0.4); }
+.ma-acc-head { width: 100%; display: flex; align-items: center; gap: 22px; padding: 24px 30px; cursor: pointer; background: none; border: none; text-align: left; }
+.ma-acc-ic { width: 48px; height: 48px; border-radius: 13px; flex-shrink: 0; display: grid; place-items: center; background: rgba(236,28,36,0.08); color: var(--dt-red); transition: background .3s ease, color .3s ease; }
+.ma-acc-ic svg { width: 23px; height: 23px; }
+.ma-acc-row.is-open .ma-acc-ic { background: var(--dt-red); color: #fff; }
+/* Uploaded icon <img>s can't recolor via CSS `color`/currentColor like the inline-SVG
+   fallback does, so the "turns white on the red background" states use a brightness/
+   invert filter instead — visually identical result for either icon source. */
+.ma-acc-row.is-open .ma-acc-ic img { filter: brightness(0) invert(1); }
+.ma-acc-t { flex: 1; font-family: 'Outfit', system-ui, sans-serif; font-size: 22px; font-weight: 600; letter-spacing: -0.015em; color: var(--dt-ink); line-height: 1.2; }
+.ma-acc-toggle { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0; background: var(--dt-gray); color: var(--dt-ink); transition: transform .3s ease, background .3s ease, color .3s ease; }
+.ma-acc-row.is-open .ma-acc-toggle { transform: rotate(180deg); background: var(--dt-red); color: #fff; }
+.ma-acc-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(.4,0,.2,1); }
+.ma-acc-panel-in { overflow: hidden; }
+.ma-acc-items { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 2px; padding: 0 30px 30px 100px; }
+.ma-acc-item { padding: 18px 22px; background: #fff; border: 1px solid var(--dt-line); border-radius: 12px; display: flex; flex-direction: column; gap: 5px; transition: background .25s ease, border-color .25s ease; }
+.ma-acc-item:hover { background: rgba(236,28,36,0.06); border-color: rgba(236,28,36,0.25); }
+.ma-acc-item b { font-size: 15px; font-weight: 600; color: var(--dt-ink); }
+.ma-acc-item span { font-size: 13.5px; line-height: 1.55; color: var(--dt-muted); }
+@media (max-width: 760px) {
+  .ma-acc-head { gap: 14px; padding: 18px 20px; }
+  .ma-acc-t { font-size: 18px; }
+  .ma-acc-items { grid-template-columns: 1fr; padding: 0 20px 22px; gap: 8px; }
+}
+
+/* ---------- DEVICE ECOSYSTEM (split rail + panel) ---------- */
+.ma-eco { margin-top: 52px; display: grid; grid-template-columns: 340px 1fr; gap: 26px; align-items: stretch; }
+.ma-eco-rail { display: flex; flex-direction: column; gap: 14px; }
+.ma-eco-tab { display: flex; align-items: center; gap: 16px; text-align: left; padding: 22px 22px; border-radius: 18px; border: 1px solid var(--dt-line); background: #fff; cursor: pointer; transition: all .3s ease; }
+.ma-eco-tab:hover { border-color: var(--dt-red); background: var(--dt-red); transform: translateX(4px); box-shadow: 0 24px 46px -30px rgba(236,28,36,0.6); }
+.ma-eco-tab:hover .ma-eco-tab-t { color: #fff; }
+.ma-eco-tab:hover .ma-eco-tab-n { color: rgba(255,255,255,0.72); }
+.ma-eco-tab:hover .ma-eco-tab-ic { background: rgba(255,255,255,0.15); color: #fff; }
+.ma-eco-tab.is-active { background: var(--dt-red); border-color: var(--dt-red); box-shadow: 0 26px 50px -30px rgba(236,28,36,0.6); }
+.ma-eco-tab.is-active:hover { background: var(--dt-red); border-color: var(--dt-red); }
+.ma-eco-tab-ic { width: 48px; height: 48px; flex-shrink: 0; border-radius: 13px; display: grid; place-items: center; background: var(--dt-gray); color: var(--dt-red); transition: all .3s ease; }
+.ma-eco-tab-ic svg { width: 22px; height: 22px; }
+.ma-eco-tab.is-active .ma-eco-tab-ic { background: rgba(255,255,255,0.15); color: #fff; animation: maEcoPop .45s cubic-bezier(.34,1.56,.64,1); }
+.ma-eco-tab.is-active .ma-eco-tab-ic img,
+.ma-eco-tab:hover .ma-eco-tab-ic img { filter: brightness(0) invert(1); }
+@keyframes maEcoPop { 0% { transform: scale(.6) rotate(-12deg); } 60% { transform: scale(1.18) rotate(6deg); } 100% { transform: scale(1) rotate(0); } }
+.ma-eco-tab-txt { display: flex; flex-direction: column; gap: 3px; flex: 1; }
+.ma-eco-tab-t { font-family: 'Outfit', system-ui, sans-serif; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; color: var(--dt-ink); transition: color .3s ease; }
+.ma-eco-tab-n { font-size: 12.5px; color: var(--dt-muted); transition: color .3s ease; }
+.ma-eco-tab.is-active .ma-eco-tab-t { color: #fff; }
+.ma-eco-tab.is-active .ma-eco-tab-n { color: rgba(255,255,255,0.72); }
+.ma-eco-panel { background: #fff; border: 1px solid var(--dt-line); border-radius: 22px; padding: 34px 34px 38px; display: flex; flex-direction: column; }
+.ma-eco-desc { position: relative; display: flex; align-items: flex-start; gap: 15px; font-size: 16px; line-height: 1.55; color: var(--dt-ink); margin: 0 0 28px; padding-bottom: 26px; border-bottom: 1px solid var(--dt-line); }
+.ma-eco-bar { width: 4px; align-self: stretch; min-height: 34px; border-radius: 4px; flex-shrink: 0; background: var(--dt-red); }
+.ma-eco-items { display: flex; flex-wrap: wrap; gap: 12px; align-content: flex-start; }
+.ma-eco-chip { display: inline-flex; align-items: center; gap: 11px; padding: 10px 18px 10px 10px; border-radius: 12px; background: #fff; border: 1px solid var(--dt-line); font-size: 14.5px; font-weight: 500; color: var(--dt-ink); text-decoration: none; opacity: 0; animation: maEcoIn .45s ease forwards; transition: border-color .25s ease, transform .25s ease; }
+.ma-eco-chip-tile img { width: 100%; height: 100%; object-fit: contain; border-radius: inherit; }
+.ma-eco-chip:hover { border-color: rgba(236,28,36,0.35); transform: translateY(-2px); }
+.ma-eco-chip-tile { width: 36px; height: 36px; border-radius: 9px; display: grid; place-items: center; font-family: 'Outfit', system-ui, sans-serif; font-weight: 700; font-size: 13px; letter-spacing: -0.02em; flex-shrink: 0; background: rgba(236,28,36,0.12); color: var(--dt-red); }
+
+
+@keyframes maEcoIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .ma-eco-tab.is-active .ma-eco-tab-ic { animation: none; } .ma-eco-chip { animation: none; opacity: 1; } }
+@media (max-width: 860px) {
+  .ma-eco { grid-template-columns: 1fr; }
+  .ma-eco-rail { flex-direction: row; overflow-x: auto; }
+  .ma-eco-tab { flex: 1 0 auto; }
+}
+@media (max-width: 520px) {
+  .ma-eco-rail { flex-direction: column; }
+  .ma-eco-panel { padding: 26px 22px 30px; }
+}
+
+/* ---------- POST-LAUNCH GROWTH (stepped list) ---------- */
+.ma-grow3 { margin-top: 56px; max-width: 940px; margin-left: auto; margin-right: auto; display: flex; flex-direction: column; }
+.ma-grow3-row { position: relative; display: grid; grid-template-columns: 72px 1fr; gap: 30px; align-items: start; padding: 30px 24px 30px 0; border-top: 1px solid var(--dt-line); border-radius: 16px; transition: background .35s ease, box-shadow .35s ease, transform .35s ease; }
+.ma-grow3-row:first-child { border-top: none; }
+.ma-grow3-row:hover { background: #fff; transform: translateX(6px); box-shadow: 0 24px 50px -40px rgba(12,35,64,0.34); }
+.ma-grow3-ic { width: 60px; height: 60px; border-radius: 15px; display: grid; place-items: center; background: rgba(236,28,36,0.08); color: var(--dt-red); transition: background .3s ease, color .3s ease, transform .3s ease; animation: maGrowFloat 4s ease-in-out infinite; }
+.ma-grow3-row:nth-child(2) .ma-grow3-ic { animation-delay: .5s; }
+.ma-grow3-row:nth-child(3) .ma-grow3-ic { animation-delay: 1s; }
+.ma-grow3-row:nth-child(4) .ma-grow3-ic { animation-delay: 1.5s; }
+.ma-grow3-row:nth-child(5) .ma-grow3-ic { animation-delay: 2s; }
+.ma-grow3-ic svg { width: 27px; height: 27px; }
+.ma-grow3-row:hover .ma-grow3-ic { transform: translateY(-3px) scale(1.06); background: var(--dt-red); color: #fff; }
+.ma-grow3-row:last-child .ma-grow3-ic {  }
+.ma-grow3-row:hover .ma-grow3-ic img,
+.ma-grow3-row:last-child .ma-grow3-ic img { filter: brightness(0) invert(1); }
+@keyframes maGrowFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@media (prefers-reduced-motion: reduce) { .ma-grow3-ic { animation: none; } }
+.ma-grow3-body { padding-top: 6px; }
+.ma-grow3-t { font-family: 'Outfit', system-ui, sans-serif; font-size: 23px; font-weight: 600; letter-spacing: -0.015em; color: var(--dt-ink); margin: 0 0 8px; line-height: 1.2; }
+.ma-grow3-d { font-size: 15.5px; line-height: 1.6; color: var(--dt-muted); margin: 0; max-width: 60ch; }
+
+
+@media (max-width: 680px) {
+  .ma-grow3-row { grid-template-columns: 52px 1fr; gap: 18px; padding: 24px 0; }
+  .ma-grow3-ic { width: 48px; height: 48px; border-radius: 13px; }
+  .ma-grow3-ic svg { width: 22px; height: 22px; }
+  .ma-grow3-t { font-size: 20px; }
+}
+
+section.dt-hero.ma-hero.mobile-app-v2-hero .dt-hero-grid-layout{
+    display :flex;
+}
+section.dt-hero.ma-hero.mobile-app-v2-hero .dt-hero-grid-layout .dt-hero-content{
+    max-width : 60%
+}
+ section.dt-hero.ma-hero.mobile-app-v2-hero .dt-hero-grid-layout .dt-hero-lead{
+     max-width: unset
+ }
+
+ section.dt-hero.ma-hero.mobile-app-v2-hero .dt-hero-grid-layout  .dt-hero-content > h1 {
+     font-size: clamp(38px, 5vw, 65px);
+}
+.pls-card:hover{
+	cursor :unset
+}
+.case-card{
+	height: fit-content
+}
+
+section.ih-section.ih-why-clean.mobile-why-choose  
+.ih-why-head {
+    max-width : unset;
+    width : unset
+}
+section.ih-section.ih-why-clean.mobile-why-choose  
+.ih-why-head h2 ,section.ih-section.ih-why-clean.mobile-why-choose  
+.ih-why-head p {
+    text-align:center;
+		margin : 50px auto !important;
+	margin-bottom : 30px
+}
+
+.page-slug-mobile-app-development  .sv-models-sub , .page-slug-mobile-app-development  .sv-models-h2 {
+	max-width : unset
+}
+section.dt-section.gray.ma-grow3-sec{
+	background :transparent
+}
+.page-slug-mobile-app-development 
+.ih-why-card-icon img{
+	width : unset ;
+	height : unset
+}
+
+/* services-copy page override — 5 equal-width columns per row. flex-grow:0 +
+   justify-content:center means a trailing partial row (4, 3, etc.) centers as
+   a group instead of stretching to fill the row or leaving blank grid cells. */
+.page-slug-mobile-app-development  .sv-tools-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+section.dt-section.ma-acc-sec .dt-head  h2,
+section.dt-section.ma-acc-sec .dt-head  p {
+    text-align :center  
+}
+.page-slug-mobile-app-development 
+.ih-ind-card-link {
+	display :none
+}
+
+.page-slug-mobile-app-development  .sv-tool {
+  flex: 0 0 calc((100% - 4 * 16px) / 5);
+}
+
+.sv-metric:nth-child(2) span.sv-metric-suffix {
+    font-size: 40px;
+ 
+}
+ 
+h2.ihcs-h2 {
+    text-align: center;
+}
+
+ 
+
+@media (max-width: 1024px) {
+  .page-slug-mobile-app-development  .sv-tool {
+    flex: 0 0 calc((100% - 3 * 16px) / 4);
+  }
+	 .page-slug-mobile-app-v2  .case-card{
+	height: unset
+}
+	
+	section.dt-hero.ma-hero.mobile-app-v2-hero .dt-hero-grid-layout{
+    display :unset;
+}
+	
+	section.dt-hero.ma-hero.mobile-app-v2-hero .dt-hero-grid-layout .dt-hero-content {
+    max-width: unset;
+}
+}
+
+@media (max-width: 640px) {
+  .page-slug-mobile-app-development .sv-tool {
+    flex: 0 0 calc((100% - 1 * 16px) / 2);
+  }
+}
+
+p.dt-hero-lead,
+p.ihcs-desc,
+p.sv-models-sub,
+p.sv-tools-sub {
+    font-size: 20px !important;
+    font-weight: 400;
+}
+
+/* Tablet */
+@media (max-width: 991px) {
+    p.dt-hero-lead,
+    p.ihcs-desc,
+    p.sv-models-sub,
+    p.sv-tools-sub {
+        font-size: 18px !important;
+    }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    p.dt-hero-lead,
+    p.ihcs-desc,
+    p.sv-models-sub,
+    p.sv-tools-sub {
+        font-size: 16px !important;
+    }
+}

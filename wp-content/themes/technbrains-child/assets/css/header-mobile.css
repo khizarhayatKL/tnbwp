@@ -1,0 +1,409 @@
+/* =============================================================================
+   TechnBrains — Mobile Header + Slide-out Nav
+   ============================================================================= */
+
+.tnb-mobile-header {
+  display: none;
+}
+
+@media (max-width: 991px) {
+
+  /* ── Top bar ────────────────────────────────────────────────────────────── */
+  .tnb-mobile-header {
+    display: block;
+    background: #000;
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    box-shadow: 0 2px 12px rgba(0,0,0,.4);
+  }
+
+  .tnb-mobile-header .main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+	/* padding: 0 20px; */
+    height: 64px;
+  }
+
+  .tnb-mobile-header .header-logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .tnb-mobile-header .header-logo img {
+    width: 170px;
+    height: auto;
+    display: block;
+  }
+
+  /* ── Overlay ────────────────────────────────────────────────────────────── */
+  .tnb-menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.65);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .3s ease, visibility .3s ease;
+    z-index: 210;
+  }
+  .tnb-menu-overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* ── Hamburger ──────────────────────────────────────────────────────────── */
+  .mobile-nav .header-top {
+    display: flex;
+    align-items: center;
+  }
+
+  .mobile-nav .hamburg {
+    width: 42px;
+    height: 42px;
+    background: #EC1C24;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    z-index: 230;
+    transition: background .2s, transform .2s;
+    flex-shrink: 0;
+    padding: 0;
+  }
+
+  .mobile-nav .hamburg:hover {
+    background: #c8151c;
+  }
+
+  .mobile-nav .hamburg svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+    transition: opacity .2s;
+  }
+
+  .mobile-nav .hamburg .icon-close { display: none; }
+  .mobile-nav .hamburg.open .icon-bars { display: none; }
+  .mobile-nav .hamburg.open .icon-close { display: block; }
+
+  /* ── Slide-out panel ────────────────────────────────────────────────────── */
+  .mobile-nav .header-menu {
+    background: #0d0d0d;
+    width: 320px;
+    position: fixed;
+    top: 0;
+    right: -360px;
+    z-index: 220;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: right .35s cubic-bezier(.4,0,.2,1);
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: thin;
+    scrollbar-color: #2a2a2a transparent;
+  }
+
+  .mobile-nav .header-menu::-webkit-scrollbar { width: 4px; }
+  .mobile-nav .header-menu::-webkit-scrollbar-track { background: transparent; }
+  .mobile-nav .header-menu::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 4px; }
+
+  .mobile-nav .header-menu.open {
+    right: 0;
+  }
+
+  /* Panel inner header */
+  .mobile-nav .header-menu::before {
+    content: '';
+    display: block;
+    height: 64px;
+    flex-shrink: 0;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+    background: #000;
+  }
+
+  /* ── Nav list ───────────────────────────────────────────────────────────── */
+  .mobile-nav .header-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+  }
+
+  .mobile-nav .header-menu > ul {
+    padding: 8px 0 24px;
+  }
+
+  .mobile-nav .header-menu > ul > li {
+    padding: 0;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+
+  .mobile-nav .header-menu > ul > li:last-child {
+    border-bottom: none;
+  }
+
+  /* Top-level plain links (Home, Blogs) */
+  .mobile-nav .header-menu > ul > li > a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    font-family: "Outfit", sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    color: #e8e4e0;
+    text-decoration: none !important;
+    transition: color .2s;
+  }
+
+  .mobile-nav .header-menu > ul > li > a:hover {
+    color: #fff;
+  }
+
+  .mobile-nav .header-menu ul li a.nav-parent,
+  .mobile-nav .header-menu ul li a.active {
+    color: #EC1C24 !important;
+  }
+
+  /* ── Parent toggle row (L1) ─────────────────────────────────────────────── */
+  .mobile-nav .menuDropdown {
+    padding: 0;
+  }
+
+  .mobile-nav .menuDropdown a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 15px 20px;
+    font-family: "Outfit", sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    color: #e8e4e0;
+    text-decoration: none !important;
+    transition: color .2s;
+    cursor: pointer;
+  }
+
+  .mobile-nav .menuDropdown a:hover {
+    color: #fff;
+  }
+
+  .mobile-nav .menuDropdown svg {
+    transition: transform .3s ease;
+    flex-shrink: 0;
+    color: #888;
+    margin-left: 8px;
+  }
+
+  .mobile-nav .menuDropdown.open svg {
+    transform: rotate(180deg);
+    color: #EC1C24;
+  }
+
+  .mobile-nav .has-child.active .menuDropdown a {
+    color: #fff !important;
+  }
+  .mobile-nav .has-child.active .menuDropdown svg {
+    color: #EC1C24;
+  }
+
+  /* ── Level-2 child list ─────────────────────────────────────────────────── */
+  .mobile-nav .child {
+    background: rgba(255,255,255,.03);
+    border-top: 1px solid rgba(255,255,255,.06);
+    padding: 6px 0 6px 0;
+    margin: 0;
+  }
+
+  .mobile-nav .child > li {
+    padding: 0;
+    border-bottom: none;
+  }
+
+  /* Direct link items in L2 (Industries, Case Studies, About Us, Contact Us) */
+  .mobile-nav .child > li > a:not(.link) {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px 10px 32px;
+    font-family: "Outfit", sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    color: #8a8480;
+    text-decoration: none !important;
+    transition: color .2s;
+    position: relative;
+  }
+
+  .mobile-nav .child > li > a:not(.link)::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #3a3a3a;
+    transition: background .2s;
+  }
+
+  .mobile-nav .child > li > a:not(.link):hover {
+    color: #e8e4e0;
+  }
+
+  .mobile-nav .child > li > a:not(.link):hover::before {
+    background: #EC1C24;
+  }
+
+  .mobile-nav .child > li > a:not(.link).active {
+    color: #EC1C24 !important;
+  }
+
+  .mobile-nav .child > li > a:not(.link).active::before {
+    background: #EC1C24;
+  }
+
+  /* L2 toggle */
+  .mobile-nav .child .link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px 10px 32px;
+    font-family: "Outfit", sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    color: #b0aaa5;
+    text-decoration: none !important;
+    width: 100%;
+    transition: color .2s;
+    cursor: pointer;
+  }
+
+  .mobile-nav .child .link:hover {
+    color: #fff;
+  }
+
+  .mobile-nav .child .link svg {
+    transition: transform .3s ease;
+    flex-shrink: 0;
+    color: #666;
+    margin-left: 6px;
+  }
+
+  .mobile-nav .child .link.open svg {
+    transform: rotate(180deg);
+    color: #EC1C24;
+  }
+
+  .mobile-nav .child .has-child.active .link {
+    color: #EC1C24 !important;
+  }
+
+  /* ── Level-3 inner list ─────────────────────────────────────────────────── */
+  .mobile-nav .child ul {
+    background: rgba(0,0,0,.2);
+    padding: 4px 0;
+    margin: 0;
+    border-top: 1px solid rgba(255,255,255,.04);
+  }
+
+  .mobile-nav .child ul li {
+    padding: 0;
+    border-bottom: none;
+  }
+
+  .mobile-nav .child ul li a {
+    display: flex;
+    align-items: center;
+    padding: 9px 20px 9px 44px;
+    font-family: "Outfit", sans-serif;
+    font-size: 13px;
+    color: #8a8480;
+    font-weight: 400;
+    text-decoration: none !important;
+    transition: color .2s;
+    position: relative;
+  }
+
+  .mobile-nav .child ul li a::before {
+    content: '';
+    position: absolute;
+    left: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #3a3a3a;
+    transition: background .2s;
+  }
+
+  .mobile-nav .child ul li a:hover {
+    color: #e8e4e0;
+  }
+
+  .mobile-nav .child ul li a:hover::before {
+    background: #EC1C24;
+  }
+
+  .mobile-nav .child ul li a.active {
+    color: #EC1C24 !important;
+  }
+
+  .mobile-nav .child ul li a.active::before {
+    background: #EC1C24;
+  }
+
+  /* ── CTA at bottom of panel ─────────────────────────────────────────────── */
+  .mobile-nav .mob-cta-wrap {
+    padding: 20px;
+    border-top: 1px solid rgba(255,255,255,.08);
+    margin-top: auto;
+  }
+
+  .mobile-nav .mob-cta-btn {
+    display: block;
+    width: 100%;
+    padding: 14px 20px;
+    background: #EC1C24;
+    color: #fff !important;
+    font-family: "Outfit", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none !important;
+    border-radius: 8px;
+    letter-spacing: .01em;
+    transition: background .2s;
+  }
+
+  .mobile-nav .mob-cta-btn:hover {
+    background: #c8151c;
+  }
+
+  /* Standalone CTA links in sub-menus (e.g. Hire Software Developers) */
+  .mobile-nav .child > li.mob-view-all > a {
+    color: #b0aaa5;
+    font-weight: 500;
+  }
+
+  .mobile-nav .child > li.mob-view-all > a::before {
+    display: none;
+  }
+}
+
+/* ── Full-width panel on small screens ──────────────────────────────────────── */
+@media (max-width: 480px) {
+  .mobile-nav .header-menu {
+    width: 100%;
+    right: -100%;
+  }
+}

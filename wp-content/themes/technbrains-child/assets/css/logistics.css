@@ -1,0 +1,503 @@
+/**
+ * Logistics page family — component CSS.
+ *
+ * Loaded only where an lg_* layout is present (see tnb_logistics_enqueue_assets()
+ * in functions.php), after tnb-components/tnb-responsive so these scoped rules win
+ * by source order. Reuses the shared .dt-section/.dt-head/.dt-h2/.dt-sub/.dt-rev
+ * scaffold and --dt-ink/--dt-muted/--dt-line/--dt-red/--dt-gray tokens already
+ * defined in components.css — nothing here redeclares them.
+ *
+ * @package technbrains-child
+ */
+
+/* Outfit across every section on this one page (.page-slug-logistics-software-
+   development-services) — lg_*, plus whatever Construction/Platform sections are
+   placed alongside them (cn_hero, cn_calculator, cn_process, cn_integrations,
+   platform_services, platform_faqs, lp_case_studies, …). Scoped to #main under the
+   page-slug body class rather than construction.css/components.css themselves, so
+   no other page anywhere on the site is affected. */
+.page-slug-logistics-software-development-services #main {
+  font-family: 'Outfit', system-ui, sans-serif;
+}
+
+/* ── LG Why — stats strip (.lg-why-grid) ─────────────────────────────────── */
+.lg-why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  row-gap: 32px;
+  column-gap: 0;
+  margin-top: 56px;
+  text-align: center;
+}
+.lg-why-stat { position: relative; padding: 0 40px; }
+.lg-why-stat:first-child { padding-left: 0; }
+.lg-why-stat:last-child { padding-right: 0; }
+.lg-why-stat + .lg-why-stat::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: var(--dt-line);
+}
+@media (max-width: 700px) {
+  .lg-why-grid { grid-template-columns: 1fr; }
+  .lg-why-stat + .lg-why-stat::before { display: none; }
+  .lg-why-stat { padding: 0; }
+}
+.lg-why-v {
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-size: clamp(32px, 3.4vw, 44px);
+  font-weight: 700;
+  color: var(--dt-red);
+  line-height: 1.1;
+}
+.lg-why-l { margin-top: 10px; font-size: 15px; line-height: 1.5; color: var(--dt-muted); }
+
+/* ── LG Flow — pipeline widget (.lg-flow) ────────────────────────────────── */
+.lg-flow {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-top: 56px;
+}
+.lg-flow-track {
+  position: absolute;
+  top: 26px;
+  left: calc(100% / 12);
+  right: calc(100% / 12);
+  height: 2px;
+  background: var(--dt-line);
+  z-index: 0;
+}
+.lg-flow-pulse {
+  position: absolute;
+  top: 20px;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  border-radius: 50%;
+  background: var(--dt-red);
+  box-shadow: 0 0 0 5px rgba(236,28,36,0.16);
+  transition: left .4s cubic-bezier(.22,1,.36,1);
+  z-index: 1;
+}
+.lg-flow-stage {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-align: center;
+}
+.lg-flow-node {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  border: 2px solid var(--dt-line);
+  color: var(--dt-muted);
+  transition: border-color .25s ease, color .25s ease, background .25s ease;
+}
+.lg-flow-node svg, .lg-flow-node img { width: 22px; height: 22px; }
+/* Uploaded icons are an <img>, so they can't take currentColor like the inline SVG
+   set does — filter forces the same dark-normal/white-on-active swap the circle
+   itself already gets via its own color/background transition above. */
+.lg-flow-node img { filter: brightness(0) saturate(100%); opacity: .55; transition: filter .25s ease, opacity .25s ease; }
+.lg-flow-stage.on .lg-flow-node img { filter: brightness(0) saturate(100%) invert(1); opacity: 1; }
+.lg-flow-num {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--dt-line);
+  color: var(--dt-ink);
+  font-size: 10px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}
+.lg-flow-stage.on .lg-flow-node { border-color: var(--dt-red); color: #fff; background: var(--dt-red); box-shadow: 0 6px 16px -6px rgba(236,28,36,0.55); }
+.lg-flow-stage.on .lg-flow-num { background: #fff; color: var(--dt-red); }
+.lg-flow-card { display: flex; flex-direction: column; gap: 4px; }
+.lg-flow-card b { font-size: 15px; font-weight: 600; color: var(--dt-ink); }
+.lg-flow-card p { font-size: 13px; line-height: 1.4; color: var(--dt-muted); margin: 0; }
+.lg-pipe-note { max-width: 900px; margin: 48px auto 0; text-align: center; font-size: 16px; line-height: 1.6; color: var(--dt-muted); }
+.lg-pipe-note b { color: var(--dt-ink); font-weight: 600; }
+
+@media (max-width: 900px) {
+  .lg-flow { grid-template-columns: repeat(3, 1fr); row-gap: 40px; }
+  .lg-flow-track, .lg-flow-pulse { display: none; }
+}
+@media (max-width: 560px) {
+  .lg-flow { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── LG Roles — "By Operator" cards (.lg-roles) ──────────────────────────── */
+.lg-roles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 28px;
+  margin-top: 56px;
+}
+.lg-role { padding: 32px 28px; border: 1px solid var(--dt-line); border-radius: 16px; background: #fff; }
+.lg-role-ic {
+  display: inline-flex;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+  background: var(--dt-gray);
+  color: var(--dt-red);
+  margin-bottom: 18px;
+}
+.lg-role-ic svg, .lg-role-ic img { width: 100%; height: 100%; }
+.lg-role h3 { font-size: 18px; font-weight: 600; color: var(--dt-ink); margin: 0 0 14px; }
+.lg-role-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+.lg-role-list li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--dt-muted);
+}
+.lg-role-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--dt-red);
+}
+.lg-roles-note { max-width: 800px; margin: 40px auto 0; text-align: center; font-size: 15px; color: var(--dt-muted); }
+
+/* ── LG Cost Table — driver comparison (.lg-cost2) ───────────────────────── */
+.lg-cost2 { --cmp-cols: 0.95fr 2.4fr; margin-top: 56px; }
+.lg-cost2-heads {
+  display: grid;
+  grid-template-columns: var(--cmp-cols);
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.lg-cost2-head { padding: 20px 24px; display: flex; flex-direction: column; gap: 4px; color: #fff; }
+.lg-cost2-head.lbl { background: linear-gradient(135deg, #4a88c9, #185fa5); }
+.lg-cost2-head.tone-blue { background: linear-gradient(135deg, #185fa5, #0c3d70); }
+.lg-cost2-head b { font-size: 16px; font-weight: 600; }
+.lg-cost2-head span { font-size: 12.5px; opacity: .8; }
+.lg-cost2-body {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  border-top: 1px solid var(--dt-line);
+  border-bottom: 1px solid var(--dt-line);
+  border-left: 1px solid var(--dt-line);
+  border-right: 1px solid var(--dt-line);
+}
+.lg-cost2-row { display: grid; grid-template-columns: var(--cmp-cols); }
+.lg-cost2-row.alt { background: var(--dt-gray); }
+.lg-cost2-cell { padding: 18px 24px; font-size: 14.5px; line-height: 1.5; }
+.lg-cost2-cell.cap { font-weight: 600; color: var(--dt-ink); }
+.lg-cost2-cell.txt { color: var(--dt-muted); border-left: 1px solid var(--dt-line); }
+
+@media (max-width: 700px) {
+  .lg-cost2 { --cmp-cols: 1fr; }
+  .lg-cost2-heads { display: none; }
+  .lg-cost2-row { grid-template-columns: 1fr; border-top: 1px solid var(--dt-line); }
+  .lg-cost2-row:first-child { border-top: 0; }
+  .lg-cost2-cell.txt { padding-top: 0; }
+}
+
+/* ── LG Conn Ops — focus grid + system pills (.lg-drivers-grid, .lg-conn-pills) */
+.lg-inhead { font-size: 20px; font-weight: 600; color: var(--dt-ink); margin: 48px 0 24px; text-align: center; }
+.lg-drivers-grid { display: grid; grid-template-columns: repeat(3, 1fr); align-items: stretch; gap: 24px; }
+@media (max-width: 900px) {
+  .lg-drivers-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .lg-drivers-grid { grid-template-columns: 1fr; }
+}
+.lg-driver { display: flex; flex-direction: column; height: 100%; padding: 26px; border: 1px solid var(--dt-line); border-radius: 14px; background: #fff; }
+.lg-driver-ic { display: inline-flex; width: 40px; height: 40px; border-radius: 10px; align-items: center; justify-content: center; background: var(--dt-gray); color: var(--dt-red); margin-bottom: 14px; }
+.lg-driver-ic svg, .lg-driver-ic img { width: 100%; height: 100%; }
+.lg-driver b { display: block; font-size: 15.5px; font-weight: 600; color: var(--dt-ink); margin-bottom: 8px; }
+.lg-driver p { margin: 0; font-size: 14px; line-height: 1.55; color: var(--dt-muted); }
+
+.lg-conn-pills { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: center; }
+.lg-conn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--dt-line);
+  background: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dt-ink);
+}
+.lg-conn-ic { display: inline-flex; color: var(--dt-red); }
+.lg-conn-ic svg, .lg-conn-ic img { width: 17px; height: 17px; }
+/* .lg-conn-break { flex-basis: 100%; height: 0; } */
+
+/* ── LG Priorities — numbered stat cards (.lg-pri-grid) ──────────────────── */
+.lg-pri-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+@media (max-width: 900px) {
+  .lg-pri-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .lg-pri-grid { grid-template-columns: 1fr; }
+}
+.lg-pri-card { position: relative; padding: 30px 28px; border: 1px solid var(--dt-line); border-radius: 16px; background: #fff; }
+.lg-pri-idx {
+  position: absolute;
+  top: 0px;
+  right: 20px;
+  font-size: 70px;
+  font-weight: 700;
+  color: var(--dt-line);
+  -webkit-text-stroke: 1.5px var(--dt-line);
+  -webkit-text-fill-color: transparent;
+	display : none
+}
+.lg-pri-head { margin-bottom: 14px; }
+.lg-pri-ey { font-size: 12.5px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--dt-muted); margin-bottom: 6px; }
+.lg-pri-v { font-family: 'Outfit', system-ui, sans-serif; font-size: 34px; font-weight: 600; color: var(--dt-red); line-height: 1; }
+.lg-pri-m { font-size: 14.5px; font-weight: 600; line-height: 1.5; color: var(--dt-ink); margin: 0 0 10px; }
+.lg-pri-r { font-size: 14px; line-height: 1.55; color: var(--dt-muted); margin: 0; }
+
+/* ── LG Compliance — cards + watchlist + reqs pills (.lg-comp-*, .lg-watch-*) */
+.lg-comp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+@media (max-width: 900px) {
+  .lg-comp-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .lg-comp-grid { grid-template-columns: 1fr; }
+}
+.lg-comp-card { padding: 26px; border: 1px solid var(--dt-line); border-radius: 14px; background: #fff; }
+.lg-comp-ic { display: inline-flex; width: 40px; height: 40px; border-radius: 10px; align-items: center; justify-content: center; background: var(--dt-gray); color: var(--dt-red); margin-bottom: 14px; }
+.lg-comp-ic svg, .lg-comp-ic img { width: 100%; height: 100%; }
+.lg-comp-card h3 { font-size: 15.5px; font-weight: 600; color: var(--dt-ink); margin: 0 0 8px; }
+.lg-comp-card p { margin: 0; font-size: 14px; line-height: 1.55; color: var(--dt-muted); }
+
+.lg-watch-wrap { margin-top: 48px; }
+.lg-watch { padding: 32px; border-radius: 16px; background: var(--dt-gray); border: 1px solid var(--dt-line); }
+.lg-watch-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; flex-wrap: wrap; }
+.lg-watch-tag { padding: 5px 12px; border-radius: 999px; background: var(--dt-red); color: #fff; font-size: 11.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.lg-watch-head h3 { font-size: 19px; font-weight: 600; color: var(--dt-ink); margin: 0; }
+.lg-watch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+.lg-watch-card { padding: 18px 20px; border-radius: 10px; background: #fff; border: 1px solid var(--dt-line); }
+.lg-watch-card b { display: block; font-size: 14.5px; font-weight: 600; color: var(--dt-ink); margin-bottom: 8px; }
+.lg-watch-card p { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--dt-muted); }
+
+.lg-comp-note { margin: 24px 0 0; font-size: 13.5px; line-height: 1.55; color: var(--dt-muted); font-style: italic; }
+
+.lg-comp-reqs { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.lg-req-lbl { font-size: 12.5px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--dt-muted); margin-right: 4px; }
+.lg-comp-req {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 10px;
+  background: linear-gradient(rgb(255, 255, 255), rgb(246, 248, 251));
+  border: 1px solid var(--dt-line);
+  box-shadow: rgba(12, 35, 64, 0.05) 0px 2px 0px, rgb(255, 255, 255) 0px 1px 0px inset;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dt-ink);
+}
+.lg-comp-req svg { width: 15px; height: 15px; color: var(--dt-red); flex-shrink: 0; }
+
+/* ── LG Ladder — decision accordion + assessment CTA (.lg-lad, .lg-assess) ── */
+.lg-lad { margin-top: 56px; }
+.lg-lad-row {
+  background: #fff;
+  border: 1px solid var(--dt-line);
+  border-left: 4px solid var(--dt-red);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.lg-lad-row:last-child { margin-bottom: 0; }
+.lg-lad-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 28px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+.lg-lad-rank {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--dt-gray);
+  color: var(--dt-ink);
+  font-size: 13px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}
+.lg-lad-title { flex: 1; font-size: 17px; font-weight: 600; color: var(--dt-ink); }
+.lg-lad-chev { flex-shrink: 0; color: var(--dt-muted); transition: transform .3s ease; }
+.lg-lad-chev svg { width: 18px; height: 18px; display: block; }
+.lg-lad-row.open .lg-lad-chev { transform: rotate(180deg); color: var(--dt-red); }
+.lg-lad-body { max-height: 0; overflow: hidden; transition: max-height .4s ease, opacity .3s ease; opacity: 0; }
+.lg-lad-row.open .lg-lad-body { max-height: 260px; opacity: 1; }
+.lg-lad-inner { padding: 0 28px 26px 76px; }
+.lg-lad-when { margin: 0 0 8px; font-size: 15px; line-height: 1.55; color: var(--dt-ink); }
+.lg-lad-when b { font-weight: 600; }
+.lg-lad-eg { margin: 0; font-size: 14px; line-height: 1.55; color: var(--dt-muted); }
+
+.lg-assess {
+  margin-top: 40px;
+  padding: 44px 40px;
+  border-radius: 20px;
+  background: var(--dt-dark);
+  color: #fff;
+  text-align: center;
+}
+.lg-assess-ey { display: inline-block; font-size: 12.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #FF6168; margin-bottom: 14px; }
+.lg-assess h3 { font-family: 'Outfit', system-ui, sans-serif; font-size: clamp(22px, 2.6vw, 30px); font-weight: 600; margin: 0 0 14px; }
+.lg-assess p { max-width: 620px; margin: 0 auto 26px; font-size: 15.5px; line-height: 1.6; color: rgba(255,255,255,0.7); }
+.lg-assess .dt-btn .arr { display: inline-flex; margin-left: 8px; vertical-align: middle; }
+.lg-assess .dt-btn .arr svg { width: 16px; height: 16px; display: block; }
+
+@media (max-width: 640px) {
+  .lg-lad-inner { padding-left: 28px; }
+  .lg-assess { padding: 34px 24px; }
+}
+
+/* ── LG Types — "Custom Logistics Software We Build" grid + CTA banner ──── */
+section.dt-section.lg-types-section .dt-head.dt-center.dt-rev.in { max-width: unset; }
+section.dt-section.lg-roles-section .dt-head.dt-center.dt-rev.in { max-width: unset; }
+
+/* .pls-section (Platform Services Grid) is a shared, site-wide component — scoped by
+   page-slug here rather than editing components.css, so only this page's two grids
+   are affected, not every other page that places the layout. */
+.page-slug-logistics-software-development-services section.pls-section .pls-head,
+.page-slug-logistics-software-development-services section.pls-section .pls-sub {
+  max-width: unset;
+}
+
+section#lg-estimator .dt-head {
+ max-width : 100%     
+}
+section.dt-section.lg-cost-section  
+.dt-head.dt-center.dt-rev.in {
+    max-width : 80%
+}
+.lg-types-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 56px; }
+@media (max-width: 560px) {
+  .lg-types-grid { grid-template-columns: 1fr; }
+}
+.lg-type-card { padding: 28px; border: 1px solid var(--dt-line); border-radius: 14px; background: #fff; }
+.lg-type-ic { display: inline-flex; width: 44px; height: 44px; border-radius: 10px; align-items: center; justify-content: center; background: var(--dt-gray); color: var(--dt-red); margin-bottom: 16px; }
+.lg-type-ic svg, .lg-type-ic img { width: 55px; height: 50px; }
+.lg-type-card h3 { font-size: 16.5px; font-weight: 600; color: var(--dt-ink); margin: 0 0 10px; }
+.lg-type-card p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--dt-muted); }
+.lg-type-card p a { color: var(--dt-red); font-weight: 600; text-decoration: underline; }
+
+.lg-types-cta {
+  margin-top: 40px;
+  padding: 32px 36px;
+  border-radius: 16px;
+  background: var(--dt-gray);
+  border: 1px solid var(--dt-line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.lg-types-cta-tx { flex: 1; min-width: 260px; }
+.lg-types-cta-tx b { display: block; font-size: 17px; font-weight: 600; color: var(--dt-ink); margin-bottom: 6px; }
+.lg-types-cta-tx p { margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--dt-muted); max-width: 560px; }
+.lg-types-cta .dt-btn { flex-shrink: 0; }
+.lg-types-cta .dt-btn .arr { display: inline-flex; margin-left: 8px; vertical-align: middle; }
+
+/* ── LG Estimator — build-cost calculator (.lg-est-*) ────────────────────────
+   Self-contained (no construction.css dependency): the module/inputs/results are
+   permanently dark, matching the only treatment the source design defines for this
+   component — unlike Construction's calculator this one has no separate light/no-bg
+   theme to fall back to, so .lg-est-sec itself carries a dark flat fallback and the
+   uploaded background photo (optional) just sits on top of it at full strength. */
+.lg-est-sec { position: relative; background: #07111F; overflow: hidden; }
+.lg-est-sec .eyebrow { color: #FF6168; }
+.lg-est-sec .dt-h2 { color: #fff; }
+.lg-est-sec .dt-sub { color: rgba(255,255,255,0.7); }
+.lg-est-bg { position: absolute; inset: 0; z-index: 0; background-image: var(--lg-est-bg); background-size: cover; background-position: center; }
+.lg-est-sec > .container { position: relative; z-index: 1; }
+
+.lg-est-module { position: relative; margin-top: 52px; border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; overflow: hidden; background: #0b0b0d; box-shadow: 0 60px 120px -50px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.05); }
+.lg-est-module::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--dt-red), #FF6168); z-index: 3; }
+.lg-est-shell { display: grid; grid-template-columns: 40% 60%; gap: 0; }
+
+.lg-est-inputs { padding: 40px 38px; background: #121214; border-right: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; gap: 24px; }
+.lg-est-field label { display: block; font-family: 'Outfit', system-ui, sans-serif; font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 12px; }
+.lg-est-seg { display: flex; flex-wrap: wrap; gap: 7px; }
+.lg-est-seg button { all: unset; cursor: pointer; padding: 9px 15px; border-radius: 9px; font-family: 'Outfit', system-ui, sans-serif; font-size: 13.5px; font-weight: 600; color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); transition: all .2s ease; }
+.lg-est-seg button:hover { border-color: rgba(255,255,255,0.28); color: #fff; }
+.lg-est-seg button.on { background: var(--dt-red); border-color: var(--dt-red); color: #fff; }
+.lg-est-help { font-size: 12.5px; line-height: 1.45; color: rgba(255,255,255,0.6); margin: 8px 0 0; }
+.lg-est-slider { margin-top: 14px; }
+.lg-est-slider input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 6px; background: linear-gradient(90deg, var(--dt-red) var(--pct), #2a2a2e var(--pct)); outline: none; }
+.lg-est-slider input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #0b0b0d; border: 3px solid var(--dt-red); cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.4); }
+.lg-est-slider input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: #0b0b0d; border: 3px solid var(--dt-red); cursor: pointer; }
+
+.lg-est-toggles { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+.lg-est-toggle { all: unset; cursor: pointer; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 11px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); font-size: 13.5px; font-weight: 500; color: rgba(255,255,255,0.82); transition: all .2s ease; }
+.lg-est-toggle:hover { border-color: rgba(255,255,255,0.28); }
+.lg-est-toggle .box { width: 20px; height: 20px; border-radius: 6px; border: 1.5px solid rgba(255,255,255,0.28); display: grid; place-items: center; flex-shrink: 0; transition: all .2s ease; }
+.lg-est-toggle .box svg { width: 12px; height: 12px; color: #fff; opacity: 0; transition: opacity .15s ease; }
+.lg-est-toggle.on { background: rgba(236,28,36,0.14); border-color: rgba(236,28,36,0.5); color: #fff; }
+.lg-est-toggle.on .box { background: var(--dt-red); border-color: var(--dt-red); }
+.lg-est-toggle.on .box svg { opacity: 1; }
+
+.lg-est-results { padding: 40px 38px; display: flex; flex-direction: column; justify-content: center; gap: 16px; background: #0b0b0d; }
+.lg-est-hero { background: #000; border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 28px 30px; }
+.lg-est-hero-label { font-size: 13.5px; color: rgba(255,255,255,0.6); }
+.lg-est-hero-val { display: block; font-family: 'Outfit', system-ui, sans-serif; font-size: clamp(34px, 4.6vw, 50px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; color: #fff; margin: 8px 0; }
+.lg-est-hero-sub { display: block; font-size: 13.5px; line-height: 1.5; color: rgba(255,255,255,0.6); }
+.lg-est-ab { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.lg-est-card { background: #141416; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px 22px; }
+.lg-est-card-label { font-size: 12.5px; color: rgba(255,255,255,0.6); }
+.lg-est-card-val { display: block; font-family: 'Outfit', system-ui, sans-serif; font-size: 26px; font-weight: 700; letter-spacing: -0.02em; color: #fff; margin: 8px 0 0; }
+.lg-est-drivers { background: #141416; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px 22px; }
+.lg-est-drivers-t { font-family: 'Outfit', system-ui, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin: 0 0 14px; }
+.lg-est-driver { display: flex; align-items: center; gap: 12px; padding: 9px 0; }
+.lg-est-driver:not(:last-child) { border-bottom: 1px solid rgba(255,255,255,0.07); }
+.lg-est-driver-rank { width: 24px; height: 24px; border-radius: 7px; background: rgba(236,28,36,0.16); color: #FF6168; font-family: 'Outfit', system-ui, sans-serif; font-weight: 700; font-size: 12px; display: grid; place-items: center; flex-shrink: 0; }
+.lg-est-driver span { font-size: 14px; color: #fff; }
+.lg-est-tag { display: block; font-size: 12px; color: rgba(255,255,255,0.5); font-style: italic; }
+
+@media (max-width: 940px) {
+  .lg-est-shell { grid-template-columns: 1fr; }
+  .lg-est-inputs { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .lg-est-ab { grid-template-columns: 1fr; }
+  .lg-est-toggles { grid-template-columns: 1fr; }
+}
+.lg-types-cta .dt-btn .arr svg { width: 16px; height: 16px; display: block; }

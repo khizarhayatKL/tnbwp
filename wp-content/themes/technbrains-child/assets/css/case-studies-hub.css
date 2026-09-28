@@ -1,0 +1,654 @@
+/* ==========================================================================
+   Case Studies Hub — page-scoped CSS for 3 components: Hero (csh-hero),
+   Coverflow slider (csh-feat) and Filtered Grid (csh-section, plain).
+   Every rule is nested under .csh-page (added by tnb_case_studies_hub_body_class()
+   in functions.php whenever any of the 3 flexible-content layouts is present on
+   the current page), so nothing here can reach or be affected by any other page,
+   and none of it reuses components.css classes/variables (--ih-*, .ih-h2, .ih-btn*).
+   Tokens sourced from Figma (nodes 3001:822, 3003:1187) and from getComputedStyle
+   extraction against the reference static export (Case Studies.html).
+   ========================================================================== */
+
+.csh-page {
+  --csh-red: #ec1c24;
+  --csh-navy: #0c2340;
+  --csh-muted: #5a6478;
+  --csh-line: #e8e5e0;
+  --csh-white: #ffffff;
+  --csh-container-xl: 1600px;
+  --csh-container-lg: 1200px;
+  --csh-pad-x: 40px;
+}
+
+.csh-container {
+  max-width: var(--csh-container-xl);
+  margin: 0 auto;
+  padding: 0 var(--csh-pad-x);
+}
+@media (max-width: 1700px) {
+  .csh-container {
+    max-width: var(--csh-container-lg);
+  }
+}
+@media (max-width: 1024px) {
+  .csh-container {
+    padding: 0 24px;
+  }
+}
+@media (max-width: 640px) {
+  .csh-container {
+    padding: 0 16px;
+  }
+}
+
+.csh-h2 {
+  font-family: "Outfit", "Montserrat", system-ui, sans-serif;
+  font-size: clamp(32px, 3.8vw, 56px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.06;
+  color: var(--csh-navy);
+  margin: 0;
+  text-transform: capitalize;
+}
+.csh-sub {
+  font-family: "Outfit", "Montserrat", system-ui, sans-serif;
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--csh-muted);
+  margin: 12px 0 0;
+}
+.csh-head-center {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Shared button styles (own copies — not a reference to .ih-btn) */
+.csh-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 26px;
+  border-radius: 10px;
+  font-family: "Outfit", "Montserrat", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 14.5px;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+.csh-btn-primary {
+  background: var(--csh-red);
+  color: var(--csh-white);
+  box-shadow: 0 8px 24px -12px rgba(236, 28, 36, 0.45);
+}
+.csh-btn-primary:hover {
+  color: var(--csh-white);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -10px rgba(236, 28, 36, 0.55);
+}
+.csh-btn-ghost {
+  background: transparent;
+  color: var(--csh-white);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+.csh-btn-ghost:hover {
+  background: var(--csh-white);
+  color: var(--csh-navy);
+  border-color: var(--csh-white);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   1. Hero (csh-hero)
+   ========================================================================== */
+.csh-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 540px;
+  padding: 90px var(--csh-pad-x);
+  background-color: #0a0a0b;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  text-align: center;
+}
+.csh-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.csh-hero-title {
+  font-family: "Outfit", "Montserrat", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: clamp(38px, 4.8vw, 66px);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  text-transform: capitalize;
+  color: var(--csh-white);
+  margin: 0;
+}
+.csh-hero-title .accent {
+  color: var(--csh-red);
+}
+.csh-hero-sub {
+  font-family: "Outfit", "Montserrat", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  max-width: 760px;
+}
+.csh-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 8px;
+}
+@media (max-width: 640px) {
+  .csh-hero {
+    min-height: 420px;
+    padding: 64px 20px;
+  }
+  .csh-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  .csh-hero-actions .csh-btn {
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   2. Coverflow slider (csh-feat)
+   ========================================================================== */
+.csh-feat {
+  position: relative;
+  padding: 90px 0;
+  background: var(--csh-white);
+  overflow: hidden;
+}
+.csh-feat-head {
+  margin-bottom: 56px;
+}
+.csh-hcopy {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.csh-deck {
+  position: relative;
+  max-width: var(--csh-container-xl);
+  height: 520px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.csh-show {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(833px, 62vw);
+  height: 442px;
+  margin: -221px 0 0;
+  border-radius: 30px;
+  border: 1px solid rgba(12, 35, 64, 0.06);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  will-change: transform, opacity, filter;
+  transition:
+    transform 0.55s cubic-bezier(0.18, 0.9, 0.3, 1.05),
+    opacity 0.45s ease,
+    filter 0.45s ease;
+}
+.csh-show.is-front {
+  width: min(980px, 74vw);
+  height: 520px;
+  margin-top: -260px;
+  transform: translateX(-50%) scale(1);
+  opacity: 1;
+  filter: none;
+  pointer-events: auto;
+}
+.csh-show.is-side-l {
+  transform: translateX(calc(-50% - 46%)) scale(0.85);
+  opacity: 0.55;
+  filter: blur(1.5px);
+  pointer-events: auto;
+}
+.csh-show.is-side-r {
+  transform: translateX(calc(-50% + 46%)) scale(0.85);
+  opacity: 0.55;
+  filter: blur(1.5px);
+  pointer-events: auto;
+}
+.csh-show.is-far {
+  transform: translateX(-50%) scale(0.7);
+  opacity: 0;
+  pointer-events: none;
+}
+
+ 
+
+.csh-show-panel {
+  position: relative;
+  z-index: 2;
+  width: 50%;
+  min-width: 300px;
+  padding: 0 0 0 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.csh-show-brand {
+  display: flex;
+  align-items: center;
+}
+.csh-show-logo {
+  max-height: 32px;
+  width: auto;
+  display: block;
+}
+.csh-show-brand-text {
+  font-family: "Outfit", "Montserrat", system-ui, sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--csh-white);
+}
+.csh-disc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.csh-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 16px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.19);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  font-family: "Outfit", "Montserrat", system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--csh-white);
+  white-space: nowrap;
+}
+.csh-show-desc {
+  font-family: "Outfit", "Montserrat", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+  max-width: 460px;
+}
+.csh-show-btn {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  padding: 14px 22px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.26);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  font-family: "Outfit", "Montserrat", system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--csh-white);
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+.csh-show-btn:hover {
+  background: rgba(0, 0, 0, 0.4);
+  color: var(--csh-white);
+  transform: translateY(-2px);
+}
+
+.csh-show-shot {
+  position: relative;
+  z-index: 1;
+  flex: 1 0 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.csh-show-shot-frame {
+  position: relative;
+  width: 100%;
+  border-radius: 0;
+  overflow: hidden;
+}
+.csh-show-shot-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.csh-deck-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+.csh-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  margin: 0;
+  line-height: 0;
+  border-radius: 50%;
+  border: 1px solid var(--csh-line);
+  background: var(--csh-white);
+  color: var(--csh-navy);
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+.csh-nav-btn svg {
+  display: block;
+}
+.csh-nav-btn:hover {
+  background: var(--csh-red);
+  border-color: var(--csh-red);
+  color: var(--csh-white);
+}
+.csh-deck-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.csh-deck-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: var(--csh-line);
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    width 0.25s ease;
+}
+.csh-deck-dot.is-active {
+  width: 24px;
+  border-radius: 4px;
+  background: var(--csh-red);
+}
+
+@media (max-width: 1100px) {
+  .csh-show-panel {
+    width: 56%;
+  }
+}
+@media (max-width: 860px) {
+  .csh-feat {
+    padding: 64px 0;
+  }
+  .csh-deck {
+    height: auto;
+    flex-direction: column;
+  }
+  .csh-show,
+  .csh-show.is-front {
+    position: relative;
+    left: 0;
+    top: 0;
+    margin: 0 0 24px;
+    width: 100%;
+    height: auto;
+    min-height: 360px;
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    flex-direction: column;
+  }
+  .csh-show.is-far {
+    display: none;
+  }
+  .csh-show-panel {
+    width: 100%;
+    padding: 28px 24px 0;
+  }
+  .csh-show-shot {
+    flex: none;
+    width: 100%;
+    padding: 24px 24px 0;
+  }
+  .csh-show-blob {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   3. Filtered grid (csh-section, plain — "Browse Case Studies By Industry")
+   Flex layout throughout — no CSS grid, no absolute-positioned layout.
+   ========================================================================== */
+.csh-section {
+  padding: 90px 0;
+  background: var(--csh-white);
+}
+
+.csh-filters {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 32px 0 48px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  padding-bottom: 4px;
+}
+.csh-filter {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--csh-line);
+  background: var(--csh-white);
+  color: var(--csh-muted);
+  font-family: "Outfit", "Montserrat", system-ui, sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+.csh-filter:hover {
+  border-color: var(--csh-red);
+  color: var(--csh-red);
+}
+.csh-filter.is-active {
+  background: var(--csh-red);
+  border-color: var(--csh-red);
+  color: var(--csh-white);
+}
+
+.csh-card-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.csp-card {
+  display: flex;
+  gap: 10px;
+  text-decoration: none;
+  background: var(--csh-white);
+  padding: 10px;
+  border: 1px solid rgba(12, 35, 64, 0.08);
+  border-radius: 10px;
+  height: 500px;
+  box-shadow: 0 20px 40px -28px rgba(12, 35, 64, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.csp-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 28px 52px -24px rgba(12, 35, 64, 0.32);
+}
+
+.csp-card-media {
+  flex: 1 1 40%;
+  min-width: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--csh-line);
+}
+
+.csp-book {
+  position: relative;
+  flex: 1 1 60%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  padding: 28px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.csp-book-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 30px;
+}
+.csp-eyebrow {
+  font-family: "Outfit", "Montserrat", system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+.csp-book-body h3 {
+  font-family: "Outfit", "Montserrat", system-ui, sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.22;
+  color: var(--csh-white);
+  margin: 0;
+}
+.csp-separator {
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.35);
+}
+.csp-desc {
+  display: block;
+  font-family: "Outfit", "Montserrat", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.75);
+}
+.csp-read-more {
+  position: absolute;
+  right: 28px;
+  bottom: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "Outfit", "Montserrat", system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--csh-white);
+}
+.csp-read-more:hover {
+  text-decoration: underline;
+}
+
+
+p.csh-show-desc {
+    color: white !important;
+}
+span.csh-tag {
+    padding: 5px 20px;
+    border-radius: 30px;
+}
+
+.csh-show-shot-frame.ds-cocacola {
+    position: absolute;
+    bottom: 0px;
+}
+.csh-show-shot-frame.ds-spruce {
+    position: absolute;
+    width: 80%;
+    bottom: 0px;
+	right : 10px
+}
+
+/* Card color now comes from per-card color-picker fields (cshg_card_color_start/
+   _end in ACF), rendered as an inline style on .csp-book — see
+   case-studies-filtered-grid.php. No .tone-* classes needed anymore. */
+
+@media (max-width: 860px) {
+  .csh-card-list {
+    grid-template-columns: 1fr;
+  }
+  .csp-card {
+    height: auto;
+    flex-direction: column;
+  }
+  .csp-card-media {
+    min-height: 200px;
+  }
+	.csh-show-shot-frame.ds-spruce , .csh-show-shot-frame.ds-cocacola{
+		position : relative
+	}
+}
+
+.csh-show-logo[src*="spruse"]{
+    max-height: 60px;
+}
+.csh-show-logo[src*="coca-cola-logo"],
+.csh-show-logo[src*="Rectangle-9322"] {
+  max-height: 48px;
+}

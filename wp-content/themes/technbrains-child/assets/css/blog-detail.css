@@ -1,0 +1,1849 @@
+/* ============================================================
+   TechnBrains — Blog Detail (single post) restyle
+   Px-perfect port of the approved reference design
+   ("Blog Post - AI Hallucination" / blog-post.css) onto the
+   existing single.php markup. Loaded ONLY on single posts
+   (is_singular('post')) and every selector is additionally
+   scoped under body.single-post — this file cannot affect any
+   other page.
+
+   DYNAMIC: post content needs NO custom classes. All styling
+   targets plain elements and core Gutenberg classes
+   (wp-block-table, wp-block-list, wp-block-heading), so every
+   past and future post gets the design automatically. Inline
+   CTA bands come from the house pattern: ACF cta-1..4 fields +
+   [xyz-ips snippet="cta-N"] shortcode (renders .cta-section).
+
+   Type scale per client spec:
+     H1 48/700 · H2 32/700 · H3 28/600
+     Body-L 20/500 (auto-lede) · Body-M 18/400 · Body-S 14/400
+   ============================================================ */
+
+body.single-post {
+	--tnb-r: #ec1c24;
+	--tnb-ink: #16181d;
+	--tnb-charcoal: #1a1a1c;
+	--tnb-mute: #5a6478;
+	--tnb-soft: #6e7787;
+	--tnb-line: #e7e8ec;
+	--tnb-gray: #f6f6f4;
+	--tnb-dark: #05070b;
+	--tnb-font: "Outfit", system-ui, sans-serif;
+}
+
+/* ============================================================ HERO (dark) */
+body.single-post .singleBanner {
+	font-family: var(--tnb-font);
+	color: #fff;
+	padding: 64px 0 60px;
+	box-shadow: none;
+	background: #05070b url("/wp-content/uploads/2026/07/Header-scaled-1.webp") no-repeat center / cover;
+	position: relative;
+	overflow: hidden;
+}
+/* legacy theme paints a banner image via .singleBanner::before — suppress it
+   (kill rule only; this stylesheet adds no decorative pseudo-elements) */
+body.single-post .singleBanner::before {
+	display: none;
+}
+body.single-post .singleBanner .mainGrid {
+	grid-template-columns: minmax(0, 1fr);
+	position: relative;
+	z-index: 2;
+}
+
+
+/* breadcrumb — dark glass pill (same treatment as .sec-hero/.mobileAppBanner);
+   components.css lists .singleBanner in its light-banner overrides from the
+   old light blog hero, so re-assert the dark variant here */
+body.single-post .singleBanner .tnb-breadcrumb {
+	    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    list-style: none;
+    padding: 8px 15px;
+    margin: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 1;
+}
+body.single-post .singleBanner .tnb-breadcrumb a {
+	color: rgba(255, 255, 255, 0.85);
+}
+body.single-post .singleBanner .tnb-breadcrumb .tnb-bc-current {
+	color: rgba(255, 255, 255, 0.9);
+}
+body.single-post .singleBanner .tnb-breadcrumb li + li::before {
+	border-top-color: rgba(255, 255, 255, 0.9);
+	border-right-color: rgba(255, 255, 255, 0.9);
+}
+ 
+/* category chip */
+body.single-post .singleBanner .mainGrid .leftSide > span {
+	display: inline-flex;
+	align-items: center;
+	gap: 9px;
+	font-family: var(--tnb-font);
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: #fff;
+	background: rgba(236, 28, 36, 0.16);
+	border: 1px solid rgba(236, 28, 36, 0.42);
+	border-radius: 100px;
+	padding: 7px 15px;
+	margin-top: 24px;
+}
+/* H1 — spec: 48 bold */
+body.single-post .singleBanner .mainGrid .leftSide h1 {
+	font-family: var(--tnb-font);
+	font-size: 48px;
+	font-weight: 700;
+	line-height: 1.1;
+	letter-spacing: -0.03em;
+	color: #fff;
+	margin-top: 24px;
+	text-wrap: balance;
+}
+body.single-post .singleBanner .mainGrid .leftSide hr {
+	display: none;
+}
+/* excerpt — Body Large 20/500 */
+body.single-post .singleBanner .mainGrid .leftSide p {
+	font-family: var(--tnb-font);
+	font-size: 20px;
+	font-weight: 500;
+	line-height: 1.6;
+	color: rgba(255, 255, 255, 0.66);
+	margin: 22px 0 0;
+}
+/* byline + updated-date meta row — reference .bp-meta / .bp-byline values */
+body.single-post .singleBanner .mainGrid .leftSide .tnb-post-meta {
+	display: flex;
+	align-items: center;
+	gap: 22px;
+	flex-wrap: wrap;
+	margin-top: 30px;
+}
+body.single-post .singleBanner .mainGrid .leftSide .tnb-byline {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+body.single-post .singleBanner .mainGrid .leftSide .tnb-byline img {
+	width: 42px;
+	height: 42px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 2px solid rgba(255, 255, 255, 0.14);
+}
+body.single-post .singleBanner .mainGrid .leftSide .tnb-byline-name {
+	display: block;
+	font-size: 16px;
+	font-weight: 600;
+	color: #fff;
+}
+body.single-post .singleBanner .mainGrid .leftSide .tnb-byline-role {
+	display: block;
+	font-size: 13px;
+	font-weight: 500;
+	color: rgba(255, 255, 255, 0.55);
+	margin-top: 1px;
+}
+body.single-post .singleBanner .mainGrid .leftSide .tnb-meta-div {
+	width: 1px;
+	height: 30px;
+	background: rgba(255, 255, 255, 0.14);
+}
+body.single-post .singleBanner .mainGrid .leftSide .last-updated-date {
+	font-size: 14.5px;
+	font-weight: 500;
+	color: rgba(255, 255, 255, 0.72);
+	margin-top: 30px;
+}
+body.single-post .singleBanner .mainGrid .leftSide .tnb-post-meta .last-updated-date {
+	margin: 0;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+}
+body.single-post .singleBanner .mainGrid .leftSide .last-updated-date svg {
+	width: 16px;
+	height: 16px;
+	color: var(--tnb-r);
+	flex-shrink: 0;
+}
+body.single-post .singleBanner .mainGrid .leftSide .last-updated-date b {
+	color: #fff;
+	font-weight: 600;
+}
+
+/* ---------- author hover card (hero byline) — desktop/laptop only -------- */
+body.single-post .singleBanner .mainGrid .leftSide .tnb-byline {
+	position: relative;
+}
+body.single-post .singleBanner .mainGrid .leftSide .tnb-author-pop {
+	display: none;
+}
+@media (min-width: 992px) and (hover: hover) {
+	/* the card extends below the byline — the banner must not clip it */
+	body.single-post .singleBanner {
+		overflow: visible;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide .tnb-author-pop {
+		display: block;
+		position: absolute;
+		top: 100%;
+		left: -12px;
+		z-index: 60;
+		padding-top: 14px; /* hover bridge across the gap */
+		width: min(480px, calc(100vw - 48px));
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(6px);
+		transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide .tnb-byline:hover .tnb-author-pop,
+	body.single-post .singleBanner .mainGrid .leftSide .tnb-byline:focus-within .tnb-author-pop {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0);
+	}
+	body.single-post .singleBanner .mainGrid .leftSide .tnb-author-pop-arrow {
+		position: absolute;
+		top: 7px;
+		left: 34px;
+		width: 14px;
+		height: 14px;
+		background: #fff;
+		transform: rotate(45deg);
+		border-radius: 2px;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide .tnb-author-pop-card {
+		position: relative;
+		background: #fff;
+		border-radius: 16px;
+		padding: 22px 24px;
+		box-shadow: 0 24px 60px -20px rgba(12, 35, 64, 0.35), 0 8px 24px -12px rgba(12, 35, 64, 0.25);
+		font-family: var(--tnb-font);
+		text-align: left;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide .tnb-author-pop-card {
+		display: flex;
+		align-items: flex-start;
+		gap: 18px;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide .tnb-author-pop-img {
+		width: 90px;
+		height: 90px;
+		border-radius: 50%;
+		object-fit: cover;
+		border: 0;
+		flex-shrink: 0;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide .tnb-author-pop-content {
+		flex: 1;
+		min-width: 0;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide .tnb-author-pop-head {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 16px;
+		padding-bottom: 14px;
+		border-bottom: 1px solid var(--tnb-line);
+	}
+	body.single-post .singleBanner .mainGrid .leftSide .tnb-author-pop-id {
+		flex: 1;
+		min-width: 0;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide .tnb-author-pop-name {
+		font-size: 19px;
+		font-weight: 700;
+		color: var(--tnb-charcoal);
+		letter-spacing: -0.01em;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide .tnb-author-pop-sub {
+		font-size: 13px;
+		font-weight: 500;
+		color: var(--tnb-soft);
+		margin-top: 3px;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide .tnb-author-pop-social {
+		display: flex;
+		gap: 8px;
+		align-self: flex-start;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide .tnb-author-pop-social a {
+		width: 26px;
+		height: 26px;
+		border-radius: 7px;
+		display: grid;
+		place-items: center;
+		color: var(--tnb-r);
+		border: 1px solid rgba(236, 28, 36, 0.35);
+		background: #fff;
+		transition: background 0.2s ease, color 0.2s ease;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide .tnb-author-pop-social a:hover {
+		background: var(--tnb-r);
+		color: #fff;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide .tnb-author-pop-social svg {
+		width: 13px;
+		height: 13px;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide .tnb-author-pop-bio {
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 1.6;
+		color: var(--tnb-mute);
+		margin: 16px 0 0;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide .tnb-author-pop-more {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		gap: 7px;
+		margin-top: 14px;
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--tnb-charcoal);
+		transition: color 0.2s ease;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide .tnb-author-pop-more svg {
+		width: 14px;
+		height: 14px;
+		transition: transform 0.2s ease;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide .tnb-author-pop-more:hover {
+		color: var(--tnb-r);
+	}
+	body.single-post .singleBanner .mainGrid .leftSide .tnb-author-pop-more:hover svg {
+		transform: translateX(3px);
+	}
+}
+
+/* ============================================================ LAYOUT */
+body.single-post .sec-post.det-post {
+	font-family: var(--tnb-font);
+	padding: clamp(44px, 5vw, 68px) 0 clamp(64px, 8vw, 110px);
+}
+body.single-post .sec-post.det-post .singleGrid {
+	display: grid;
+	grid-template-columns: 250px minmax(0, 1fr) 260px;
+	column-gap: 40px;
+	row-gap: 56px;
+	align-items: start;
+}
+
+/* ---------- LEFT: TOC + share ---------- */
+body.single-post .sec-post.det-post .leftContent {
+	align-self: start;
+	position: sticky;
+	top: 96px;
+}
+body.single-post .sec-post.det-post .leftContent .custom-table-of-content {
+	display: flex;
+	flex-direction: column;
+	gap: 34px;
+}
+body.single-post .sec-post.det-post .leftContent div#ez-toc-container {
+	background: transparent;
+	border: 0;
+	box-shadow: none;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	max-height: none;
+	overflow: visible;
+	display: block;
+}
+body.single-post .sec-post.det-post .leftContent div#ez-toc-container .ez-toc-title,
+body.single-post .sec-post.det-post .leftContent .soc > span > b {
+	font-family: var(--tnb-font);
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--tnb-charcoal);
+}
+body.single-post .sec-post.det-post .leftContent div#ez-toc-container nav ul.ez-toc-list {
+	max-height: none;
+	/* legacy responsive.css forces `overflow: overlay !important` on the list,
+	   which clips the active link's red border — must match its weight.
+	   Scrolling lives on the parent nav instead (see min-width:992px block). */
+	overflow: visible !important;
+}
+body.single-post .sec-post.det-post .leftContent div#ez-toc-container nav > ul {
+	display: flex;
+	flex-direction: column;
+	border-left: 2px solid var(--tnb-line);
+	margin: 10px 0 0;
+	/* ez-toc plugin forces its own list padding — must match its weight */
+	padding: 0 !important;
+	list-style: none;
+}
+body.single-post .sec-post.det-post .leftContent div#ez-toc-container nav ul li {
+	/* ez-toc plugin ships `list-style: disc !important` — must match its weight */
+	list-style: none !important;
+	margin: 0;
+	padding: 0;
+}
+/* legacy responsive.css TOC rules use !important (color #000, active
+   #de253a, paddings) — these must match that weight to win */
+body.single-post .sec-post.det-post .leftContent div#ez-toc-container nav ul li a.ez-toc-link {
+	display: block;
+	font-family: var(--tnb-font);
+	font-size: 13px !important;
+	font-weight: 500;
+	line-height: 1.2;
+	color: var(--tnb-mute) !important;
+	padding: 0 8px 0 15px;
+	/* -2px = link border exactly overlays the ul rail (red covers gray when active) */
+	margin-left: -2px;
+	border-left: 2px solid transparent;
+	white-space: normal;
+	overflow: visible;
+	text-decoration: none;
+	transition: color 0.2s ease, border-color 0.2s ease;
+}
+body.single-post .sec-post.det-post .leftContent div#ez-toc-container nav ul li a.ez-toc-link:hover {
+	color: var(--tnb-charcoal) !important;
+}
+body.single-post .sec-post.det-post .leftContent div#ez-toc-container nav ul li a.ez-toc-link.active,
+body.single-post .sec-post.det-post .leftContent div#ez-toc-container nav ul li a.ez-toc-link.ez-toc-active,
+body.single-post .sec-post.det-post .leftContent div#ez-toc-container nav ul li a.ez-toc-link:focus-visible {
+	color: var(--tnb-r) !important;
+	border-left-color: var(--tnb-r) !important;
+	font-weight: 600;
+}
+/* TOC title container — kill legacy red underline + gap */
+body.single-post .sec-post.det-post .leftContent .custom-table-of-content .ez-toc-title-container {
+	width: fit-content;
+	border-bottom: 0;
+	margin-bottom: 0;
+}
+
+/* long TOC scrolls inside the sticky sidebar — only where the sidebar
+   column exists (≥992px); below that the layout is single column */
+@media (min-width: 992px) {
+	body.single-post .sec-post.det-post .leftContent div#ez-toc-container nav {
+		max-height: calc(100vh - 320px);
+		overflow-y: auto;
+		overflow-x: hidden;
+		/* active links overhang the ul rail by -2px — pad the scrollbox so
+		   the red border isn't clipped */
+		padding-left: 2px;
+		scrollbar-width: thin;
+		scrollbar-color: var(--tnb-r) var(--tnb-line);
+	}
+	body.single-post .sec-post.det-post .leftContent div#ez-toc-container nav::-webkit-scrollbar {
+		width: 4px;
+	}
+	body.single-post .sec-post.det-post .leftContent div#ez-toc-container nav::-webkit-scrollbar-track {
+		background: var(--tnb-line);
+		border-radius: 4px;
+	}
+	body.single-post .sec-post.det-post .leftContent div#ez-toc-container nav::-webkit-scrollbar-thumb {
+		background: var(--tnb-r);
+		border-radius: 4px;
+	}
+}
+
+/* share — reference .bp-share values */
+body.single-post .sec-post.det-post .leftContent .soc {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+body.single-post .sec-post.det-post .leftContent .soc .tnb-share-h {
+	font-family: var(--tnb-font);
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--tnb-charcoal);
+	margin: 0;
+}
+body.single-post .sec-post.det-post .leftContent .soc .tnb-share {
+	display: flex;
+	gap: 10px;
+}
+body.single-post .sec-post.det-post .leftContent .soc .tnb-share a,
+body.single-post .sec-post.det-post .leftContent .soc .tnb-share button {
+	width: 40px;
+	height: 40px;
+	border-radius: 10px;
+	display: grid;
+	place-items: center;
+	color: var(--tnb-charcoal);
+	background: var(--tnb-gray);
+	border: 1px solid var(--tnb-line);
+	cursor: pointer;
+	padding: 0;
+	transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+body.single-post .sec-post.det-post .leftContent .soc .tnb-share a:hover,
+body.single-post .sec-post.det-post .leftContent .soc .tnb-share button:hover {
+	background: var(--tnb-r);
+	border-color: var(--tnb-r);
+	color: #fff;
+	transform: translateY(-2px);
+}
+body.single-post .sec-post.det-post .leftContent .soc .tnb-share svg {
+	width: 17px;
+	height: 17px;
+}
+body.single-post .sec-post.det-post .leftContent .soc .tnb-share .tnb-copy-link.copied {
+	background: #1f8a5b;
+	border-color: #1f8a5b;
+	color: #fff;
+}
+
+/* ---------- CENTER: article (all rules class-free / Gutenberg-core) ---------- */
+body.single-post .sec-post.det-post .det {
+	min-width: 0;
+	font-family: var(--tnb-font);
+}
+/* Body Medium — 18/400 */
+body.single-post .sec-post.det-post .det p {
+	font-family: var(--tnb-font);
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 1.7;
+	color: #3a3f4a;
+	margin: 0 0 7px;
+}
+/* auto-lede: first paragraph of every post — Body Large 20/500 */
+/* body.single-post .sec-post.det-post .det > p:first-of-type {
+	font-size: 20px;
+	font-weight: 500;
+	line-height: 1.7;
+	color: #2a2f39;
+} */
+body.single-post .sec-post.det-post .det p a,
+body.single-post .sec-post.det-post .det li a {
+	color: var(--tnb-r);
+	font-weight: 600;
+	text-decoration: none;
+	border-bottom: 1px solid rgba(236, 28, 36, 0.3);
+	transition: border-color 0.2s ease;
+}
+body.single-post .sec-post.det-post .det p a:hover,
+body.single-post .sec-post.det-post .det li a:hover {
+	border-bottom-color: var(--tnb-r);
+}
+body.single-post .sec-post.det-post .det strong,
+body.single-post .sec-post.det-post .det b {
+	color: var(--tnb-charcoal);
+	font-weight: 700;
+}
+body.single-post .sec-post.det-post .det th b{
+	color : white
+}
+/* H2 — spec: 32 bold */
+body.single-post .sec-post.det-post .det h2, body.single-post .sec-post.det-post .det h2 span {
+	font-family: var(--tnb-font);
+	font-size: 32px;
+	font-weight: 700 !important;
+	line-height: 1.2;
+	letter-spacing: -0.02em;
+	color: var(--tnb-charcoal);
+/* 	margin: clamp(48px, 6vw, 72px) 0 26px; */
+	scroll-margin-top: 96px;
+}
+/* H3 — spec: 28 semibold */
+body.single-post .sec-post.det-post .det h3 , body.single-post .sec-post.det-post .det h3 span{
+	font-family: var(--tnb-font);
+	font-size: 28px;
+	font-weight: 600 !important;
+	line-height: 1.3;
+	letter-spacing: -0.01em;
+	color: var(--tnb-charcoal);
+	margin: 32px 0 14px;
+}
+body.single-post .sec-post.det-post .det h4 , body.single-post .sec-post.det-post .det h4 span {
+	font-family: var(--tnb-font);
+	font-size: 24px;
+	font-weight: 600;
+	line-height: 1.35;
+	letter-spacing: -0.01em;
+	color: var(--tnb-charcoal);
+}
+body.single-post .sec-post.det-post .det h5 , body.single-post .sec-post.det-post .det h5 span {
+	font-family: var(--tnb-font);
+	font-size: 20px;
+	font-weight: 600 !important;
+	line-height: 1.4;
+	color: var(--tnb-charcoal);
+}
+body.single-post .sec-post.det-post .det > *:first-child {
+	margin-top: 0;
+}
+/* unordered lists — custom image bullets (class-free) */
+body.single-post .sec-post.det-post .det ul {
+	margin: 4px 0 30px;
+	padding: 0 0 0 24px;
+	list-style: none;
+}
+body.single-post .sec-post.det-post .det ul li {
+	position: relative;
+	margin: 0 0 14px;
+	padding-left: 6px;
+	font-family: var(--tnb-font);
+	font-size: 18px;
+	line-height: 1.66;
+	color: #3a3f4a;
+}
+body.single-post .sec-post.det-post .det ul li::before {
+	content: "";
+	position: absolute;
+	left: -20px;
+	top: 0.42em;
+	width: 13px;
+	height: 13px;
+	background: url("/wp-content/uploads/2026/07/bullets.webp") no-repeat center / contain;
+}
+/* shielded / normalized / blockquote lists must not get the image bullet */
+body.single-post .sec-post.det-post .det .tnb-blocks li::before,
+body.single-post .sec-post.det-post .det li[style*="list-style-type"]::before,
+body.single-post .sec-post.det-post .det blockquote ul li::before {
+	content: none;
+}
+/* blockquote keeps native red disc markers (see blockquote section) */
+body.single-post .sec-post.det-post .det blockquote ul {
+	list-style: disc;
+}
+/* ordered lists — native list-style, red bold numbers (class-free) */
+body.single-post .sec-post.det-post .det ol {
+	margin: 8px 0 30px;
+	padding: 0 0 0 24px;
+	list-style: decimal;
+}
+body.single-post .sec-post.det-post .det ol li {
+	margin: 0 0 12px;
+	padding-left: 6px;
+	font-family: var(--tnb-font);
+	font-size: 18px;
+	line-height: 1.6;
+	color: #3a3f4a;
+}
+body.single-post .sec-post.det-post .det ol li::marker {
+	color: var(--tnb-r);
+	font-weight: 700;
+}
+/* TnB content blocks ([tnb_blocks]) style their own lists — shield them from
+   the generic post-list rules above and re-assert their reference values at
+   this (higher) specificity. */
+body.single-post .sec-post.det-post .det .tnb-blocks ul,
+body.single-post .sec-post.det-post .det .tnb-blocks ol {
+	list-style: none;
+	padding-left: 0;
+}
+body.single-post .sec-post.det-post .det .tnb-blocks li {
+	list-style: none;
+}
+body.single-post .sec-post.det-post .det .tnb-blocks li::marker {
+	content: "";
+	color: transparent;
+}
+body.single-post .sec-post.det-post .det .tnb-blocks ol.tnb-rank {
+	margin: 8px 0 30px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+body.single-post .sec-post.det-post .det .tnb-blocks ol.tnb-rank li {
+	padding: 16px 20px 16px 62px;
+	margin: 0;
+	font-size: 15.5px;
+	line-height: 1.55;
+	color: #3a3f4a;
+}
+/* ---------- content repair: forgiving styles for legacy writer markup ----
+   ~100 existing posts contain editor artifacts that cannot be re-edited:
+   empty <p>, single-item nested list wrappers (<ul><li style="list-style-
+   type:none"><ul><li>…), <ol> groups restarting at 1 per item, inline-styled
+   .highlighted-box callouts. These rules normalize them visually. */
+
+/* empty paragraphs create huge gaps — collapse them */
+body.single-post .sec-post.det-post .det p:empty,
+body.single-post .sec-post.det-post .det p:has(> br:only-child) {
+	display: none;
+	margin: 0;
+}
+
+/* nested single-item wrapper lists: neutralize the styleless outer <li>
+   and the double indentation of the inner list */
+body.single-post .sec-post.det-post .det li[style*="list-style-type"] {
+	padding-left: 0;
+	margin: 0;
+	list-style: none !important;
+}
+body.single-post .sec-post.det-post .det li[style*="list-style-type"]::marker {
+	content: "";
+	color: transparent;
+}
+body.single-post .sec-post.det-post .det li[style*="list-style-type"] > ul,
+body.single-post .sec-post.det-post .det li[style*="list-style-type"] > ol {
+	margin: 0;
+	padding-left: 24px;
+}
+/* each wrapper list holds one item — space them like list items, not blocks */
+body.single-post .sec-post.det-post .det > ul:has(> li[style*="list-style-type"]),
+body.single-post .sec-post.det-post .det > ol:has(> li[style*="list-style-type"]) {
+	margin: 0 0 14px;
+}
+
+/* continuous numbering across consecutive single-item <ol> wrappers:
+   a group starts after any non-ol sibling; consecutive ols keep counting */
+body.single-post .sec-post.det-post .det > :not(ol) + ol:has(> li[style*="list-style-type"] > ol),
+body.single-post .sec-post.det-post .det > ol:has(> li[style*="list-style-type"] > ol):first-child {
+	counter-reset: tnb-olfix;
+}
+body.single-post .sec-post.det-post .det > ol:has(> li[style*="list-style-type"] > ol) > li > ol > li {
+	counter-increment: tnb-olfix;
+}
+body.single-post .sec-post.det-post .det > ol:has(> li[style*="list-style-type"] > ol) > li > ol > li::marker {
+	content: counter(tnb-olfix) ". ";
+	color: var(--tnb-r);
+	font-weight: 700;
+}
+
+/* inline-styled highlighted boxes (writers' callouts) — polish geometry;
+   their inline background/border colors are kept */
+body.single-post .sec-post.det-post .det .highlighted-box {
+	border-radius: 14px;
+	padding: 24px 28px;
+	margin: clamp(30px, 3.6vw, 44px) 0;
+	box-shadow: none;
+}
+body.single-post .sec-post.det-post .det .highlighted-box > *:first-child {
+	margin-top: 0;
+}
+body.single-post .sec-post.det-post .det .highlighted-box > p:last-child,
+body.single-post .sec-post.det-post .det .highlighted-box > ul:last-child,
+body.single-post .sec-post.det-post .det .highlighted-box > ol:last-child {
+	margin-bottom: 0;
+}
+
+/* centered inline images pasted via the classic editor */
+body.single-post .sec-post.det-post .det img.aligncenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* uploaded image + caption — reference bp-fig card, fully dynamic.
+   Only the figure with a DIRECT figcaption becomes the card: the classic
+   editor nests figure.wp-caption inside figure.wp-block-image, and matching
+   any-depth would card both (double border). */
+body.single-post .sec-post.det-post .det figure.wp-block-image:has(> figcaption),
+body.single-post .sec-post.det-post .det figure.wp-caption:has(> figcaption) {
+	border: 1px solid var(--tnb-line);
+	border-radius: 16px;
+	overflow: hidden;
+	background: #fff;
+	/* editor writes inline width (e.g. style="width: 1000px") — must win */
+	width: auto !important;
+	max-width: 100%;
+}
+/* outer wrapper around a nested caption-figure: container only, no box */
+body.single-post .sec-post.det-post .det figure.wp-block-image:has(> figure) {
+	border: 0;
+	padding: 0;
+	background: transparent;
+	overflow: visible;
+}
+body.single-post .sec-post.det-post .det figure.wp-block-image:has(> figure) > figure {
+	margin: 0;
+}
+body.single-post .sec-post.det-post .det figure.wp-block-image:has(> figcaption) img,
+body.single-post .sec-post.det-post .det figure.wp-caption:has(> figcaption) img {
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: 0;
+}
+body.single-post .sec-post.det-post .det figure.wp-block-image:has(> figcaption) > figcaption,
+body.single-post .sec-post.det-post .det figure.wp-caption:has(> figcaption) > figcaption {
+	padding: 14px 20px;
+	border-top: 1px solid var(--tnb-line);
+	margin: 0;
+	font-size: 14px;
+	color: var(--tnb-soft);
+}
+
+/* blockquote — key-takeaway callout panel (class-free) */
+body.single-post .sec-post.det-post .det blockquote {
+	margin: clamp(30px, 3.6vw, 44px) 0;
+	padding: 30px 34px 32px;
+	background: #fdf1f1;
+	border: 1px solid rgba(236, 28, 36, 0.16);
+	border-left: 4px solid var(--tnb-r);
+	border-radius: 14px;
+}
+body.single-post .sec-post.det-post .det blockquote p {
+	font-size: 18px;
+	line-height: 1.6;
+	color: #40454f;
+	margin: 0 0 14px;
+}
+body.single-post .sec-post.det-post .det blockquote p:last-child,
+body.single-post .sec-post.det-post .det blockquote ul:last-child {
+	margin-bottom: 0;
+}
+body.single-post .sec-post.det-post .det blockquote ul li::marker {
+	color: var(--tnb-r);
+}
+/* code */
+body.single-post .sec-post.det-post .det code {
+	font-size: 15px;
+	background: var(--tnb-gray);
+	border: 1px solid var(--tnb-line);
+	border-radius: 6px;
+	padding: 2px 7px;
+	color: var(--tnb-charcoal);
+}
+body.single-post .sec-post.det-post .det pre {
+	margin: 0 0 15px;
+	padding: 20px 24px;
+	background: var(--tnb-dark);
+	color: #e7e8ec;
+	border-radius: 12px;
+	overflow-x: auto;
+	font-size: 14px;
+	line-height: 1.6;
+}
+body.single-post .sec-post.det-post .det pre code {
+	background: transparent;
+	border: 0;
+	padding: 0;
+	color: inherit;
+}
+/* images / figures — Body Small captions 14/400 */
+body.single-post .sec-post.det-post .det img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 12px;
+}
+body.single-post .sec-post.det-post .det figure {
+	margin: clamp(28px, 3.4vw, 40px) 0;
+}
+body.single-post .sec-post.det-post .det figcaption,
+body.single-post .sec-post.det-post .det .wp-caption-text {
+	font-size: 14px;
+	font-weight: 400;
+	color: var(--tnb-soft);
+	margin-top: 10px;
+	text-align: left;
+}
+/* hr */
+body.single-post .sec-post.det-post .det hr {
+	border: 0;
+	border-top: 1px solid var(--tnb-line);
+	margin: 40px 0;
+}
+/* embeds */
+body.single-post .sec-post.det-post .det iframe,
+body.single-post .sec-post.det-post .det video {
+	max-width: 100%;
+	border-radius: 12px;
+}
+
+/* comparison tables — Gutenberg figure wrapper OR bare table, class-free */
+body.single-post .sec-post.det-post .det figure.wp-block-table {
+	margin: clamp(24px, 3vw, 34px) 0;
+	border: 1px solid var(--tnb-line);
+	border-radius: 14px;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+body.single-post .sec-post.det-post .det > table {
+	display: block;
+	margin: clamp(24px, 3vw, 34px) 0;
+	border: 1px solid var(--tnb-line);
+	border-radius: 14px;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+body.single-post .sec-post.det-post .det table {
+	width: 100%;
+	border-collapse: collapse;
+	font-family: var(--tnb-font);
+	font-size: 15px;
+}
+/* production scroll approach, below 1920 only: table takes natural content
+   width — wider than the column → wrapper scrolls; narrower → stretches to
+   100%. At ≥1920 tables stay plain full width, no scroll sizing. */
+@media (max-width: 1919px) {
+	body.single-post .sec-post.det-post .det table {
+		width: max-content;
+		min-width: 100%;
+		max-width: none;
+	}
+	/* bare .det > table (before initBlogTableWrap adds .responsive-table) is
+	   its own display:block scrollbox — content width would defeat its
+	   overflow-x */
+	body.single-post .sec-post.det-post .det > table {
+		width: 100%;
+	}
+}
+body.single-post .sec-post.det-post .det figure.wp-block-table table {
+	margin: 0;
+	border: 0;
+	display: table;
+}
+/* Gutenberg "fixed width table cells" toggle sets table-layout:fixed, which
+   ignores cell min-width and re-crushes wide tables — restore auto so the
+   min-width floor + overflow-x scroll can engage */
+body.single-post .sec-post.det-post .det table.has-fixed-layout {
+	table-layout: auto;
+}
+/* neutralize legacy responsive.css table rules (border shorthand on every
+   cell, red #ed2a32 first row with !important, padding-left 0 !important) */
+body.single-post .sec-post.det-post .det table td,
+body.single-post .sec-post.det-post .det table th {
+	border: 0;
+	padding: 15px 12px !important;
+	/* readable floor per column — wide tables scroll in the wrapper instead
+	   of crushing into one-word columns */
+	min-width: 120px;
+}
+body.single-post .sec-post.det-post .det table tbody tr:nth-child(1) {
+	background-color: transparent;
+	font-weight: 400;
+}
+body.single-post .sec-post.det-post .det table:not(:has(thead)) tbody tr:nth-child(1) {
+	background-color: var(--tnb-charcoal);
+	font-weight: 600;
+}
+body.single-post .sec-post.det-post .det table thead + tbody tr:nth-child(1),
+body.single-post .sec-post.det-post .det table thead + tbody tr:nth-child(1) td {
+	color: #3a3f4a !important;
+	font-weight: 400;
+	background-color: transparent;
+}
+body.single-post .sec-post.det-post .det table thead + tbody tr:nth-child(1) p {
+	color: #3a3f4a !important;
+	font-weight: 400 !important;
+}
+
+body.single-post .sec-post.det-post .det table thead th,
+body.single-post .sec-post.det-post .det table:not(:has(thead)) tbody tr:first-child td,
+body.single-post .sec-post.det-post .det table:not(:has(thead)) tbody tr:first-child th {
+	background: var(--tnb-charcoal);
+	color: #fff;
+	font-weight: 600;
+	text-align: center;
+	padding: 15px 12px !important;
+	font-size: 13px;
+	letter-spacing: 0.01em;
+	border-right: 1px solid rgba(255, 255, 255, 0.12);
+	border-top: 0;
+	border-left: 0;
+	border-bottom: 0;
+}
+body.single-post .sec-post.det-post .det table thead th:last-child,
+body.single-post .sec-post.det-post .det table:not(:has(thead)) tbody tr:first-child td:last-child {
+	border-right: none;
+}
+/* keep the card's rounded corners visible above the scrollable table */
+body.single-post .sec-post.det-post .det table thead th:first-child,
+body.single-post .sec-post.det-post .det table:not(:has(thead)) tbody tr:first-child td:first-child {
+	border-top-left-radius: 13px;
+}
+body.single-post .sec-post.det-post .det table thead th:last-child,
+body.single-post .sec-post.det-post .det table:not(:has(thead)) tbody tr:first-child td:last-child {
+	border-top-right-radius: 13px;
+}
+body.single-post .sec-post.det-post .det table:not(:has(thead)) tbody tr:first-child td strong,
+body.single-post .sec-post.det-post .det table:not(:has(thead)) tbody tr:first-child td b {
+	color: #fff;
+}
+body.single-post .sec-post.det-post .det table tbody td {
+	padding: 15px 12px !important;
+	border-top: 1px solid var(--tnb-line);
+	border-right: 1px solid var(--tnb-line);
+	border-left: 0;
+	border-bottom: 0;
+	line-height: 1.55;
+	color: #3a3f4a;
+	vertical-align: middle;
+	font-size: 14px;
+	word-break: break-word;
+	overflow-wrap: anywhere;
+	text-align: center;
+	background: transparent;
+}
+body.single-post .sec-post.det-post .det table tbody td:last-child {
+	border-right: none;
+}
+body.single-post .sec-post.det-post .det table tbody tr:nth-child(even) {
+	background: #fafaf9;
+}
+body.single-post .sec-post.det-post .det table td:first-child {
+	font-weight: 600;
+	color: var(--tnb-charcoal);
+}
+body.single-post .sec-post.det-post .det table:not(:has(thead)) tbody tr:first-child td:first-child {
+	color: #fff;
+}
+
+/* inline CTA band — house snippet output ([xyz-ips snippet="cta-N"] → .cta-section) */
+body.single-post .sec-post.det-post .det .cta-section {
+	margin: clamp(34px, 4vw, 48px) 0;
+	padding: 32px 30px;
+	border-radius: 16px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: 6px;
+	background-color: var(--tnb-dark);
+	background-size: cover;
+	background-position: center;
+	border: 1px solid rgba(255, 255, 255, 0.06);
+}
+body.single-post .sec-post.det-post .det .cta-section h4 {
+	font-size: 22px;
+	font-weight: 600;
+	line-height: 1.35;
+	letter-spacing: -0.015em;
+	color: #fff;
+	margin: 0 auto;
+	max-width: 30ch;
+}
+body.single-post .sec-post.det-post .det .cta-section p {
+	font-size: 15px;
+	line-height: 1.55;
+	color: rgba(255, 255, 255, 0.7);
+	margin: 10px auto 0;
+	max-width: 44ch;
+}
+body.single-post .sec-post.det-post .det .cta-section .btn-red,
+body.single-post .sec-post.det-post .det .cta-section button {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	margin-top: 20px;
+	font-family: var(--tnb-font);
+	font-size: 15px;
+	font-weight: 600;
+	padding: 13px 22px;
+	border: 0;
+	border-radius: 10px;
+	background: var(--tnb-r);
+	color: #fff;
+	cursor: pointer;
+	box-shadow: 0 14px 28px -14px rgba(236, 28, 36, 0.7);
+	transition: transform 0.2s ease;
+}
+body.single-post .sec-post.det-post .det .cta-section button:hover {
+	transform: translateY(-2px);
+}
+
+/* ---------- FAQ accordion (existing .faqSection markup) ---------- */
+body.single-post .sec-post.det-post .faqSection {
+	margin-top: clamp(44px, 5vw, 60px);
+}
+body.single-post .sec-post.det-post .faqSection .faqheading h2 {
+	font-family: var(--tnb-font);
+	font-size: 32px;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	color: var(--tnb-charcoal);
+	text-align: center;
+	margin-bottom: 28px;
+}
+body.single-post .sec-post.det-post .faqSection .accordion {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+body.single-post .sec-post.det-post .faqSection .card {
+	background: #fff;
+	border: 1px solid #eceef1;
+	border-radius: 14px;
+	padding: 0 26px;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+body.single-post .sec-post.det-post .faqSection .card:hover {
+	border-color: #dfe2e7;
+}
+body.single-post .sec-post.det-post .faqSection .card .card-header {
+	background: transparent;
+	border: 0;
+	padding: 0;
+}
+body.single-post .sec-post.det-post .faqSection .card .card-header h3 {
+	margin: 0;
+}
+body.single-post .sec-post.det-post .faqSection .card .btn-link {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
+	width: 100%;
+	padding: 22px 0;
+	font-family: var(--tnb-font);
+	font-size: 17px;
+	font-weight: 600;
+	color: var(--tnb-charcoal);
+	line-height: 1.4;
+	text-align: left;
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+body.single-post .sec-post.det-post .faqSection .card .btn-link:hover {
+	color: var(--tnb-r);
+}
+body.single-post .sec-post.det-post .faqSection .card .btn-link .icon {
+	width: 32px;
+	height: 32px;
+	flex-shrink: 0;
+	border-radius: 50%;
+	background: var(--tnb-r);
+	color: #fff;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+body.single-post .sec-post.det-post .faqSection .card .btn-link .icon svg {
+	width: 14px;
+	height: 14px;
+}
+/* chevron: points down when closed (.collapsed), rotates 180° when open */
+body.single-post .sec-post.det-post .faqSection .card .btn-link .icon {
+	transition: transform 0.3s ease;
+}
+body.single-post .sec-post.det-post .faqSection .card .btn-link:not(.collapsed) .icon {
+	transform: rotate(180deg);
+}
+body.single-post .sec-post.det-post .faqSection .card .card-body {
+	padding: 0 0 24px;
+	font-family: var(--tnb-font);
+	font-size: 16px;
+	line-height: 1.65;
+	color: var(--tnb-mute);
+}
+
+/* ---------- author card (after FAQs) — reference .bp-authorcard 1:1 ------- */
+body.single-post .sec-post.det-post .tnb-authorcard {
+	margin-top: clamp(44px, 5vw, 60px);
+	display: flex;
+	gap: 22px;
+	align-items: flex-start;
+	padding: 26px 28px;
+	background: var(--tnb-gray);
+	border: 1px solid var(--tnb-line);
+	border-radius: 18px;
+	font-family: var(--tnb-font);
+}
+body.single-post .sec-post.det-post .tnb-authorcard > img {
+	width: 74px;
+	height: 74px;
+	border-radius: 50%;
+	object-fit: cover;
+	flex-shrink: 0;
+}
+body.single-post .sec-post.det-post .tnb-authorcard-body {
+	flex: 1;
+	min-width: 0;
+}
+body.single-post .sec-post.det-post .tnb-authorcard-top {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
+}
+body.single-post .sec-post.det-post .tnb-authorcard-k {
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--tnb-r);
+}
+body.single-post .sec-post.det-post .tnb-authorcard-n {
+	font-size: 20px;
+	font-weight: 700;
+	color: var(--tnb-charcoal);
+	margin-top: 4px;
+	letter-spacing: -0.01em;
+}
+body.single-post .sec-post.det-post .tnb-authorcard-foot {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: 14px;
+}
+body.single-post .sec-post.det-post .tnb-authorcard-foot p {
+	font-size: 14.5px;
+	line-height: 1.55;
+	color: var(--tnb-mute);
+	margin: 14px 0 0;
+}
+body.single-post .sec-post.det-post .tnb-author-social {
+	display: flex;
+	gap: 10px;
+	flex-shrink: 0;
+}
+body.single-post .sec-post.det-post .tnb-author-social a {
+	width: 40px;
+	height: 40px;
+	border-radius: 10px;
+	display: grid;
+	place-items: center;
+	color: var(--tnb-charcoal);
+	background: #fff;
+	border: 1px solid var(--tnb-line);
+	transition: all 0.2s ease;
+}
+body.single-post .sec-post.det-post .tnb-author-social a:hover {
+	background: var(--tnb-r);
+	border-color: var(--tnb-r);
+	color: #fff;
+	transform: translateY(-2px);
+}
+body.single-post .sec-post.det-post .tnb-author-social svg {
+	width: 17px;
+	height: 17px;
+}
+body.single-post .sec-post.det-post .tnb-author-more {
+	align-self: flex-end;
+	flex-shrink: 0;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	font-family: var(--tnb-font);
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--tnb-r);
+	white-space: nowrap;
+	transition: color 0.2s ease;
+}
+body.single-post .sec-post.det-post .tnb-author-more svg {
+	width: 15px;
+	height: 15px;
+	transition: transform 0.2s ease;
+}
+body.single-post .sec-post.det-post .tnb-author-more:hover {
+	color: var(--tnb-charcoal);
+}
+body.single-post .sec-post.det-post .tnb-author-more:hover svg {
+	transform: translateX(3px);
+}
+/* ---------- RIGHT rail ---------- */
+body.single-post .sec-post.det-post .rightContent {
+	position: sticky;
+	top: 96px;
+	align-self: start;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+body.single-post .sec-post.det-post .rightContent > h2 {
+	font-family: var(--tnb-font);
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--tnb-charcoal);
+	margin: 0;
+}
+body.single-post .sec-post.det-post .rightContent .related-post-grid {
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+}
+body.single-post .sec-post.det-post .rightContent .relatedPost {
+	border: 1px solid var(--tnb-line);
+	border-radius: 14px;
+	overflow: hidden;
+	background: #fff;
+	transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+body.single-post .sec-post.det-post .rightContent .relatedPost:hover {
+	transform: translateY(-4px);
+	border-color: rgba(236, 28, 36, 0.35);
+	box-shadow: 0 30px 60px -40px rgba(12, 35, 64, 0.35);
+}
+body.single-post .sec-post.det-post .rightContent .relatedPost img {
+	width: 100%;
+	height: 120px;
+	object-fit: cover;
+	display: block;
+}
+body.single-post .sec-post.det-post .rightContent .relatedPost .card--info {
+	padding: 14px 16px 16px;
+}
+body.single-post .sec-post.det-post .rightContent .relatedPost h3 {
+	font-family: var(--tnb-font);
+	font-size: 15px;
+	font-weight: 600;
+	line-height: 1.32;
+	letter-spacing: -0.01em;
+	color: var(--tnb-charcoal);
+	transition: color 0.25s ease;
+}
+body.single-post .sec-post.det-post .rightContent .relatedPost:hover h3 {
+	color: var(--tnb-r);
+}
+body.single-post .sec-post.det-post .rightContent .relatedPost .card--info > a:last-child {
+	font-family: var(--tnb-font);
+	font-size: 13.5px;
+	font-weight: 600;
+	color: var(--tnb-r);
+}
+/* dark promo card ("Value we delivered") */
+body.single-post .sec-post.det-post .rightContent .rightCta {
+	position: relative;
+	overflow: hidden;
+	border-radius: 22px;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	color: #fff;
+	padding: 28px 26px;
+	text-align: center;
+	background:
+		radial-gradient(120% 90% at 88% -6%, rgba(236, 28, 36, 0.5) 0%, rgba(236, 28, 36, 0) 52%),
+		radial-gradient(90% 70% at -10% 110%, rgba(63, 120, 197, 0.28) 0%, rgba(63, 120, 197, 0) 55%),
+		linear-gradient(180deg, #10151f 0%, #080b12 100%);
+	box-shadow: 0 30px 60px -32px rgba(236, 28, 36, 0.4), 0 18px 40px -30px rgba(12, 35, 64, 0.6);
+}
+body.single-post .sec-post.det-post .rightContent .rightCta h4 {
+	font-family: var(--tnb-font);
+	font-size: 14px;
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: rgba(255, 255, 255, 0.66);
+	margin: 0 0 10px;
+}
+body.single-post .sec-post.det-post .rightContent .rightCta h5 {
+	font-family: var(--tnb-font);
+	font-size: 44px;
+	font-weight: 700;
+	letter-spacing: -0.03em;
+	color: #fff;
+	margin: 0 0 8px;
+}
+body.single-post .sec-post.det-post .rightContent .rightCta p {
+	font-family: var(--tnb-font);
+	font-size: 14.5px;
+	line-height: 1.6;
+	color: rgba(255, 255, 255, 0.66);
+	margin: 0 0 18px;
+}
+body.single-post .sec-post.det-post .rightContent .rightCta a {
+	display: inline-flex;
+	justify-content: center;
+	width: 100%;
+	padding: 13px 18px;
+	border-radius: 10px;
+	font-family: var(--tnb-font);
+	font-size: 14.5px;
+	font-weight: 600;
+	color: #fff;
+	background: rgba(255, 255, 255, 0.06);
+	border: 1px solid rgba(255, 255, 255, 0.22);
+	transition: background 0.2s ease, border-color 0.2s ease;
+}
+body.single-post .sec-post.det-post .rightContent .rightCta a:hover {
+	background: rgba(255, 255, 255, 0.14);
+	border-color: rgba(255, 255, 255, 0.4);
+}
+/* promo variant — real heading + two stacked buttons (primary + ghost);
+   ghost button inherits the base .rightCta a treatment above */
+body.single-post .sec-post.det-post .rightContent .rightCta.bp-promo .bp-promo-inner-heading {
+	font-size: 20px;
+	font-weight: 700;
+	letter-spacing: -0.01em;
+	text-transform: none;
+	color: #fff;
+	margin: 0 0 10px;
+}
+body.single-post .sec-post.det-post .rightContent .rightCta .bp-promo-btns {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+body.single-post .sec-post.det-post .rightContent .rightCta .hd-btn-primary {
+	background: var(--tnb-r);
+	border-color: var(--tnb-r);
+}
+body.single-post .sec-post.det-post .rightContent .rightCta .hd-btn-primary:hover {
+	background: #d31219;
+	border-color: #d31219;
+}
+/* light sidebar CTA (ACF sidebar_cta) */
+body.single-post .sec-post.det-post .rightContent .rightCtaTwo {
+	border: 1px solid var(--tnb-line);
+	border-radius: 20px;
+	padding: 26px 24px;
+	background: var(--tnb-gray);
+	cursor: pointer;
+}
+body.single-post .sec-post.det-post .rightContent .rightCtaTwo h4 {
+	font-family: var(--tnb-font);
+	font-size: 18px;
+	font-weight: 700;
+	letter-spacing: -0.01em;
+	color: var(--tnb-charcoal);
+	margin: 0;
+}
+body.single-post .sec-post.det-post .rightContent .rightCtaTwo p {
+	font-family: var(--tnb-font);
+	font-size: 14px;
+	line-height: 1.6;
+	color: var(--tnb-mute);
+	margin: 8px 0 18px;
+}
+body.single-post .sec-post.det-post .rightContent .rightCtaTwo button {
+	width: 100%;
+	justify-content: center;
+	display: inline-flex;
+	align-items: center;
+	padding: 13px 18px;
+	border: 0;
+	border-radius: 10px;
+	background: var(--tnb-r);
+	color: #fff !important;
+	font-family: var(--tnb-font);
+	font-size: 14.5px;
+	font-weight: 600;
+	cursor: pointer;
+	box-shadow: 0 14px 28px -14px rgba(236, 28, 36, 0.7);
+	transition: transform 0.2s ease;
+}
+body.single-post .sec-post.det-post .rightContent .rightCtaTwo button:hover {
+	transform: translateY(-2px);
+}
+
+/* focus visibility */
+body.single-post .sec-post.det-post a:focus-visible,
+body.single-post .sec-post.det-post button:focus-visible {
+	outline: 2px solid var(--tnb-r);
+	outline-offset: 2px;
+}
+
+/* ============================================================ RESPONSIVE */
+
+/* ==========================================
+   Laptop
+========================================== */
+
+/* Large Laptop */
+@media (min-width: 1600px) and (max-width: 1919px) {
+
+}
+
+/* Medium Laptop */
+@media (min-width: 1366px) and (max-width: 1599px) {
+
+}
+
+/* Small Laptop */
+@media (min-width: 1200px) and (max-width: 1365px) {
+
+}
+
+
+/* ==========================================
+   Tablet
+========================================== */
+
+/* Large Tablet */
+@media (min-width: 992px) and (max-width: 1199px) {
+	body.single-post .sec-post.det-post .singleGrid {
+		grid-template-columns: 220px minmax(0, 1fr);
+	}
+	body.single-post .sec-post.det-post .rightContent {
+		grid-column: 1 / -1;
+		position: static;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 24px;
+	}
+	body.single-post .sec-post.det-post .rightContent > h2 {
+		grid-column: 1 / -1;
+	}
+	body.single-post .sec-post.det-post .det table td,
+	body.single-post .sec-post.det-post .det table th {
+		min-width: 110px;
+	}
+
+	.det .responsive-table table {
+    width: max-content !important;
+
+}
+}
+
+/* Medium Tablet */
+@media (min-width: 768px) and (max-width: 991px) {
+	
+	html {
+    overflow-x: hidden;
+}
+ 
+	
+	body.single-post .singleBanner .mainGrid .leftSide h1 {
+		font-size: 36px;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide p {
+		font-size: 18px;
+	}
+	body.single-post .sec-post.det-post .singleGrid {
+		grid-template-columns: 1fr;
+		row-gap: 40px;
+	}
+	body.single-post .sec-post.det-post .leftContent {
+		position: static;
+	}
+	body.single-post .sec-post.det-post .rightContent {
+		grid-column: 1 / -1;
+		position: static;
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 24px;
+	}
+	body.single-post .sec-post.det-post .rightContent > h2 {
+		grid-column: 1 / -1;
+	}
+	body.single-post .sec-post.det-post .det table td,
+	body.single-post .sec-post.det-post .det table th {
+		min-width: 110px;
+	}
+}
+
+/* Small Tablet */
+@media (min-width: 576px) and (max-width: 767px) {
+	
+	html {
+    overflow-x: hidden;
+}
+ 
+	
+	body.single-post .singleBanner {
+		padding: 48px 0 44px;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide h1 {
+		font-size: 30px;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide p {
+		font-size: 18px;
+	}
+	body.single-post .sec-post.det-post .singleGrid {
+		grid-template-columns: 1fr;
+		row-gap: 40px;
+	}
+	body.single-post .sec-post.det-post .leftContent {
+		position: static;
+	}
+	body.single-post .sec-post.det-post .rightContent {
+		grid-column: 1 / -1;
+		position: static;
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 24px;
+	}
+	body.single-post .sec-post.det-post .rightContent > h2 {
+		grid-column: 1 / -1;
+	}
+	body.single-post .sec-post.det-post .det h2 {
+		font-size: 26px;
+	}
+	body.single-post .sec-post.det-post .det h3 {
+		font-size: 22px;
+	}
+	body.single-post .sec-post.det-post .det p,
+	body.single-post .sec-post.det-post .det ul li {
+		font-size: 16px;
+	}
+	body.single-post .sec-post.det-post .det > p:first-of-type {
+/* 		font-size: 18px; */
+	}
+	body.single-post .sec-post.det-post .det .cta-section button,
+	body.single-post .sec-post.det-post .det .cta-section .btn-red {
+		width: 100%;
+		justify-content: center;
+	}
+	body.single-post .sec-post.det-post .det table td,
+	body.single-post .sec-post.det-post .det table th {
+		min-width: 100px;
+		padding: 12px 10px !important;
+	}
+	body.single-post .sec-post.det-post .det table tbody td {
+		font-size: 13px;
+	}
+	body.single-post .sec-post.det-post .det table thead th,
+	body.single-post .sec-post.det-post .det table:not(:has(thead)) tbody tr:first-child td,
+	body.single-post .sec-post.det-post .det table:not(:has(thead)) tbody tr:first-child th {
+		font-size: 12px;
+		padding: 12px 10px !important;
+	}
+}
+
+
+/* ==========================================
+   Mobile
+========================================== */
+
+/* Large Mobile */
+@media (min-width: 480px) and (max-width: 575px) {
+	
+	html {
+    overflow-x: hidden;
+}
+ 
+	
+	body.single-post .singleBanner {
+		padding: 48px 0 44px;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide h1 {
+		font-size: 30px;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide p {
+		font-size: 18px;
+	}
+	body.single-post .sec-post.det-post .singleGrid {
+		grid-template-columns: 1fr;
+		row-gap: 40px;
+	}
+	body.single-post .sec-post.det-post .leftContent {
+		position: static;
+	}
+	body.single-post .sec-post.det-post .rightContent {
+		grid-column: 1 / -1;
+		position: static;
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 24px;
+	}
+	body.single-post .sec-post.det-post .rightContent > h2 {
+		grid-column: 1 / -1;
+	}
+	body.single-post .sec-post.det-post .det h2 {
+		font-size: 26px;
+	}
+	body.single-post .sec-post.det-post .det h3 {
+		font-size: 22px;
+	}
+	body.single-post .sec-post.det-post .det p,
+	body.single-post .sec-post.det-post .det ul li {
+		font-size: 16px;
+	}
+	body.single-post .sec-post.det-post .det > p:first-of-type {
+/* 		font-size: 18px; */
+	}
+	body.single-post .sec-post.det-post .det .cta-section button,
+	body.single-post .sec-post.det-post .det .cta-section .btn-red {
+		width: 100%;
+		justify-content: center;
+	}
+	body.single-post .sec-post.det-post .tnb-authorcard {
+		flex-wrap: wrap;
+	}
+	body.single-post .sec-post.det-post .tnb-author-social {
+		width: 100%;
+	}
+	body.single-post .sec-post.det-post .det table td,
+	body.single-post .sec-post.det-post .det table th {
+		min-width: 100px;
+		padding: 12px 10px !important;
+	}
+	body.single-post .sec-post.det-post .det table tbody td {
+		font-size: 13px;
+	}
+	body.single-post .sec-post.det-post .det table thead th,
+	body.single-post .sec-post.det-post .det table:not(:has(thead)) tbody tr:first-child td,
+	body.single-post .sec-post.det-post .det table:not(:has(thead)) tbody tr:first-child th {
+		font-size: 12px;
+		padding: 12px 10px !important;
+	}
+}
+
+/* Medium Mobile */
+@media (min-width: 375px) and (max-width: 479px) {
+	
+	html {
+    overflow-x: hidden;
+}
+ 
+	
+	body.single-post .singleBanner {
+		padding: 48px 0 44px;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide h1 {
+		font-size: 30px;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide p {
+		font-size: 18px;
+	}
+	body.single-post .sec-post.det-post .singleGrid {
+		grid-template-columns: 1fr;
+		row-gap: 40px;
+	}
+	body.single-post .sec-post.det-post .leftContent {
+		position: static;
+	}
+	body.single-post .sec-post.det-post .rightContent {
+		grid-column: 1 / -1;
+		position: static;
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 24px;
+	}
+	body.single-post .sec-post.det-post .rightContent > h2 {
+		grid-column: 1 / -1;
+	}
+	body.single-post .sec-post.det-post .det h2 {
+		font-size: 26px;
+	}
+	body.single-post .sec-post.det-post .det h3 {
+		font-size: 22px;
+	}
+	body.single-post .sec-post.det-post .det p,
+	body.single-post .sec-post.det-post .det ul li {
+		font-size: 16px;
+	}
+	body.single-post .sec-post.det-post .det > p:first-of-type {
+/* 		font-size: 18px; */
+	}
+	body.single-post .sec-post.det-post .det .cta-section button,
+	body.single-post .sec-post.det-post .det .cta-section .btn-red {
+		width: 100%;
+		justify-content: center;
+	}
+	body.single-post .sec-post.det-post .tnb-authorcard {
+		flex-wrap: wrap;
+	}
+	body.single-post .sec-post.det-post .tnb-author-social {
+		width: 100%;
+	}
+	body.single-post .sec-post.det-post .det table td,
+	body.single-post .sec-post.det-post .det table th {
+		min-width: 100px;
+		padding: 12px 10px !important;
+	}
+	body.single-post .sec-post.det-post .det table tbody td {
+		font-size: 13px;
+	}
+	body.single-post .sec-post.det-post .det table thead th,
+	body.single-post .sec-post.det-post .det table:not(:has(thead)) tbody tr:first-child td,
+	body.single-post .sec-post.det-post .det table:not(:has(thead)) tbody tr:first-child th {
+		font-size: 12px;
+		padding: 12px 10px !important;
+	}
+}
+
+/* Small Mobile */
+@media (max-width: 374px) {
+	
+	html {
+    overflow-x: hidden;
+}
+ 
+	
+	body.single-post .singleBanner {
+		padding: 48px 0 44px;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide h1 {
+		font-size: 30px;
+	}
+	body.single-post .singleBanner .mainGrid .leftSide p {
+		font-size: 18px;
+	}
+	body.single-post .sec-post.det-post .singleGrid {
+		grid-template-columns: 1fr;
+		row-gap: 40px;
+	}
+	body.single-post .sec-post.det-post .leftContent {
+		position: static;
+	}
+	body.single-post .sec-post.det-post .rightContent {
+		grid-column: 1 / -1;
+		position: static;
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 24px;
+	}
+	body.single-post .sec-post.det-post .rightContent > h2 {
+		grid-column: 1 / -1;
+	}
+	body.single-post .sec-post.det-post .det h2 {
+		font-size: 26px;
+	}
+	body.single-post .sec-post.det-post .det h3 {
+		font-size: 22px;
+	}
+	body.single-post .sec-post.det-post .det p,
+	body.single-post .sec-post.det-post .det ul li {
+		font-size: 16px;
+	}
+	body.single-post .sec-post.det-post .det > p:first-of-type {
+/* 		font-size: 18px; */
+	}
+	body.single-post .sec-post.det-post .det .cta-section button,
+	body.single-post .sec-post.det-post .det .cta-section .btn-red {
+		width: 100%;
+		justify-content: center;
+	}
+	body.single-post .sec-post.det-post .tnb-authorcard {
+		flex-wrap: wrap;
+	}
+	body.single-post .sec-post.det-post .tnb-author-social {
+		width: 100%;
+	}
+	body.single-post .sec-post.det-post .det table td,
+	body.single-post .sec-post.det-post .det table th {
+		min-width: 100px;
+		padding: 12px 10px !important;
+	}
+	body.single-post .sec-post.det-post .det table tbody td {
+		font-size: 13px;
+	}
+	body.single-post .sec-post.det-post .det table thead th,
+	body.single-post .sec-post.det-post .det table:not(:has(thead)) tbody tr:first-child td,
+	body.single-post .sec-post.det-post .det table:not(:has(thead)) tbody tr:first-child th {
+		font-size: 12px;
+		padding: 12px 10px !important;
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	body.single-post .sec-post.det-post * {
+		transition: none !important;
+	}
+}
+
+
+body.single-post .sec-post.det-post .det p a span,
+body.single-post .sec-post.det-post .det li a span{
+	text-decoration: none !important;
+}
+
+/* TL;DR block body is editor wysiwyg — use the same image bullets as the
+   post content lists (bullets.webp via ::before) */
+body.single-post .sec-post.det-post .det .tnb-blocks .tnb-tldr .tnb-tldr__body ul {
+	list-style: none;
+	padding-left: 24px;
+}
+body.single-post .sec-post.det-post .det .tnb-blocks .tnb-tldr .tnb-tldr__body li {
+	position: relative;
+	list-style: none;
+}
+body.single-post .sec-post.det-post .det .tnb-blocks .tnb-tldr .tnb-tldr__body li::before {
+	content: "";
+	position: absolute;
+	left: -20px;
+	top: 0.42em;
+	width: 13px;
+	height: 13px;
+	background: url("/wp-content/uploads/2026/07/bullets.webp") no-repeat center / contain;
+}

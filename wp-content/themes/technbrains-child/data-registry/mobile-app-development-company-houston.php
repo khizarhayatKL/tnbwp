@@ -1,0 +1,311 @@
+<?php
+return array(
+	'schemas' => array(),
+
+	'mock_data' => array(
+
+		'sdd_banner' => array(
+    'heading'         => '<span>Mobile App Development Company</span> in Houston',
+    'paragraph'       => 'TechnBrains is a leading <a href="/mobile-app-development/">mobile app development company</a> in Houston that helps startups and scale-ups turn raw ideas into investor-ready applications. Our mobile app developers in Houston combine agile development and modern frameworks to cut turnaround time, reduce risk, and build real momentum in early-stage growth&#8212;without burning your budget.',
+    'btn_title'       => 'Talk to Houston App Experts',
+    'btn_anchor_text' => 'See Portfolio',
+    'btn_anchor_url'  => '/case-studies/',
+    'form_title'      => 'Share Your Requirements',
+    'form_para'       => 'To help our experts understand your business objective and create your customized plan.',
+),
+
+		'houston_company' => array(
+			'img_src'    => '/software-dev-houston/companyside.webp',
+			'img_width'  => 585,
+			'img_height' => 606,
+			'alt'        => 'mobile app development houston',
+			'heading'    => 'Leading Mobile App Development Company in Houston for Startups, SMBs & Scaling Brands!',
+			'para'       => 'We provide mobile application development in Houston with a clear focus—faster MVPs, smarter builds, and apps that gain real traction. Backed by the top 1% of developers, we help founders avoid technical debt, make better product decisions, and ship scalable apps that are ready for users, feedback, and growth.',
+			'icon_list'  => array(
+				array('img_src' => '/software-dev-houston/aw1.png', 'width' => 65, 'height' => 59, 'link' => 'https://www.softwareworld.co/service/technbrains-reviews/'),
+				array('img_src' => '/software-dev-houston/aw2.png', 'width' => 79, 'height' => 27, 'link' => 'https://www.inc.com/profile/technbrains'),
+				array('img_src' => '/software-dev-houston/aw3.png', 'width' => 109, 'height' => 31, 'link' => 'https://clutch.co/profile/technbrains'),
+				array('img_src' => '/software-dev-houston/aw4.png', 'width' => 176, 'height' => 33, 'link' => 'https://www.goodfirms.co/company/technbrains'),
+			),
+		),
+
+		'software_solution' => array(
+    'heading'     => 'Full-Scale <span>Mobile App Development Services</span> in Houston for Founders, Startup Teams &amp; Growth-Stage Businesses',
+    'para'        => 'We offer mobile app development services in Houston designed for speed, scale, and product-market fit. Our team works closely with tech-driven teams to build intuitive iOS and Android apps, accelerating launch timelines, reducing risk, and giving startups a technical foundation strong enough to grow without constant rebuilds.',
+    'box_listing' => array(
+        array(
+            'title'      => '<a href="/android-app-development/">Android App<br>Development</a>',
+            'content'    => 'We build robust Android applications using Kotlin, Android Studio, and modern Jetpack components. With adaptive UI design and clean code architecture, our <a href="/hire-android-developer/">Android app developers</a> in Houston are tailored for scalability, speed, and device compatibility across the Android ecosystem.',
+            'side_image' => '/software-dev-houston/solu-1.png',
+            'img_width'  => 27,
+            'img_height' => 45,
+        ),
+        array(
+            'title'      => '<a href="/ios-app-development/">iOS App<br>Development</a>',
+            'content'    => 'Our <a href="/hire-ios-developer/">iOS app developers</a> in Houston build stable, high-performance applications using Swift, Xcode, and Apple\'s latest SDKs. Support for Core Data, push notifications, and seamless iCloud integration is what makes us a dependable iOS app development company for Houston-based startups and established brands.',
+            'side_image' => '/software-dev-houston/solu-2.png',
+            'img_width'  => 30,
+            'img_height' => 45,
+        ),
+        array(
+    'title'      => 'React Native App<br>Development',
+    'content'    => 'TechnBrains offers React Native app development services that combine reusable TypeScript codebases with native module support. We maintain visual and functional parity across platforms, delivering fast-loading, app-store-ready products that meet the expectations of mobile-first users in Houston through our dedicated <a href="/hire-react-native-developer/">React Native Developers</a>.',
+    'side_image' => '/software-dev-houston/solu-3.png',
+    'img_width'  => 36,
+    'img_height' => 45,
+),
+array(
+    'title'      => 'Flutter App<br>Development',
+    'content'    => 'Our Flutter app development services leverage Dart, widget-driven architecture, and reactive programming to build high-performance apps. From MVPs to production-ready products, we help businesses in Houston launch on both iOS and Android with pixel-perfect UI and native-speed execution from a single codebase, supported by expert <a href="/hire-flutter-developer/">Flutter App Developers</a>.',
+    'side_image' => '/software-dev-houston/solu-4.png',
+    'img_width'  => 28,
+    'img_height' => 45,
+),
+array(
+    'title'      => '<a href="/web-app-development/">Web App<br>Development</a>',
+    'content'    => 'As a top-grade web app development company, we create fast, secure, and scalable web applications using React, Angular, and Node.js. We support modular code, RESTful APIs, and CI/CD pipelines to deliver browser-based solutions that handle real-time data, complex workflows, and enterprise-grade performance needs.',
+    'side_image' => '/software-dev-houston/solu-5.png',
+    'img_width'  => 46,
+    'img_height' => 45,
+),
+array(
+    'title'      => '<a href="/enterprise-app-development/">Enterprise App<br>Development</a>',
+    'content'    => 'We build enterprise apps with scalable architecture, secure APIs, and CI/CD workflows. Our platforms support SSO, audit logs, ERP and CRM integration, and connect with internal systems across departments and high-volume user environments.',
+    'side_image' => '/software-dev-houston/solu-6.png',
+    'img_width'  => 32,
+    'img_height' => 45,
+),
+    ),
+),
+
+		'houston_cta' => array(
+			'heading'    => 'Empowering Ambitious Founders &amp; Growing Brands with High-Impact Mobile App Development Services in Houston',
+			'btn_text'   => 'Book Your Breakthrough Call!',
+			'img_src'    => '/software-dev-houston/houstoncta-side.webp',
+			'img_width'  => 496,
+			'img_height' => 427,
+			'img_alt'    => 'mobile app development company in houston',
+		),
+
+		'industry_specific' => array(
+			'heading'  => 'Serving Diverse Markets as an Industry-Focused Mobile App Development Company in Houston',
+			'content'  => 'We help startups and growing companies in healthcare, logistics, fintech, and more solve real problems with mobile apps. As a top-notch Houston app development company, we build industry-specific solutions that streamline operations, improve outcomes, and support long-term scalability.',
+			'listing'  => array(
+				array('img_src' => '/software-dev-houston/tech-1.png', 'width' => '400', 'height' => '279', 'title' => 'Healthcare', 'link' => '/industries/healthcare-app-development/', 'content' => 'We build HIPAA-ready healthcare apps that streamline workflows, enhance patient experiences, and support providers with secure, real-time data access.'),
+				array('img_src' => '/software-dev-houston/tech-2.png', 'width' => '400', 'height' => '279', 'title' => 'Fintech', 'link' => '/industries/fintech-software-development/', 'content' => 'Our FinTech apps simplify money movement, compliance, and mobile banking with secure builds and scalable, user-friendly transaction flows.'),
+				array('img_src' => '/software-dev-houston/tech-3.png', 'width' => '400', 'height' => '279', 'title' => 'SaaS', 'link' => '/saas-application-development/', 'content' => 'We help SaaS startups launch fast with multi-tenant architectures, subscription billing, and dashboards users actually understand and use.'),
+				array('img_src' => '/software-dev-houston/tech-4.png', 'width' => '400', 'height' => '279', 'title' => 'Automotive', 'link' => '/industries/automotive-app-development/', 'content' => 'From dealership portals to connected vehicle platforms, we create automotive apps that improve visibility, speed up sales, and sync data.'),
+				array('img_src' => '/software-dev-houston/tech-5.png', 'width' => '400', 'height' => '279', 'title' => 'Logistics', 'link' => '/industries/logistics-software-development/', 'content' => 'We build logistics apps with live tracking, route optimization, and inventory sync to reduce delays and maximize delivery efficiency.'),
+				array('img_src' => '/software-dev-houston/tech-6.png', 'width' => '400', 'height' => '279', 'title' => 'Real Estate', 'link' => '/industries/real-estate-app-development/', 'content' => 'Our real estate apps combine smart search, geolocation, and MLS integration to connect agents, buyers, and listings instantly.'),
+				array('img_src' => '/software-dev-houston/tech-7.png', 'width' => '400', 'height' => '279', 'title' => 'On-Demand', 'link' => '/industries/on-demand-app-development/', 'content' => 'We power on-demand apps with real-time availability, location-aware features, and instant booking to support instant gratification at scale.'),
+				array('img_src' => '/software-dev-houston/tech-8.png', 'width' => '400', 'height' => '279', 'title' => 'Education', 'link' => '/industries/education-app-development/', 'content' => 'From LMS platforms to exam prep tools, we create education apps that boost engagement, track progress, and personalize learning.'),
+				array('img_src' => '/software-dev-houston/tech-9.png', 'width' => '400', 'height' => '279', 'title' => 'Energy &amp; Retail', 'link' => '/industries/energy-management-software-development/', 'content' => 'We digitize retail and energy workflows with custom dashboards, mobile reporting, and tools that help teams monitor, manage, and grow.'),
+			),
+		),
+
+		'app_services' => array(
+    'head_text'  => '<span>Why TechnBrains for</span> Mobile App Development Services in Houston?',
+    'para_text'  => 'We combine deep technical expertise with product thinking to help businesses build mobile apps that are stable, secure, and scalable, as explained in <a href="/mobile-app-development/" target="_blank">why choose TechnBrains guide</a>. As a mobile app development company in Houston, we focus on clean code, fast delivery, and long-term maintainability, backed by proven frameworks, agile workflows, and compliance-first practices.',
+    'img_src'    => '/software-dev-houston/fiximage.webp',
+    'img_width'  => 568,
+    'img_height' => 620,
+    'img_alt'    => 'app developers in houston',
+    'image_left' => true,
+    'listing'    => array(
+        array( 'title' => 'Engineered for Growth',         'content' => 'We build apps with clean architecture, modular code, and scalable infrastructure—ready for seamless updates, multi-platform support, and long-term performance.' ),
+        array( 'title' => 'Confident Launches for Startups','content' => 'We help startups turn validated concepts into functional products with market-fit features, clear timelines, and rollout plans built for traction.' ),
+        array( 'title' => 'Speed Without Sacrifice',        'content' => 'Reusable components and agile workflows help us deliver faster without cutting corners on code quality, stability, or testing coverage.' ),
+        array( 'title' => 'Built-In Compliance',            'content' => 'Our apps are developed to meet HIPAA, GDPR, and CCPA from day one—secure, audit-ready, and aligned with your industry\'s regulations.' ),
+        array( 'title' => 'Scale-Ready Architecture',       'content' => 'We prepare your app for scale with backend optimization, cloud-native deployments, and real-time performance monitoring that grows with your user base.' ),
+    ),
+),
+
+		'app_portfolio' => array(
+    'main_heading' => 'Houston Mobile App Development Success Case',
+    'sub_heading'  => 'Behind Startup Wins and Enterprise-Scale Success Stories!',
+),
+
+		'how_we_deliver' => array(
+    'title'   => 'Our Fail-Proof Mobile App Development Process',
+    'para'    => 'We combine product thinking, agile execution, and clean architecture to build high-performance apps. Our approach to mobile app development in Houston prioritizes speed, scalability, and real-world usability from first sprint to final release.',
+    'listing' => array(
+        array(
+            'img_src'      => '/software-dev-houston/t7.png',
+            'img_width'    => '28',
+            'img_height'   => '28',
+            'title'        => 'Discovery Phase',
+            'number'       => '01',
+            'heading_html' => '<span>Discovery</span> Phase',
+            'content'      => 'We align on goals, define features, choose tech stacks, and map architecture to ensure clarity before design or development begins.',
+            'img_one'      => '/software-dev-houston/tab1.webp',
+            'img_two'      => '/software-dev-houston/tab1b.webp',
+        ),
+        array(
+            'img_src'      => '/software-dev-houston/t2.png',
+            'img_width'    => '28',
+            'img_height'   => '28',
+            'title'        => 'UI/UX Design',
+            'number'       => '02',
+            'heading_html' => '<span>UI/UX</span> Design',
+            'content'      => 'We design intuitive user flows, wireframes, and interface systems <a href="/ui-ux-design/">Figma Design</a> aligned with user behavior, platform standards, and your business goals.',
+            'img_one'      => '/software-dev-houston/tab2a.webp',
+            'img_two'      => '/software-dev-houston/tab2b.webp',
+        ),
+        array(
+            'img_src'      => '/software-dev-houston/t3.png',
+            'img_width'    => '28',
+            'img_height'   => '28',
+            'title'        => 'Prototyping',
+            'number'       => '03',
+            'heading_html' => '<span>Prototyping</span>',
+            'content'      => 'Interactive prototypes built in Figma or Adobe XD simulate app behavior, helping stakeholders visualize product flow before development starts.',
+            'img_one'      => '/software-dev-houston/tab3a.webp',
+            'img_two'      => '/software-dev-houston/tab3b.webp',
+        ),
+        array(
+            'img_src'      => '/software-dev-houston/t4.png',
+            'img_width'    => '28',
+            'img_height'   => '28',
+            'title'        => 'Development',
+            'number'       => '04',
+            'heading_html' => '<span>Development</span>',
+            'content'      => 'Using agile sprints, we write scalable codebases with clean architecture, integrate APIs, and set up backend logic and cloud infrastructure.',
+            'img_one'      => '/software-dev-houston/tab4a.webp',
+            'img_two'      => '/software-dev-houston/tab4b.webp',
+        ),
+        array(
+            'img_src'      => '/software-dev-houston/t5.png',
+            'img_width'    => '28',
+            'img_height'   => '28',
+            'title'        => 'Testing & QA',
+            'number'       => '05',
+            'heading_html' => '<span>Testing</span> &amp; QA',
+            'content'      => 'We conduct manual and automated testing across devices, validating performance, functionality, security, and edge cases before green-lighting deployment through our <a href="/quality-assurance/">Quality Assurance process</a>.',
+            'img_one'      => '/software-dev-houston/tab5a.webp',
+            'img_two'      => '/software-dev-houston/tab5b.webp',
+        ),
+        array(
+            'img_src'      => '/software-dev-houston/t6.png',
+            'img_width'    => '28',
+            'img_height'   => '28',
+            'title'        => 'Launch',
+            'number'       => '06',
+            'heading_html' => '<span>Launch</span>',
+            'content'      => 'We publish to the App Store and Play Store, implement analytics, configure CI/CD pipelines, and monitor <a href="/blog/post-launch-maintenance-in-app-development/" target="_blank">post-launch performance</a> in real time.',
+            'img_one'      => '/software-dev-houston/tab6a.webp',
+            'img_two'      => '/software-dev-houston/tab6b.webp',
+        ),
+    ),
+),
+
+		'houston_cta_2' => array(
+			'heading'    => 'What Would It Cost to Hire a Mobile App Development Company in Houston?',
+			'btn_text'   => 'GET YOUR ANSWER HERE!',
+			'img_src'    => '/software-dev-houston/secCta.webp',
+			'img_width'  => 484,
+			'img_height' => 435,
+			'img_alt'    => 'mobile app developers houston',
+		),
+
+		'stack_new_box' => array(
+    'title'   => '<span>The Engineering Stack Behind Our High-Performance</span><br>Mobile App Development Services in Houston',
+    'para'    => 'Our mobile app developers in Houston rely on a modern, battle-tested tech stack to support modular builds, clean architecture, and scalable infrastructure that evolves with product needs and market demands.',
+    'listing' => array(
+        array(
+            'tab_title' => 'Frontend Development',
+            'data_list' => array(
+    array( 'img_src' => '/software-dev-houston/r1.png', 'width' => '117', 'height' => '117', 'title' => '<a href="/technologies/react-native/">React Native</a>' ),
+    array( 'img_src' => '/software-dev-houston/r2.png', 'width' => '117', 'height' => '117', 'title' => '<a href="/technologies/flutter/">Flutter</a>' ),
+    array( 'img_src' => '/software-dev-houston/s1.png', 'width' => '100', 'height' => '123', 'title' => 'SwiftUI' ),
+    array( 'img_src' => '/software-dev-houston/st-7.png', 'width' => '100', 'height' => '123', 'title' => '<a href="/technologies/angular/">Angular</a>' ),
+    array( 'img_src' => '/software-dev-houston/r1.png', 'width' => '100', 'height' => '123', 'title' => '<a href="/technologies/reactjs/">ReactJS</a>' ),
+    array( 'img_src' => '/software-dev-houston/html.png', 'width' => '100', 'height' => '123', 'title' => '<a href="/technologies/html5/">HTML5</a>' ),
+),
+        ),
+        array(
+    'tab_title' => 'Backend Development',
+    'data_list' => array(
+        array( 'img_src' => '/software-dev-houston/s6.png',  'width' => '148', 'height' => '86',  'title' => '<a href="/technologies/nodejs/">Node.js</a>' ),
+        array( 'img_src' => '/software-dev-houston/s8.png',  'width' => '150', 'height' => '80',  'title' => '<a href="/technologies/php/">PHP</a>' ),
+        array( 'img_src' => '/software-dev-houston/s3.png',  'width' => '100', 'height' => '123', 'title' => '<a href="/technologies/java/">Java</a>' ),
+        array( 'img_src' => '/stack/technical-stack/net.png',  'width' => '117', 'height' => '117', 'title' => '<a href="/technologies/net/">.Net</a>' ),
+        array( 'img_src' => '/software-dev-houston/s7.png',  'width' => '104', 'height' => '104', 'title' => '<a href="/technologies/python/">Python</a>' ),
+        array( 'img_src' => '/software-dev-houston/s15.png', 'width' => '150', 'height' => '79',  'title' => 'Django' ),
+        array( 'img_src' => '/software-dev-houston/r14.png', 'width' => '128', 'height' => '75',  'title' => 'Spring Boot' ),
+    ),
+),
+        array(
+            'tab_title' => 'Databases',
+            'data_list' => array(
+                array( 'img_src' => '/software-dev-houston/s9.png',  'width' => '170', 'height' => '86',  'title' => 'MySQL' ),
+                array( 'img_src' => '/software-dev-houston/s10.png', 'width' => '104', 'height' => '104', 'title' => 'MongoDB' ),
+                array( 'img_src' => '/software-dev-houston/s11.png', 'width' => '91',  'height' => '109', 'title' => 'Firebase' ),
+            ),
+        ),
+        array(
+            'tab_title' => 'Cloud Services',
+            'data_list' => array(
+                array( 'img_src' => '/software-dev-houston/s12.png', 'width' => '144', 'height' => '89',  'title' => 'AWS' ),
+                array( 'img_src' => '/software-dev-houston/s13.png', 'width' => '109', 'height' => '86',  'title' => 'Google Cloud' ),
+                array( 'img_src' => '/software-dev-houston/s14.png', 'width' => '107', 'height' => '109', 'title' => 'Microsoft Azure' ),
+                array( 'img_src' => '/software-dev-houston/s11.png', 'width' => '91',  'height' => '109', 'title' => 'Firebase Cloud Services' ),
+            ),
+        ),
+    ),
+),
+
+		'app_services_2' => array(
+			'head_text'  => 'Compliance-Driven Mobile App Development<br>Company in Houston for<br>Audit-Ready Apps!',
+			'para_text'  => 'Our Houston app developers build audit-ready mobile apps with built-in compliance for HIPAA, GDPR, and industry-specific regulatory standards from day one.',
+			'image_left' => true,
+			'listing'    => array(
+				array('title' => 'Regulation-First Development Approach', 'content' => 'We architect every app to align with HIPAA, GDPR, and CCPA from inception onward.'),
+				array('title' => 'Encryption &amp; Data Protection', 'content' => 'All sensitive data is encrypted in transit and at rest to meet compliance mandates.'),
+				array('title' => 'Consent &amp; Privacy Management', 'content' => 'We implement consent tracking, privacy settings, and data retention policies required by global regulations.'),
+				array('title' => 'Access &amp; Identity Controls', 'content' => 'MFA and role-based access help enforce user-level data protection and meet compliance requirements.'),
+				array('title' => 'Comprehensive Audit Trails', 'content' => 'Every data access, change, and transfer is logged, timestadmped, and ready for external compliance audits.'),
+			),
+		),
+
+		'faqs' => array(
+    'heading'   => 'Frequently Asked Questions (FAQs)',
+    'head_text' => 'Things you might want to know',
+    'listing'   => array(
+        array( 'faqhead' => 'How do I choose the right mobile app development company in Houston for my startup?', 'faqbody' => 'Look for a mobile app development company in Houston that understands MVP strategy, agile workflows, and startup scalability needs.' ),
+        array( 'faqhead' => 'What\'s the average cost of mobile app development in Houston?',                      'faqbody' => '<a href="/blog/app-development-cost/" target="_blank">Mobile app development cost</a> in Houston typically ranges from $20,000 to $150,000, depending on complexity, platform, and feature set.' ),
+        array( 'faqhead' => 'Do you offer both Android and iOS app development in Houston?',                       'faqbody' => 'Yes, we specialize in both Android app development in Houston and iOS builds with native or cross-platform technologies.' ),
+        array( 'faqhead' => 'How long does it take to develop a mobile app in Houston?',                           'faqbody' => 'For most clients, mobile app development in Houston takes 10–20 weeks, depending on scope, platform, and iteration cycles.' ),
+        array( 'faqhead' => 'Can you scale my app post-launch?',                                                   'faqbody' => 'Absolutely. As a full-cycle Houston mobile app development team, we build apps with future scalability and backend growth in mind.' ),
+        array( 'faqhead' => 'Do you provide end-to-end mobile app development services in Houston?',               'faqbody' => 'Yes. We offer full-stack mobile app development services in Houston—from discovery to launch, support, and post-launch updates.' ),
+        array( 'faqhead' => 'Are your mobile app developers in Houston familiar with modern frameworks?',           'faqbody' => 'Our mobile app developers in Houston use Flutter, React Native, and native SDKs to build fast, scalable applications.' ),
+        array( 'faqhead' => 'What industries do you serve with mobile application development in Houston?',         'faqbody' => 'We offer mobile application development in Houston for healthcare, fintech, logistics, real estate, retail, and other high-impact sectors.' ),
+        array( 'faqhead' => 'Do you provide UI/UX services as part of your Houston app development process?',      'faqbody' => 'Yes. Our Houston app development approach includes UX research, wireframes, and UI design to enhance usability and retention.' ),
+        array( 'faqhead' => 'Can I hire iOS developers in Houston for a specific feature or module?',               'faqbody' => 'Yes, you can <a href="/hire-ios-developer/">hire dedicated iOS developers</a> in Houston for feature-specific work, third-party integrations, or component-level updates.' ),
+    ),
+),
+
+		'location_cta' => array(
+			'heading'      => '<span>Book Your Legacy Call</span> with the Best Mobile App Developers in Houston!',
+			'para'         => 'Whether you\'re refining an MVP or scaling post-launch, TechnBrains is the ideal mobile app development company in Houston that helps you move forward with confidence. Get expert guidance, faster execution, and a product built to perform—book your call today!',
+			'btn_text'     => 'Let\'s make magic happen!',
+			'location_url' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3135.1900607260504!2d-95.38223939999999!3d29.7343033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640bf426e89cbef%3A0xe4ac07f5ce21fb4b!2sTechnbrains%20Houston%20-%20Mobile%20App%20Development%20Company!5e1!3m2!1sen!2s!4v1740646161385!5m2!1sen!2s',
+		),
+
+	),
+
+	'components' => array(
+		array('name' => 'sdd-banner',        'modifier_class' => 'houston'),
+		array('name' => 'HoustonCompany',    'modifier_class' => ''),
+		array('name' => 'SoftwareSolutions', 'modifier_class' => 'houston'),
+		array('name' => 'houston-cta',       'modifier_class' => 'houstonIndex'),
+		array('name' => 'industry-specific', 'modifier_class' => 'houston'),
+		array('name' => 'app-services',      'modifier_class' => ''),
+		array('name' => 'app-portfolio',     'modifier_class' => ''),
+		array('name' => 'how-we-deliver',    'modifier_class' => ''),
+		array('name' => 'houston-cta',       'modifier_class' => '', 'args' => array('data_key' => 'houston_cta_2')),
+		array('name' => 'stack-new-box',     'modifier_class' => ''),
+		array('name' => 'app-services',      'modifier_class' => 'hosutonBottom', 'args' => array('data_key' => 'app_services_2')),
+		array('name' => 'faq-revamp',        'modifier_class' => 'houston'),
+		array('name' => 'location-cta',      'modifier_class' => ''),
+	),
+);

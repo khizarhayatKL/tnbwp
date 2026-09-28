@@ -1,0 +1,21 @@
+<?php
+/**
+ * Template Name: Hire Java Developer
+ *
+ * @package technbrains-child
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+$registry = require get_stylesheet_directory() . '/data-registry/hire-java-developer.php';
+
+get_header();
+
+set_query_var( 'component_data', $registry['mock_data'] );
+
+foreach ( $registry['components'] as $c ) {
+	set_query_var( 'component_modifier_classes', $c['modifier_class'] ?? '' );
+	get_template_part( 'template-parts/components/' . $c['name'], '', $c['args'] ?? array() );
+}
+
+get_footer();

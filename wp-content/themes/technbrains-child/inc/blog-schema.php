@@ -1,0 +1,163 @@
+<?php
+/**
+ * Blog post structured data — Article, BreadcrumbList, FAQPage.
+ *
+ * Emitted only on single blog posts (is_singular('post')). Organization
+ * schema is site-wide and printed elsewhere; this file must not duplicate it.
+ * The 4-level breadcrumb here (Home > Blog > Category > Post) supersedes the
+ * generic tnb_breadcrumb_schema() output, which bails on single posts.
+ *
+ * Data sources (all auto-fetched per post):
+ *   headline      post title
+ *   description   Yoast meta description (fallback: excerpt)
+ *   image         featured image (full size)
+ *   dates         published / modified, ISO 8601
+ *   author        display name + author archive URL
+ *   publisher     TechnBrains + theme logo (hardcoded)
+ *   category      Yoast primary category (fallback: first assigned)
+ *   FAQ           ACF `faqs` repeater (question / answer sub fields)
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * The post's primary category (Yoast primary term when set, else first).
+ *
+ * @return WP_Term|null
+ */
+function tnb_blog_schema_primary_category( $post_id ) {
+	$primary_id = (int) get_post_meta( $post_id, '_yoast_wpseo_primary_category', true );
+	if ( $primary_id ) {
+		$term = get_term( $primary_id, 'category' );
+		if ( $term instanceof WP_Term ) {
+			return $term;
+		}
+	}
+	$cats = get_the_category( $post_id );
+	return ! empty( $cats ) ? $cats[0] : null;
+}
+
+add_action( 'wp_head', 'tnb_blog_schema_output', 12 );
+
+function tnb_blog_schema_output() {
+	if ( ! is_singular( 'post' ) ) {
+		return;
+	}
+
+	$post_id   = get_queried_object_id();
+	$permalink = get_permalink( $post_id );
+
+	// ── Article ────────────────────────────────────────────────────────────
+	
+	$description = get_post_meta( $post_id, '_yoast_wpseo_metadesc', true );
+	if ( ! is_string( $description ) || trim( $description ) === '' ) {
+		$description = get_the_excerpt( $post_id );
+	}
+
+	$article = array(
+		'@context'      => 'https://schema.org',
+		'@type'         => 'Article',
+		'headline'      => get_the_title( $post_id ),
+		'description'   => wp_strip_all_tags( $description ),
+		'url'           => $permalink,
+		'datePublished' => get_the_date( 'c', $post_id ),
+		'dateModified'  => get_the_modified_date( 'c', $post_id ),
+		'author'        => array(
+			'@type' => 'Person',
+			'name'  => get_the_author_meta( 'display_name', (int) get_post_field( 'post_author', $post_id ) ),
+			'url'   => get_author_posts_url( (int) get_post_field( 'post_author', $post_id ) ),
+		),
+		'publisher'     => array(
+			'@type' => 'Organization',
+			'name'  => 'TechnBrains',
+			'logo'  => array(
+				'@type' => 'ImageObject',
+				'url'   => get_stylesheet_directory_uri() . '/assets/images/logo.svg',
+			),
+		),
+		'mainEntityOfPage' => array(
+			'@type' => 'WebPage',
+			'@id'   => $permalink,
+		),
+	);
+
+	$image = get_the_post_thumbnail_url( $post_id, 'full' );
+	if ( $image ) {
+		$article['image'] = $image;
+	}
+
+	// ── BreadcrumbList: Home > Blog > Category > Post ─────────────────────
+	$crumbs = array(
+		array( 'name' => 'Home', 'item' => home_url( '/' ) ),
+		array( 'name' => 'Blog', 'item' => home_url( '/blog/' ) ),
+	);
+	$category = tnb_blog_schema_primary_category( $post_id );
+	if ( $category ) {
+		$cat_link = get_category_link( $category );
+		if ( $cat_link && ! is_wp_error( $cat_link ) ) {
+			$crumbs[] = array( 'name' => $category->name, 'item' => $cat_link );
+		}
+	}
+	
+	$crumbs[] = array( 'name' => get_the_title( $post_id ), 'item' => $permalink );
+
+	$list = array();
+	foreach ( $crumbs as $i => $crumb ) {
+		$list[] = array(
+			'@type'    => 'ListItem',
+			'position' => $i + 1,
+			'name'     => $crumb['name'],
+			'item'     => $crumb['item'],
+		);
+	}
+	$breadcrumbs = array(
+		'@context'        => 'https://schema.org',
+		'@type'           => 'BreadcrumbList',
+		'itemListElement' => $list,
+	);
+
+	// ── FAQPage: ACF `faqs` repeater ───────────────────────────────────────
+	
+	$faq_entities = array();
+	if ( function_exists( 'have_rows' ) && have_rows( 'faqs', $post_id ) ) {
+		while ( have_rows( 'faqs', $post_id ) ) {
+			the_row();
+			$question   = get_sub_field( 'question' );
+			$answer     = get_sub_field( 'answer' );
+			$additional = get_sub_field( 'additional_content' );
+			// answer text mirrors the visible card body: plain answer field
+			// plus the wysiwyg additional_content (either may be empty).
+			// Rows with no answer at all are skipped — FAQPage requires
+			// acceptedAnswer.text; an empty one invalidates the whole block.
+			$answer_txt = trim( wp_strip_all_tags( trim( (string) $answer . ' ' . (string) $additional ) ) );
+			if ( $question && $answer_txt !== '' ) {
+				$faq_entities[] = array(
+					'@type'          => 'Question',
+					'name'           => wp_strip_all_tags( $question ),
+					'acceptedAnswer' => array(
+						'@type' => 'Answer',
+						'text'  => $answer_txt,
+					),
+				);
+			}
+		}
+	}
+
+	$blocks = array( $article, $breadcrumbs );
+	
+	if ( $faq_entities ) {
+		$blocks[] = array(
+			'@context'   => 'https://schema.org',
+			'@type'      => 'FAQPage',
+			'mainEntity' => $faq_entities,
+		);
+	}
+
+	foreach ( $blocks as $block ) {
+		echo '<script type="application/ld+json">' .
+			wp_json_encode( $block, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) .
+			'</script>' . "\n";
+	}
+}

@@ -1,0 +1,132 @@
+<?php
+defined( 'ABSPATH' ) || exit;
+
+return array(
+	'schemas'    => array(
+		array(
+			'@context'   => 'https://schema.org',
+			'@type'      => 'FAQPage',
+			'mainEntity' => array(
+				array( '@type' => 'Question', 'name' => 'How does outsourcing to a Python development company work?',  'acceptedAnswer' => array( '@type' => 'Answer', 'text' => 'Outsourcing to a Python development company involves hiring external experts to handle your software development needs. These companies, like TechnBrains, follow a structured process: Requirement Analysis, Proposal and Agreement, Development Phase, Regular Updates, Testing and Quality Assurance, and Deployment with post-launch support.' ) ),
+				array( '@type' => 'Question', 'name' => 'Is Python good for game development?',                        'acceptedAnswer' => array( '@type' => 'Answer', 'text' => 'Absolutely! Python has gained popularity in the game development domain. While it may not be as performance-oriented as some other languages, it excels in rapid development and prototyping. Pygame, Panda3D and Godot Engine support Python, making it a viable choice for various game development projects.' ) ),
+				array( '@type' => 'Question', 'name' => 'Is Python Still Good for Web Development?',                  'acceptedAnswer' => array( '@type' => 'Answer', 'text' => 'Yes, Python continues to be an excellent choice for web development, owing to the strengths of frameworks like Django and Flask. These frameworks streamline the development process and offer a range of robust features, making them indispensable for building scalable and maintainable web applications.' ) ),
+				array( '@type' => 'Question', 'name' => 'What kind of applications can you build using Python?',       'acceptedAnswer' => array( '@type' => 'Answer', 'text' => 'Python is versatile and can be used to develop: Web Applications using Django and Flask, Data Analysis and Visualization with Pandas and Matplotlib, Artificial Intelligence and Machine Learning using TensorFlow and PyTorch, Desktop GUI Applications, Game Development, and Mobile Applications.' ) ),
+				array( '@type' => 'Question', 'name' => 'Can Python replace PHP?',                                     'acceptedAnswer' => array( '@type' => 'Answer', 'text' => 'While both Python and PHP have their strengths, Python has gained ground in web development and is often considered a solid alternative to PHP. With frameworks like Django and Flask, Python offers modern development practices and supports a wide range of applications.' ) ),
+				array( '@type' => 'Question', 'name' => 'Will TechnBrains do custom development work?',               'acceptedAnswer' => array( '@type' => 'Answer', 'text' => 'Yes, TechnBrains specializes in custom development work. Whether you need a tailored web application, a unique software solution, or a customized mobile app using Python, their experienced team is equipped to meet your specific requirements.' ) ),
+				array( '@type' => 'Question', 'name' => 'How can I hire Python developers?',                           'acceptedAnswer' => array( '@type' => 'Answer', 'text' => 'Elevate your business by hiring Python developers from our top-tier Python development company. We leverage the dynamic tools of Python for software development with innovative techniques. Our developers craft high-performing code, adhere to strict international standards, deliver rapid MVPs, and provide 24x7 support.' ) ),
+			),
+		),
+	),
+	'mock_data'  => array(
+		'main_banner'         => array(
+			'head_text'     => 'Python Development Services',
+			'content'       => 'As a trailblazing Python development company, we stand as your trusted partner in crafting scalable and impeccable enterprise applications. Our expertise in Python development services ensures the creation of scalable, top-notch applications.',
+			'img_src'       => '/stack/python/python-banner.webp',
+			'img_width'     => 917,
+			'img_height'    => 550,
+			'img_alt'       => 'python-banner',
+			'btn_link'      => '/contact-us',
+			'btn_link_text' => 'Learn More',
+			'popup_text'    => 'GET A FREE QUOTE',
+		),
+		'dedicated_lang_desc' => array(
+			'para_html' => 'Specializing in custom web and desktop apps, our outcome-driven methodology and skilled teams using frameworks like Flask, Web2py, and Django guarantee premium solutions. Scale your Python development seamlessly with our nearshore talent, initiating top-quality software within two weeks.',
+		),
+		'language_services'   => array(
+			'head_text' => 'Python Development Services',
+			'para_text' => 'Elevate your digital presence with our premium Python development services, crafting bespoke, dynamic web apps tailored to your unique needs.',
+			'btn_text'  => 'Hire PYTHON GEEKS NOW!',
+			'anchor'    => true,
+			'btn_url'   => '/hire-python-developer',
+			'listing'   => array(
+				array( 'img_src' => '/stack/python/p1.png',  'width' => '80', 'height' => '80', 'alt' => 'app-dev',   'list_head' => 'Custom Python Development',                          'list_para' => 'Tailor your digital presence with our custom Python web development services. We specialize in dynamic applications across Finance, Healthcare, Entertainment, Logistics, and more.' ),
+				array( 'img_src' => '/stack/python/p2.png',  'width' => '80', 'height' => '80', 'alt' => 'app',       'list_head' => 'Python Mobile App Development',                      'list_para' => 'Stay ahead in the mobile landscape with interactive and advanced Python mobile app development. We cater to enterprises, mid-size businesses, and customer-centric apps.' ),
+				array( 'img_src' => '/stack/python/p3.png',  'width' => '80', 'height' => '80', 'alt' => 'web-dev',   'list_head' => 'Python CMS Development',                             'list_para' => 'Experience highly scalable CMS web application development using Python. We bring relevancy to your systems, storing and managing content seamlessly with our expert Python development team.' ),
+				array( 'img_src' => '/stack/python/p4.png',  'width' => '80', 'height' => '80', 'alt' => 'app-des',   'list_head' => 'Python Upgradation & Migration',                     'list_para' => 'Ensure the security, speed, and reliability of your applications with our rapid Python version upgrades and migration services. Move seamlessly from legacy systems to the latest Python versions.' ),
+				array( 'img_src' => '/stack/python/p5.png',  'width' => '80', 'height' => '80', 'alt' => 'back',      'list_head' => 'Django Framework Development',                       'list_para' => 'Experience high-quality Django-based web development in Python. Our solutions involve scientific computation, statistical analysis, and data science capabilities for robust and scalable applications.' ),
+				array( 'img_src' => '/stack/python/p6.png',  'width' => '80', 'height' => '80', 'alt' => 'mantain',   'list_head' => 'Python API Development and Integration',             'list_para' => 'Streamline your processes with our Python API development and integration services. Connect systems seamlessly, ensuring smooth communication, data exchange, and secure integration.' ),
+				array( 'img_src' => '/stack/python/p7.png',  'width' => '80', 'height' => '80', 'alt' => 'team',      'list_head' => 'Machine Learning and Artificial Intelligence Solutions','list_para' => 'Our Python-based solutions use TensorFlow, Natural Language Toolkit, and PyTorch for image recognition, natural language processing, and predictive analytics.' ),
+				array( 'img_src' => '/stack/python/p8.png',  'width' => '80', 'height' => '80', 'alt' => 'integrate', 'list_head' => 'Cloud-based Python Application Development',          'list_para' => 'Leverage the scalability and scripting capabilities of Python for cloud computing. Our Python development team utilizes AWS, Google Cloud, and Microsoft Azure to build secure applications.' ),
+				array( 'img_src' => '/stack/python/p9.png',  'width' => '80', 'height' => '80', 'alt' => 'integrate', 'list_head' => 'IoT Application Development',                        'list_para' => 'Python is the language for intelligent IoT solutions. Our Python developers use Flask and Django to create web-based interfaces for monitoring and controlling IoT devices.' ),
+				array( 'img_src' => '/stack/python/p10.png', 'width' => '80', 'height' => '80', 'alt' => 'integrate', 'list_head' => 'Prototyping and MVP Development',                    'list_para' => 'Bring your ideas to life swiftly with Python. Our developers use Python\'s concise syntax and prototyping-focused libraries like Streamlit and Dash to create solutions and validate concepts.' ),
+			),
+		),
+		'proposal'            => array(
+			'head_html' => '<h2>Top Provider of Python Development Services for customized web and desktop applications</h2>',
+			'btn_text'  => 'Launch Your Python Project',
+			'anchor'    => false,
+			'classes'   => 'python',
+		),
+		'dev_process'         => array(
+			'main_title' => 'Our PYTHON development expertise',
+			'lang_title' => 'Uncover the fundamental elements of Python',
+			'lang_para'  => 'We offer python development services that create secure and sustainable solutions across devices. Our agile approach and custom solutions optimize performance, scalability, and responsiveness. We focus on client success with tailored python development services.',
+			'listing'    => array(
+				array( 'img_src' => '/stack/python/web2py.png', 'title' => 'Web2py',  'para' => 'Simplify and accelerate your Python web development journey with Web2Py. This all-in-one framework provides a hassle-free experience, minimizing complexities. Web2Py prioritizes simplicity and ease of use, enabling rapid application development with a built-in ticketing system for error tracking.' ),
+				array( 'img_src' => '/stack/python/flask.png',  'title' => 'Flask',   'para' => 'Experience flexibility and simplicity in Python web development with Flask. Flask, a lightweight and versatile micro framework, offers simplicity and flexibility. Its modular design and extensibility make it ideal for small to medium-sized projects, allowing developers to choose components tailored to specific needs.' ),
+				array( 'img_src' => '/stack/python/dj.png',     'title' => 'Django',  'para' => 'Elevate your web presence with our expertise in Django, a high-quality Python web development framework. Delivering scalable, secure, and feature-rich applications, we specialize in harnessing Django\'s power for robust web solutions.' ),
+			),
+		),
+		'key_things'          => array(
+			'sub_title' => 'Learn how Python\'s leads to faster development',
+			'title'     => 'Key Things To Know About Python Web Development',
+			'listing'   => array(
+				array( 'tab_title' => 'Benefits of Using Python',          'tab_content' => '<h4>Versatility in Development:</h4><p>Embrace the versatility of Python across various domains, from web development to game development. Its adaptability caters to diverse project requirements.</p><h4>Efficient App Development:</h4><p>Python excels in app development, providing a foundation for creating seamless and efficient applications. Its simplicity enhances development speed without compromising functionality.</p><h4>Comprehensive Development Services:</h4><p>Access a spectrum of superior Python development services that cover everything from ideation to execution. A robust range of services ensures your project\'s success and scalability.</p><h4>Framework for Scalability:</h4><p>Leverage Python as a reliable web development framework, offering scalability and security for your projects.</p><h4>Readability for Software Development:</h4><p>Python\'s readability shines in software development, enhancing collaboration and expediting the development process.</p>' ),
+				array( 'tab_title' => 'What Python is Primarily Used For', 'tab_content' => '<p>Python development is renowned for its versatility, serving diverse purposes in the tech landscape:</p><p>1. Web Development: Python is a leading choice for web development, powering robust and scalable applications.</p><p>2. Game Development: Python\'s adaptability extends to the gaming industry, facilitating efficient game development.</p><p>3. App Development: From mobile to desktop, Python excels in app development, creating interactive and feature-rich applications.</p><p>4. Software Development: Python\'s readability and extensive libraries make it a go-to language for various software development projects.</p>' ),
+				array( 'tab_title' => 'Reasons for Python\'s Popularity',  'tab_content' => '<p>Python\'s widespread acclaim can be attributed to several key factors:</p><p>1. Versatility: Its ability to span diverse domains, including web development, game development, and app development.</p><p>2. Developer-Friendly: Python\'s clean syntax and readability make it accessible, attracting a vast community of developers.</p><p>3. Frameworks: Robust web development frameworks like Django and Flask enhance productivity and code maintainability.</p><p>4. Industry Adoption: Python\'s prevalence in software development contribute to its popularity.</p><p>5. Community Support: An active and vibrant community ensures continual updates, support, and a wealth of resources.</p><p>6. Outsourcing: Python\'s role in development outsourcing is significant, with companies trusting its efficiency and reliability.</p><p>7. Mobile App Development: Python\'s adaptability to mobile app development ensures a seamless experience.</p>' ),
+			),
+		),
+		'stack_new_box'       => array(
+			'subtitle' => 'Redefine your app\'s visual appeal with TechnBrains',
+			'title'    => 'Technology Stack for Python Development',
+			'para'     => '',
+			'listing'  => array(
+				array( 'tab_title' => 'Web Frameworks',                          'data_list' => array( array('title'=>'Flask'), array('title'=>'Django'), array('title'=>'Bottle'), array('title'=>'Pyramid'), array('title'=>'CherryPy') ) ),
+				array( 'tab_title' => 'Machine Learning & Data Science',          'data_list' => array( array('title'=>'PyTorch'), array('title'=>'TensorFlow'), array('title'=>'NumPy'), array('title'=>'Pandas') ) ),
+				array( 'tab_title' => 'Database and ORM',                        'data_list' => array( array('title'=>'Django ORM'), array('title'=>'Pony ORM'), array('title'=>'SQLAlchemy'), array('title'=>'SQLAlchemy-Utils') ) ),
+				array( 'tab_title' => 'Task Queue and Asynchronous Processing',  'data_list' => array( array('title'=>'Celery'), array('title'=>'Huey'), array('title'=>'Asyncio') ) ),
+				array( 'tab_title' => 'Development Tools & Environments',        'data_list' => array( array('title'=>'Docker'), array('title'=>'Poetry'), array('title'=>'PyCharm'), array('title'=>'Jupyter Notebook') ) ),
+				array( 'tab_title' => 'Testing & Quality Assurance',             'data_list' => array( array('title'=>'pytest'), array('title'=>'Hypothesis'), array('title'=>'Doctest') ) ),
+			),
+		),
+		'hiring'              => array(
+			'lang_title' => 'Python Development Company',
+			'hire_title' => 'Hiring Models for Business Success',
+			'para_text'  => 'Elevate your business to new heights with our business-friendly hiring models, offering the flexibility of monthly or fixed-priced arrangements for our expert developers.',
+			'listing'    => array(
+				array( 'key' => 'tab-1', 'title' => 'Hire Team',                     'tab_points' => array( array('text'=>'Initiate the process with your requirements, followed by our team proposition.'), array('text'=>'Ensure the team aligns perfectly with your project needs before finalizing the dedicated team.') ) ),
+				array( 'key' => 'tab-1', 'title' => 'Project Development Lifecycle', 'tab_points' => array( array('text'=>'Agile and Lean Software Development'), array('text'=>'Project Milestones & Bi-Weekly Sprint Designs'), array('text'=>'Iterative Development and Feedback') ) ),
+				array( 'key' => 'tab-1', 'title' => 'Project Delivery Excellence',   'tab_points' => array( array('text'=>'Cloud and DevOps Integration'), array('text'=>'Manual/Automated Testing'), array('text'=>'Reliable and Flexible Delivery') ) ),
+				array( 'key' => 'tab-2', 'title' => 'Project Requirements',          'tab_points' => array( array('text'=>'Requirement gathering and gap analysis'), array('text'=>'Time and cost estimation'), array('text'=>'Project agreement signing') ) ),
+				array( 'key' => 'tab-2', 'title' => 'Project Development',           'tab_points' => array( array('text'=>'Agile and Lean Software Development'), array('text'=>'Project Milestones & Bi-Weekly Sprint Designs'), array('text'=>'Iterative Development and Feedback') ) ),
+				array( 'key' => 'tab-2', 'title' => 'Project Delivery',              'tab_points' => array( array('text'=>'Manual/Automated Testing'), array('text'=>'Reliable and Flexible Delivery') ) ),
+			),
+		),
+		'faqs'                => array(
+			'head_text' => 'Things you might want to know',
+			'faq_image' => false,
+			'listing'   => array(
+				array( 'faqhead' => 'How does outsourcing to a Python development company work?',  'faqbody' => 'Outsourcing to a Python development company involves hiring external experts to handle your software development needs. TechnBrains follows a structured process: Requirement Analysis, Proposal and Agreement, Development Phase, Regular Updates, Testing and Quality Assurance, and Deployment.' ),
+				array( 'faqhead' => 'Is Python good for game development?',                        'faqbody' => 'Absolutely! Python has gained popularity in the game development domain. While it may not be as performance-oriented as some other languages, it excels in rapid development and prototyping. Pygame, Panda3D and Godot Engine support Python.' ),
+				array( 'faqhead' => 'Is Python Still Good for Web Development?',                  'faqbody' => 'Yes, Python continues to be an excellent choice for web development, owing to the strengths of frameworks like Django and Flask. These frameworks streamline the development process and offer a range of robust features.' ),
+				array( 'faqhead' => 'What kind of applications can you build using Python?',       'faqbody' => 'Python is versatile and can be used to develop: Web Applications, Data Analysis and Visualization, Artificial Intelligence and Machine Learning, Desktop GUI Applications, Game Development, and Mobile Applications.' ),
+				array( 'faqhead' => 'Can Python replace PHP?',                                     'faqbody' => 'While both Python and PHP have their strengths, Python has gained ground in web development and is often considered a solid alternative to PHP. With frameworks like Django and Flask, Python offers modern development practices.' ),
+				array( 'faqhead' => 'Will TechnBrains do custom development work?',               'faqbody' => 'Yes, TechnBrains specializes in custom development work. Whether you need a tailored web application, a unique software solution, or a customized mobile app using Python, their experienced team is equipped to meet your specific requirements.' ),
+				array( 'faqhead' => 'How can I hire Python developers?',                           'faqbody' => 'Elevate your business by hiring Python developers from our top-tier Python development company. We leverage the dynamic tools of Python for software development, craft high-performing code, adhere to strict international standards, and provide 24x7 support.' ),
+			),
+		),
+	),
+	'components' => array(
+		array( 'name' => 'main-banner',         'modifier_class' => '' ),
+		array( 'name' => 'dedicated-lang-desc', 'modifier_class' => '' ),
+		array( 'name' => 'python-discover',     'modifier_class' => '' ),
+		array( 'name' => 'language-services',   'modifier_class' => '' ),
+		array( 'name' => 'proposal',            'modifier_class' => 'python' ),
+		array( 'name' => 'development-process', 'modifier_class' => '' ),
+		array( 'name' => 'key-things',          'modifier_class' => '' ),
+		array( 'name' => 'stack-new-box',       'modifier_class' => 'angular-stack' ),
+		array( 'name' => 'hiring',              'modifier_class' => '' ),
+		array( 'name' => 'testimonials',        'modifier_class' => '' ),
+		array( 'name' => 'main-faqs',           'modifier_class' => '' ),
+	),
+);

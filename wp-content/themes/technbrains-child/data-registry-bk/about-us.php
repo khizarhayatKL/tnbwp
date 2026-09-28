@@ -1,0 +1,85 @@
+<?php
+defined( 'ABSPATH' ) || exit;
+
+return array(
+	'schemas'    => array(
+		array(
+			'@context'    => 'https://schema.org',
+			'@type'       => 'WebPage',
+			'name'        => 'About Us | TechnBrains',
+			'description' => 'Technbrains is a leading app and software development company that delivers custom software solutions and technology services that drive business growth.',
+			'url'         => 'https://www.technbrains.com/about-us',
+		),
+	),
+	'mock_data'  => array(
+		'industry_banner'   => array(
+			'title'             => 'Redefining Possibilities Through Digital Transformation',
+			'para'              => 'At TechnBrains, we don\'t just develop apps; we engineer experiences, innovate solutions, and redefine possibilities. With a legacy of over a decade, our commitment to excellence, cutting-edge technologies, and a talented team of professionals sets us apart as a leading force in the ever-evolving tech landscape.',
+			'banner_img_src'    => '/about-us/banner.webp',
+			'banner_img_width'  => 994,
+			'banner_img_height' => 522,
+			'banner_img_alt'    => 'About TechnBrains',
+			'second_button'     => true,
+		),
+		'award_list'        => array(
+			array( 'img_src' => '/home-page/award/trust.png',      'img_width' => '159', 'img_height' => '73',  'title' => 'Top Mobile App Development Company 2023', 'para' => 'Technbrains is listed as Top Android App Development Companies by Goodfirms' ),
+			array( 'img_src' => '/home-page/award/clutch.png',     'img_width' => '122', 'img_height' => '34',  'title' => 'Top Mobile App Development Company 2023', 'para' => 'Technbrains is listed as Top Android App Development Companies by Goodfirms' ),
+			array( 'img_src' => '/home-page/award/good.png',       'img_width' => '134', 'img_height' => '134', 'title' => 'Top Mobile App Development Company 2023', 'para' => 'Technbrains is listed as Top Android App Development Companies by Goodfirms' ),
+			array( 'img_src' => '/home-page/award/expertise.png',  'img_width' => '129', 'img_height' => '100', 'title' => 'Top Mobile App Development Company 2023', 'para' => 'Technbrains is listed as Top Android App Development Companies by Goodfirms' ),
+			array( 'img_src' => '/home-page/award/top-mobile.png', 'img_width' => '132', 'img_height' => '113', 'title' => 'Top Mobile App Development Company 2023', 'para' => 'Technbrains is listed as Top Android App Development Companies by Goodfirms' ),
+			array( 'img_src' => '/home-page/award/trust.png',      'img_width' => '159', 'img_height' => '73',  'title' => 'Top Mobile App Development Company 2023', 'para' => 'Technbrains is listed as Top Android App Development Companies by Goodfirms' ),
+			array( 'img_src' => '/home-page/award/clutch.png',     'img_width' => '122', 'img_height' => '34',  'title' => 'Top Mobile App Development Company 2023', 'para' => 'Technbrains is listed as Top Android App Development Companies by Goodfirms' ),
+			array( 'img_src' => '/home-page/award/good.png',       'img_width' => '134', 'img_height' => '134', 'title' => 'Top Mobile App Development Company 2023', 'para' => 'Technbrains is listed as Top Android App Development Companies by Goodfirms' ),
+			array( 'img_src' => '/home-page/award/expertise.png',  'img_width' => '129', 'img_height' => '100', 'title' => 'Top Mobile App Development Company 2023', 'para' => 'Technbrains is listed as Top Android App Development Companies by Goodfirms' ),
+			array( 'img_src' => '/home-page/award/top-mobile.png', 'img_width' => '132', 'img_height' => '113', 'title' => 'Top Mobile App Development Company 2023', 'para' => 'Technbrains is listed as Top Android App Development Companies by Goodfirms' ),
+			array( 'img_src' => '/home-page/award/trust.png',      'img_width' => '159', 'img_height' => '73',  'title' => 'Top Mobile App Development Company 2023', 'para' => 'Technbrains is listed as Top Android App Development Companies by Goodfirms' ),
+			array( 'img_src' => '/home-page/award/clutch.png',     'img_width' => '122', 'img_height' => '34',  'title' => 'Top Mobile App Development Company 2023', 'para' => 'Technbrains is listed as Top Android App Development Companies by Goodfirms' ),
+			array( 'img_src' => '/home-page/award/good.png',       'img_width' => '134', 'img_height' => '134', 'title' => 'Top Mobile App Development Company 2023', 'para' => 'Technbrains is listed as Top Android App Development Companies by Goodfirms' ),
+			array( 'img_src' => '/home-page/award/expertise.png',  'img_width' => '129', 'img_height' => '100', 'title' => 'Top Mobile App Development Company 2023', 'para' => 'Technbrains is listed as Top Android App Development Companies by Goodfirms' ),
+			array( 'img_src' => '/home-page/award/top-mobile.png', 'img_width' => '132', 'img_height' => '113', 'title' => 'Top Mobile App Development Company 2023', 'para' => 'Technbrains is listed as Top Android App Development Companies by Goodfirms' ),
+		),
+		'dev_process'       => array(
+			'main_title' => 'Discover the Core Values of TechnBrains',
+			'lang_title' => 'Our Mission',
+			'lang_para'  => 'TechnBrains defines success as operating a profitable organization that upholds our core values, makes meaningful contributions to clients, users, and communities, and nurtures healthy and balanced lives for its team members.',
+			'listing'    => array(
+				array( 'img_src' => '/about-us/dev1.png', 'title' => 'TENACIOUS',    'para' => 'Fearless doers, we thrive on challenges, continuously adapting to the dynamic tech landscape. Our relentless pursuit is to develop transformative technology that enhances lives, both subtly and significantly' ),
+				array( 'img_src' => '/about-us/dev2.png', 'title' => 'COLLABORATIVE', 'para' => 'As a team, collaboration is our forte. We excel in blending diverse backgrounds, leveraging each team member\'s strengths and knowledge. Together, we achieve what others can only aspire to.' ),
+				array( 'img_src' => '/about-us/dev3.png', 'title' => 'PROGRESSIVE',  'para' => 'We are lifelong learners who embrace challenges, experiment with new technology, and strive to solve real human problems through thoughtful design.' ),
+				array( 'img_src' => '/about-us/dev4.png', 'title' => 'INTEGRITY',    'para' => 'We promote empathy, support, active listening, and empowerment to create a positive impact. We acknowledge our mistakes, take responsibility for them, learn from them, and strive to move forward.' ),
+				array( 'img_src' => '/about-us/dev1.png', 'title' => 'TENACIOUS',    'para' => 'Fearless doers, we thrive on challenges, continuously adapting to the dynamic tech landscape. Our relentless pursuit is to develop transformative technology that enhances lives, both subtly and significantly' ),
+				array( 'img_src' => '/about-us/dev2.png', 'title' => 'COLLABORATIVE', 'para' => 'As a team, collaboration is our forte. We excel in blending diverse backgrounds, leveraging each team member\'s strengths and knowledge. Together, we achieve what others can only aspire to.' ),
+				array( 'img_src' => '/about-us/dev3.png', 'title' => 'PROGRESSIVE',  'para' => 'We are lifelong learners who embrace challenges, experiment with new technology, and strive to solve real human problems through thoughtful design.' ),
+				array( 'img_src' => '/about-us/dev4.png', 'title' => 'INTEGRITY',    'para' => 'We promote empathy, support, active listening, and empowerment to create a positive impact. We acknowledge our mistakes, take responsibility for them, learn from them, and strive to move forward.' ),
+			),
+		),
+		'language_services' => array(
+			'head_text' => 'Why TechnBrains?',
+			'para_text' => 'Our Design Sprint strategists ignite innovation and propel your business beyond limits. Embrace disruption; unparalleled growth begins with our skilled developers.',
+			'btn_text'  => 'REACH OUT NOW',
+			'listing'   => array(
+				array( 'img_src' => '/about-us/ab1.png', 'width' => '80', 'height' => '80', 'alt' => 'Reimagined Experiences', 'list_head' => 'Reimagined Experiences', 'list_para' => 'The best designs not only instill confidence in your brand, but also inspire users to download, engage, and evangelize. We use human-centered design and research methods to understand your customers and create uniquely memorable product experiences that they will love.' ),
+				array( 'img_src' => '/about-us/ab2.png', 'width' => '80', 'height' => '80', 'alt' => 'Build Better Products',   'list_head' => 'Build Better Products',   'list_para' => 'Build excellent products with our full-stack engineering prowess. From mobile apps to websites, frontend to backend, we cover it all. Our tech wizards bring your vision to life, providing architecture consulting and cybersecurity strategy to ensure your product stands out.' ),
+				array( 'img_src' => '/about-us/ab3.png', 'width' => '80', 'height' => '80', 'alt' => 'Sustainable Growth',      'list_head' => 'Sustainable Growth',      'list_para' => 'Rev up your growth engine with analytics, experimentation, and growth marketing. Our partnerships with top vendors empower us to tailor tool stacks, driving revenue and fostering customer loyalty. Fuel sustainable growth; let us turn data into decisions and strategies into success stories.' ),
+				array( 'img_src' => '/about-us/ab4.png', 'width' => '80', 'height' => '80', 'alt' => 'The Power of AI',         'list_head' => 'The Power of AI',         'list_para' => 'Step into the future with cutting-edge generative AI. Personalization, predictive analytics, smart search—our AI expertise enhances customer experiences and product features. Unleash the power of AI at mindspot.io; it is not just technology; it is the future of innovation.' ),
+				array( 'img_src' => '/about-us/ab5.png', 'width' => '80', 'height' => '80', 'alt' => 'Next-gen technology',     'list_head' => 'Next-gen technology',     'list_para' => 'From AR/VR to IoT, blockchain to connected hardware, we are tech enthusiasts on a mission. We love pushing boundaries, turning emerging technologies into solutions for real-world challenges. Our team does not just follow trends; we set them. Join us in the exploration of the latest and greatest.' ),
+			),
+		),
+		'about_info_list'   => array(
+			array( 'img_src' => '/about-us/app.png',      'count' => '100', 'suffix' => 'k', 'title' => 'USERS OF OUR APP' ),
+			array( 'img_src' => '/about-us/skill.png',    'count' => '200', 'suffix' => '+', 'title' => 'HIGHLY SKILLED EMPLOYEES' ),
+			array( 'img_src' => '/about-us/business.png', 'count' => '10',  'suffix' => '+', 'title' => 'YEARS IN BUSINESS' ),
+			array( 'img_src' => '/about-us/mobile.png',   'count' => '50',  'suffix' => '+', 'title' => 'MOBILE APPS' ),
+		),
+	),
+	'components' => array(
+		array( 'name' => 'industry-banner', 'modifier_class' => '' ),
+		array( 'name' => 'AboutAwardWinning',  'modifier_class' => '' ),
+		array( 'name' => 'AwardSec',           'modifier_class' => '' ),
+		array( 'name' => 'AboutCeo',           'modifier_class' => '' ),
+		array( 'name' => 'development-process', 'modifier_class' => '', 'args' => array( 'data_key' => 'dev_process' ) ),
+		array( 'name' => 'language-services',  'modifier_class' => '' ),
+		array( 'name' => 'AboutInfoCounter',   'modifier_class' => '' ),
+		array( 'name' => 'testimonials',       'modifier_class' => '' ),
+	),
+);

@@ -1,0 +1,90 @@
+<svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    width="360"
+                    height="320"
+                    viewBox="0 0 33.83"
+                  >
+                    <defs>
+                      <clipPath id="clip-path">
+                        <path
+                          id="Path_7738"
+                          data-name="Path 7738"
+                          d="M5389.333,2343.333l156,296.667L5654,2483.333l-16.667-94.667L5474.667,2338Z"
+                          transform="translate(-4096)"
+                          fill="#fff"
+                        />
+                      </clipPath>
+                    </defs>
+                    <g
+                      id="Group_36926"
+                      data-name="Group 36926"
+                      transform="translate(-1200 -2660)"
+                    >
+                      <text
+                        id="Users"
+                        transform="translate(1330 2810)"
+                        fill="#888686"
+                        font-size="50"
+                        font-family="SegoeUI, Segoe UI"
+                        letter-spacing="-0.05em"
+                      >
+                        <tspan x="0" y="54">
+                          Users
+                        </tspan>
+                      </text>
+                      <g id="Group_36925" data-name="Group 36925">
+                        <g
+                          id="Ellipse_30"
+                          data-name="Ellipse 30"
+                          transform="translate(1200 2675)"
+                          fill="none"
+                          stroke="#3b3b3b"
+                          stroke-width="25"
+                        >
+                          <circle
+                            cx="149.5"
+                            cy="149.5"
+                            r="149.5"
+                            stroke="none"
+                          />
+                          <circle cx="149.5" cy="149.5" r="137" fill="none" />
+                        </g>
+                        <g
+                          id="Mask_Group_25"
+                          data-name="Mask Group 25"
+                          transform="translate(0 322)"
+                          clip-path="url(#clip-path)"
+                        >
+                          <g
+                            id="Ellipse_31"
+                            data-name="Ellipse 31"
+                            transform="translate(1200 2353)"
+                            fill="none"
+                            stroke="#ed1b2e"
+                            stroke-width="25"
+                          >
+                            <circle
+                              cx="149.5"
+                              cy="149.5"
+                              r="149.5"
+                              stroke="none"
+                            />
+                            <circle cx="149.5" cy="149.5" r="137" fill="none" />
+                          </g>
+                        </g>
+                      </g>
+                      <text
+                        id="_6500_"
+                        data-name="6500+"
+                        transform="translate(1330 2733)"
+                        fill="#fff"
+                        font-size="80"
+                        font-family="SegoeUI, Segoe UI"
+                      >
+                        <tspan x="0" y="86">
+                          6500+
+                        </tspan>
+                      </text>
+                    </g>
+                  </svg>

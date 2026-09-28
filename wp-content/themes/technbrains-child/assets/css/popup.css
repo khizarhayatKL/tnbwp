@@ -1,0 +1,1144 @@
+/* =============================================================================
+   TechnBrains — "Scale My Team" Popup Modal
+   Converted from: PopupCta.module.scss
+   ============================================================================= */
+
+/* ── Overlay backdrop ───────────────────────────────────────────────────────── */
+.tnb-popup-overlay {
+  z-index: 99999;
+  align-items: center;
+  padding: 50px 0;
+  display: grid;
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.5);
+}
+.tnb-popup-overlay[hidden] {
+  display: none;
+}
+
+/* Alignment layer — mirrors .modal-align (flex centering) */
+.tnb-popup-align {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ── Inner box ──────────────────────────────────────────────────────────────── */
+.tnb-popup-inner {
+  position: relative;
+  background: #fff;
+  border-radius: 10px;
+  width: 60%;
+  height: auto;
+  margin: 0 4rem;
+  font-family: "Outfit", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  box-shadow:
+    0 100px 80px rgba(184, 184, 184, 0.07),
+    0 25px 19px 4px rgba(178, 178, 178, 0.05),
+    0 7.8px 7.3px rgba(0, 0, 0, 0.04),
+    0 1.5px 2.1px rgba(0, 0, 0, 0.02);
+  background-size: cover !important;
+}
+@media (max-width: 1600px) {
+  .tnb-popup-inner {
+    width: 75%;
+  }
+}
+@media (max-width: 1366px) {
+  .tnb-popup-inner {
+    width: 85%;
+    margin: 0 2rem;
+  }
+}
+@media (max-width: 1199px) {
+  .tnb-popup-inner {
+    width: 92%;
+    margin: 0 1rem;
+  }
+}
+@media (max-width: 767px) {
+	.tnb-popup-overlay {
+    padding: 60px 12px 0;
+    align-items: flex-end;
+  }
+  .tnb-popup-align {
+    width: 100%;
+    align-items: flex-end;
+  }
+/*   .tnb-popup-inner {
+    width: 100%;
+    margin: 0 1.5rem;
+    border-radius: 10px;
+  } */
+	 .tnb-popup-inner {
+    width: 100%;
+    margin: 0;
+    border-radius: 16px 16px 0 0;
+    max-height: 90vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-gutter: stable;
+  }
+  .tnb-popup-inner .popup-grid {
+    min-height: unset;
+  }
+	.tnb-popup-close{
+	  width: 35px !important;
+        height: 35px !important;
+        top: 5px !important;
+        right: 5px !important;	
+	}
+}
+
+/* ── Close button ───────────────────────────────────────────────────────────── */
+.tnb-popup-close {
+	position: absolute;
+  background-color: #ed2a32;
+    border: 2px solid #fff !important;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    top: -15px;
+    right: -15px;
+    box-shadow: 0 0 20px #00000082;
+    padding: 10px;
+	outline:none !important;
+	z-index: 111111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tnb-popup-close svg {
+  color: #fff;
+  font-size: 25px;
+  font-weight: 900;
+  transition: all 0.5s;
+  pointer-events: none;
+}
+.tnb-popup-close:hover{
+	background-color: #000;
+}
+/* .tnb-popup-close:hover svg {
+  color: #ed2a32;
+} */
+
+/* ── Two-column grid ────────────────────────────────────────────────────────── */
+.tnb-popup-inner .popup-grid {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  gap: 0;
+  align-items: stretch;
+  min-height: 600px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* ── Right: dark social-proof panel ────────────────────────────────────────── */
+.tnb-popup-inner .popup-right-info {
+  background-image: url("../images/popup-bg-black.webp");
+  background-size: cover;
+  background-position: center;
+  padding: 50px;
+}
+
+.tnb-popup-inner .popup-right-info .headBox {
+  padding-bottom: 20px;
+}
+
+.tnb-popup-inner .popup-right-info .headBox span {
+  font-size: 30px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  padding: 20px 0 10px;
+  width: 75%;
+}
+
+.tnb-popup-inner .popup-right-info .headBox > p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #bebbbb;
+  margin: 0;
+  width: 90%;
+}
+
+/* ── Review slider — Swiper, exact match to PopupCta.module.scss ─────────────── */
+.popup-review-swiper {
+  width: calc(100% - 44px); /* 22px each side = exact arrow half-width buffer */
+  max-width: 500px; /* 450 - 44 */
+  margin: 20px auto 0;
+  position: relative;
+}
+
+.popup-review-swiper .singleReview {
+  background: #000;
+  padding: 20px 40px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0 30px; /* creates 30px each side — arrow centers land at card border */
+}
+
+.popup-review-swiper .review p {
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 500;
+  color: #fff;
+  font-family: "Outfit", system-ui, sans-serif;
+  margin-bottom: 0;
+}
+
+.popup-review-swiper .clientMeta {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.popup-review-swiper .clientImg img {
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.popup-review-swiper .title span {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.popup-review-swiper .title p {
+  color: #8c8c8c;
+  font-size: 14px;
+  margin: 0;
+}
+
+.popup-review-swiper .cardFooter {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Swiper navigation — white circles matching live site */
+.popup-review-swiper .swiper-button-prev,
+.popup-review-swiper .swiper-button-next {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  color: #222 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  top: 50%;
+  margin-top: -22px;
+  z-index: 10;
+}
+/* Arrow center at card border: margin(30) - half_arrow(22) = 8px from swiper edge */
+.popup-review-swiper .swiper-button-prev {
+  left: 8px;
+}
+.popup-review-swiper .swiper-button-next {
+  right: 8px;
+}
+/* .popup-review-swiper .swiper-button-prev::after,
+.popup-review-swiper .swiper-button-next::after {
+  font-size: 13px !important;
+  font-weight: 900;
+  color: #222 !important;
+} */
+
+.popup-review-swiper .swiper-button-prev::after,
+.popup-review-swiper .swiper-button-next::after {
+  font-family: initial !important;
+  content: '' !important;
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid #222;
+  border-right: 2px solid #222;
+}
+.popup-review-swiper .swiper-button-prev::after { transform: rotate(-135deg); }
+.popup-review-swiper .swiper-button-next::after { transform: rotate(45deg); }
+
+
+/* ── Trusted clients ────────────────────────────────────────────────────────── */
+.tnb-popup-inner .caseStudy {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto 0;
+}
+
+.tnb-popup-inner .caseStudy span,
+.tnb-popup-inner .featured span {
+  color: #cac9c9;
+  font-size: 15px;
+  font-weight: 400;
+  text-transform: capitalize;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.tnb-popup-inner .caseStudy .logos {
+  /* display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin-top: 20px;
+  align-items: center;
+  gap: 20px; */
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  margin-top: 20px;
+  display: grid;
+}
+
+.tnb-popup-inner .caseStudy .logos .image img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ── Featured in ────────────────────────────────────────────────────────────── */
+.tnb-popup-inner .featured {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 30px auto 0;
+}
+
+.tnb-popup-inner .featured .logos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 10px;
+  align-items: center;
+  gap: 30px;
+}
+
+.tnb-popup-inner .featured .logos .image img {
+  filter: brightness(0) saturate(100%) invert(99%) sepia(8%) saturate(11%)
+    hue-rotate(119deg) brightness(110%) contrast(100%);
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ── Left: form panel ───────────────────────────────────────────────────────── */
+.tnb-popup-inner .popup-left-info {
+  padding: 30px;
+  text-align: left;
+}
+
+.tnb-popup-inner .popup-left-info > span {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 1.2;
+  color: #0c2340;
+	display:block;
+}
+
+.tnb-popup-inner .popup-left-info > p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #979797;
+  font-weight: 400;
+}
+
+/* ── Popup form ─────────────────────────────────────────────────────────────── */
+.new-form {
+  padding: 10px;
+  width: 100%;
+}
+
+.new-form .formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+.new-form .formRow .inputField {
+  min-width: 0;
+}
+
+.new-form .inputField {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.new-form .inputField label {
+  display: block;
+  font-weight: 700;
+  color: #0d1b3e;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.new-form .inputField label small {
+  color: #8c8c8c;
+  font-weight: 400;
+  font-size: 11px;
+}
+
+.new-form .inputField input {
+  width: 100%;
+  height: 45px;
+  border: 1px solid #e1e4ed;
+  border-radius: 5px;
+  font-size: 14px;
+  box-shadow: none;
+  padding: 0 12px;
+  font-family: "Outfit", system-ui, sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.new-form .inputField input:focus {
+  border-color: #ed2a32;
+}
+
+.new-form .inputField input::placeholder {
+  color: #b0b8c1;
+}
+
+.new-form .inputField textarea {
+  width: 100%;
+  height: 80px;
+  min-height: 70px;
+  max-height: 80px;
+  border: 1px solid #e1e4ed;
+  border-radius: 5px;
+  font-size: 13px;
+  padding: 12px;
+  resize: none;
+  font-family: "Outfit", system-ui, sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+  overflow-y: auto;
+}
+
+.new-form .inputField textarea:focus {
+  border-color: #ed2a32;
+}
+
+/* ── Service selection cards ────────────────────────────────────────────────── */
+.new-form .serviceSelection {
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+
+.new-form .sectionLabel {
+  font-weight: 700;
+  color: #0d1b3e;
+  font-size: 14px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+/* selectionRow — horizontal flex container matching PopupCta.jsx */
+.new-form .selectionRow {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  align-items: stretch;
+}
+
+.new-form .serviceCard {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border: 1px solid #e1e4ed;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1;
+  position: relative;
+  background-color: #fff;
+  user-select: none;
+}
+
+.new-form .serviceCard:focus {
+  outline: 2px solid #ed2a32;
+  outline-offset: 2px;
+}
+
+.new-form .serviceCard.active {
+  border-color: #ff3333;
+  background-color: #fff9f9;
+}
+
+.new-form .serviceCard.active .customRadio {
+  border-color: #ff3333;
+}
+
+.new-form .serviceCard.active .customRadio::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #ff3333;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.new-form .cardText {
+  position: relative;
+  width: calc(100% - 24px);
+}
+
+.new-form .cardText strong {
+  display: block;
+  font-size: 13px;
+  color: #0d1b3e;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+/* Tooltip — appears above card on hover */
+.new-form .cardText p.tooltipBox {
+  position: absolute;
+  bottom: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%) translateY(5px);
+  background-color: #6d757d;
+  color: #fff !important;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s ease;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.new-form .cardText p.tooltipBox::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: #6d757d transparent transparent transparent;
+}
+
+.new-form .serviceCard:hover .cardText p.tooltipBox {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.new-form .customRadio {
+  margin-left: auto;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #e1e4ed;
+  border-radius: 50%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* ── Submit row — full width matching live site ──────────────────────────────── */
+.new-form .btnRow {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+  width: 100%;
+}
+
+.new-form .submitBtn {
+  background: #ed1c24;
+  color: #fff;
+  border: none;
+  padding: 14px 25px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 15px;
+  flex: 1;
+  width: 100%;
+  cursor: pointer;
+  font-family: "Outfit", system-ui, sans-serif;
+  transition: background 0.2s;
+}
+
+.new-form .submitBtn:hover {
+  background: #c41219;
+}
+.new-form .submitBtn:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+/* form message */
+#tnb-popup-form-msg {
+  font-size: 13px;
+}
+#tnb-popup-form-msg.error {
+  color: #f55;
+}
+#tnb-popup-form-msg.success {
+  color: #4caf50;
+}
+
+/* =============================================================================
+   RESPONSIVE
+   ============================================================================= */
+
+@media (max-width: 1600px) {
+  .tnb-popup-inner .popup-right-info {
+    padding: 50px 30px;
+  }
+  .tnb-popup-inner .popup-right-info .headBox span {
+    font-size: 26px;
+  }
+  .tnb-popup-inner .popup-left-info {
+    padding: 30px 20px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .tnb-popup-inner .popup-grid {
+    grid-template-columns: 1fr;
+  }
+  .tnb-popup-inner .popup-right-info {
+    display: none;
+  }
+  .tnb-popup-inner .popup-left-info span {
+    text-align: center;
+  }
+  .tnb-popup-inner .popup-left-info > p {
+    width: 70%;
+    margin: 10px auto;
+    text-align: center;
+  }
+  .new-form {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 991px) {
+  .tnb-popup-inner .popup-left-info {
+    padding: 20px;
+  }
+  .tnb-popup-inner .popup-left-info span {
+    font-size: 22px;
+  }
+  .tnb-popup-inner .popup-left-info > p {
+    width: 100%;
+  }
+  
+}
+
+@media (max-width: 768px) {
+  .new-form .iconBox {
+    display: none;
+  }
+  .new-form .cardText {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .new-form .formRow {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .new-form .selectionRow {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .new-form .selectionRow .serviceCard {
+    flex: 1 1 calc(50% - 4px);
+    max-width: calc(50% - 4px);
+    min-width: 0;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 400px) {
+  .new-form .selectionRow {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .new-form .selectionRow .serviceCard {
+    flex: none;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 575px) {
+  .tnb-popup-inner .popup-left-info {
+    padding: 15px;
+  }
+  .tnb-popup-inner .popup-left-info span {
+    font-size: 20px;
+  }
+  .tnb-popup-inner .popup-left-info > p {
+    font-size: 14px;
+    width: 100%;
+  }
+  .new-form .formRow {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .new-form .btnRow {
+    width: 100%;
+  }
+  .new-form .serviceCard {
+    padding: 10px;
+  }
+  .new-form .cardText strong {
+    font-size: 12px;
+  }
+  .new-form .cardText {
+    width: 70%;
+  }
+	
+}
+
+@media (max-width: 320px) {
+  .new-form .btnRow {
+    width: 100%;
+  }
+}
+
+/* =============================================================================
+   EXIT POPUP — converted from ExitPopup.module.scss
+   ============================================================================= */
+
+/* ── Overlay (matches .modal-bg) ─────────────────────────────────────────────── */
+.tnb-exit-popup-overlay {
+  z-index: 99999;
+  align-items: center;
+  padding: 30px 0;
+  display: grid;
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.5);
+}
+.tnb-exit-popup-overlay[hidden] {
+  display: none;
+}
+
+/* Flex align wrapper — mirrors .modal-align */
+.tnb-exit-popup-overlay::before {
+  display: none;
+}
+
+/* ── Inner wrapper (matches .modal-content + new-home-popup) ──────────────────── */
+.tnb-exit-popup-inner {
+  position: relative;
+  background: #fff;
+  border-radius: 10px;
+  width: 70%;
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+  font-family: "Outfit", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  box-shadow:
+    0 100px 80px rgba(184, 184, 184, 0.07),
+    0 25.8px 19px 4px rgba(178, 178, 178, 0.05),
+    0 7.8px 7.3px rgba(0, 0, 0, 0.04),
+    0 1.5px 2.1px rgba(0, 0, 0, 0.02);
+  align-self: center;
+  justify-self: center;
+}
+@media (max-width: 1600px) {
+  .tnb-exit-popup-inner {
+    width: 80%;
+  }
+}
+@media (max-width: 1199px) {
+  .tnb-exit-popup-inner {
+    width: 95%;
+    overflow: hidden;
+  }
+}
+@media (max-width: 767px) {
+	.tnb-exit-popup-overlay {
+    padding: 60px 12px 0;
+    align-items: flex-end;
+  }
+/*   .tnb-exit-popup-inner {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+  } */
+	.tnb-exit-popup-inner {
+    width: 100%;
+    border-radius: 16px 16px 0 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: 90vh;
+  }
+}
+
+/* ── Close button ──────────────────────────────────────────────────────────────── */
+.tnb-exit-popup-close {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  background-color: #ed2a32;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  color: #fff;
+  z-index: 111111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.51);
+  transition: all 0.5s;
+  padding: 8px;
+}
+.tnb-exit-popup-close svg {
+  color: #fff;
+  font-size: 25px;
+  width: 1em;
+  height: 1em;
+  transition: all 0.5s;
+  pointer-events: none;
+}
+.tnb-exit-popup-close:hover svg {
+  color: rgba(0, 0, 0, 0.51);
+}
+
+/* ── Popup grid: 50/50 ─────────────────────────────────────────────────────────── */
+.exit-popup-grid {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  gap: 0;
+  align-items: stretch;
+  min-height: 500px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* ── Right-info (dark bg panel) ────────────────────────────────────────────────── */
+.exit-right-panel {
+  background-color: #0c1a2e;
+  background-size: cover;
+  background-position: center;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+}
+.exit-right-panel .headBox {
+  padding-bottom: 20px;
+}
+.exit-right-panel .headBox h3 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  padding: 20px 0 10px;
+  width: 85%;
+  line-height: 1.25;
+}
+.exit-right-panel .headBox p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #bebbbb;
+  margin: 0;
+  width: 90%;
+  line-height: 1.5;
+}
+.exit-right-panel .imgBox {
+  text-align: center;
+  margin-top: auto;
+  padding-top: 20px;
+}
+.exit-right-panel .imgBox img {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+}
+
+/* ── Left-info (form panel) ────────────────────────────────────────────────────── */
+.exit-left-panel {
+  padding: 30px;
+  text-align: left;
+}
+.exit-left-panel > h3 {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 1.2;
+  color: #0c2340;
+  margin-bottom: 8px;
+}
+.exit-left-panel > p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #979797;
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+
+/* ── Form inside exit popup ────────────────────────────────────────────────────── */
+.exit-left-panel .new-form {
+  padding: 8px 0;
+}
+.exit-left-panel .new-form .formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+.exit-left-panel .new-form .formRow .inputField {
+  min-width: 0;
+}
+.exit-left-panel .new-form .inputField {
+  margin-bottom: 18px;
+  text-align: left;
+}
+.exit-left-panel .new-form .inputField label {
+  display: block;
+  font-weight: 700;
+  color: #0d1b3e;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+.exit-left-panel .new-form .inputField label small {
+  color: #8c8c8c;
+  font-weight: 400;
+  font-size: 11px;
+}
+.exit-left-panel .new-form .inputField input {
+  height: 45px;
+  border: 1px solid #e1e4ed;
+  border-radius: 5px;
+  font-size: 14px;
+  box-shadow: none !important;
+  width: 100%;
+  padding: 0 12px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.exit-left-panel .new-form .inputField input:focus {
+  border-color: #ed1c24;
+}
+.exit-left-panel .new-form .inputField input::placeholder {
+  color: #b0b8c1;
+}
+
+.exit-left-panel .new-form .textareaWrapper {
+  position: relative;
+}
+.exit-left-panel .new-form textarea {
+  width: 100%;
+  min-height: 100px;
+  border: 1px solid #e1e4ed;
+  border-radius: 5px;
+  font-size: 13px;
+  padding: 12px;
+  resize: none;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+.exit-left-panel .new-form textarea:focus {
+  border-color: #ed1c24;
+}
+
+.exit-left-panel .new-form .btnRow {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.exit-left-panel .new-form .submitBtn {
+  background: #ed1c24;
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 14px;
+  flex: 1;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.exit-left-panel .new-form .submitBtn:hover {
+  background: #c0151c;
+}
+.exit-left-panel .new-form .submitBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* ── Form messages ─────────────────────────────────────────────────────────────── */
+#tnb-exit-popup-form-msg {
+  font-size: 13px;
+  margin-bottom: 10px;
+  min-height: 18px;
+}
+#tnb-exit-popup-form-msg.error {
+  color: #ed1c24;
+}
+#tnb-exit-popup-form-msg.success {
+  color: #16a34a;
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────────────── */
+@media (max-width: 1199px) {
+  .exit-popup-grid {
+    grid-template-columns: 1fr;
+  }
+  .exit-right-panel {
+    display: none;
+  }
+  .exit-left-panel > h3 {
+    text-align: center;
+  }
+  .exit-left-panel > p {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  .tnb-exit-popup-close {
+    color: #333;
+    background: rgba(0, 0, 0, 0.08);
+  }
+}
+@media (max-width: 575px) {
+  .exit-left-panel .new-form .formRow {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .exit-left-panel .new-form .btnRow {
+    width: 90%;
+  }
+  .exit-left-panel > p {
+    width: 100%;
+  }
+}
+
+/* ── intl-tel-input overrides (popup + exit popup phone fields) ── */
+.tnb-popup-inner .iti,
+.tnb-exit-popup-inner .iti {
+  width: 100%;
+}
+.tnb-popup-inner .iti__flag-container,
+.tnb-exit-popup-inner .iti__flag-container {
+  top: 0;
+  bottom: 0;
+}
+.tnb-popup-inner #popup-phone,
+.tnb-exit-popup-inner #exit-phone {
+  width: 100%;
+  height: 45px;
+  border: 1px solid #e1e4ed;
+  border-radius: 5px;
+  font-size: 14px;
+  padding-left: 52px;
+  box-shadow: none !important;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+.tnb-popup-inner #popup-phone:focus,
+.tnb-exit-popup-inner #exit-phone:focus {
+  border-color: #ed1c24;
+}
+.tnb-popup-inner .iti--separate-dial-code .iti__selected-flag,
+.tnb-exit-popup-inner .iti--separate-dial-code .iti__selected-flag {
+  background: #f9fafb;
+  border-right: 1px solid #e1e4ed;
+  border-radius: 5px 0 0 5px;
+}
+
+
+/* ITI country dropdown appended to body via dropdownContainer — must clear popup z-index */
+.iti--container {
+  z-index: 100000 !important;
+  position: absolute;
+}
+.iti--container .iti__country-list {
+  max-height: 200px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  font-family: "Outfit", system-ui, sans-serif;
+  font-size: 14px;
+}
+
+/* ── Per-field validation ─────────────────────────────────────────────────────── */
+.new-form .inputField input.field-error,
+.new-form .inputField textarea.field-error,
+.exit-left-panel .new-form .inputField input.field-error,
+.exit-left-panel .new-form .inputField textarea.field-error {
+  border-color: #ed2a32 !important;
+  background-color: #fff9f9;
+}
+.new-form .inputField .field-error-msg,
+.exit-left-panel .new-form .inputField .field-error-msg {
+  display: block;
+  color: #ed2a32;
+  font-size: 11.5px;
+  margin-top: 4px;
+  font-weight: 500;
+  min-height: 16px;
+}
+/* iti phone wrapper error state */
+.new-form .inputField .iti input.field-error,
+.exit-left-panel .new-form .inputField .iti input.field-error {
+  border-color: #ed2a32 !important;
+  background-color: #fff9f9;
+}
+
+/* Swiper fills container; keep default overflow:hidden for correct slide transitions */
+.popup-review-swiper .swiper {
+  width: 100%;
+}
+
+/* reCAPTCHA — popup-specific scale
+   Popup has 37px padding each side (overlay 12 + left-info 15 + new-form 10).
+   At 378px viewport: available = 304px = widget width → scale kicks in below 380px.
+   Global responsive.css covers ≤360px; this rule catches the 361–380px gap in popup context.
+*/
+@media (max-width: 400px) {
+  .tnb-popup-inner .g-recaptcha,
+  .tnb-popup-inner .tnb-recaptcha-field,
+  .tnb-exit-popup-inner .g-recaptcha,
+  .tnb-exit-popup-inner .tnb-recaptcha-field {
+    transform: scale(0.88);
+    transform-origin: left top;
+    overflow: hidden;
+    margin-bottom: calc((0.88 - 1) * 78px);
+  }
+}
+@media (max-width: 340px) {
+  .tnb-popup-inner .g-recaptcha,
+  .tnb-popup-inner .tnb-recaptcha-field,
+  .tnb-exit-popup-inner .g-recaptcha,
+  .tnb-exit-popup-inner .tnb-recaptcha-field {
+    transform: scale(0.76);
+    transform-origin: left top;
+    margin-bottom: calc((0.76 - 1) * 78px);
+  }
+}

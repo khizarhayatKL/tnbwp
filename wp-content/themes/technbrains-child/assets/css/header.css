@@ -1,0 +1,685 @@
+/* =============================================================================
+   TechnBrains — Desktop Header + Mega Nav
+   Converted from: Header.module.scss + CoreServiceDropdown.module.scss
+                   TechnologyDropdown.module.scss + IndustriesDropdown.module.scss
+                   CompanyDropdown.module.scss + globals.css (nav rules)
+   ============================================================================= */
+
+/* ── Layout containers ──────────────────────────────────────────────────────── */
+.max-con {
+  width: 80%;
+  margin: auto;
+}
+
+.contain {
+  padding-left: 8%;
+  padding-right: 8%;
+}
+
+/* ── Global resets ──────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+/* neutralize parent theme p/ul/li defaults inside our components */
+.tnb-desktop-header p,
+.tnb-desktop-header h4,
+.tnb-desktop-header h5,
+.tnb-desktop-header h6,
+.core-services-dropdown p,
+.core-services-dropdown h4,
+.core-services-dropdown h5,
+.core-services-dropdown h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+  clear: none;
+}
+
+.tnb-desktop-header ul,
+.tnb-desktop-header ol,
+.core-services-dropdown ul,
+.core-services-dropdown ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Skip link (accessibility) ──────────────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-link:focus {
+  left: 6px;
+  top: 6px;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  z-index: 9999;
+  background: #fff;
+  color: #000;
+  padding: 8px 14px;
+}
+
+/* ── Menu overlay ───────────────────────────────────────────────────────────── */
+.tnb-menu-overlay {
+  transition: 0.5s;
+}
+.tnb-menu-overlay.open {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  z-index: 99;
+  top: 0;
+  left: 0;
+}
+
+/* ── Desktop header wrapper ─────────────────────────────────────────────────── */
+.tnb-desktop-header {
+  background-color: #000;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 111;
+}
+
+.tnb-desktop-header .main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tnb-desktop-header .header-logo {
+  padding: 12px 0;
+}
+
+.tnb-desktop-header .header-logo a {
+  display: block;
+  line-height: 0;
+}
+
+/* ── Desktop nav list ───────────────────────────────────────────────────────── */
+.tnb-desktop-header .header-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.tnb-desktop-header .header-menu ul li {
+  font-size: 16px;
+  color: #fff;
+  padding: 25px 20px;
+  font-weight: 500;
+  line-height: 1;
+  text-align: left;
+}
+
+.tnb-desktop-header .header-menu ul li svg {
+  margin-left: 5px;
+  vertical-align: middle;
+  transition: transform 0.3s ease;
+}
+
+.tnb-desktop-header .header-menu ul li a {
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* ── Active nav states (from globals.css) ───────────────────────────────────── */
+.nav-parent {
+  color: #f00 !important;
+}
+.nav-parent svg {
+  color: #f00 !important;
+}
+.nav-parent-inner {
+  text-decoration: underline !important;
+  text-underline-position: under;
+}
+.cus-header-nav-active a {
+  color: #f00 !important;
+  text-decoration: underline !important;
+  text-underline-position: under;
+}
+
+/* ── CTA button ─────────────────────────────────────────────────────────────── */
+.tnb-btn {
+  display: inline-flex;
+  cursor: pointer;
+  background-color: #ec1c24;
+  padding: 0.75rem 1.5rem;
+  border-radius: 2rem;
+  border: 1px solid #b3141a;
+  color: #fff;
+  font-weight: 500;
+  font-size: 16px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  font-family: "Montserrat", sans-serif;
+  white-space: nowrap;
+}
+
+.tnb-btn .textWrapper {
+  position: relative;
+  overflow: hidden;
+  height: 1.5rem;
+  line-height: 1.5rem;
+}
+
+.tnb-btn .primaryText {
+  display: block;
+  transition: transform 1.125s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.tnb-btn .secondaryText {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  transition: all 1.125s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.tnb-btn:hover {
+  transform: translateY(-1px);
+}
+.tnb-btn:hover .primaryText {
+  transform: translateY(-100%);
+}
+.tnb-btn:hover .secondaryText {
+  top: 0;
+}
+.tnb-btn:active {
+  transform: translateY(1px);
+}
+.tnb-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  background: #999;
+  border-color: #777;
+}
+
+/* ── Dropdown shared base ───────────────────────────────────────────────────── */
+.core-services-dropdown {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 75px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: auto;
+  background: linear-gradient(90deg, #212529 0%, #212529 100%);
+  padding-top: 30px;
+  padding-bottom: 50px;
+  z-index: 100;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+/* match .contain padding so dropdown content aligns with header content */
+.core-services-dropdown .container {
+  padding-left: 8%;
+  padding-right: 8%;
+}
+
+/* background decoration image */
+.core-services-dropdown::before {
+  content: "";
+  background-image: url("../images/menu-icon.png");
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: right;
+  top: 0;
+  width: 100%;
+  right: 50px;
+  position: absolute;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ── Dropdown visibility: hover (CSS) + keyboard (JS .is-open) ───────────── */
+.li-nav:hover .core-services-dropdown {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.li-nav.is-open .core-services-dropdown {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* rotate chevron on hover / open */
+.li-nav:hover > a svg,
+.li-nav.is-open > a svg {
+  transform: rotate(180deg);
+}
+
+/* ── Services / Technology dropdown — main-menu layout ──────────────────────── */
+.core-services-dropdown .main-menu {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.core-services-dropdown .menu-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.core-services-dropdown .menu-info h4 {
+  font-size: 20px;
+  color: #f00;
+  margin: 10px 0;
+  text-align: left;
+  line-height: 1.2;
+}
+
+.core-services-dropdown .menu-info ul {
+  display: block;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.core-services-dropdown .menu-info ul li {
+  padding: 5px 0;
+}
+
+.core-services-dropdown .menu-info ul li a {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #fff;
+  transition: 0.5s;
+  display: block;
+}
+
+.core-services-dropdown .menu-info ul li a:hover {
+  color: #f00;
+  text-decoration: underline !important;
+  text-underline-position: under;
+}
+
+/* inner-info active state */
+.core-services-dropdown .inner-info.cus-header-nav-active a {
+  color: #f00 !important;
+  text-decoration: underline !important;
+  text-underline-position: under;
+}
+
+/* ── Technology dropdown ─────────────────────────────────────────────────────── */
+.tnb-technology-dropdown {
+  height: 400px;
+}
+
+.tnb-technology-dropdown .menu-info:first-child ul {
+  column-count: 3;
+}
+
+.tnb-technology-dropdown .menu-info ul li {
+  padding: 8px 0;
+}
+
+/* ── Industries dropdown — right-info panel ─────────────────────────────────── */
+.tnb-industries-dropdown {
+  height: 400px;
+}
+
+.tnb-industries-dropdown .main-menu .menu-info ul {
+  column-count: 5;
+}
+
+.tnb-industries-dropdown .main-menu .menu-info ul li {
+  padding: 8px 0;
+}
+
+.tnb-industries-dropdown .right-info {
+  width: 30%;
+  position: relative;
+}
+
+.tnb-industries-dropdown .right-info::after {
+  content: "";
+  background-image: url("../images/industrymenu.png");
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-repeat: no-repeat;
+  top: 0;
+  right: 0;
+  background-position: bottom right;
+  pointer-events: none;
+}
+
+.tnb-industries-dropdown .right-info h4 {
+  font-weight: 500;
+  font-size: 25px;
+  color: #fff;
+  position: relative;
+  z-index: 12;
+  text-align: left;
+}
+
+.tnb-industries-dropdown .right-info h4 span {
+  color: #f00;
+  font-weight: 600;
+}
+
+.tnb-industries-dropdown .right-info p {
+  font-size: 18px;
+  line-height: 30px;
+  color: #fff;
+  margin: 0 10px 0 0;
+  position: relative;
+  z-index: 12;
+  text-align: left;
+}
+
+.tnb-industries-dropdown .right-info a {
+  font-size: 18px;
+  line-height: 30px;
+  color: #f00 !important;
+  position: relative;
+  z-index: 12;
+  text-align: left;
+}
+
+/* ── Company dropdown ────────────────────────────────────────────────────────── */
+.tnb-company-dropdown .main-menu {
+  justify-content: space-between;
+  height: 350px;
+}
+
+.tnb-company-dropdown .about-info {
+  width: 30%;
+}
+
+.tnb-company-dropdown .about-info > a {
+  font-weight: 500;
+  font-size: 20px;
+  color: #f00 !important;
+  margin-bottom: 10px;
+  display: block;
+  text-align: left;
+}
+
+.tnb-company-dropdown .about-info p {
+  line-height: 30px;
+  color: #fff;
+  text-align: left;
+}
+
+.tnb-company-dropdown .menu-info {
+  display: flex;
+  gap: 30px;
+  flex: unset;
+}
+
+.tnb-company-dropdown .menu-info ul h4 {
+  font-size: 20px;
+  color: #f00;
+  text-align: left;
+}
+
+.tnb-company-dropdown .menu-info ul li a {
+  font-size: 16px;
+  color: #fff;
+  transition: 0.5s;
+}
+
+.tnb-company-dropdown .menu-info ul li a:hover {
+  color: #f00;
+  text-decoration: underline !important;
+  text-underline-position: under;
+}
+
+.tnb-company-dropdown .menu-info .link-info {
+  display: flex;
+  gap: 40px;
+}
+
+.tnb-company-dropdown .menu-info .link-info a {
+  margin-top: -3px;
+  font-weight: 500;
+  font-size: 20px;
+  color: #f00 !important;
+  text-align: left;
+}
+
+.tnb-company-dropdown .right-info {
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.tnb-company-dropdown .right-info::before {
+  content: "";
+  background: linear-gradient(90deg, #282c30 0%, #4e5a64 100%);
+  width: 40%;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.tnb-company-dropdown .right-info > p {
+  font-size: 18px;
+  line-height: 30px;
+  color: #fff;
+  position: relative;
+  z-index: 12;
+  margin: 0;
+  text-align: left;
+}
+
+.tnb-company-dropdown .right-info > p::before {
+  content: "''";
+  font-size: 42px;
+  position: absolute;
+  right: 0;
+  top: -30px;
+  font-weight: 800;
+  color: #f00;
+}
+
+.tnb-company-dropdown .right-info hr {
+  width: 60px;
+  height: 6px;
+  border-top: 5px solid #f00;
+  opacity: 1;
+}
+
+.tnb-company-dropdown .profile-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.tnb-company-dropdown .profile-info img {
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tnb-company-dropdown .profile-info h6 {
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  line-height: 22px;
+  color: #fff;
+  margin: 0;
+  text-align: left;
+}
+
+.tnb-company-dropdown .profile-info p {
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  line-height: 22px;
+  color: #f00;
+  text-align: left;
+  margin: 0;
+}
+
+.tnb-company-dropdown .profile-info p::before {
+  content: none;
+}
+
+/* =============================================================================
+   RESPONSIVE
+   ============================================================================= */
+
+@media (max-width: 1600px) {
+  .tnb-desktop-header .header-menu ul li {
+    font-size: 16px;
+    padding: 25px 10px;
+  }
+  .tnb-btn {
+    font-size: 15px;
+    padding: 10px 15px;
+  }
+}
+
+@media (max-width: 1440px) {
+  .max-con { width: 85%; }
+
+  .tnb-desktop-header .header-menu ul li {
+    font-size: 15px;
+    padding: 25px 10px;
+  }
+  .tnb-btn {
+    font-size: 15px;
+    padding: 10px 15px;
+  }
+
+  /* Company dropdown */
+  .tnb-company-dropdown .about-info > a    { font-size: 18px; }
+  .tnb-company-dropdown .about-info p      { font-size: 16px; }
+  .tnb-company-dropdown .menu-info ul h4   { font-size: 18px; }
+  .tnb-company-dropdown .menu-info ul li a { font-size: 16px; }
+  .tnb-company-dropdown .menu-info .link-info a { font-size: 18px; }
+  .tnb-company-dropdown .right-info::before { width: 36%; }
+  .tnb-company-dropdown .right-info > p    { font-size: 18px; }
+  .tnb-company-dropdown .profile-info h6   { font-size: 16px; }
+  .tnb-company-dropdown .profile-info p    { font-size: 16px; }
+
+  /* Industries dropdown */
+  .tnb-industries-dropdown .right-info { width: 25%; }
+  .tnb-industries-dropdown .right-info h4 { font-size: 22px; }
+  .tnb-industries-dropdown .right-info p  { font-size: 16px; }
+  .tnb-industries-dropdown .right-info a  { font-size: 16px; }
+}
+
+@media (max-width: 1400px) {
+  /* Services/Tech dropdowns */
+  .core-services-dropdown .menu-info h4   { font-size: 18px; }
+  .core-services-dropdown .menu-info ul li a { font-size: 15px; }
+
+  /* Company dropdown */
+  .tnb-company-dropdown .main-menu        { gap: 20px; }
+  .tnb-company-dropdown .menu-info        { gap: 20px; }
+  .tnb-company-dropdown .right-info::before { width: 38%; }
+  .tnb-company-dropdown .profile-info p   { font-size: 15px; }
+
+  /* Industries */
+  .tnb-industries-dropdown .main-menu .menu-info ul { column-count: 4; }
+  .tnb-industries-dropdown .right-info { width: 25%; }
+  .tnb-industries-dropdown .right-info h4 { font-size: 20px; }
+  .tnb-industries-dropdown .right-info p  { font-size: 16px; }
+  .tnb-industries-dropdown .right-info a  { font-size: 16px; }
+}
+
+@media (max-width: 1300px) {
+  .tnb-company-dropdown .right-info::before { width: 36%; }
+}
+
+@media (max-width: 1200px) {
+  .max-con { width: 90%; }
+
+  .tnb-desktop-header .header-logo img {
+    width: 180px;
+    height: auto;
+  }
+  .tnb-desktop-header .header-menu ul li {
+    font-size: 14px;
+  }
+  .tnb-btn { font-size: 14px; }
+
+  /* Services/Tech */
+  .core-services-dropdown .menu-info h4   { font-size: 16px; }
+  .core-services-dropdown .menu-info ul li a { font-size: 14px; }
+
+  /* Industries */
+  .tnb-industries-dropdown .main-menu .menu-info ul { column-count: 4; }
+  .tnb-industries-dropdown .right-info { width: 30%; }
+  .tnb-industries-dropdown .right-info::after { width: 50%; background-size: 40%; }
+  .tnb-industries-dropdown .right-info::before { content: none; }
+  .tnb-industries-dropdown .right-info h4 { font-size: 18px; }
+  .tnb-industries-dropdown .right-info p  { font-size: 16px; line-height: 1.5; }
+  .tnb-industries-dropdown .right-info a  { font-size: 14px; }
+
+  /* Company */
+  .tnb-company-dropdown .main-menu        { gap: 20px; height: 300px; }
+  .tnb-company-dropdown .about-info > a   { font-size: 16px; }
+  .tnb-company-dropdown .about-info p     { font-size: 14px; line-height: 1.6; }
+  .tnb-company-dropdown .menu-info        { gap: 20px; }
+  .tnb-company-dropdown .menu-info ul h4  { font-size: 16px; }
+  .tnb-company-dropdown .menu-info ul li a { font-size: 14px; }
+  .tnb-company-dropdown .menu-info .link-info a { font-size: 16px; }
+  .tnb-company-dropdown .right-info::before { content: none; }
+  .tnb-company-dropdown .right-info > p   { font-size: 14px; line-height: 1.6; }
+  .tnb-company-dropdown .profile-info h6  { font-size: 14px; }
+  .tnb-company-dropdown .profile-info p   { font-size: 14px; }
+}
+
+@media (max-width: 1100px) {
+  .tnb-desktop-header .header-menu ul li {
+    font-size: 14px;
+    padding: 25px 12px;
+  }
+  .tnb-btn { font-size: 13px; }
+}
+
+@media (max-width: 1024px) {
+  .tnb-desktop-header .header-menu ul li {
+    font-size: 14px;
+    padding: 25px 8px;
+  }
+}
+
+/* Hide desktop header on mobile */
+@media (max-width: 991px) {
+  .tnb-desktop-header {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .max-con { width: 95%; }
+}
+
+@media (max-width: 479px) {
+  .tnb-btn { font-size: 14px; }
+}

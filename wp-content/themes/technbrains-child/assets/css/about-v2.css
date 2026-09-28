@@ -1,0 +1,1007 @@
+/* ============================================================
+   TechnBrains — About Us V2 ("Our Story")
+   Port of the QA-approved prototype (about-story-copy.css).
+
+   Loaded ONLY on page-templates/page-about-us-v2.php, and every rule is
+   scoped under .abs-body (added to <body> by tnb_about_v2_body_class) so
+   nothing here can affect any other page. Selectors that were global in the
+   prototype — the h1/h2/h3 type scale and the button-arrow suppression —
+   are scoped here for exactly that reason.
+
+   Values are unchanged from the approved design except where a comment says
+   otherwise. Rules for prototype components that this template does not render
+   (the interactive timeline, industries grid, stats band, list chips, big case
+   card, whobx stack, narrative connectors, role-avatar cluster, testimonial
+   carousel controls) have been removed, as have declarations that the
+   standardized type scale at the bottom of this file already overrides.
+
+   HEADING SIZES — single source of truth:
+   the STD-TYPE-SCALE block near the end sizes every h1/h2/h3 with !important,
+   including .abs-h2, .abs-since-title, .abs-capcard-t, .abs-op-t and
+   .abs-casecard-name. Do not add font-size to those selectors; it will not
+   apply. Wide-screen scaling lives in the min-width:1600px block.
+   ============================================================ */
+
+/* Scoped reset — replaces the prototype's global `* { box-sizing: border-box }` */
+.abs-body,
+.abs-body *,
+.abs-body *::before,
+.abs-body *::after { box-sizing: border-box; }
+
+.abs-body {
+  background: #FFFFFF; color: #111; font-family: 'Outfit', system-ui, sans-serif;
+  /* clip, not hidden. This class lands on <body>, and overflow-x: hidden turns
+     body itself into a scroll container — which resolves every position: sticky
+     on the page against a box that never scrolls. That silently disabled all of
+     the design's sticky section headings (.abs-split-head, .abs-jrn-head): they
+     measured as pinning for a single frame and then scrolling away. `clip` clips
+     horizontal bleed exactly the same way but creates no scroll container, so
+     sticky works. overflow-y stays visible so the page scrolls normally. */
+  overflow-x: clip; position: relative;
+  --r: #EC1C24; --navy: #0C2340; --ink: #111; --mute: #5A6478;
+  --line: #E7E8EC; --gray: #F6F6F4; --dark: #0A0A0B;
+  --ch-pad: 110px; --rev-x: 0px; --rev-y: 30px;
+  --navy-line: #1A4DA6;
+  /* Lowest point placeRail() may put the first node, so it never lands above
+     where .abs-rail starts. Read by about-v2.js; scaled down with the rail on
+     mobile, where the chapters are shorter and 196px would overshoot the first
+     heading. */
+  --abs-rail-floor: 196px;
+  /* Where the rail and its fill both begin, measured from the story track's top. */
+  --abs-rail-top: 184px;
+  /* Rail axis, derived from the container so the two never drift apart.
+     +22px keeps the rail 26px to the left of where content starts (48px gutter),
+     which is the same offset the design had against its original 40px gutter. */
+  --rail-x: max(24px, calc((100vw - 1240px) / 2 + 22px));
+}
+
+/* Container matches the Author Profile page (.ap-wrap in author-profile.css:22)
+   so both templates share one measure: 1240px max, 48px gutters, stepping down
+   through the same breakpoint ladder. Wider measures: see min-width blocks.
+   The gutter ladder lives in the RESPONSIVE region at the foot of this file. */
+.abs-wrap { max-width: 1240px; margin: 0 auto; padding: 0 48px; box-sizing: border-box; }
+
+/* was inline in source: style={{ position:'relative', zIndex:1 }} on the .abs-wrap
+   of these eight chapters only. The Who (03), Journey (06b) and Final CTA (12)
+   sections deliberately carried no such inline style in the approved design, so
+   they are excluded rather than swept in by a broader selector. */
+.abs-chapter[data-screen-label="02 Proof"] > .abs-wrap,
+.abs-chapter[data-screen-label="04 Capabilities"] > .abs-wrap,
+.abs-chapter[data-screen-label="05 Founder"] > .abs-wrap,
+.abs-chapter[data-screen-label="06a Recognition"] > .abs-wrap,
+.abs-chapter[data-screen-label="07 Case"] > .abs-wrap,
+.abs-chapter[data-screen-label="09 Experts"] > .abs-wrap,
+.abs-chapter[data-screen-label="10 Testimonials"] > .abs-wrap,
+.abs-chapter[data-screen-label="11 Principles"] > .abs-wrap { position: relative; z-index: 1; }
+
+/* Eyebrows are rendered for semantics but hidden by the approved design. */
+.abs-eyebrow { display: none !important; }
+.abs-eyebrow2 { display: none !important; }
+.abs-hero-tag { display: none !important; }
+
+/* font-size/font-weight intentionally absent — see STD-TYPE-SCALE note above. */
+.abs-h2 { line-height: 1.06; letter-spacing: -0.03em; color: var(--navy); margin: 0; text-wrap: balance; }
+.abs-lead { font-size: 19px; line-height: 1.6; color: var(--mute); margin: 18px 0 0; }
+
+/* reveal */
+.abs-rev { opacity: 0; transform: translate(var(--rev-x), var(--rev-y)); transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); }
+.abs-rev.in { opacity: 1; transform: none; }
+.abs-rev.d1 { transition-delay: .1s; } .abs-rev.d2 { transition-delay: .2s; } .abs-rev.d3 { transition-delay: .3s; }
+@media (prefers-reduced-motion: reduce) { .abs-rev { opacity: 1; transform: none; transition: none; } }
+
+/* ============================================================ HERO
+   The banner is sized to be fully visible without scrolling.
+
+   - min-height fills the screen so it reads as a full-bleed banner, minus an
+     allowance for the in-flow site header above it. Subtracting the header from
+     100vh makes header + hero come to exactly one screen, so no strip of the
+     next section shows under the banner.
+   - vh-aware padding compresses on short screens. With the design's fixed
+     180px/120px padding the banner measured 904-996px tall including the header,
+     so on 768px and 800px-tall laptops the CTA buttons fell below the fold. */
+.abs-hero {
+  --abs-hero-header: 100px;
+  position: relative; color: #fff; overflow: hidden;
+  min-height: calc(100vh - var(--abs-hero-header));
+  padding: clamp(70px, 9vh, 180px) 0 clamp(48px, 7vh, 120px);
+  display: flex; align-items: center;
+  background: #05070B; background-image: radial-gradient(820px 500px at 26% 28%, rgba(236,28,36,0.18) 0%, transparent 60%), radial-gradient(900px 560px at 86% 72%, rgba(20,44,84,0.5) 0%, transparent 64%), linear-gradient(180deg, #0A0F18 0%, #05070B 72%);
+}
+/* The per-breakpoint header allowance is in the RESPONSIVE region below:
+   100px on wide desktop, 96px on mid laptops, 84px at 1024, and none under the
+   992px breakpoint where the desktop nav is replaced by the mobile bar. */
+
+/* The decorative layer (glows, dot grid, particle canvas) is taken out of flow
+   so it cannot become a flex sibling that competes with the copy for width. */
+.abs-hero > [aria-hidden="true"] { position: absolute; inset: 0; pointer-events: none; }
+.abs-hero-glow { display: none; }
+.abs-hero-plexus { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.abs-hero-glow.a { width: 640px; height: 640px; top: -240px; left: -140px; background: radial-gradient(circle, rgba(236,28,36,0.22) 0%, transparent 62%); animation: absPulse 9s ease-in-out infinite; }
+.abs-hero-glow.b { width: 680px; height: 680px; bottom: -300px; right: -180px; background: radial-gradient(circle, rgba(26,74,140,0.34) 0%, transparent 64%); animation: absPulse 11s ease-in-out infinite reverse; }
+@keyframes absPulse { 0%,100%{opacity:.7;transform:scale(1)} 50%{opacity:1;transform:scale(1.08)} }
+.abs-hero-grid { position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 30px 30px; mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, #000 10%, transparent 78%); -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, #000 10%, transparent 78%); }
+
+/* No max-width cap on the hero copy — the hero's own rail-aligned left padding
+   and 48px right gutter are the only constraint. */
+.abs-hero-inner { position: relative; z-index: 2; text-align: left; width: 100%; max-width: none; margin: 0; padding-left: var(--rail-x); padding-right: 48px; box-sizing: border-box; }
+.abs-hero h1 { line-height: 1.02; letter-spacing: -0.035em; color: #fff; margin: 0; text-wrap: balance; }
+.abs-hero h1 .hl { color: var(--r); }
+.abs-hero-lines { position: relative; margin: 44px 0 0; display: flex; flex-direction: column; gap: 8px; }
+
+/* The three story lines are a real <ul> — they are a list of visitor situations,
+   so the semantics match the content and screen readers announce the count.
+   The list marker is drawn with ::before rather than list-style so its size,
+   colour and optical alignment are controlled on the dark hero. */
+.abs-hero-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.abs-hero-list li { position: relative; padding-left: 20px; }
+.abs-hero-list li::before {
+  content: ""; position: absolute; left: 2px; top: 0.66em;
+  width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(255,255,255,0.42);
+}
+.abs-hero-list li, .abs-hero-lines span { font-size: clamp(18px, 1.4vw, 22px); line-height: 1.5; color: rgba(255,255,255,0.55); font-weight: 400; }
+/* was inline in source: style={{ color:'#FFFFFF8C' }} on the third hero line */
+.abs-hero-list li:nth-child(3) { color: #FFFFFF8C; }
+.abs-hero-list li:nth-child(3)::before { background: rgba(255,255,255,0.34); }
+.abs-hero-lines span.em { position: relative; display: inline-block; align-self: flex-start; color: #fff; font-weight: 600; margin-top: 16px; font-size: clamp(22px, 2vw, 30px); letter-spacing: -0.01em; }
+.abs-hero-lines span.em::after { content: ""; position: absolute; left: 0; bottom: -6px; height: 3px; width: 100%; border-radius: 3px; background: var(--r); transform: scaleX(0); transform-origin: left; }
+@media (prefers-reduced-motion: no-preference) {
+  .abs-hero-list li, .abs-hero-lines span { opacity: 0; transform: translateY(14px); animation: absLineIn .6s cubic-bezier(.22,1,.36,1) forwards; }
+  .abs-hero-list li:nth-child(1) { animation-delay: .45s; }
+  .abs-hero-list li:nth-child(2) { animation-delay: .7s; }
+  .abs-hero-list li:nth-child(3) { animation-delay: .95s; }
+  .abs-hero-lines span.em { animation-delay: 1.35s; }
+  .abs-hero-lines span.em::after { animation: absUnderline .6s cubic-bezier(.22,1,.36,1) 1.7s forwards; }
+}
+@keyframes absLineIn { to { opacity: 1; transform: none; } }
+@keyframes absUnderline { to { transform: scaleX(1); } }
+.abs-hero-actions { margin-top: 38px; display: flex; gap: 14px; justify-content: flex-start; flex-wrap: wrap; }
+.abs-hero-actions .hd-btn-secondary { color: #fff; border-color: rgba(255,255,255,0.28); }
+.abs-hero-actions .hd-btn-secondary:hover { background: #fff; border-color: #fff; color: #000; }
+
+/* Hover shift fix. components.css gives .hd-btn a 1px transparent border, then
+   .hd-btn-primary:hover sets `border: none` — so the button loses 2px in both
+   axes on hover and, because the base transition is `all`, animates the shrink
+   as a visible jerk. Restoring the transparent border keeps the box stable so
+   only the intended translateY runs. Scoped to .abs-body; the same issue exists
+   site-wide but fixing it globally is out of this page's scope. */
+.abs-body .hd-btn-primary:hover { border: 1px solid transparent; }
+
+/* ============================================================ CHAPTER scaffold */
+.abs-chapter { position: relative; padding: var(--ch-pad) 0; }
+.abs-chapter[data-screen-label="02 Proof"] { padding-top: calc(var(--ch-pad) + 100px); }
+.abs-ch-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 72px; align-items: center; position: relative; z-index: 1; }
+
+/* ============================================================ SPLIT — h2 left / content right (section standard) */
+.abs-split { display: grid; grid-template-columns: minmax(240px, 0.78fr) 1.5fr; gap: 56px; align-items: center; }
+.abs-split-head { position: sticky; top: 120px; padding-left: 58px; }
+/* proof heading: give the head column enough room to stay within two lines */
+.abs-proof-head .abs-h2 { text-wrap: balance; }
+.abs-split:has(.abs-proof-head) { grid-template-columns: minmax(320px, 0.95fr) 1.5fr; }
+.abs-split-head .abs-lead { font-size: 17px; }
+.abs-ts-chapter .abs-split { gap: 104px; }
+/* left-column chapter headings clear the yarn rail + logo bead too.
+   Declared BEFORE the media query below on purpose: both selectors are (0,2,0),
+   so a tie is settled by source order. With this rule last, the 58px leaked into
+   tablet widths and the Who and Founder headings sat 18px right of every other
+   section's. */
+.abs-ch-grid:not(.flip) .abs-ch-text { padding-left: 58px; }
+/* inner grids reflow to 2 cols inside the narrower right column.
+   --abs-split-pad is the yarn-rail clearance. It is 0 while the split has two
+   columns (the body sits in column 2, already clear of the rail) and 40px once
+   the split collapses, matching .abs-split-head exactly so the heading and the
+   cards below it start on the same line instead of the cards running into the
+   rail. A custom property rather than a plain padding-left because .abs-capwall
+   sets a padding shorthand of its own further down and would otherwise reset
+   it — this way the one value feeds both. */
+.abs-split-body { max-width: none !important; margin: 0 !important; padding-left: var(--abs-split-pad, 0px); }
+.abs-capwall.abs-split-body > :nth-child(n) { margin-top: 0; }
+.abs-rec-grid.abs-split-body { grid-template-columns: repeat(2, 1fr); }
+.abs-expring.abs-split-body { grid-template-columns: repeat(2, minmax(0, 250px)); gap: 36px 40px; justify-content: end; margin-left: auto; }
+
+/* ============================================================ PROOF — creative bento */
+.abs-bento { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: minmax(170px, auto); gap: 16px;
+  grid-template-areas:
+    "feat m1 m2"
+    "m3   m4 m5"; }
+/* was inline in source: style={{ gridArea: m.a }} — placement follows row order */
+.abs-bento-card:nth-child(1) { grid-area: feat; }
+.abs-bento-card:nth-child(2) { grid-area: m1; }
+.abs-bento-card:nth-child(3) { grid-area: m2; }
+.abs-bento-card:nth-child(4) { grid-area: m3; }
+.abs-bento-card:nth-child(5) { grid-area: m4; }
+.abs-bento-card:nth-child(6) { grid-area: m5; }
+.abs-bento-card { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 22px; padding: 26px 28px; border: 1px solid var(--line); border-radius: 22px; background: #fff; overflow: hidden; transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s ease, border-color .4s ease; }
+.abs-bento-card:hover { transform: translateY(-5px); box-shadow: 0 32px 64px -42px rgba(12,35,64,0.45); border-color: rgba(12,35,64,0.16); }
+.abs-bento-wm { position: absolute; right: -6px; bottom: -38px; font-size: 150px; font-weight: 800; line-height: 1; letter-spacing: -0.06em; color: rgba(12,35,64,0.045); pointer-events: none; transition: transform .5s cubic-bezier(.22,1,.36,1), color .4s ease; }
+.abs-bento-card:hover .abs-bento-wm { transform: translateY(-8px) scale(1.06); color: rgba(236,28,36,0.08); }
+.abs-bento-bot { position: relative; z-index: 1; }
+.abs-bento-v { font-size: clamp(40px, 4.4vw, 58px); font-weight: 600; letter-spacing: -0.025em; color: var(--navy); line-height: 0.96; font-variant-numeric: tabular-nums; }
+.abs-bento-v .u { color: var(--r); font-size: 0.55em; font-weight: 600; }
+.abs-bento-l { font-size: 14px; color: var(--mute); line-height: 1.45; margin-top: 11px; max-width: 260px; }
+.abs-bento-stars { display: inline-flex; gap: 3px; color: var(--r); margin-top: 12px; }
+.abs-bento-tag { display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--r); }
+.abs-bento-bar { margin-top: 16px; height: 4px; border-radius: 99px; background: rgba(12,35,64,0.09); overflow: hidden; }
+/* was inline in source: style={{ width: go ? pct+'%' : '0%' }} — about-v2.js sets --abs-pct on reveal */
+.abs-bento-bar span { display: block; height: 100%; border-radius: 99px; background: var(--r); width: var(--abs-pct, 0%); transition: width 1.4s cubic-bezier(.22,1,.36,1) .15s; }
+/* featured — reachable via the abs_stats "Featured" toggle */
+.abs-bento-card.feat { background: var(--r); border-color: var(--r); }
+.abs-bento-card.feat .abs-bento-wm { color: rgba(255,255,255,0.1); }
+.abs-bento-card.feat:hover .abs-bento-wm { color: rgba(255,255,255,0.16); }
+.abs-bento-card.feat .abs-bento-v { color: #fff; font-size: clamp(66px, 7.4vw, 116px); }
+.abs-bento-card.feat .abs-bento-v .u { color: #fff; }
+.abs-bento-card.feat .abs-bento-l { color: rgba(255,255,255,0.9); font-size: 17px; max-width: none; }
+.abs-bento-card.feat::after { content: ""; position: absolute; right: -46px; top: -46px; width: 200px; height: 200px; border-radius: 50%; border: 30px solid rgba(255,255,255,0.12); pointer-events: none; }
+.abs-bento-card.feat:hover { box-shadow: 0 36px 70px -38px rgba(236,28,36,0.6); }
+
+/* ============================================================ WHO — opportunity-card collage */
+.abs-wa2 { container-type: inline-size; position: relative; width: 100%; max-width: 480px; margin: 0 auto; aspect-ratio: 100 / 124; --wbrown: #3A211D; }
+.abs-wa2 * { box-sizing: border-box; }
+.abs-wa2-blob { display: none; }
+/* Percentages of .abs-wa2, which has a fixed 100/124 aspect ratio, so these four
+   values hold the same proportions at every breakpoint — the collage only changes
+   size (480 / 560 / 620px), never shape. No per-breakpoint override needed. */
+.abs-wa2-portrait { position: absolute; left: 16%; top: 19%; width: 64%; height: 65%; border-radius: 14px; overflow: hidden; background: #BFE0EC; z-index: 1; box-shadow: 0 30px 60px -34px rgba(12,35,64,0.45); }
+.abs-wa2-portrait img { width: 100%; height: 100%; object-fit: cover; }
+.abs-wa2-card { position: absolute; border-radius: 7cqw; box-shadow: 0 22px 46px -30px rgba(12,35,64,0.42); z-index: 3; }
+
+/* Collage card copy ("We build new products.", "We add vetted engineers…",
+   "We improve existing systems.") — sized against .abs-wa2's own inline size,
+   which is a container-query container, so one value covers every breakpoint:
+   3.23cqw = 20px at 1920 (620px collage), 18px at 1600, 15.5px below that.
+   The 14px floor keeps it legible on phones, where the collage narrows to the
+   viewport and a pure cqw value would fall to ~11px. */
+.abs-wa2-ttl,
+.abs-wa2-h { font-size: max(14px, 3.23cqw); font-weight: 700; letter-spacing: -0.01em; color: var(--wbrown); }
+.abs-wa2-ttl { margin-top: 1cqw; line-height: 1.1; }
+.abs-wa2-h { margin-top: 1.4cqw; line-height: 1.12; }
+.abs-wa2-ttl.light { color: #fff; }
+
+/* card 1 — top left */
+.abs-wa2-job { top: 4%; left: 0; width: 46%; background: #FDECEC; padding: 4.5cqw 5cqw 5cqw; }
+.abs-wa2-job .abs-wa2-ttl { color: #EC1C24; }
+/* card 2 — right, overlapping the portrait */
+.abs-wa2-app { top: 46%; right: -9%; width: 42%; background: #F6C3C5; padding: 4.5cqw 4.8cqw 5cqw; }
+.abs-wa2-app .abs-wa2-h { color: #EC1C24; }
+/* card 3 — bottom left */
+.abs-wa2-saved { bottom: 2%; left: 2%; width: 46%; background: #C8161D; padding: 4.5cqw 5cqw 5cqw; z-index: 4; }
+/* icon badges */
+.abs-wa2-bell { width: 9.5cqw; height: 9.5cqw; border-radius: 50%; background: #fff; display: grid; place-items: center; color: #EC1C24; margin-bottom: 3cqw; }
+.abs-wa2-bell svg { width: 5cqw; height: 5cqw; }
+.abs-wa2-book { width: 9.5cqw; height: 9.5cqw; border-radius: 50%; background: #FCE7E8; display: grid; place-items: center; color: #C8161D; margin-bottom: 3cqw; }
+.abs-wa2-book svg { width: 5cqw; height: 5cqw; }
+
+/* ============================================================ CAPABILITIES — card wall */
+/* --abs-caps-per is 6 here purely so about-v2.js can read "everything already
+   fits" off the CSS and keep the paging controls hidden. The grid itself does
+   not use it — only the ≤1599px carousel below does. */
+.abs-capwall { --abs-caps-per: 6; display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: 28px; align-items: stretch; max-width: 1060px; margin: 0 auto; }
+/* card entrance: each card appears as it scrolls into view (per-card observer) */
+.abs-capwall.abs-rev { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .abs-capcard { opacity: 0; transform: translateY(40px) scale(0.97); transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
+  .abs-capcard.is-in { opacity: 1; transform: none; }
+}
+.abs-capcard {
+  position: relative; overflow: visible;
+  background: #FFFFFF; border: 1px solid rgba(12,35,64,0.07); border-radius: 30px;
+  padding: 28px; height: 100%;
+  box-shadow: 0 30px 60px -42px rgba(12,35,64,0.28);
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+.abs-capcard:hover { transform: translateY(-6px); box-shadow: 0 44px 84px -46px rgba(12,35,64,0.38); }
+/* icon tile tint cycles amber / periwinkle / coral by card position */
+.abs-capcard-ic { position: relative; z-index: 1; width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; margin-bottom: 22px; }
+.abs-capcard:nth-child(3n+1) .abs-capcard-ic { background: rgba(232,196,40,0.16); color: #B8870B; }
+.abs-capcard:nth-child(3n+2) .abs-capcard-ic { background: rgba(96,128,206,0.16); color: #3C5FB0; }
+.abs-capcard:nth-child(3n)   .abs-capcard-ic { background: rgba(228,90,90,0.16); color: #C8474A; }
+.abs-capcard-ic svg { width: 23px; height: 23px; }
+/* Uploaded-file icons already carry the tinted rounded tile, so the CSS tile is
+   suppressed to avoid drawing it twice. Box geometry is unchanged.
+   :nth-child(n) matches the specificity of the three tint rules above so this
+   wins on source order — without it (0,2,0 vs 0,3,0) the tint would still paint
+   and the tile would be drawn twice. */
+.abs-capcard:nth-child(n) .abs-capcard-ic--img { background: none; }
+.abs-capcard-ic--img img { width: 100%; height: 100%; object-fit: contain; display: block; }
+/* font-size/font-weight omitted — h3, sized by STD-TYPE-SCALE. */
+.abs-capcard-t { position: relative; z-index: 1; letter-spacing: -0.015em; color: var(--navy); margin: 0 0 9px; }
+.abs-capcard-d { position: relative; z-index: 1; font-size: 15px; line-height: 1.6; color: var(--mute); margin: 0; }
+
+/* Below 1600px the wall becomes a scroll-snap carousel — see the ≤1599px block
+   in the RESPONSIVE region at the foot of this file. */
+/* Carousel nav — reuses the .case-deck-nav / .case-btn / .case-deck-dot look
+   already defined in components.css, so none of it is re-declared here. That
+   file reads its palette off .section.cases, so the three tokens are re-pointed
+   at this page's own; and its ≤1280px `display: none` is undone (this file loads
+   after components.css, so equal specificity resolves here) because on this page
+   the nav is the only way to page through the cards. */
+.abs-body .case-deck-nav { --cs-red: var(--r); --cs-navy: var(--navy); --cs-line: var(--line); }
+/* -2 / -1 = last column: column 2 in the split, column 1 once it collapses. */
+.abs-caps-nav { display: flex; grid-column: -2 / -1; margin-top: 0; }
+.abs-caps-nav[hidden] { display: none; }
+/* The track's own 34px bottom padding already spaces the nav; the split's 56px
+   row gap on top of it would read as a break between two sections. */
+.abs-split:has(.abs-caps-nav) { row-gap: 0; }
+
+/* ============================================================ FOUNDER */
+.abs-founder-photo { border-radius: 26px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 40px 80px -50px rgba(12,35,64,0.5); max-width: 360px; margin: 0 auto; }
+.abs-founder-photo img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 16%; }
+/* founder chapter: top-align text with the tall portrait, give photo a touch less width */
+.abs-chapter:has(.abs-founder-photo) .abs-ch-grid { grid-template-columns: 1.25fr 0.75fr; align-items: center; }
+.abs-chapter:has(.abs-founder-photo) .abs-ch-text { padding-top: 8px; }
+/* was inline in source: style={{ marginTop: 22 }} on the founder quote wrapper */
+.abs-fquote-wrap { margin-top: 22px; }
+.abs-fmark { font-size: 80px; line-height: 0.5; color: var(--r); font-weight: 700; display: block; height: 44px; }
+.abs-fquote { font-size: clamp(24px, 2.8vw, 34px); font-weight: 500; line-height: 1.35; letter-spacing: -0.02em; color: var(--navy); margin: 0; text-wrap: pretty; }
+.abs-fby { margin-top: 28px; }
+.abs-fname { font-size: 19px; font-weight: 700; color: var(--ink); }
+.abs-frole { font-size: 15px; color: var(--mute); margin-top: 3px; }
+.abs-fbody { font-size: 17px; line-height: 1.6; color: var(--mute); margin: 16px 0 0; }
+.abs-since { margin-top: 80px; padding-top: 56px; padding-left: 58px; }
+/* font-size/font-weight omitted — h2, sized by STD-TYPE-SCALE. */
+.abs-since-title { letter-spacing: -0.04em; line-height: 0.98; color: var(--navy); margin: 0; }
+.abs-since-rows { display: flex; flex-direction: column; gap: clamp(56px, 7vw, 112px); margin-top: clamp(44px, 6vw, 84px); }
+.abs-since-row { display: grid; grid-template-columns: 0.82fr 1.18fr; gap: clamp(36px, 5vw, 84px); align-items: center; }
+.abs-since-row.solo { grid-template-columns: 1fr; }
+.abs-since-row.solo .abs-since-lead { max-width: 1000px; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.4; }
+.abs-since-row.solo .abs-since-sub { font-size: clamp(17px, 1.5vw, 20px); max-width: 920px; }
+.abs-since-copy { padding-top: 4px; }
+.abs-since-lead { font-size: clamp(17px, 1.5vw, 20px); font-weight: 600; line-height: 1.5; color: var(--navy); margin: 0; max-width: 360px; text-wrap: pretty; }
+.abs-since-sub { font-size: 15px; line-height: 1.7; color: var(--mute); margin: 16px 0 0; max-width: 400px; text-wrap: pretty; }
+
+/* ============================================================ JOURNEY — sticky head, era cards */
+/* overflow-x: clip, not overflow: hidden. `hidden` makes this section a scroll
+   container, which silently disables position:sticky for everything inside it —
+   so .abs-jrn-head carried `position: sticky; top: 120px` but never actually
+   stuck at any width. `clip` still clips horizontal bleed but creates no scroll
+   container, so the sticky heading works. Only the x axis is clipped, leaving
+   overflow-y visible; setting both would reintroduce the problem. */
+.abs-yr { position: relative; background: #FFFFFF; color: var(--ink); overflow-x: clip; padding: var(--ch-pad) 0; }
+.abs-jrn-head { max-width: 680px; margin-bottom: 70px; padding-left: 30px; }
+.abs-jrn-hl { color: inherit; }
+.abs-jrn-sub { margin-top: 18px; }
+.abs-jrn-split { display: grid; grid-template-columns: minmax(280px, 0.82fr) 1.5fr; gap: 64px; align-items: start; margin-top: 8px; }
+.abs-jrn-split .abs-jrn-head { position: sticky; top: 120px; margin-bottom: 0; padding-left: 58px; }
+.abs-jrn-cards { display: flex; flex-direction: column; gap: 20px; }
+@media (prefers-reduced-motion: no-preference) {
+  .abs-jc { opacity: 0; transform: translateY(46px) translateX(28px) rotate(2.5deg) scale(0.95); filter: blur(6px); transform-origin: right center; transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1), filter .8s ease, box-shadow .45s ease, border-color .45s ease; }
+  .abs-jc:nth-child(even) { transform: translateY(46px) translateX(-28px) rotate(-2.5deg) scale(0.95); transform-origin: left center; }
+  .abs-jc.is-in { opacity: 1; transform: none; filter: none; }
+}
+.abs-jc { position: relative; overflow: hidden; background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 26px 30px 24px; box-shadow: 0 22px 48px -38px rgba(12,35,64,0.4); transition: transform .45s cubic-bezier(.22,1,.36,1), box-shadow .45s ease, border-color .45s ease; }
+.abs-jc::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--r), rgba(236,28,36,0.25)); opacity: 0; transition: opacity .4s ease; }
+.abs-jc:hover { transform: translateY(-4px); border-color: rgba(236,28,36,0.28); box-shadow: 0 30px 60px -30px rgba(236,28,36,0.3); }
+.abs-jc:hover::before { opacity: 1; }
+.abs-jc-head { position: relative; z-index: 1; display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 12px; }
+.abs-jc-year { font-family: 'Outfit', system-ui, sans-serif; font-size: clamp(24px, 2.6vw, 32px); font-weight: 700; letter-spacing: -0.02em; line-height: 1; color: var(--navy); font-variant-numeric: tabular-nums; transition: color .4s ease; }
+.abs-jc-step { font-family: 'Outfit', system-ui, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--r); }
+.abs-jc-text { position: relative; z-index: 1; font-size: 15px; line-height: 1.62; color: var(--mute); margin: 0; text-wrap: pretty; }
+.abs-jc.is-now .abs-jc-year { color: var(--r); }
+
+/* ============================================================ RECOGNITION / AWARDS */
+.abs-rec-head { max-width: 720px; }
+.abs-rec-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 52px; }
+.abs-rec-card {
+  background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 26px 24px;
+  display: flex; flex-direction: column; gap: 14px;
+  transition: transform .4s ease, box-shadow .4s ease, border-color .4s ease;
+}
+.abs-rec-card:hover { transform: translateY(-5px); box-shadow: 0 36px 70px -46px rgba(12,35,64,0.4); border-color: rgba(12,35,64,0.14); }
+.abs-rec-badge { height: 30px; display: flex; align-items: center; }
+.abs-rec-badge img { height: 100%; width: auto; object-fit: contain; }
+.abs-rec-rating { display: flex; align-items: baseline; gap: 8px; }
+.abs-rec-rating .v { font-size: 30px; font-weight: 700; letter-spacing: -0.03em; color: var(--navy); }
+.abs-rec-rating .stars { display: flex; gap: 1px; color: var(--r); }
+.abs-rec-l { font-size: 13px; color: var(--mute); line-height: 1.4; }
+.abs-rec-pill {
+  display: inline-flex; align-items: center; gap: 6px; align-self: flex-start;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.04em; color: var(--r);
+  background: rgba(236,28,36,0.14); padding: 5px 11px; border-radius: 100px;
+}
+
+/* ============================================================ CASES — result cards */
+.abs-caselist { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: 14px; align-items: stretch;
+  grid-template-areas:
+    "c1 c2 c3"
+    "c0 c0 c4"; }
+.abs-caselist > :nth-child(1) { grid-area: c0; }
+.abs-caselist > :nth-child(2) { grid-area: c1; }
+.abs-caselist > :nth-child(3) { grid-area: c2; }
+.abs-caselist > :nth-child(4) { grid-area: c3; }
+.abs-caselist > :nth-child(5) { grid-area: c4; }
+.abs-casecard { position: relative; display: block; min-height: 150px; text-decoration: none; background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 26px 28px; transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, border-color .35s ease; }
+.abs-casecard:hover { transform: translateY(-4px); border-color: rgba(236,28,36,0.35); box-shadow: 0 30px 60px -42px rgba(12,35,64,0.42); }
+.abs-casecard-top { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+.abs-casecard-logo { flex-shrink: 0; width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center; background: rgba(236,28,36,0.1); color: var(--r); font-weight: 700; font-size: 18px; letter-spacing: -0.02em; transition: background .3s ease, color .3s ease; }
+.abs-casecard:hover .abs-casecard-logo { background: var(--r); color: #fff; }
+/* An uploaded logo replaces the monogram: the tint and the red hover fill are
+   dropped so neither shows through nor washes out the artwork. The hover rule
+   has to be restated at (0,2,0) to beat the one above — source order settles the
+   tie. Tile geometry (46px, 13px radius) is identical either way. */
+.abs-casecard-logo--img { background: none; overflow: hidden; }
+.abs-casecard:hover .abs-casecard-logo--img { background: none; }
+.abs-casecard-logo--img img { width: 100%; height: 100%; object-fit: contain; display: block; }
+/* font-size/font-weight omitted — h3, sized by STD-TYPE-SCALE. */
+.abs-casecard-name { letter-spacing: -0.02em; color: var(--navy); margin: 0; }
+/* the arrow is hidden by the approved design; the description carries the link */
+.abs-casecard-ar { display: none; }
+.abs-casecard-d { font-size: 14.5px; line-height: 1.55; color: var(--mute); margin: 12px 0 0; }
+
+/* ============================================================ EXPERTS — circular portraits, B&W until hover */
+.abs-expring { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; max-width: 1000px; margin: 0 auto; }
+.abs-expc { text-align: center; }
+.abs-expc-photo { position: relative; width: 100%; max-width: 250px; margin: 0 auto; aspect-ratio: 1; border-radius: 50%; overflow: hidden; box-shadow: 0 18px 40px -26px rgba(0,0,0,0.4); transition: box-shadow .4s ease; }
+/* translateZ(0) + will-change put the image on its own compositor layer, so the
+   greyscale-to-colour and scale hover run without repainting the whole card.
+   backface-visibility stops the layer being re-rasterised mid-transition. */
+.abs-expc-photo img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%;
+  filter: grayscale(1) contrast(1.02);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: filter, transform;
+  transition: filter .5s ease, transform .6s ease;
+}
+.abs-expc:hover .abs-expc-photo { box-shadow: 0 30px 56px -22px rgba(0,0,0,0.45); }
+.abs-expc:hover .abs-expc-photo img { filter: grayscale(0); transform: scale(1.05) translateZ(0); }
+.abs-expc-role { margin-top: 16px; font-size: 14px; color: var(--mute); }
+
+/* ============================================================ TESTIMONIALS — single rotating card on a ghost stack */
+@keyframes absTsRowIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.abs-ts2-stack { position: relative; max-width: 540px; flex: 1 1 auto; min-width: 0; }
+.abs-ts2-card { background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: 32px 30px 28px; display: flex; flex-direction: column; gap: 18px; position: relative; min-height: 320px; transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease; }
+.abs-ts2-card:hover { transform: translateY(-4px); border-color: rgba(236,28,36,0.3); box-shadow: 0 24px 50px -26px rgba(12,35,64,0.18), 0 0 0 1px rgba(236,28,36,0.06); }
+.abs-ts2-card.is-c { transform: scale(1); z-index: 2; box-shadow: 0 30px 60px -28px rgba(12,35,64,0.22); }
+.abs-ts2-card.is-solo { min-height: 0; max-width: 540px; animation: absTsRowIn 0.4s ease; }
+/* Must stay after .is-c: both are (0,2,0), so source order decides, and the
+   approved design resolves the card to z-index 1 — above the ghosts, below the
+   rail. Moving this earlier silently promotes it to 2. */
+.abs-ts2-stack .abs-ts2-card { position: relative; z-index: 1; }
+.abs-ts2-mark { color: var(--r); opacity: 0.55; flex-shrink: 0; }
+.abs-ts2-quote { font-family: 'Outfit', system-ui, sans-serif; font-size: 16.5px; line-height: 1.5; color: var(--navy); font-weight: 500; margin: 0; flex: 1; }
+.abs-ts2-divider { height: 1px; background: var(--line); margin: 4px 0 6px; }
+.abs-ts2-foot { display: flex; align-items: center; gap: 12px; }
+.abs-ts2-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--gray); border: 1px solid var(--line); display: grid; place-items: center; font-size: 14px; font-weight: 700; letter-spacing: 0.02em; color: var(--navy); flex-shrink: 0; }
+/* An uploaded reviewer photo fills the circle. The tint is dropped so it cannot
+   show through a transparent PNG, and overflow clips the image to the radius.
+   Both children occupy the same grid cell, so whichever is hidden leaves no gap
+   and the 44px box never changes — the swap cannot shift the card's layout.
+   --img is added at runtime by about-v2.js, hence the .abs- RUCSS safelist. */
+.abs-ts2-avatar--img { background: none; overflow: hidden; }
+.abs-ts2-avatar > img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block; grid-area: 1 / 1; }
+.abs-ts2-avatar > img[hidden] { display: none; }
+.abs-ts2-initials { grid-area: 1 / 1; }
+.abs-ts2-cite { flex: 1; min-width: 0; }
+.abs-ts2-name { font-size: 14.5px; font-weight: 600; color: var(--navy); line-height: 1.2; }
+.abs-ts2-role { font-size: 12.5px; color: var(--mute); margin-top: 2px; }
+.abs-ts2-platform { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600; color: var(--mute); flex-shrink: 0; }
+.abs-ts2-platform .glyph { color: var(--r); }
+.abs-ts2-link { margin-top: 4px; align-self: flex-start; font-size: 12.5px; font-weight: 600; color: var(--navy); display: inline-flex; align-items: center; gap: 6px; text-decoration: none; border-bottom: 1px solid var(--navy); padding-bottom: 2px; transition: color .2s ease, border-color .2s ease, gap .2s ease; }
+.abs-ts2-link:hover { color: var(--r); border-color: var(--r); gap: 10px; }
+.abs-ts2-ghost { position: absolute; left: 0; right: 0; top: 0; height: 100%; background: #fff; border: 1px solid var(--line); border-radius: 24px; }
+.abs-ts2-ghost.g1 { transform: translateY(14px) scale(0.965); opacity: 0.7; z-index: 0; box-shadow: 0 18px 40px -30px rgba(12,35,64,0.25); }
+.abs-ts2-ghost.g2 { transform: translateY(28px) scale(0.93); opacity: 0.45; z-index: 0; }
+/* Manual controls: arrows and dots in a row UNDER the card. That is already the
+   theme's .case-deck-nav default (components.css — row, centred, 36px top margin,
+   24x8 active dot), so only two things are set here: the borderless treatment,
+   and a width cap so the centred controls line up with the card instead of with
+   the wider grid column .abs-split-body occupies.
+
+   The border is made transparent rather than removed so the hover state cannot
+   change the button's box size (the 1px-to-0 shrink is what made the hero CTA
+   jerk). margin-top: 0 hands spacing to .abs-ts2-body's gap.
+
+   `display: flex` is NOT redundant with .case-deck-nav: components.css hides that
+   class outright on tablet (`.case-deck-nav { display: none }`). Both selectors are
+   (0,1,0), so this file winning depends on load order — about-v2.css is enqueued
+   after tnb-components. Removing this line hides the controls below 1024px.
+
+   .abs-ts-nav[hidden] is (0,2,0) and so outranks both whatever the order, which is
+   what lets about-v2.js park the nav by toggling that attribute. */
+.abs-ts2-body { display: flex; flex-direction: column; align-items: stretch; gap: 26px; }
+.abs-ts-nav { display: flex; max-width: 540px; margin-top: 0; }
+.abs-ts-nav[hidden] { display: none; }
+.abs-ts-nav .case-btn { background: transparent; border-color: transparent; }
+.abs-ts-nav .case-btn:hover { background: var(--r); border-color: transparent; color: #fff; }
+
+/* ============================================================ PRINCIPLES — numbered cards */
+.abs-op { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.abs-op-card { position: relative; overflow: hidden; padding: 24px 24px 22px; border-radius: 18px; border: 1px solid var(--line); background: #fff; transition: transform .45s cubic-bezier(.22,1,.36,1), border-color .45s ease, box-shadow .45s ease; }
+.abs-op-card:hover { transform: translateY(-6px); border-color: rgba(236,28,36,0.4); box-shadow: 0 34px 76px -44px rgba(12,35,64,0.4); }
+.abs-op-ghost { position: absolute; top: -16px; right: 8px; font-size: 96px; font-weight: 800; line-height: 1; letter-spacing: -0.05em; color: rgba(12,35,64,0.05); pointer-events: none; transition: color .45s ease, transform .45s cubic-bezier(.22,1,.36,1); }
+.abs-op-card:hover .abs-op-ghost { color: rgba(236,28,36,0.13); transform: translateY(4px) scale(1.04); }
+.abs-op-ic { position: relative; z-index: 1; width: 44px; height: 44px; border-radius: 13px; display: grid; place-items: center; color: var(--r); background: rgba(236,28,36,0.08); border: 1px solid rgba(236,28,36,0.18); margin-bottom: 30px; transition: background .45s ease, transform .45s cubic-bezier(.22,1,.36,1); }
+.abs-op-card:hover .abs-op-ic { background: rgba(236,28,36,0.14); transform: translateY(-2px); }
+.abs-op-ic svg { width: 21px; height: 21px; }
+/* font-size/font-weight omitted — h3, sized by STD-TYPE-SCALE. */
+.abs-op-t { position: relative; z-index: 1; letter-spacing: -0.02em; color: var(--navy); margin: 0; line-height: 1.22; text-wrap: balance; }
+
+/* ============================================================ FINAL CTA */
+/* Optional background image, supplied per environment as --abs-cta-bg by
+   About-v2-cta.php.
+
+   The scrim is deliberately light. Measured against the supplied artwork, its
+   brightest region is rgb(94,81,76) — white copy on it is already 7.62:1, i.e.
+   AAA, with no scrim at all. At 0.32/0.42 the gradient stays clearly visible and
+   the text still measures ~12:1, so the scrim is insurance against a brighter
+   image being chosen later rather than something the current one needs.
+
+   rgba(10,10,11,a) over --dark composites to exactly --dark at any alpha, so with
+   no image this band is pixel-identical to the approved design. background-color
+   is the paint-time fallback while the image decodes — no flash of unstyled band. */
+.abs-final {
+  position: relative; color: #fff; overflow: hidden; padding: 130px 0; text-align: center;
+  background-color: var(--dark);
+  background-image:
+    linear-gradient(180deg, rgba(10,10,11,0.32) 0%, rgba(10,10,11,0.42) 100%),
+    var(--abs-cta-bg, none);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.abs-final-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 760px; height: 420px; border-radius: 50%; background: radial-gradient(circle, rgba(236,28,36,0.18) 0%, transparent 68%); pointer-events: none; }
+.abs-final-inner { position: relative; z-index: 1; max-width: 760px; margin: 0; text-align: left; padding-left: 58px; }
+/* font-size/font-weight omitted — h2, sized by STD-TYPE-SCALE. */
+.abs-final h2 { letter-spacing: -0.03em; line-height: 1.05; color: #fff; margin: 0; }
+.abs-final-lines { margin: 28px 0 0; display: flex; flex-direction: column; gap: 8px; }
+.abs-final-lines p { margin: 0; font-size: 19px; color: rgba(255,255,255,0.7); }
+.abs-final-close { margin: 22px 0 0; font-size: 20px; font-weight: 600; color: #fff; }
+.abs-final-actions { margin-top: 40px; display: flex; gap: 14px; justify-content: flex-start; flex-wrap: wrap; }
+.abs-final-actions .hd-btn-secondary { color: #fff; border: 1px solid rgba(255,255,255,0.3); background: transparent; }
+.abs-final-actions .hd-btn-secondary:hover { background: #fff; color: #000; border-color: #fff; }
+
+/* ============================================================ STORYLINE PATH (rail + red markers)
+   .abs-rail-node and .abs-rail-dot.abs-rail-traveler are injected by
+   about-v2.js → placeRail(). They never appear in the served HTML, which is why
+   the .abs- namespace is safelisted against WP Rocket's Remove Unused CSS —
+   see tnb_about_v2_rucss_safelist() in functions.php. */
+.abs-story-track { position: relative; }
+.abs-storyline { position: absolute; inset: 0; pointer-events: none; z-index: 4; }
+/* --abs-rail-top is shared by the faint rail and the red fill that grows along
+   it. They must start at the same y: the fill used to carry its own hard-coded
+   184px, so once the rail moved up to 64px on tablets the fill began 120px below
+   the line it is supposed to fill, and about-v2.js measures its height from
+   fill.offsetTop — so the progress was offset by that much too. */
+.abs-rail {
+  position: absolute; left: var(--rail-x); top: var(--abs-rail-top); bottom: 48px; width: 4px; border-radius: 4px;
+  /* Centred on --rail-x like the fill, the nodes and the bead. Without this the
+     faint line was drawn from --rail-x rightwards, so it sat 2px off-centre from
+     everything riding on it. */
+  transform: translateX(-50%);
+  background: var(--r); opacity: 0.2;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 95%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 95%, transparent 100%);
+}
+.abs-rail-fill {
+  position: absolute; left: var(--rail-x); top: var(--abs-rail-top); width: 6px; height: 0; border-radius: 6px;
+  background: var(--r); transform: translateX(-50%);
+  transition: height 0.18s ease-out;
+}
+.abs-rail-dot {
+  position: absolute; left: var(--rail-x); width: 46px; height: 46px; border-radius: 50%;
+  background: #fff url('../images/about-v2/logo-icon-hires.webp') center / 28px 28px no-repeat;
+  border: 2px solid var(--line); transform: translate(-50%, -50%);
+  box-shadow: 0 10px 24px -8px rgba(12,35,64,0.45);
+  will-change: transform; transition: transform 0.12s linear;
+}
+.abs-rail-node {
+  position: absolute; left: var(--rail-x); width: 11px; height: 11px; border-radius: 50%;
+  background: #fff; border: 2px solid var(--r); transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 4px #fff; opacity: .7;
+  transition: opacity .4s ease, background .4s ease, transform .4s ease;
+}
+.abs-rail-node.done { opacity: 1; background: var(--r); box-shadow: 0 0 0 4px #fff, 0 0 0 7px rgba(236,28,36,0.18); }
+.abs-rail-traveler {
+  z-index: 2; box-shadow: 0 12px 28px -8px rgba(236,28,36,0.5), 0 0 0 6px #fff;
+  transition: top 0.18s ease-out, transform 0.1s linear;
+}
+/* ============================================================ STD-TYPE-SCALE
+   Standardized typography scale (Outfit): H1 75/700, H2 60/600 title-case,
+   H3 26/600. SCOPED to .abs-body — in the prototype these were bare element
+   selectors, which would resize and capitalize every heading on the site.
+
+   This is the ONLY place heading sizes are set. Because these declarations use
+   !important, any font-size on .abs-h2 / .abs-since-title / .abs-capcard-t /
+   .abs-op-t / .abs-casecard-name / .abs-hero h1 / .abs-final h2 would be dead —
+   those selectors deliberately carry no font-size. */
+.abs-body h1 { font-size: 75px !important; font-weight: 700 !important; }
+.abs-body h2 { font-size: 60px !important; font-weight: 600 !important; text-transform: capitalize !important; }
+.abs-body h3 { font-size: 26px !important; font-weight: 600 !important; }
+
+/* ============================================================ NO-BTN-ARROWS
+   Remove trailing arrow icons from primary/secondary/ghost buttons. Targets the
+   LAST child only, so leading icons (calendar, check, etc.) stay. SCOPED to
+   .abs-body — unscoped, [class*="btn"] would strip the arrows from .tnb-btn /
+   .hd-btn / .ih-btn on every other page.
+
+   Two buttons are excluded because their icon IS the only child, so :last-child
+   matches the control's entire visible content rather than a trailing arrow:
+     .case-btn     — the carousel prev/next arrows.
+     .iframe-btn   — the site-wide floating "Schedule a meeting" trigger
+                     (#tnb-calendar-trigger, rendered on every page). Hiding its
+                     calendar icon left a bare black circle on this page only.
+   [class*="btn"] is a substring match, so any future button whose only child is
+   an icon needs adding here too. */
+.abs-body a[class*="btn"]:not(.iframe-btn) > svg:last-child,
+.abs-body button[class*="btn"]:not(.case-btn):not(.iframe-btn) > svg:last-child,
+.abs-body a[class*="btn"]:not(.iframe-btn) > span:last-child > svg:only-child,
+.abs-body button[class*="btn"]:not(.iframe-btn) > span:last-child > svg:only-child,
+.abs-body .tc-btn-arrow { display: none !important; }
+
+/* ============================================================ RESPONSIVE
+   Every width breakpoint lives here, exactly once, in descending order. They are
+   collected rather than scattered through the file for two reasons: a single
+   block per breakpoint means there is one place to look for "what happens at
+   940px", and descending order makes the cascade explicit — a narrower
+   breakpoint always resolves after a wider one it overlaps.
+
+   Because these all sit after the base rules, a base declaration can never
+   silently win an equal-specificity tie against its own responsive override.
+   That is not cosmetic: it is what previously made .abs-fquote's mobile size and
+   .abs-ch-text's tablet padding dead declarations.
+   ============================================================ */
+
+/* Laptops and below: the capability wall becomes a scroll-snap carousel — two
+   cards per view, one on phones (see the 560px block), paged by .abs-caps-nav.
+   Gated at 1599px so the 1600px+ desktop wall — six cards, two rows of three —
+   is left exactly as approved.
+
+   Two non-obvious bits:
+   - the vertical padding is load-bearing. A horizontal scroll container clips
+     its cross axis too, so without it the card's hover lift and drop-shadow
+     would be cut off.
+   - height:auto lets align-items:stretch take over from the grid's height:100%,
+     which is what keeps every card on a row the same height. */
+@media (max-width: 1599px) {
+  .abs-capwall {
+    --abs-caps-per: 2;
+    --abs-caps-gap: 28px;
+    display: flex; gap: var(--abs-caps-gap); align-items: stretch;
+    overflow-x: auto; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    /* Left value carries the rail clearance — see --abs-split-pad. The matching
+       scroll-padding is what keeps that indent on a touch swipe: native snapping
+       aligns to the snapport, not the content box. */
+    padding: 10px 0 34px var(--abs-split-pad, 0px);
+    scroll-padding-left: var(--abs-split-pad, 0px);
+    scrollbar-width: none;
+  }
+  .abs-capwall::-webkit-scrollbar { display: none; }
+  .abs-capcard {
+    flex: 0 0 calc((100% - (var(--abs-caps-per) - 1) * var(--abs-caps-gap)) / var(--abs-caps-per));
+    min-width: 0; height: auto; scroll-snap-align: start;
+  }
+}
+
+/* Laptops. This band used to be flat 75/60/26 — the same size a 1024px tablet
+   rendered — and then jumped to 90/72/31 at 1920px. Now fluid across it.
+
+   The vw terms are the ones the min-width:1600px block already uses
+   (75/1600 = 4.6875vw, 60/1600 = 3.75vw, 26/1600 = 1.625vw), so each lands on
+   exactly its 1600px value at the boundary and there is no jump where the two
+   bands meet. The floors equal the ≤1024px caps for the same reason at the lower
+   edge. Result: 60px h1 at 1280, 64 at 1366, 67.5 at 1440, 72 at 1536, 75 at
+   1600 — monotonic, with nothing at or above 1600px changed.
+
+   !important matches STD-TYPE-SCALE, which this must beat on source order. */
+@media (min-width: 1025px) and (max-width: 1599px) {
+  .abs-body h1 { font-size: clamp(60px, 4.6875vw, 75px) !important; }
+  .abs-body h2 { font-size: clamp(48px, 3.75vw, 60px) !important; }
+  .abs-body h3 { font-size: clamp(22px, 1.625vw, 26px) !important; }
+}
+
+@media (max-width: 1400px) { .abs-hero { --abs-hero-header: 96px; } }
+
+@media (max-width: 1280px) { .abs-wrap { padding: 0 40px; } }
+
+@media (max-width: 1240px) { .abs-body { --rail-x: 24px; } }
+
+@media (max-width: 1120px) {
+  .abs-bento { grid-template-columns: repeat(2, 1fr); grid-auto-rows: minmax(150px, auto);
+    grid-template-areas:
+      "feat m1"
+      "m2   m3"
+      "m4   m5"; }
+}
+
+@media (max-width: 1100px) {
+  .abs-hero { --abs-hero-header: 84px; }
+  .abs-body { --abs-rail-top: 64px; }
+}
+
+/* Caps lowered from 75/60/26 to meet the laptop band below without a step. They
+   have to move together: 1024px used to render the same 75px h1 as a 1440px
+   laptop, so trimming only the laptop band would have made a laptop heading
+   smaller than a tablet one. Only widths above ~810px are affected — below that
+   the vw term is already under the cap. */
+@media (max-width: 1024px) {
+  .abs-body h1 { font-size: clamp(40px, 7.4vw, 60px) !important; }
+  .abs-body h2 { font-size: clamp(32px, 6vw, 48px) !important; }
+  .abs-body h3 { font-size: clamp(22px, 3.4vw, 22px) !important; }
+
+  /* Tablet vertical rhythm. --ch-pad drives .abs-chapter and .abs-yr together, so
+     one token tightens every section instead of each carrying its own override.
+     Section padding was 19% of a 13477px page at 834px wide. */
+  .abs-body { --ch-pad: 84px; }
+  .abs-chapter[data-screen-label="02 Proof"] { padding-top: calc(var(--ch-pad) + 56px); }
+  .abs-since { margin-top: 56px; padding-top: 40px; }
+  .abs-final { padding: 96px 0; }
+}
+
+@media (max-width: 1000px) { .abs-rec-grid { grid-template-columns: repeat(2, 1fr); } }
+
+@media (max-width: 992px) {
+  .abs-wrap { padding: 0 32px; }
+  /* Below this the desktop nav is replaced by the mobile bar, so the hero no
+     longer has to reserve room for an in-flow header. */
+  .abs-hero { --abs-hero-header: 0px; }
+}
+
+/* Portrait tablets — the one place in this file that keys off orientation rather
+   than width, because orientation is genuinely what separates the two cases. The
+   hero reserves a full viewport, but its copy is only ~480px tall, so portrait
+   left 270–367px of dead space under the CTA row (367 at 1024x1366, 345 at
+   834x1194, 340 at 820x1180, 270 at 768x1024) while landscape at the very same
+   widths fits comfortably. The vh-based padding is deliberately kept — it is
+   what still gives the banner its proportions once the floor is gone. */
+@media (max-width: 1024px) and (orientation: portrait) {
+  .abs-hero { min-height: auto; }
+}
+
+@media (max-width: 960px) {
+  /* The founder chapter needs naming explicitly: its own rule is
+     .abs-chapter:has(.abs-founder-photo) .abs-ch-grid, which at (0,3,0) outranks
+     a bare .abs-ch-grid no matter which media query it sits in — so the founder
+     copy and portrait stayed side by side all the way down to phones. */
+  .abs-ch-grid,
+  .abs-chapter:has(.abs-founder-photo) .abs-ch-grid { grid-template-columns: 1fr; gap: 40px; }
+  .abs-since-row { grid-template-columns: 1fr; gap: 28px; }
+  /* Once the grid stacks, the visual column sits in column 1 where the rail runs,
+     so it needs the clearance the copy already has. It had none, so the Who
+     collage and the founder portrait began at the wrap edge — 40px left of every
+     other section — and the stacked collage cards sat on top of the rail and its
+     bead. Mirrors .abs-ch-text: 58px here, 40px at 940px. */
+  .abs-ch-visual { padding-left: 58px; }
+}
+
+/* 940px is where the section standard collapses to one column. Everything that
+   then lands in column 1 takes the same 40px rail clearance, so all eleven
+   sections share one left edge. */
+@media (max-width: 940px) {
+  /* The proof variant needs naming explicitly for the same reason as the founder
+     chapter above: .abs-split:has(.abs-proof-head) is (0,2,0) and outranks a bare
+     .abs-split, so without it the proof section kept its two-column grid down to
+     360px with the bento squeezed into column 2. */
+  .abs-split,
+  .abs-split:has(.abs-proof-head) { grid-template-columns: 1fr; gap: 30px; }
+  .abs-split-head { position: static; padding-left: 40px; }
+  .abs-split-body { --abs-split-pad: 40px; }
+  .abs-ch-grid:not(.flip) .abs-ch-text { padding-left: 40px; }
+  .abs-ch-visual { padding-left: 40px; }
+  .abs-since { padding-left: 40px; }
+  .abs-final-inner { padding-left: 40px; }
+  .abs-rec-grid.abs-split-body,
+  .abs-expring.abs-split-body { grid-template-columns: repeat(2, 1fr); }
+  /* The cases grid had no ladder at all: the bespoke 3-column areas held to
+     360px and .abs-casecard's 28px side padding stopped the tracks shrinking, so
+     the row stayed 509px wide inside a 390px viewport and put a horizontal
+     scrollbar on the whole page. Both steps also place the cards in DOM order,
+     so tab order matches the screen once the wide c0 arrangement is gone. */
+  .abs-caselist { grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "c0 c0"
+      "c1 c2"
+      "c3 c4"; }
+}
+
+@media (max-width: 900px) {
+  /* display:block, not a one-column grid. Sticky travel is bounded by the
+     containing block, and in a grid that is the item's own row — which is exactly
+     the heading's height, so sticky would resolve to no movement at all. As a
+     block, head and cards share .abs-jrn-split as one containing block and the
+     heading can travel the full length of the card list. The grid's 36px gap
+     becomes a margin. */
+  .abs-jrn-split { display: block; }
+  /* 40px padding, not 0 — the same clearance the collapsed .abs-split sections
+     use. At 0 this section's heading and cards sat flush against the wrap edge
+     while every other section started 40px in, and the cards ran into the rail.
+     top: 80px clears the 64px .tnb-mobile-header that takes over below 992px
+     (desktop uses 120px for the 100px nav). z-index sits above the cards but
+     below the storyline's 4, so the rail still draws over the sticky band
+     instead of vanishing behind it. */
+  .abs-jrn-split .abs-jrn-head {
+    position: sticky; top: 80px; z-index: 3;
+    padding-left: 40px; padding-bottom: 16px; margin-bottom: 36px;
+    background: #FFFFFF;
+  }
+  .abs-jrn-cards { padding-left: 40px; }
+}
+
+@media (max-width: 768px) {
+  .abs-wrap { padding: 0 24px; }
+  .abs-body { --ch-pad: 72px; }
+}
+
+/* The rail stays on phones rather than being hidden — it is the page's spine —
+   but thinner and smaller, so it reads as a hairline in the 40px gutter instead
+   of competing with the content. Geometry is untouched: placeRail() still
+   measures each chapter's own h2, so every node stays on its section. */
+@media (max-width: 760px) {
+  .abs-body { --abs-rail-floor: 88px; }
+  .abs-rail { width: 2px; border-radius: 2px; }
+  .abs-rail-fill { width: 3px; border-radius: 3px; }
+  .abs-rail-node { width: 7px; height: 7px; box-shadow: 0 0 0 3px #fff; }
+  .abs-rail-node.done { box-shadow: 0 0 0 3px #fff, 0 0 0 5px rgba(236,28,36,0.18); }
+  .abs-rail-dot { width: 26px; height: 26px; background-size: 16px 16px; }
+  .abs-rail-traveler { box-shadow: 0 8px 18px -6px rgba(236,28,36,0.5), 0 0 0 4px #fff; }
+  .abs-expring { grid-template-columns: 1fr 1fr; gap: 32px 20px; }
+  .abs-op { grid-template-columns: 1fr; }
+  .abs-op-ic { margin-bottom: 44px; }
+}
+
+@media (max-width: 720px) { .abs-yr { padding: 64px 0; } }
+
+@media (max-width: 640px) { .abs-wrap { padding: 0 20px; } }
+
+/* Phone vertical rhythm. --ch-pad drives .abs-chapter and .abs-yr alike, so one
+   token tightens every section instead of each one carrying its own override. */
+@media (max-width: 600px) {
+  .abs-body { --ch-pad: 48px; }
+  /* .abs-yr hard-codes 64px at 720px; hand it back to the token here so the
+     journey keeps the same rhythm as its neighbours. */
+  .abs-yr { padding: var(--ch-pad) 0; }
+  /* The desktop +100px buys room for the rail to start above the first chapter.
+     On phones the rail starts at 64px and placeRail()'s floor is 88px, which the
+     heading already clears on its own — so the extra was pure dead space at the
+     very top of the page. Proof now uses the same padding as every other
+     section. */
+  .abs-chapter[data-screen-label="02 Proof"] { padding-top: var(--ch-pad); }
+  .abs-since { margin-top: 48px; padding-top: 32px; }
+  .abs-rec-grid { margin-top: 32px; grid-template-columns: 1fr; }
+  .abs-final { padding: 72px 0; }
+}
+
+@media (max-width: 576px) { .abs-wrap { padding: 0 16px; } }
+
+@media (max-width: 560px) {
+  .abs-rec-grid.abs-split-body,
+  .abs-expring.abs-split-body { grid-template-columns: 1fr; }
+  .abs-capwall { --abs-caps-per: 1; }
+  .abs-caselist { grid-template-columns: 1fr; grid-auto-rows: auto;
+    grid-template-areas: "c0" "c1" "c2" "c3" "c4"; }
+  /* The Who collage stops being a collage. It is an absolutely-positioned
+     composition whose cards are 42–46% of the container, so at 362px they land
+     ~160px wide and the copy breaks to five or six lines. Here they stack in
+     markup order, which is also the reading order. The portrait is dropped
+     rather than shrunk: it exists to be overlapped by the cards, and with them
+     stacked beside nothing it would only add height. .abs-wa2 stays a
+     container-query container, so the cards' cqw padding, radius and icon sizes
+     keep scaling — only the layout changes. */
+  .abs-wa2 { aspect-ratio: auto; max-width: none; display: flex; flex-direction: column; gap: 14px; }
+  .abs-wa2-portrait { display: none; }
+  .abs-wa2-job,
+  .abs-wa2-app,
+  .abs-wa2-saved { position: static; width: auto; }
+  /* One column means a 360px cap let the portrait fill the width and dominate
+     the copy above it. The pull-quote drops to 19px — 2px over .abs-fbody's
+     17px, the paragraph size in this section — because the clamp's 24px floor
+     was nearly 1.5x the body copy. */
+  .abs-founder-photo { max-width: 250px; }
+  .abs-fquote { font-size: 19px; }
+}
+
+@media (max-width: 520px) {
+  /* The approved mobile layout opened with a "head" row here. Nothing uses
+     grid-area: head, so it resolved to an empty implicit row that grid-auto-rows
+     still sized — 150px plus the 16px gap, i.e. 166px of blank space between the
+     heading and the first stat card. Dropped on request to tighten the phone
+     layout; the row order is otherwise unchanged. */
+  .abs-bento { grid-template-columns: 1fr;
+    grid-template-areas: "feat" "m1" "m2" "m3" "m4" "m5"; }
+}
+
+@media (max-width: 430px) { .abs-wrap { padding: 0 14px; } }
+
+@media (max-width: 360px) { .abs-wrap { padding: 0 12px; } }
+
+/* ============================================================ WIDE SCREENS — 1600px container measure
+   The container grows from 1240px to 1440px, so a 1920px viewport renders
+   1440px of container (1344px of content) instead of 1144px.
+
+   Gated at min-width 1600px so 1440px-class laptops keep the 1240px measure and
+   don't end up edge-to-edge with only the 48px gutters for breathing room.
+
+   Each value below is a proportional step-up of a FIXED pixel value that would
+   otherwise read small in the wider container. Ratio-based values (all the `fr`
+   columns, every clamp(), the .abs-wa2 collage's cqw units) already scale on
+   their own and are deliberately left alone.
+
+   Headings become fluid here too. The vw term equals the fixed size exactly at
+   1600px (3.75vw of 1600 = 60px), so there is no jump at the boundary — they
+   simply start scaling from the value they already had:
+     h2  60px @1600  ->  67.5px @1800  ->  72px @1920  ->  caps at 78px
+     h1  75px @1600  ->  90px @1920    ->  caps at 98px
+     h3  26px @1600  ->  31px @1920    ->  caps at 34px
+   These must stay after the STD-TYPE-SCALE block: both use !important, so
+   equal-specificity ties resolve on source order.
+   ============================================================ */
+@media (min-width: 1600px) {
+  /* Container + the rail axis derived from it. The rail must be re-derived or it
+     would land inside the content column: the default formula is 1240-based. */
+  .abs-body { --rail-x: max(24px, calc((100vw - 1440px) / 2 + 22px)); }
+  .abs-wrap { max-width: 1440px; }
+
+  /* All six capability cards fit at once here, so there is nothing to page. With
+     the nav display:none it is not a grid item either, which is what keeps the
+     desktop split at its original two-child, single-row layout. */
+  .abs-caps-nav { display: none; }
+
+  /* Column gaps — scaled so the wider columns keep the same visual rhythm. */
+  .abs-split { gap: 72px; }
+  .abs-ch-grid { gap: 88px; }
+  .abs-jrn-split { gap: 80px; }
+
+  /* Card grids: gaps and the bento's row floor. */
+  .abs-bento { grid-auto-rows: minmax(190px, auto); gap: 20px; }
+  .abs-capwall { gap: 32px; }
+  .abs-caselist { gap: 18px; }
+  .abs-rec-grid { gap: 22px; }
+  .abs-op { gap: 22px; }
+  .abs-expring.abs-split-body { grid-template-columns: repeat(2, minmax(0, 290px)); gap: 40px 46px; }
+
+  /* Single-column blocks that were capped for the narrower measure. */
+  .abs-wa2 { max-width: 560px; }
+  .abs-founder-photo { max-width: 420px; }
+  .abs-ts2-stack,
+  .abs-ts-nav,
+  .abs-ts2-card.is-solo { max-width: 620px; }
+  .abs-final-inner { max-width: 880px; }
+
+  /* Fluid headings — see the note above. */
+  .abs-body h1 { font-size: clamp(75px, 4.6875vw, 98px) !important; }
+  .abs-body h2 { font-size: clamp(60px, 3.75vw, 78px) !important; }
+  .abs-body h3 { font-size: clamp(26px, 1.625vw, 34px) !important; }
+}
+
+/* ============================================================ 1920 AND UP — 1600px container measure
+   Third measure step: the container grows again from 1440px to 1600px, so a
+   1920px viewport renders 1600px of container (1504px of content).
+
+   Gated at min-width 1800px rather than 1600px: a 1600px viewport needs to keep
+   the 1440px measure, otherwise the container would fill the whole screen with
+   nothing but the 48px gutters either side.
+
+   Measure ladder overall:
+     >= 1800px  ->  1600px container  (1504px content)
+     >= 1600px  ->  1440px container  (1344px content)
+     <  1600px  ->  1240px container  (1144px content, Author-page measure)
+
+   No heading rules here — the clamp()s in the 1600px block are vw-based and
+   already cover 1800px and up.
+   ============================================================ */
+@media (min-width: 1800px) {
+  /* Container + its derived rail axis. */
+  .abs-body { --rail-x: max(24px, calc((100vw - 1600px) / 2 + 22px)); }
+  .abs-wrap { max-width: 1600px; }
+
+  /* Column gaps. */
+  .abs-split { gap: 84px; }
+  .abs-ch-grid { gap: 100px; }
+  .abs-jrn-split { gap: 92px; }
+
+  /* Card grids. */
+  .abs-bento { grid-auto-rows: minmax(210px, auto); gap: 24px; }
+  .abs-capwall { gap: 36px; }
+  .abs-caselist { gap: 22px; }
+  .abs-rec-grid { gap: 26px; }
+  .abs-op { gap: 26px; }
+  .abs-expring.abs-split-body { grid-template-columns: repeat(2, minmax(0, 320px)); gap: 44px 52px; }
+
+  /* Capped single-column blocks. */
+  .abs-wa2 { max-width: 620px; }
+  .abs-founder-photo { max-width: 470px; }
+  .abs-ts2-stack,
+  .abs-ts-nav,
+  .abs-ts2-card.is-solo { max-width: 700px; }
+  .abs-final-inner { max-width: 980px; }
+}
