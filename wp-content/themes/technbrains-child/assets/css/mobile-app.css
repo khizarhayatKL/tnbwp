@@ -208,7 +208,15 @@ h2.ihcs-h2 {
     text-align: center;
 }
 
- 
+ .dt-hero .eyebrow,
+.dt-hero-content h1,
+.dt-hero-content h2,
+.dt-hero-content p,
+.dt-hero-actions {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
 
 @media (max-width: 1024px) {
   .page-slug-mobile-app-development  .sv-tool {

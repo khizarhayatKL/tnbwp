@@ -51,28 +51,28 @@ $mod = get_query_var( 'component_modifier_classes', '' );
 				<img class="thumb-img" width="500" height="500" src="<?php echo esc_url( $img . '/portfolio/portfolio-new/web-thumb/web-1.webp' ); ?>" alt="portfolio image" loading="lazy" decoding="async">
 				<div class="overlay"><img class="logo" src="<?php echo esc_url( $img . '/portfolio/portfolio-new/Logo/mw.png' ); ?>" width="175" height="146" alt="Marquita Waters" loading="lazy" decoding="async"></div>
 			</a>
-			<div class="view-more--case"><a target="_blank" href="https://marquitawaters.com/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
+			<div class="view-more--case"><a   href="https://marquitawaters.com/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
 		</div>
 		<div class="grid-item web-view">
 			<a href="<?php echo esc_url( $img . '/portfolio/portfolio-new/web-screen/web-2.webp' ); ?>" data-fancybox="gallery">
 				<img class="thumb-img" width="500" height="500" src="<?php echo esc_url( $img . '/portfolio/portfolio-new/web-thumb/web-2.webp' ); ?>" alt="portfolio image" loading="lazy" decoding="async">
 				<div class="overlay"><img class="logo" src="<?php echo esc_url( $img . '/portfolio/portfolio-new/Logo/draw.png' ); ?>" width="355" height="113" alt="I Heard You Can Draw" loading="lazy" decoding="async"></div>
 			</a>
-			<div class="view-more--case"><a target="_blank" href="https://iheardyoucandraw.com/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
+			<div class="view-more--case"><a   href="https://iheardyoucandraw.com/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
 		</div>
 		<div class="grid-item web-view">
 			<a href="<?php echo esc_url( $img . '/portfolio/portfolio-new/web-screen/web-3.webp' ); ?>" data-fancybox="gallery">
 				<img class="thumb-img" width="500" height="500" src="<?php echo esc_url( $img . '/portfolio/portfolio-new/web-thumb/web-3.webp' ); ?>" alt="portfolio image" loading="lazy" decoding="async">
 				<div class="overlay"><img class="logo" src="<?php echo esc_url( $img . '/portfolio/p-logo-2.png' ); ?>" width="355" height="83" alt="Kifaru" loading="lazy" decoding="async"></div>
 			</a>
-			<div class="view-more--case"><a target="_blank" href="https://kifaru.net/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
+			<div class="view-more--case"><a   href="https://kifaru.net/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
 		</div>
 		<div class="grid-item web-view">
 			<a href="<?php echo esc_url( $img . '/portfolio/portfolio-new/web-screen/web-4.webp' ); ?>" data-fancybox="gallery">
 				<img class="thumb-img" width="500" height="500" src="<?php echo esc_url( $img . '/portfolio/portfolio-new/web-thumb/web-4.webp' ); ?>" alt="portfolio image" loading="lazy" decoding="async">
 				<div class="overlay"><img class="logo" src="<?php echo esc_url( $img . '/portfolio/portfolio-new/Logo/amt.png' ); ?>" width="341" height="83" alt="AMT" loading="lazy" decoding="async"></div>
 			</a>
-			<div class="view-more--case"><a target="_blank" href="https://americanmadetactical.com/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
+			<div class="view-more--case"><a   href="https://americanmadetactical.com/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
 		</div>
 	</section>
 
@@ -89,7 +89,7 @@ $mod = get_query_var( 'component_modifier_classes', '' );
 				<img class="thumb-img" width="500" height="500" src="<?php echo esc_url( $img . '/portfolio/portfolio-new/web-thumb/web-5.webp' ); ?>" alt="portfolio image" loading="lazy" decoding="async">
 				<div class="overlay"><img class="logo" src="<?php echo esc_url( $img . '/portfolio/portfolio-new/Logo/jewelry.png' ); ?>" width="255" height="52" alt="Jewelry" loading="lazy" decoding="async"></div>
 			</a>
-			<div class="view-more--case"><a target="_blank" href="https://dontquityourdaydreams.com/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
+			<div class="view-more--case"><a   href="https://dontquityourdaydreams.com/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
 		</div>
 		<div class="grid-item big">
 			<a href="<?php echo esc_url( home_url( '/case-studies/built-by-determination/' ) ); ?>">
@@ -103,35 +103,35 @@ $mod = get_query_var( 'component_modifier_classes', '' );
 				<img class="thumb-img" width="500" height="500" src="<?php echo esc_url( $img . '/portfolio/portfolio-new/web-thumb/web-6.webp' ); ?>" alt="portfolio image" loading="lazy" decoding="async">
 				<div class="overlay"><img class="logo" src="<?php echo esc_url( $img . '/portfolio/p-logo-7.png' ); ?>" width="215" height="93" alt="Airhart" loading="lazy" decoding="async"></div>
 			</a>
-			<div class="view-more--case"><a target="_blank" href="http://www.airharttrading.com/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
+			<div class="view-more--case"><a   href="http://www.airharttrading.com/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
 		</div>
 		<div class="web-view grid-item">
 			<a href="<?php echo esc_url( $img . '/portfolio/portfolio-new/web-screen/web-7.webp' ); ?>" data-fancybox="gallery">
 				<img class="thumb-img" width="500" height="500" src="<?php echo esc_url( $img . '/portfolio/portfolio-new/web-thumb/web-7.webp' ); ?>" alt="portfolio image" loading="lazy" decoding="async">
 				<div class="overlay"><img class="logo" src="<?php echo esc_url( $img . '/portfolio/generationbroadcasting.png' ); ?>" width="221" height="95" alt="Generation Broadcasting" loading="lazy" decoding="async"></div>
 			</a>
-			<div class="view-more--case"><a target="_blank" href="https://generationsbroadcasting.com/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
+			<div class="view-more--case"><a   href="https://generationsbroadcasting.com/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
 		</div>
 		<div class="web-view grid-item">
 			<a href="<?php echo esc_url( $img . '/portfolio/portfolio-new/web-screen/web-8.webp' ); ?>" data-fancybox="gallery">
 				<img class="thumb-img" width="500" height="500" src="<?php echo esc_url( $img . '/portfolio/portfolio-new/web-thumb/web-8.webp' ); ?>" alt="portfolio image" loading="lazy" decoding="async">
 				<div class="overlay"><img class="logo" src="<?php echo esc_url( $img . '/portfolio/p-logo-28.png' ); ?>" width="228" height="52" alt="Good Filter" loading="lazy" decoding="async"></div>
 			</a>
-			<div class="view-more--case"><a target="_blank" href="https://goodfiltercompany.com/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
+			<div class="view-more--case"><a   href="https://goodfiltercompany.com/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
 		</div>
 		<div class="web-view grid-item">
 			<a href="<?php echo esc_url( $img . '/portfolio/portfolio-new/web-screen/web-9.webp' ); ?>" data-fancybox="gallery">
 				<img class="thumb-img" width="500" height="500" src="<?php echo esc_url( $img . '/portfolio/portfolio-new/web-thumb/web-9.webp' ); ?>" alt="portfolio image" loading="lazy" decoding="async">
 				<div class="overlay"><img class="logo" src="<?php echo esc_url( $img . '/portfolio/p-logo-27.png' ); ?>" width="213" height="52" alt="Immunacy" loading="lazy" decoding="async"></div>
 			</a>
-			<div class="view-more--case"><a target="_blank" href="https://immunacy.com/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
+			<div class="view-more--case"><a   href="https://immunacy.com/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
 		</div>
 		<div class="web-view grid-item">
 			<a href="<?php echo esc_url( $img . '/portfolio/portfolio-new/web-screen/web-10.webp' ); ?>" data-fancybox="gallery">
 				<img class="thumb-img" width="500" height="500" src="<?php echo esc_url( $img . '/portfolio/portfolio-new/web-thumb/web-10.webp' ); ?>" alt="portfolio image" loading="lazy" decoding="async">
 				<div class="overlay"><img class="logo" src="<?php echo esc_url( $img . '/portfolio/portfolio-new/Logo/james.png' ); ?>" width="209" height="89" alt="James" loading="lazy" decoding="async"></div>
 			</a>
-			<div class="view-more--case"><a target="_blank" href="https://www.baslawgroup.com/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
+			<div class="view-more--case"><a   href="https://www.baslawgroup.com/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
 		</div>
 		<div class="grid-item big">
 			<a href="<?php echo esc_url( home_url( '/case-studies/fitforgolf/' ) ); ?>">
@@ -145,21 +145,21 @@ $mod = get_query_var( 'component_modifier_classes', '' );
 				<img class="thumb-img" width="500" height="500" src="<?php echo esc_url( $img . '/portfolio/portfolio-new/web-thumb/web-11.webp' ); ?>" alt="portfolio image" loading="lazy" decoding="async">
 				<div class="overlay"><img class="logo" src="<?php echo esc_url( $img . '/portfolio/khoja-logo.png' ); ?>" width="172" height="107" alt="Khoja" loading="lazy" decoding="async"></div>
 			</a>
-			<div class="view-more--case"><a target="_blank" href="https://www.khojaleadershipforum.org/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
+			<div class="view-more--case"><a   href="https://www.khojaleadershipforum.org/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
 		</div>
 		<div class="web-view grid-item">
 			<a href="<?php echo esc_url( $img . '/portfolio/portfolio-new/web-screen/web-12.webp' ); ?>" data-fancybox="gallery">
 				<img class="thumb-img" width="500" height="500" src="<?php echo esc_url( $img . '/portfolio/portfolio-new/web-thumb/web-12.webp' ); ?>" alt="portfolio image" loading="lazy" decoding="async">
 				<div class="overlay"><img class="logo" src="<?php echo esc_url( $img . '/portfolio/altasLogo.png' ); ?>" width="187" height="107" alt="Altas" loading="lazy" decoding="async"></div>
 			</a>
-			<div class="view-more--case"><a target="_blank" href="https://altastoneindustries.com/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
+			<div class="view-more--case"><a   href="https://altastoneindustries.com/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
 		</div>
 		<div class="web-view grid-item">
 			<a href="<?php echo esc_url( $img . '/portfolio/portfolio-new/web-screen/web-13.webp' ); ?>" data-fancybox="gallery">
 				<img class="thumb-img" width="500" height="500" src="<?php echo esc_url( $img . '/portfolio/portfolio-new/web-thumb/web-13.webp' ); ?>" alt="portfolio image" loading="lazy" decoding="async">
 				<div class="overlay"><img class="logo" src="<?php echo esc_url( $img . '/portfolio/portfolio-new/Logo/happy.png' ); ?>" width="187" height="107" alt="Happy Place" loading="lazy" decoding="async"></div>
 			</a>
-			<div class="view-more--case"><a target="_blank" href="https://inmyhappyplace.net/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
+			<div class="view-more--case"><a   href="https://inmyhappyplace.net/">View Website <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a></div>
 		</div>
 		<div class="web-view grid-item">
 			<a href="<?php echo esc_url( $img . '/portfolio/portfolio-new/web-screen/web-14.webp' ); ?>" data-fancybox="gallery">

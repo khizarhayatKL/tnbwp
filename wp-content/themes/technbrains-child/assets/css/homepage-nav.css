@@ -136,8 +136,6 @@
   border-radius: 5px;
   font-weight: 500;
   font-size: 14px;
-  appearance: none;
-  -webkit-appearance: none;
   letter-spacing: 0.01em;
   cursor: pointer;
   border: 1.5px solid transparent;
@@ -147,6 +145,8 @@
   font-family: "Outfit", sans-serif;
   transition: all 0.25s;
   text-decoration: none !important;
+	 appearance: none;
+  -webkit-appearance: none;
 }
 
 #hp-nav .hp-btn:hover {

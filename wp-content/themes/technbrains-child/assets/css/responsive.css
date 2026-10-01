@@ -103,15 +103,7 @@
   box-shadow: 20px 20px 70px 0px #00000033;
   border-radius: 20px;
 }
-.featuredSec .mainGrid .leftInfo .featuredInfo::before {
-  content: "";
-  background-image: url("/blog/wp-content/uploads/2026/03/Blog-Author-1.png");
-  position: absolute;
-  width: 88px;
-  height: 176px;
-  background-size: contain;
-  left: -45px;
-}
+ 
 .featuredSec .mainGrid .featuredInfo {
   box-shadow: 2px 2px 5px 0px #ffffff80 inset;
 
@@ -508,7 +500,7 @@
 }
 .singleBanner::before {
   content: "";
-  background-image: url("/wp-content/uploads/2026/03/bg_banner_single_post.png");
+  background-image: url("/wp-content/uploads/2026/03/bg_banner_single_post.webp");
   position: absolute;
   top: 0;
   right: 0;
@@ -3059,6 +3051,7 @@ table th {
 	}
 }
 
+
 @media (max-width: 320px) {
 	.devProcess .info-grid .box h3 {
     font-size: 14px;
@@ -3073,6 +3066,15 @@ table th {
    margin-bottom compensates the dead layout space created by scale() (layout
    footprint stays 78px tall; we pull up by the difference).
    ============================================================================= */
+
+.categoryMain .categoryGrid > * { min-width: 0; }
+.blog--cards h4 { overflow-wrap: anywhere; }
+
+@media (max-width: 575px) {
+  .categoryMain .categoryGrid { grid-template-columns: minmax(0, 1fr); }
+  .catBanner h1 { font-size: clamp(28px, 8vw, 54px); overflow-wrap: anywhere; }
+}
+
 @media (max-width: 360px) {
   .g-recaptcha,
   .tnb-recaptcha-field {

@@ -51,12 +51,30 @@ if ( defined( 'TNB_USE_NEW_LAYOUT' ) && TNB_USE_NEW_LAYOUT ) : ?>
     "availableLanguage": "English"
   },
   "areaServed": [
-    { "@type": "Country", "name": "United States" },
-    { "@type": "City", "name": "Dallas" },
-    { "@type": "City", "name": "New York" },
-    { "@type": "City", "name": "Houston" },
-    { "@type": "City", "name": "Austin" },
-    { "@type": "City", "name": "San Antonio" }
+    {
+      "@type": "Country",
+      "name": "United States"
+    },
+    {
+      "@type": "City",
+      "name": "Dallas"
+    },
+    {
+      "@type": "City",
+      "name": "New York"
+    },
+    {
+      "@type": "City",
+      "name": "Houston"
+    },
+    {
+      "@type": "City",
+      "name": "Austin"
+    },
+    {
+      "@type": "City",
+      "name": "San Antonio"
+    }
   ],
   "knowsAbout": [
     "Software Development",
@@ -171,6 +189,9 @@ if ( defined( 'TNB_USE_NEW_LAYOUT' ) && TNB_USE_NEW_LAYOUT ) : ?>
 			}, <?php echo ( function_exists( 'tnb_page_has_layout' ) && tnb_page_has_layout( 'lp_hero' ) ) ? '0' : '3500'; ?>);  
 		});
 	</script>
+	<script id="hs-script-loader"
+            strategy="lazyOnload"
+            src="//js.hs-scripts.com/19591491.js"></script>
 <!-- End Google Tag Manager -->
 </head>
   <body <?php body_class( is_front_page() ? 'homepage-revamp page-homepage' : 'homepage-revamp' ); ?>><?php wp_body_open(); ?>

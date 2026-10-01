@@ -49,6 +49,7 @@ function tnb_register_case_study_cpt(): void {
 			'show_in_nav_menus'  => true,
 			'has_archive'        => false,
 			'hierarchical'       => false,
+			
 			'menu_icon'          => 'dashicons-portfolio',
 			'menu_position'      => 21,
 			'supports'           => array( 'title', 'thumbnail', 'excerpt', 'revisions' ,'author'),
@@ -64,13 +65,9 @@ function tnb_register_case_study_cpt(): void {
  * Registers the Industry taxonomy for case_study posts.
  *
  * Flat/tag-like (not hierarchical) — powers the filter tabs on the "Browse Case
- * Studies By Industry" grid (case-studies-filtered-grid.php) via get_the_terms()/
- * get_terms() server-side lookups only. rewrite is false and public is false:
- * this taxonomy has no public archive/permalink of its own — public was previously
- * true, which contradicted that intent by exposing a real, indexable
- * ?case_study_industry={slug} archive (crawlable, sitemapped, no meta description
- * of its own — SMAP-2). show_ui/show_in_rest stay true so it's still manageable
- * in wp-admin and Gutenberg; only the public-facing archive is disabled.
+ * Studies By Industry" grid (case-studies-filtered-grid.php). rewrite is false:
+ * this taxonomy has no public archive/permalink of its own, so no rewrite-rule
+ * flush is needed when adding it (unlike the CPT's own slug above).
  */
 add_action( 'init', 'tnb_register_case_study_industry_tax' );
 function tnb_register_case_study_industry_tax(): void {
@@ -90,8 +87,7 @@ function tnb_register_case_study_industry_tax(): void {
 				'menu_name'     => 'Industry',
 			),
 			'hierarchical'      => false,
-			'public'            => false,
-			'publicly_queryable' => false,
+			'public'            => true,
 			'show_ui'           => true,
 			'show_admin_column' => true,
 			'show_in_nav_menus' => false,

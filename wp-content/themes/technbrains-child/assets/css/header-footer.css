@@ -1688,7 +1688,7 @@ body {
 .footer .footer-nav-list li a {
   display: flex;
   align-items: center;
-  min-height: 28px;
+/*   min-height: 28px; */
   font-size: 15px !important;
   font-weight: 500 !important;
   color: rgba(255, 255, 255, 0.7) !important;
@@ -1696,7 +1696,7 @@ body {
   transition: color 0.2s;
   white-space: normal;
   line-height: 1.4;
-  padding: 2px 0;
+  padding: 2px 0;min-height: 44px;
 }
 .footer .footer-nav-list li a:hover {
   color: #ec1c24 !important;
@@ -1899,7 +1899,7 @@ body {
   }
   .footer .footer-nav-list li a {
     font-size: 13px !important;
-    min-height: 24px;
+    min-height: 44px;
   }
   .footer .footer-card {
     padding: 24px 16px;
@@ -2005,6 +2005,25 @@ body {
 }
 .tnb-calendar-close svg {
   pointer-events: none;
+}
+/* BUS-38: 44px tap target, dot itself stays the same size (drawn by ::before) */
+.case-deck-dot,
+.sa-ps-dot { width: 44px; height: 44px; }
+.sa-ps-dot { all: revert; width: 44px; height: 44px; background: transparent; border: 0; padding: 0; display: grid; place-items: center; cursor: pointer; }
+.sa-ps-dot::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: rgba(12,35,64,0.15); transition: all .3s ease; }
+.sa-ps-dot.is-active::before { background: currentColor; }
+.sv-tab { min-height: 44px; }
+.footer .footer-contact,
+.footer .footer-bar__privacy { min-height: 44px; display: inline-flex; align-items: center; }
+
+@media (min-width: 1280px) and (max-width: 1400px) {
+    .footer .footer-bar {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0;
+        justify-content: center;
+    }
 }
 
 @media (max-width: 960px) {

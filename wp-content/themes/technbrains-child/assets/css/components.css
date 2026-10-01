@@ -49175,6 +49175,10 @@ p.dt-hero-lead.cn-hero-lead-2 a {
 button.hd-form-submit.lp-hero-form-submit {
     background: #B21818;
 }
+
+.featuredSec .mainGrid .leftInfo .featuredInfo::before{
+	display : none
+}
 @media (max-width: 640px) {
   .cne-head {
     flex-direction: column;

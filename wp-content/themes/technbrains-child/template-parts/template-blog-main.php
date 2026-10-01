@@ -31,100 +31,81 @@ get_header(); ?>
         <div class="mainGrid">
             <div class="leftInfo">
 				<?php
-                // PERF-6: cache the hydrated featured post + slider data together (the
-                // slider excludes $featured_id, so both must come from one cache-consistent
-                // build) instead of running both queries every page load. See
-                // inc/perf-query-cache.php.
-                $tnb_blog_top = tnb_perf_cache_remember( 'tnb_blog_featured_and_slider', HOUR_IN_SECONDS, function () {
-                    // Get the most recent featured post
+                // Get the most recent featured post
+                $featured_query = new WP_Query(array(
+                    'post_type' => 'post',
+                    'posts_per_page' => 1,
+                    'meta_query' => array(
+                        array(
+                            'key' => 'is_featured',
+                            'value' => '1',
+                            'compare' => '='
+                        )
+                    )
+                ));
+				$featured_id = get_the_ID();
+                
+                // If no featured post is set, get the latest post
+                if (!$featured_query->have_posts()) {
                     $featured_query = new WP_Query(array(
                         'post_type' => 'post',
-                        'posts_per_page' => 1,
-                        'meta_query' => array(
-                            array(
-                                'key' => 'is_featured',
-                                'value' => '1',
-                                'compare' => '='
-                            )
-                        )
+                        'posts_per_page' => 1
                     ));
-
-                    // If no featured post is set, get the latest post
-                    if (!$featured_query->have_posts()) {
-                        $featured_query = new WP_Query(array(
-                            'post_type' => 'post',
-                            'posts_per_page' => 1
-                        ));
-                    }
-
-                    $featured      = null;
-                    $featured_id   = 0;
-
-                    if ($featured_query->have_posts()) :
-                        $featured_query->the_post();
-                        $featured_id = get_the_ID();
-                        $excerpt     = get_the_excerpt();
-                        $featured    = array(
-                            'permalink' => get_permalink(),
-                            'title'     => get_the_title(),
-                            'excerpt'   => wp_trim_words($excerpt, 40, '...'),
-                        );
-                    endif;
-                    wp_reset_postdata();
-
-                    $args = array(
-                        'post_type' => 'post',
-                        'posts_per_page' => 4,
-                        'post_status' => 'publish',
-                        'post__not_in' => array($featured_id)
-                    );
-                    $query = new WP_Query($args);
-                    $slider = array();
-                    while ($query->have_posts()) : $query->the_post();
-                        $slider[] = array(
-                            'permalink' => get_permalink(),
-                            'title'     => get_the_title(),
-                            'image'     => get_the_post_thumbnail_url(get_the_ID(), 'full'),
-                        );
-                    endwhile;
-                    wp_reset_postdata();
-
-                    return array( 'featured' => $featured, 'featured_id' => $featured_id, 'slider' => $slider );
-                } );
-                $featured_id = $tnb_blog_top['featured_id'];
-                if ($tnb_blog_top['featured']) :
-                    $tnb_blog_featured = $tnb_blog_top['featured'];
+                }
+				$featured_id = 0;
+                
+                if ($featured_query->have_posts()) : 
+                    $featured_query->the_post();
+				$featured_id = get_the_ID();
                 ?>
                 <div class="featuredInfo">
                     <span><svg width="15" height="19" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                      <path d="M8.06776 1C8.06776 1 9.21632 2.54111 9.21632 4.09436C9.21632 4.72537 9.21632 5.35637 9.16895 5.93884C9.07423 7.0431 10.3886 7.74692 11.1345 6.93389C11.2766 6.78827 11.395 6.61838 11.4898 6.41209C11.4898 6.41209 14 7.95321 14 11.4359C14 15.319 10.4478 18.4255 6.56398 17.9522C3.73403 17.6125 1.55532 15.2705 1.09353 12.4431C0.868555 11.084 1.04617 9.65207 1.66189 8.42646C1.8395 8.07455 2.06448 7.74692 2.30129 7.45568L8.06776 1Z" stroke="#EC1C24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                      <path d="M10 15.2757C10 16.7784 8.87892 18 7.5 18C6.12108 18 5 16.7784 5 15.2757C5 13.7731 7.14126 11 7.5 11C7.85874 11 10 13.7731 10 15.2757Z" stroke="#EC1C24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                      </svg> Featured Post</span>
-                    <h2><a href="<?php echo esc_url($tnb_blog_featured['permalink']); ?>"><?php echo esc_html($tnb_blog_featured['title']); ?></a></h2>
+                    <h2><a href="<?php the_permalink(); ?>"><?php
+									$title = get_the_title();
+									echo esc_html($title);
+								?></a></h2>
                     <hr>
                     <p>
-                        <?php echo esc_html( $tnb_blog_featured['excerpt'] ); ?>
+                        <?php
+                                  $excerpt = get_the_excerpt();
+                                  echo esc_html( wp_trim_words($excerpt, 40, '...') );
+                              ?>                
                     </p>
                     <div class="btnWrapper">
-                        <a href="<?php echo esc_url($tnb_blog_featured['permalink']); ?>">Read More <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <a href="<?php the_permalink(); ?>">Read More <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M14 5H1M11 1L15 5L11 9" stroke="#EC1C24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </a>
                     </div>
                 </div>
-				<?php
-                endif;
+				<?php 
+                wp_reset_postdata();
+                endif; 
                 ?>
             </div>
             <div class="rightInfo">
                <div class="articleSlider swiper">
-
+                
                 <div class="swiper-wrapper">
                 <?php
-                foreach ($tnb_blog_top['slider'] as $tnb_blog_slide) :
+                $args = array(
+                    'post_type' => 'post',
+                    'posts_per_page' => 4,
+                    'post_status' => 'publish',
+                    'post__not_in' => array($featured_id)
+                );
+
+                $query = new WP_Query($args);
+
+                if($query->have_posts()) :
+                while($query->have_posts()) : $query->the_post();
+                $image = get_the_post_thumbnail_url(get_the_ID(),'full');
                 ?>
 
-                    <div class="single swiper-slide" style="background-image:url('<?php echo esc_url($tnb_blog_slide['image']); ?>')">
+                    <div class="single swiper-slide" style="background-image:url('<?php echo $image; ?>')">
                         <div class="info">
                             <span>
                                 <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -134,10 +115,10 @@ get_header(); ?>
                                 <path d="M5 11H8" stroke="#ADBBC7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             Article</span>
-                            <h3><?php echo esc_html($tnb_blog_slide['title']); ?></h3>
+                            <h3><?php the_title(); ?></h3>
                         </div>
                         <div class="btnWrapper">
-                            <a href="<?php echo esc_url($tnb_blog_slide['permalink']); ?>">
+                            <a href="<?php the_permalink(); ?>">
                             Read More
                             <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M14 5H1M11 1L15 5L11 9" stroke="#EC1C24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -147,7 +128,9 @@ get_header(); ?>
                     </div>
 
                 <?php
-                endforeach;
+                endwhile;
+                wp_reset_postdata();
+                endif;
                 ?>
                 </div> </div>
                <div class="arrow-wrap">

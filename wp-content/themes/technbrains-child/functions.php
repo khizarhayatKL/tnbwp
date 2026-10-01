@@ -46,7 +46,6 @@ function output_page_post_schema()
 	}
 }
 
-defined('ABSPATH') || exit;
 
 /**
  * SEO-G6: drop every BreadcrumbList node from a hand-written head_schema value.
@@ -114,6 +113,8 @@ function tnb_strip_breadcrumb_json( string $json ) {
 	return (string) wp_json_encode( $data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
 }
 
+defined('ABSPATH') || exit;
+
 // ─── Layout toggle ───────────────────────────────────────────────────────────
 // true  = new header/footer on ALL pages (only header-footer.css/js loaded — no other changes)
 // false = original theme header/footer
@@ -162,13 +163,13 @@ require_once get_stylesheet_directory() . '/inc/case-study-cpt.php';
 require_once get_stylesheet_directory() . '/inc/case-study-helpers.php';
 require_once get_stylesheet_directory() . '/inc/acf-case-study.php';
 require_once get_stylesheet_directory() . '/inc/case-studies.php';
-require_once get_stylesheet_directory() . '/inc/perf-query-cache.php';
 //helpers
 require_once get_stylesheet_directory() . '/inc/mobile-app-helpers.php';
 require_once get_stylesheet_directory() . '/inc/lg-helpers.php';
 // security hardening
 require_once get_stylesheet_directory() . '/inc/rest-hardening.php';
 require_once get_stylesheet_directory() . '/inc/comments-off.php';
+
 
 // ─── Breadcrumb JSON-LD Schema (SEO-G6) ───────────────────────────────────────
 // Emitted from wp_footer, built from the SAME items the visible trail printed
@@ -194,6 +195,7 @@ function tnb_breadcrumb_schema() {
 if (is_admin()) {
     require_once get_stylesheet_directory() . '/inc/admin/url-migration.php';
 }
+
 
 
 // ─── Enqueue parent + child styles ───────────────────────────────────────────
@@ -684,6 +686,10 @@ function tnb_script_loader_attributes(string $tag, string $handle, string $src):
 		return $tag;
 	}
 
+	if ('google-recaptcha' === $handle) {
+		return str_replace(' src=', ' async defer src=', $tag);
+	}
+
 	static $defer = array(
 		'jquery',
 		'jquery-core',
@@ -726,6 +732,7 @@ add_filter('rocket_delay_js_exclusions', function (array $exclusions): array {
 	$exclusions[] = 'bootstrap.bundle.min.js';
 	$exclusions[] = 'fancybox.umd.js';
 	$exclusions[] = 'intlTelInput.min.js';
+	$exclusions[] = 'live-chat-script';
 	$exclusions[] = 'swift-sales-loader';
 	return $exclusions;
 });
@@ -767,11 +774,11 @@ function tnb_output_resource_hints(): void
 {
 	echo "<link rel='preconnect' href='https://cdn.jsdelivr.net' crossorigin>\n";
 
-	// www.gstatic.com is only requested by reCAPTCHA. captcha-lazyload.js now
-	// only injects that script on first interaction with a form that has a
-	// widget (PERF-5), so it never runs during page load either way — a full
-	// preconnect would just open an idle connection. dns-prefetch keeps the
-	// DNS resolution warm at no connection cost. Guard matches the recaptcha
+	// www.gstatic.com is only requested by reCAPTCHA. That script is async+defer and
+	// WP Rocket's Delay JS holds it until a user interaction, so it never runs during
+	// page load — Lighthouse correctly reports the preconnect as unused, and the idle
+	// connection is closed long before reCAPTCHA needs it. dns-prefetch keeps the DNS
+	// resolution warm at no connection cost. Guard matches the 'google-recaptcha'
 	// enqueue in tnb_enqueue_assets().
 	if ( ! empty( get_option( 'tnb_recaptcha_site_key', '' ) ) ) {
 		echo "<link rel='dns-prefetch' href='//www.gstatic.com'>\n";
@@ -881,21 +888,11 @@ function tnb_render_exit_popup(): void
 	get_template_part('template-parts/components/exit-popup');
 }
 
-// ─── Form-interaction third-party loaders: SwiftSales SDK + HubSpot ──────────
-// Neither is fetched on page load. Both are exposed as window.tnbLoad* and
-// fired by captcha-lazyload.js on the first focus/click/touch/submit inside a
-// form, so visitors who never touch a form load neither. This inline block is
-// exempt from WP Rocket Delay-JS via rocket_delay_js_exclusions
-// ('swift-sales-loader'), so the trigger functions exist immediately.
-//
-// SwiftSales: async queue loader (matches Next.js ExternalScripts.js). Must run
-// BEFORE the external script loads so swiftSales.queries exists —
+// ─── SwiftSales SDK — async queue loader (matches Next.js ExternalScripts.js) ─
+// Must run BEFORE the external script loads so swiftSales.queries exists.
 // wp_enqueue_script loads synchronously, bypassing queue setup → crash.
-//
-// HubSpot (PERF-6c): tracking-only script (analytics / banner / collected
-// forms). Was a hard-coded <head> tag in header.php on every page; lead
-// submissions go server-side via tnb_submit_to_hubspot() and never read its
-// cookie, so nothing depends on it before a form is used.
+// Instead: output the same IIFE Next.js uses, which creates the queue function
+// first, then injects the script as async. Delayed 5 s like Next.js.
 add_action('wp_footer', 'tnb_inject_swift_sales', 25);
 function tnb_inject_swift_sales(): void
 {
@@ -907,17 +904,10 @@ function tnb_inject_swift_sales(): void
 	if (empty($swift_id)) {
 		$swift_id  = '482';
 	}
-	$hs_portal = get_option('tnb_hubspot_portal_id', '');
-	if (empty($hs_portal)) {
-		$hs_portal = '19591491';
-	}
 ?>
 	<script id="swift-sales-loader">
 		(function() {
-			var loaded = false;
 			function loadSwiftSales() {
-				if (loaded) return;
-				loaded = true;
 				(function(scope, doc, tagName, src, objectName, newEl, firstEl) {
 					Array.isArray(scope['SwiftSalesObject']) ? scope['SwiftSalesObject'].push(objectName) : (scope['SwiftSalesObject'] = [objectName]);
 					scope[objectName] = scope[objectName] || function() {
@@ -934,21 +924,7 @@ function tnb_inject_swift_sales(): void
 				})(window, document, 'script', <?php echo wp_json_encode(esc_url_raw($swift_url)); ?>, 'swiftSales');
 				swiftSales('Init', <?php echo wp_json_encode((string) $swift_id); ?>);
 			}
-			var hsLoaded = false;
-			function loadHubSpot() {
-				if (hsLoaded) return;
-				hsLoaded = true;
-				var s = document.createElement('script');
-				s.id = 'hs-script-loader';
-				s.async = true;
-				s.defer = true;
-				s.src = 'https://js.hs-scripts.com/' + <?php echo wp_json_encode((string) $hs_portal); ?> + '.js';
-				document.head.appendChild(s);
-			}
-			// Only loaded when reCAPTCHA fires on first form interaction — see
-			// captcha-lazyload.js. No eager/timed auto-show.
-			window.tnbLoadSwiftSales = loadSwiftSales;
-			window.tnbLoadHubSpot = loadHubSpot;
+			setTimeout(loadSwiftSales, 5000);
 		})();
 	</script>
 <?php
@@ -1029,6 +1005,11 @@ function tnb_register_footer_menus()
 		'footer-locations'  => __('Footer — Locations',        'technbrains-child'),
 		'footer-resources'  => __('Footer — Resources',        'technbrains-child'),
 	]);
+	
+	// Header mega-menu "Blogs" thumbnails (Header.php) — 320×200 hard crop.
+	// Without a registered size WP falls back to the full -scaled image (2560px)
+	// for a 121px slot (audit A11 / PAGE-oversized-img).
+	add_image_size( 'tnb-menu-thumb', 320, 200, true );
 }
 
 
@@ -2383,9 +2364,9 @@ function tnb_construction_rucss_safelist($safelist)
 // Emitted from here rather than from Platform-faqs.php on purpose. That component is
 // shared by every platform page, so making it output schema would start emitting a
 // FAQPage site-wide — a behaviour change on pages nobody asked to change, and a
-// duplicate wherever a page already ships its own. Gated on head_schema: if the
-// page's own head_schema already carries a FAQPage, this stays quiet. (Breadcrumbs
-// work the other way round since SEO-G6 — theme-owned, hand-written ones stripped.)
+// duplicate wherever a page already ships its own. Gated the same way
+// tnb_breadcrumb_schema() guards BreadcrumbList: if the page's own head_schema
+// already carries a FAQPage, this stays quiet.
 add_action('wp_head', 'tnb_construction_faq_schema', 12);
 function tnb_construction_faq_schema()
 {
@@ -2993,3 +2974,46 @@ function tnb_case_studies_hub_rucss_safelist($safelist)
 	$safelist[] = '.is-active';
 	return $safelist;
 }
+
+add_action( 'wp_head', function () {
+    if ( is_singular( 'post' ) ) {
+        echo '<link rel="preload" as="image" href="/wp-content/uploads/2026/07/Header-scaled-1.webp" fetchpriority="high">' . "\n";
+    }
+}, 1 );
+
+
+/**
+ * B8: noindex paginated listings (page 2+) and 404 empty pages.
+ */
+
+// 1) noindex, follow on /blog/page/2+, /blog/category/x/page/2+, /blog/author/x/page/2+
+add_filter( 'wp_robots', function ( $robots ) {
+    if ( is_paged() || (int) get_query_var( 'paged' ) > 1 ) {
+        unset( $robots['index'] );
+        $robots['noindex'] = true;
+        $robots['follow']  = true;
+    }
+    return $robots;
+}, 999 );
+
+// 2) 404 for /blog/page/N/ past the last real page (custom blog template)
+add_action( 'template_redirect', function () {
+    $paged = (int) get_query_var( 'paged' );
+    if ( $paged < 2 || ! is_page( 'blog' ) ) {
+        return;
+    }
+    $per_page = 12; // must match posts_per_page in template-parts/template-blog-main.php
+    $q = new WP_Query( [
+        'post_type'      => 'post',
+        'post_status'    => 'publish',
+        'posts_per_page' => $per_page,
+        'fields'         => 'ids',
+        'no_found_rows'  => false,
+    ] );
+    if ( $paged > (int) $q->max_num_pages ) {
+        global $wp_query;
+        $wp_query->set_404();
+        status_header( 404 );
+        nocache_headers();
+    }
+} );

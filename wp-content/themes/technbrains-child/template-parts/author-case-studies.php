@@ -47,82 +47,72 @@ if ( ! $tnb_acs_author_id ) {
 	return;
 }
 
-// PERF-6: cache the fully hydrated cards + industry counts, not just the query —
-// the real per-request cost is the N+1 get_field() ACF lookups per card.
-// See inc/perf-query-cache.php.
-$tnb_acs_data = tnb_perf_cache_remember( 'tnb_author_case_studies_' . $tnb_acs_author_id, 6 * HOUR_IN_SECONDS, function () use ( $tnb_acs_author_id ) {
-	$tnb_acs_posts = get_posts( array(
-		'post_type'              => 'case_study',
-		'post_status'            => 'publish',
-		'author'                 => $tnb_acs_author_id,
-		'posts_per_page'         => 6,
-		'orderby'                => 'date',
-		'order'                  => 'DESC',
-		'no_found_rows'          => true,
-		'update_post_meta_cache' => false,
-	) );
+$tnb_acs_posts = get_posts( array(
+	'post_type'              => 'case_study',
+	'post_status'            => 'publish',
+	'author'                 => $tnb_acs_author_id,
+	'posts_per_page'         => 6,
+	'orderby'                => 'date',
+	'order'                  => 'DESC',
+	'no_found_rows'          => true,
+	'update_post_meta_cache' => false,
+) );
 
-	if ( empty( $tnb_acs_posts ) ) {
-		return array( 'cards' => array(), 'industry_counts' => array() );
+if ( empty( $tnb_acs_posts ) ) {
+	return;
+}
+
+/** Plain-text card title/desc — cs_hero_headline may carry <br>/<span class="hl"> for the single-page H1; a slider card wants text only. */
+$tnb_acs_plain = static function ( $html ): string {
+	$text = wp_strip_all_tags( (string) $html );
+	return trim( preg_replace( '/\s+/', ' ', $text ) );
+};
+
+$tnb_acs_cards           = array();
+$tnb_acs_industry_counts = array();
+
+foreach ( $tnb_acs_posts as $tnb_acs_post ) {
+	$tnb_acs_id = $tnb_acs_post->ID;
+
+	$tnb_acs_title = $tnb_acs_plain( get_field( 'cs_hero_headline', $tnb_acs_id ) );
+	if ( '' === $tnb_acs_title ) {
+		continue; // no headline — nothing to show on a card
 	}
 
-	/** Plain-text card title/desc — cs_hero_headline may carry <br>/<span class="hl"> for the single-page H1; a slider card wants text only. */
-	$tnb_acs_plain = static function ( $html ): string {
-		$text = wp_strip_all_tags( (string) $html );
-		return trim( preg_replace( '/\s+/', ' ', $text ) );
-	};
-
-	$tnb_acs_cards           = array();
-	$tnb_acs_industry_counts = array();
-
-	foreach ( $tnb_acs_posts as $tnb_acs_post ) {
-		$tnb_acs_id = $tnb_acs_post->ID;
-
-		$tnb_acs_title = $tnb_acs_plain( get_field( 'cs_hero_headline', $tnb_acs_id ) );
-		if ( '' === $tnb_acs_title ) {
-			continue; // no headline — nothing to show on a card
-		}
-
-		$tnb_acs_badge = '';
-		$tnb_acs_facts = get_field( 'cs_facts', $tnb_acs_id );
-		if ( is_array( $tnb_acs_facts ) ) {
-			foreach ( $tnb_acs_facts as $tnb_acs_fact ) {
-				$tnb_acs_key = isset( $tnb_acs_fact['cs_fact_key'] ) ? (string) $tnb_acs_fact['cs_fact_key'] : '';
-				if ( false !== stripos( $tnb_acs_key, 'industry' ) ) {
-					$tnb_acs_badge = trim( (string) ( $tnb_acs_fact['cs_fact_value'] ?? '' ) );
-					break;
-				}
+	$tnb_acs_badge = '';
+	$tnb_acs_facts = get_field( 'cs_facts', $tnb_acs_id );
+	if ( is_array( $tnb_acs_facts ) ) {
+		foreach ( $tnb_acs_facts as $tnb_acs_fact ) {
+			$tnb_acs_key = isset( $tnb_acs_fact['cs_fact_key'] ) ? (string) $tnb_acs_fact['cs_fact_key'] : '';
+			if ( false !== stripos( $tnb_acs_key, 'industry' ) ) {
+				$tnb_acs_badge = trim( (string) ( $tnb_acs_fact['cs_fact_value'] ?? '' ) );
+				break;
 			}
 		}
-
-		if ( '' !== $tnb_acs_badge ) {
-			$tnb_acs_industry_counts[ $tnb_acs_badge ] = ( $tnb_acs_industry_counts[ $tnb_acs_badge ] ?? 0 ) + 1;
-		}
-
-		// cs_hero_bg is the same image the single case-study page's own hero uses
-		// (Case-study-hero.php) — prefer it over the WP featured image, which
-		// isn't consistently set on every case study; fall back to the featured
-		// image when a study has no hero background configured.
-		$tnb_acs_hero_bg = get_field( 'cs_hero_bg', $tnb_acs_id );
-		$tnb_acs_thumb   = ( is_array( $tnb_acs_hero_bg ) && ! empty( $tnb_acs_hero_bg['url'] ) )
-			? $tnb_acs_hero_bg['url']
-			: get_the_post_thumbnail_url( $tnb_acs_id, 'large' );
-
-		$tnb_acs_cards[] = array(
-			'id'    => $tnb_acs_id,
-			'badge' => $tnb_acs_badge,
-			'title' => $tnb_acs_title,
-			'thumb' => $tnb_acs_thumb,
-			'desc'  => $tnb_acs_plain( get_field( 'cs_hero_lede', $tnb_acs_id ) ),
-			'url'   => get_permalink( $tnb_acs_id ),
-		);
 	}
 
-	return array( 'cards' => $tnb_acs_cards, 'industry_counts' => $tnb_acs_industry_counts );
-} );
+	if ( '' !== $tnb_acs_badge ) {
+		$tnb_acs_industry_counts[ $tnb_acs_badge ] = ( $tnb_acs_industry_counts[ $tnb_acs_badge ] ?? 0 ) + 1;
+	}
 
-$tnb_acs_cards           = $tnb_acs_data['cards'];
-$tnb_acs_industry_counts = $tnb_acs_data['industry_counts'];
+	// cs_hero_bg is the same image the single case-study page's own hero uses
+	// (Case-study-hero.php) — prefer it over the WP featured image, which
+	// isn't consistently set on every case study; fall back to the featured
+	// image when a study has no hero background configured.
+	$tnb_acs_hero_bg = get_field( 'cs_hero_bg', $tnb_acs_id );
+	$tnb_acs_thumb   = ( is_array( $tnb_acs_hero_bg ) && ! empty( $tnb_acs_hero_bg['url'] ) )
+		? $tnb_acs_hero_bg['url']
+		: get_the_post_thumbnail_url( $tnb_acs_id, 'large' );
+
+	$tnb_acs_cards[] = array(
+		'id'    => $tnb_acs_id,
+		'badge' => $tnb_acs_badge,
+		'title' => $tnb_acs_title,
+		'thumb' => $tnb_acs_thumb,
+		'desc'  => $tnb_acs_plain( get_field( 'cs_hero_lede', $tnb_acs_id ) ),
+		'url'   => get_permalink( $tnb_acs_id ),
+	);
+}
 
 if ( empty( $tnb_acs_cards ) ) {
 	return;

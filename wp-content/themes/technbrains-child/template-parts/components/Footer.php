@@ -141,9 +141,12 @@ $year     = date('Y');
     ══════════════════════════════════════════════════ -->
       <div class="footer-bar" role="contentinfo">
         <div class="copyright-sec">
-          <a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>" class="footer-bar__privacy">
-            Privacy Policy
+          <a href="<?php echo esc_url(home_url('/terms-and-conditions/')); ?>" class="footer-bar__privacy">
+            Terms & Conditions
           </a>
+			<a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>" class="footer-bar__privacy">
+            Privacy Policy
+          </a>|
 
           <p class="footer-bar__copy">
             &copy; <?php echo esc_html($year); ?> TechnBrains. All rights reserved.

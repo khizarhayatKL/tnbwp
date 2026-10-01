@@ -146,17 +146,17 @@ if ( ! empty( $tnb_ap_latest ) ) {
 
 add_action( 'wp_head', static function () use ( $tnb_ap_person, $tnb_ap_profile ) {
 	foreach ( array( $tnb_ap_person, $tnb_ap_profile ) as $tnb_ap_block ) {
-		echo '<script type="application/ld+json">' .
-			wp_json_encode( $tnb_ap_block, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) .
-			'</script>' . "\n";
+ 		echo '<script type="application/ld+json">' .
+ 			wp_json_encode( $tnb_ap_block, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) .
+ 			'</script>' . "\n";
 	}
 }, 12 );
+
 get_header();
 ?>
 
 <header class="ap-hero" data-screen-label="01 Hero">
 	<div class="ap-wrap ap-hero-inner">
-		<?php tnb_breadcrumb_html(); // SEO-G6: visible trail is the BreadcrumbList source ?>
 		<div class="ap-hero-grid-2">
 			<div class="ap-portrait ap-rev in d1">
 				<div class="ap-portrait-card">
