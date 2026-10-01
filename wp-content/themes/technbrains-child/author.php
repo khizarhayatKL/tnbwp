@@ -65,11 +65,98 @@ if ( $tnb_ap_twitter && ! preg_match( '#^https?://#i', $tnb_ap_twitter ) ) {
 }
 $tnb_ap_email = get_the_author_meta( 'user_email', $tnb_ap_author_id );
 
+// --- Person + ProfilePage schema (SCH-6) ---------------------------------
+// Built from the identity / social / ACF values above. Empty fields are omitted.
+// Article.author on single posts references the same @id (inc/blog-schema.php).
+$tnb_ap_archive_url = get_author_posts_url( $tnb_ap_author_id );
+$tnb_ap_person_id   = $tnb_ap_archive_url . '#person';
+
+$tnb_ap_person = array(
+	'@context' => 'https://schema.org',
+	'@type'    => 'Person',
+	'@id'      => $tnb_ap_person_id,
+	'name'     => $tnb_ap_name,
+	'url'      => $tnb_ap_archive_url,
+);
+
+if ( $tnb_ap_portrait_url ) {
+	$tnb_ap_person['image'] = $tnb_ap_portrait_url;
+}
+if ( is_string( $tnb_ap_role ) && '' !== trim( $tnb_ap_role ) ) {
+	$tnb_ap_person['jobTitle'] = trim( wp_strip_all_tags( $tnb_ap_role ) );
+}
+
+$tnb_ap_desc = $tnb_ap_field( 'ap_short_description' );
+if ( ! is_string( $tnb_ap_desc ) || '' === trim( $tnb_ap_desc ) ) {
+	$tnb_ap_desc = (string) $tnb_ap_bio;
+}
+if ( '' !== trim( $tnb_ap_desc ) ) {
+	$tnb_ap_person['description'] = trim( wp_strip_all_tags( $tnb_ap_desc ) );
+}
+
+// knowsAbout: ap_skills repeater names, else ap_focus split on , | • newline.
+$tnb_ap_knows = array();
+foreach ( (array) $tnb_ap_field( 'ap_skills', array() ) as $tnb_ap_sk ) {
+	$tnb_ap_sk = is_array( $tnb_ap_sk ) ? ( isset( $tnb_ap_sk['name'] ) ? $tnb_ap_sk['name'] : '' ) : $tnb_ap_sk;
+	$tnb_ap_sk = trim( wp_strip_all_tags( (string) $tnb_ap_sk ) );
+	if ( '' !== $tnb_ap_sk ) {
+		$tnb_ap_knows[] = $tnb_ap_sk;
+	}
+}
+if ( empty( $tnb_ap_knows ) && is_string( $tnb_ap_focus ) && '' !== trim( $tnb_ap_focus ) ) {
+	foreach ( (array) preg_split( '/[,|\x{2022}\r\n]+/u', wp_strip_all_tags( $tnb_ap_focus ) ) as $tnb_ap_part ) {
+		$tnb_ap_part = trim( $tnb_ap_part );
+		if ( '' !== $tnb_ap_part ) {
+			$tnb_ap_knows[] = $tnb_ap_part;
+		}
+	}
+}
+if ( ! empty( $tnb_ap_knows ) ) {
+	$tnb_ap_person['knowsAbout'] = array_values( array_unique( $tnb_ap_knows ) );
+}
+
+// sameAs: LinkedIn + Twitter (already normalised above).
+$tnb_ap_same_as = array_values( array_unique( array_filter( array_map( 'esc_url_raw', array( $tnb_ap_linkedin, $tnb_ap_twitter ) ) ) ) );
+if ( ! empty( $tnb_ap_same_as ) ) {
+	$tnb_ap_person['sameAs'] = $tnb_ap_same_as;
+}
+
+$tnb_ap_person['worksFor']         = array( '@id' => home_url( '/' ) . '#organization' );
+$tnb_ap_person['mainEntityOfPage'] = $tnb_ap_archive_url;
+
+$tnb_ap_profile = array(
+	'@context'   => 'https://schema.org',
+	'@type'      => 'ProfilePage',
+	'url'        => $tnb_ap_archive_url,
+	'mainEntity' => array( '@id' => $tnb_ap_person_id ),
+);
+$tnb_ap_latest = get_posts( array(
+	'author'         => $tnb_ap_author_id,
+	'post_type'      => 'post',
+	'post_status'    => 'publish',
+	'posts_per_page' => 1,
+	'orderby'        => 'modified',
+	'order'          => 'DESC',
+	'no_found_rows'  => true,
+	'fields'         => 'ids',
+) );
+if ( ! empty( $tnb_ap_latest ) ) {
+	$tnb_ap_profile['dateModified'] = get_the_modified_date( 'c', $tnb_ap_latest[0] );
+}
+
+add_action( 'wp_head', static function () use ( $tnb_ap_person, $tnb_ap_profile ) {
+	foreach ( array( $tnb_ap_person, $tnb_ap_profile ) as $tnb_ap_block ) {
+		echo '<script type="application/ld+json">' .
+			wp_json_encode( $tnb_ap_block, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) .
+			'</script>' . "\n";
+	}
+}, 12 );
 get_header();
 ?>
 
 <header class="ap-hero" data-screen-label="01 Hero">
 	<div class="ap-wrap ap-hero-inner">
+		<?php tnb_breadcrumb_html(); // SEO-G6: visible trail is the BreadcrumbList source ?>
 		<div class="ap-hero-grid-2">
 			<div class="ap-portrait ap-rev in d1">
 				<div class="ap-portrait-card">

@@ -14,6 +14,7 @@ $banner_image = $args['banner_image'] ?? '';
 $banner_w     = $args['banner_width'] ?? 670;
 $banner_h     = $args['banner_height'] ?? 404;
 $allowed_h    = array( 'span' => array(), 'br' => array() );
+$heading_tag  = ( strpos( $mod, 'wedding-app-footer' ) !== false ) ? 'h2' : 'h1';
 ?>
 <section class="wedding-app<?php echo $mod ? ' ' . esc_attr( $mod ) : ''; ?>" style="background-image:url('<?php echo esc_url( $img . $bg_image ); ?>');">
 	<div class="container">
@@ -23,7 +24,7 @@ $allowed_h    = array( 'span' => array(), 'br' => array() );
 			<img src="<?php echo esc_url( $img . $logo ); ?>" width="<?php echo esc_attr( $logo_width ); ?>" height="<?php echo esc_attr( $logo_height ); ?>" alt="logo" loading="eager" decoding="async">
 			<?php endif; ?>
 			<?php if ( $heading ) : ?>
-			<h2><?php echo wp_kses( $heading, $allowed_h ); ?></h2>
+			<?php echo '<' . $heading_tag . '>' . wp_kses( $heading, $allowed_h ) . '</' . $heading_tag . '>'; ?>
 			<?php endif; ?>
 			<?php if ( $para ) : ?>
 			<p><?php echo wp_kses_post( $para ); ?></p>

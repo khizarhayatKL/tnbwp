@@ -21,7 +21,8 @@ $arrow_svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill
 			</div>
 			<div class="banner-info">
 				<img src="<?php echo esc_url( $img . '/case-studies/soccerfy/banner-top.webp' ); ?>" width="202" height="134" alt="Soccerfy logo" loading="eager" decoding="async">
-				<p>The right solution for big-time soccer bettors!</p>
+				<h1 class="screen-reader-text">Soccerfy: The Right Solution for Big-Time Soccer Bettors</h1>
+					<p>The right solution for big-time soccer bettors!</p>
 				<a href="https://play.google.com/store/apps/details?id=com.soccerfy&amp;hl=en&amp;gl=US" target="_blank" rel="noopener noreferrer">
 					<?php echo $android_svg; ?> get apk
 				</a>

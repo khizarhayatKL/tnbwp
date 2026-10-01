@@ -58,7 +58,7 @@ $img = get_stylesheet_directory_uri() . '/assets/images';
 			<div class="stru-content">
 				<h3>01</h3>
 				<h2>Enrich Your Life</h2>
-				<h1>Wellness</h1>
+				<h2>Wellness</h2>
 				<p>Introducing the 5 Spheres of Fit app: Your holistic wellness guide. We blend data, research, and practical insights to optimize fitness and overall well-being. This app focuses on the physical, mental, social, financial, and educational spheres, promoting balanced success in all areas of life. Achieve true fulfillment with us.</p>
 				<h5>Business</h5>
 				<p>Wellness Industry</p>
@@ -70,11 +70,11 @@ $img = get_stylesheet_directory_uri() . '/assets/images';
 <section class="S3">
 	<div class="container">
 		<div class="theprblm-dev">
-			<h1>Problem</h1>
+			<h2>Problem</h2>
 			<p>The 5 Spheres of Fit app faces challenges in Data Security and Privacy, User Engagement, Content Curation, Interdisciplinary Expertise, and Monetization Strategy. Safeguarding user data, enhancing engagement, maintaining high-quality content, and blending diverse expertise while ensuring sustainable revenue generation are key concerns.</p>
 		</div>
 		<div class="slutn-div">
-			<h1>Solution by TechnBrains</h1>
+			<h2>Solution by TechnBrains</h2>
 			<p>Technbrains leverages cutting-edge technology to fortify Data Security, implementing robust privacy measures. We enhance User Engagement through personalized content and community-building features. Our expert team ensures top-notch Content Curation and interdisciplinary insights. We devise a Monetization Strategy that balances value and sustainability, making the 5 Spheres of Fit app a holistic wellness powerhouse.</p>
 		</div>
 	</div>
@@ -83,7 +83,7 @@ $img = get_stylesheet_directory_uri() . '/assets/images';
 <section class="Sec-4">
 	<div class="container">
 		<div class="Inner-S4">
-			<h1>Project Timeline</h1>
+			<h2>Project Timeline</h2>
 			<img src="<?php echo esc_url( $img . '/case-studies/fivesphere/projcompt.webp' ); ?>" width="1400" height="940" alt="Project timeline" loading="lazy" decoding="async">
 		</div>
 	</div>
@@ -91,7 +91,7 @@ $img = get_stylesheet_directory_uri() . '/assets/images';
 
 <section class="Sec-5">
 	<div class="Inner-Sec-5">
-		<h1>WireFrames</h1>
+		<h2>WireFrames</h2>
 		<img src="<?php echo esc_url( $img . '/case-studies/fivesphere/screens.webp' ); ?>" width="2500" height="2100" alt="Wireframes" loading="lazy" decoding="async">
 	</div>
 </section>
@@ -99,7 +99,7 @@ $img = get_stylesheet_directory_uri() . '/assets/images';
 <section class="Sec-6">
 	<div class="container">
 		<div class="Inner-Sec-6">
-			<h1>What we Offer</h1>
+			<h2>What we Offer</h2>
 			<div class="Image-Box">
 				<div class="Img-Heading">
 					<img src="<?php echo esc_url( $img . '/case-studies/fivesphere/Mob-se-log.png' ); ?>" width="45" height="45" alt="Educational icon" loading="lazy" decoding="async">

@@ -18447,14 +18447,14 @@ a.custom-btn:hover::after {
   gap: 150px;
   padding-top: 60px;
 }
-.cofit-sec-1 .Intro-sec .Intro-Hdng h1 {
+.cofit-sec-1 .Intro-sec .Intro-Hdng h2 {
   font-size: 45px;
   font-family: "Lato", sans-serif;
   font-weight: 900;
   color: #6bc86d;
   position: relative;
 }
-.cofit-sec-1 .Intro-sec .Intro-Hdng h1::after {
+.cofit-sec-1 .Intro-sec .Intro-Hdng h2::after {
   content: "";
   position: absolute;
   width: 49%;
@@ -18690,7 +18690,7 @@ a.custom-btn:hover::after {
   padding: 80px 0;
   background-repeat: no-repeat;
 }
-.cofit-sec-6 .Sec-six-Inner .top-hding h1 {
+.cofit-sec-6 .Sec-six-Inner .top-hding h2 {
   font-size: 45px;
   color: #fff;
   font-family: "Lato", sans-serif;
@@ -18698,11 +18698,11 @@ a.custom-btn:hover::after {
   text-align: center;
   position: relative;
 }
-.cofit-sec-6 .Sec-six-Inner .top-hding h1 span {
+.cofit-sec-6 .Sec-six-Inner .top-hding h2 span {
   font-weight: 900;
   color: #6bc86d;
 }
-.cofit-sec-6 .Sec-six-Inner .top-hding h1::after {
+.cofit-sec-6 .Sec-six-Inner .top-hding h2::after {
   content: "";
   position: absolute;
   width: 13%;
@@ -18862,20 +18862,20 @@ a.custom-btn:hover::after {
   width: 50%;
   height: auto;
 }
-.cofit-sec-8 .Sec-Eight-Inner .Content-Side h1 {
+.cofit-sec-8 .Sec-Eight-Inner .Content-Side h2 {
   font-size: 45px;
   color: #505050;
   font-family: "Lato", sans-serif;
   font-weight: 400;
   margin-bottom: 20px;
 }
-.cofit-sec-8 .Sec-Eight-Inner .Content-Side h1 span {
+.cofit-sec-8 .Sec-Eight-Inner .Content-Side h2 span {
   font-weight: 900;
   color: #6bc86d;
   position: relative;
   line-height: 40px;
 }
-.cofit-sec-8 .Sec-Eight-Inner .Content-Side h1 span::after {
+.cofit-sec-8 .Sec-Eight-Inner .Content-Side h2 span::after {
   content: "";
   position: absolute;
   width: 60%;
@@ -19017,7 +19017,7 @@ a.custom-btn:hover::after {
   .cofit-sec-8 {
     padding: 40px 0;
   }
-  .cofit-sec-8 .Sec-Eight-Inner .Content-Side h1 {
+  .cofit-sec-8 .Sec-Eight-Inner .Content-Side h2 {
     font-size: 35px;
     margin-bottom: 10px;
   }
@@ -19041,7 +19041,7 @@ a.custom-btn:hover::after {
     gap: 50px;
     padding-top: 20px;
   }
-  .cofit-sec-1 .Intro-sec .Intro-Hdng h1 {
+  .cofit-sec-1 .Intro-sec .Intro-Hdng h2 {
     font-size: 40px;
   }
   .cofit-sec-1 .Intro-sec .Intro-decs .Main-boxes {
@@ -19088,7 +19088,7 @@ a.custom-btn:hover::after {
     font-size: 15px;
     line-height: 28px;
   }
-  .cofit-sec-6 .Sec-six-Inner .top-hding h1 {
+  .cofit-sec-6 .Sec-six-Inner .top-hding h2 {
     font-size: 40px;
   }
   .cofit-sec-6 .Sec-six-Inner .Imagebox-Content .left .Image-box p {
@@ -19109,7 +19109,7 @@ a.custom-btn:hover::after {
   .cofit-sec-8 {
     padding: 20px 0;
   }
-  .cofit-sec-8 .Sec-Eight-Inner .Content-Side h1 {
+  .cofit-sec-8 .Sec-Eight-Inner .Content-Side h2 {
     font-size: 30px;
   }
   .cofit-sec-8 .Sec-Eight-Inner .Content-Side .counters {
@@ -19127,7 +19127,7 @@ a.custom-btn:hover::after {
   .cofit-sec-1 .Main-box .Inner-box2 img {
     display: none;
   }
-  .cofit-sec-1 .Intro-sec .Intro-Hdng h1 {
+  .cofit-sec-1 .Intro-sec .Intro-Hdng h2 {
     font-size: 35px;
   }
   .cofit-sec-1 .Intro-sec .Intro-decs .Main-boxes {
@@ -19164,7 +19164,7 @@ a.custom-btn:hover::after {
   .cofit-sec-6 {
     padding: 40px 0;
   }
-  .cofit-sec-6 .Sec-six-Inner .top-hding h1 {
+  .cofit-sec-6 .Sec-six-Inner .top-hding h2 {
     font-size: 35px;
   }
   .cofit-sec-6 .Sec-six-Inner .top-hding p {
@@ -19231,7 +19231,7 @@ a.custom-btn:hover::after {
     width: 100%;
     height: auto;
   }
-  .cofit-sec-8 .Sec-Eight-Inner .Content-Side h1 {
+  .cofit-sec-8 .Sec-Eight-Inner .Content-Side h2 {
     font-size: 35px;
   }
   .cofit-sec-8 .Sec-Eight-Inner .Content-Side .counters {
@@ -19291,7 +19291,7 @@ a.custom-btn:hover::after {
   grid-template-columns: 1.5fr 1fr;
   gap: 50px;
 }
-.cruze-sec-1 .banner-grid .left-info h3 {
+.cruze-sec-1 .banner-grid .left-info h1 {
   margin: 20px 0;
   color: #4e545e;
   font-size: 32px;
@@ -19684,7 +19684,7 @@ a.custom-btn:hover::after {
   .cruze-sec-1 .prev-btn a {
     font-size: 16px;
   }
-  .cruze-sec-1 .banner-grid .left-info h3 {
+  .cruze-sec-1 .banner-grid .left-info h1 {
     font-size: 32px;
   }
   .cruze-sec-1 .banner-grid .left-info a {
@@ -19725,7 +19725,7 @@ a.custom-btn:hover::after {
   }
 }
 @media (max-width: 1200px) {
-  .cruze-sec-1 .banner-grid .left-info h3 {
+  .cruze-sec-1 .banner-grid .left-info h1 {
     font-size: 30px;
     line-height: 1.6;
   }
@@ -19818,7 +19818,7 @@ a.custom-btn:hover::after {
   .cruze-sec-1 .prev-btn a {
     font-size: 15px;
   }
-  .cruze-sec-1 .banner-grid .left-info h3 {
+  .cruze-sec-1 .banner-grid .left-info h1 {
     font-size: 26px;
   }
   .cruze-sec-1 .banner-grid .left-info a {
@@ -19931,7 +19931,7 @@ a.custom-btn:hover::after {
     display: block;
     margin: auto;
   }
-  .cruze-sec-1 .banner-grid .left-info h3 {
+  .cruze-sec-1 .banner-grid .left-info h1 {
     font-size: 24px;
     text-align: center;
     line-height: 1.5;
@@ -20120,7 +20120,7 @@ a.custom-btn:hover::after {
     width: 200px;
     height: auto;
   }
-  .cruze-sec-1 .banner-grid .left-info h3 {
+  .cruze-sec-1 .banner-grid .left-info h1 {
     font-size: 20px;
     line-height: 1.5;
   }
@@ -21052,7 +21052,7 @@ a.custom-btn:hover::after {
 .ffg-main-banner .banner-info img {
   height: auto;
 }
-.ffg-main-banner .banner-info h2 {
+.ffg-main-banner .banner-info h1 {
   font-weight: 500;
   font-size: 40px;
   text-align: center;
@@ -21384,7 +21384,7 @@ a.custom-btn:hover::after {
 
 /* ── FFG Responsive ───────────────────────────────────────── */
 @media (max-width: 1600px) {
-  .ffg-main-banner .banner-info h2 {
+  .ffg-main-banner .banner-info h1 {
     font-size: 35px;
   }
   .ffg-tech-main .tech-grid .tech-flex .tech-info h4 {
@@ -21457,7 +21457,7 @@ a.custom-btn:hover::after {
   }
 }
 @media (max-width: 1440px) {
-  .ffg-main-banner .banner-info h2 {
+  .ffg-main-banner .banner-info h1 {
     font-size: 30px;
   }
   .ffg-about-main h2 {
@@ -21523,7 +21523,7 @@ a.custom-btn:hover::after {
   .ffg-main-banner .banner-info .logo-img {
     width: 200px;
   }
-  .ffg-main-banner .banner-info h2 {
+  .ffg-main-banner .banner-info h1 {
     font-size: 30px;
   }
   .ffg-tech-main .tech-grid .tech-flex .tech-info h4 {
@@ -21586,10 +21586,10 @@ a.custom-btn:hover::after {
   .ffg-main-banner .banner-info .logo-img {
     width: 150px;
   }
-  .ffg-main-banner .banner-info h2 {
+  .ffg-main-banner .banner-info h1 {
     font-size: 28px;
   }
-  .ffg-main-banner .banner-info h2 br {
+  .ffg-main-banner .banner-info h1 br {
     display: none;
   }
   .ffg-tech-main .tech-grid {
@@ -21684,7 +21684,7 @@ a.custom-btn:hover::after {
   .ffg-main-banner .banner-info .logo-img {
     width: 150px;
   }
-  .ffg-main-banner .banner-info h2 {
+  .ffg-main-banner .banner-info h1 {
     font-size: 25px;
     margin: 30px 0px;
   }
@@ -21771,7 +21771,7 @@ a.custom-btn:hover::after {
   }
 }
 @media (max-width: 500px) {
-  .ffg-main-banner .banner-info h2 {
+  .ffg-main-banner .banner-info h1 {
     font-size: 24px;
   }
   .ffg-about-main h2 {
@@ -21845,7 +21845,7 @@ a.custom-btn:hover::after {
   .ffg-main-banner .banner-info .logo-img {
     width: 130px;
   }
-  .ffg-main-banner .banner-info h2 {
+  .ffg-main-banner .banner-info h1 {
     font-size: 22px;
   }
 }
@@ -21881,12 +21881,12 @@ a.custom-btn:hover::after {
   padding-bottom: 10px;
   margin: 0;
 }
-.platetalk-app .content .left h2 {
+.platetalk-app .content .left h1 {
   color: #fff;
   font-size: 55px;
   font-weight: 700;
 }
-.platetalk-app .content .left h2 span {
+.platetalk-app .content .left h1 span {
   color: #1cea6f;
 }
 .platetalk-app .content .left p {
@@ -21901,7 +21901,7 @@ a.custom-btn:hover::after {
   align-items: flex-end;
 }
 @media (max-width: 1440px) {
-  .platetalk-app .content .left h2 {
+  .platetalk-app .content .left h1 {
     font-size: 55px;
     line-height: 1.1;
   }
@@ -21910,7 +21910,7 @@ a.custom-btn:hover::after {
   .platetalk-app .content .left h4 {
     font-size: 18px;
   }
-  .platetalk-app .content .left h2 {
+  .platetalk-app .content .left h1 {
     font-size: 45px;
     line-height: 1.1;
   }
@@ -21929,7 +21929,7 @@ a.custom-btn:hover::after {
   .platetalk-app .content .left h4 {
     font-size: 16px;
   }
-  .platetalk-app .content .left h2 {
+  .platetalk-app .content .left h1 {
     font-size: 40px;
   }
   .platetalk-app .content .left button {
@@ -21954,7 +21954,7 @@ a.custom-btn:hover::after {
     align-items: center;
     padding: 20px;
   }
-  .platetalk-app .content .left h2 {
+  .platetalk-app .content .left h1 {
     font-size: 35px;
   }
   .platetalk-app .content .right {
@@ -21965,7 +21965,7 @@ a.custom-btn:hover::after {
   .platetalk-app .content {
     padding: 40px;
   }
-  .platetalk-app .content .left h2 {
+  .platetalk-app .content .left h1 {
     font-size: 28px;
   }
 }
@@ -22999,7 +22999,7 @@ a.custom-btn:hover::after {
 .qpon-banner .main-baner-grid .banner-content {
   color: #fff;
 }
-.qpon-banner .main-baner-grid .banner-content h1 {
+.qpon-banner .main-baner-grid .banner-content .qpon-logotype {
   padding-top: 30px;
   font-size: 70px;
   font-weight: 900;
@@ -23380,7 +23380,7 @@ a.custom-btn:hover::after {
     max-width: 150px;
     height: auto;
   }
-  .qpon-banner .main-baner-grid .banner-content h1 {
+  .qpon-banner .main-baner-grid .banner-content .qpon-logotype {
     font-size: 50px;
   }
   .qpon-banner .main-baner-grid .banner-content h2 {
@@ -23451,7 +23451,7 @@ a.custom-btn:hover::after {
     max-width: 120px;
     height: auto;
   }
-  .qpon-banner .main-baner-grid .banner-content h1 {
+  .qpon-banner .main-baner-grid .banner-content .qpon-logotype {
     font-size: 45px;
   }
   .qpon-banner .main-baner-grid .banner-content h2 {
@@ -23510,7 +23510,7 @@ a.custom-btn:hover::after {
     max-width: 100px;
     height: auto;
   }
-  .qpon-banner .main-baner-grid .banner-content h1 {
+  .qpon-banner .main-baner-grid .banner-content .qpon-logotype {
     font-size: 40px;
   }
   .qpon-banner .main-baner-grid .banner-content h2 {
@@ -23593,7 +23593,7 @@ a.custom-btn:hover::after {
     max-width: 100px;
     height: auto;
   }
-  .qpon-banner .main-baner-grid .banner-content h1 {
+  .qpon-banner .main-baner-grid .banner-content .qpon-logotype {
     font-size: 35px;
   }
   .qpon-banner .main-baner-grid .banner-content h2 {
@@ -23688,7 +23688,7 @@ a.custom-btn:hover::after {
   .qpon-banner .main-baner-grid .banner-content {
     text-align: center;
   }
-  .qpon-banner .main-baner-grid .banner-content h1 {
+  .qpon-banner .main-baner-grid .banner-content .qpon-logotype {
     font-size: 30px;
   }
   .qpon-banner .main-baner-grid .banner-content h2 {
@@ -23799,7 +23799,7 @@ a.custom-btn:hover::after {
   .qpon-banner {
     padding-top: 40px;
   }
-  .qpon-banner .main-baner-grid .banner-content h1 {
+  .qpon-banner .main-baner-grid .banner-content .qpon-logotype {
     font-size: 28px;
   }
   .qpon-banner .main-baner-grid .banner-content h2 {
@@ -23845,7 +23845,7 @@ a.custom-btn:hover::after {
   .qpon-banner {
     padding-top: 40px;
   }
-  .qpon-banner .main-baner-grid .banner-content h1 {
+  .qpon-banner .main-baner-grid .banner-content .qpon-logotype {
     font-size: 28px;
   }
   .qpon-banner .main-baner-grid .banner-content h2 {
@@ -23919,7 +23919,7 @@ a.custom-btn:hover::after {
 }
 
 @media (max-width: 400px) {
-  .qpon-banner .main-baner-grid .banner-content h1 {
+  .qpon-banner .main-baner-grid .banner-content .qpon-logotype {
     font-size: 26px;
   }
   .qpon-banner .main-baner-grid .banner-content h2 {
@@ -25226,7 +25226,7 @@ a.custom-btn:hover::after {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-.main-banner .banner-grid .left-info h2 {
+.main-banner .banner-grid .left-info h1 {
   font-weight: 600;
   font-size: 70px;
   color: #000;
@@ -25682,7 +25682,7 @@ a.custom-btn:hover::after {
     width: 120px;
     height: auto;
   }
-  .main-banner .banner-grid .left-info h2 {
+  .main-banner .banner-grid .left-info h1 {
     font-size: 60px;
   }
   .main-banner .banner-grid .left-info h4 {
@@ -25830,7 +25830,7 @@ a.custom-btn:hover::after {
     width: 100px;
     height: auto;
   }
-  .main-banner .banner-grid .left-info h2 {
+  .main-banner .banner-grid .left-info h1 {
     font-size: 50px;
   }
   .main-banner .banner-grid .left-info h4 {
@@ -25957,7 +25957,7 @@ a.custom-btn:hover::after {
     width: 100px;
     height: auto;
   }
-  .main-banner .banner-grid .left-info h2 {
+  .main-banner .banner-grid .left-info h1 {
     font-size: 45px;
   }
   .main-banner .banner-grid .left-info h4 {
@@ -26122,7 +26122,7 @@ a.custom-btn:hover::after {
     width: 120px;
     height: auto;
   }
-  .main-banner .banner-grid .left-info h2 {
+  .main-banner .banner-grid .left-info h1 {
     font-size: 40px;
   }
   .main-banner .banner-grid .left-info h4 {
@@ -26245,7 +26245,7 @@ a.custom-btn:hover::after {
   .main-banner .banner-grid {
     grid-template-columns: 1fr;
   }
-  .main-banner .banner-grid .left-info h2 {
+  .main-banner .banner-grid .left-info h1 {
     font-size: 35px;
   }
   .main-banner .banner-grid .left-info h4 {
@@ -26404,7 +26404,7 @@ a.custom-btn:hover::after {
   .main-banner .banner-grid .left-info img {
     margin: auto;
   }
-  .main-banner .banner-grid .left-info h2 {
+  .main-banner .banner-grid .left-info h1 {
     font-size: 35px;
   }
   .main-banner .banner-grid .left-info h4 {
@@ -26503,7 +26503,7 @@ a.custom-btn:hover::after {
   .main-banner .banner-grid .left-info {
     margin-bottom: 20px;
   }
-  .main-banner .banner-grid .left-info h2 {
+  .main-banner .banner-grid .left-info h1 {
     font-size: 30px;
   }
   .main-banner .banner-grid .left-info h4 {
@@ -26748,7 +26748,7 @@ a.custom-btn:hover::after {
   align-items: center;
   height: 800px;
 }
-.xdr-main-banner-sec .banner-grid .left-info h2 {
+.xdr-main-banner-sec .banner-grid .left-info h1 {
   font-weight: bold;
   font-size: 40px;
   text-align: left;
@@ -27209,7 +27209,7 @@ a.custom-btn:hover::after {
 }
 
 @media (max-width: 1200px) {
-  .xdr-main-banner-sec .banner-grid .left-info h2 {
+  .xdr-main-banner-sec .banner-grid .left-info h1 {
     font-size: 35px;
   }
   .xdr-main-banner-sec .banner-grid .left-info p {
@@ -27293,7 +27293,7 @@ a.custom-btn:hover::after {
   .xdr-main-banner-sec .banner-grid {
     height: 700px;
   }
-  .xdr-main-banner-sec .banner-grid .left-info h2 {
+  .xdr-main-banner-sec .banner-grid .left-info h1 {
     font-size: 30px;
   }
   .xdr-main-banner-sec .banner-grid .left-info p {
@@ -27397,7 +27397,7 @@ a.custom-btn:hover::after {
     grid-gap: 40px;
     grid-template-columns: 1fr;
   }
-  .xdr-main-banner-sec .banner-grid .left-info h2 {
+  .xdr-main-banner-sec .banner-grid .left-info h1 {
     font-size: 30px;
   }
   .xdr-main-banner-sec .banner-grid .left-info p {
@@ -27529,7 +27529,7 @@ a.custom-btn:hover::after {
 }
 
 @media (max-width: 576px) {
-  .xdr-main-banner-sec .banner-grid .left-info h2 {
+  .xdr-main-banner-sec .banner-grid .left-info h1 {
     font-size: 26px;
   }
   .xdr-main-banner-sec .banner-grid .left-info p {
@@ -27633,7 +27633,7 @@ a.custom-btn:hover::after {
 }
 
 @media (max-width: 400px) {
-  .xdr-main-banner-sec .banner-grid .left-info h2 {
+  .xdr-main-banner-sec .banner-grid .left-info h1 {
     font-size: 24px;
   }
   .xdr-main-banner-sec .banner-grid .left-info p {
@@ -27837,7 +27837,7 @@ a.custom-btn:hover::after {
   color: #161616;
   margin-top: 20px;
 }
-.S2-fivesphere .S2-Inner .stru-content h1 {
+.S2-fivesphere .S2-Inner .stru-content h2 {
   font-size: 90px;
   font-family: "Montserrat", sans-serif;
   color: #161616;
@@ -27846,7 +27846,7 @@ a.custom-btn:hover::after {
   position: relative;
   margin-bottom: 60px;
 }
-.S2-fivesphere .S2-Inner .stru-content h1::after {
+.S2-fivesphere .S2-Inner .stru-content h2::after {
   content: "";
   position: absolute;
   bottom: -24px;
@@ -27883,7 +27883,7 @@ a.custom-btn:hover::after {
   gap: 40px;
   align-items: center;
 }
-.S3 .theprblm-dev h1 {
+.S3 .theprblm-dev h2 {
   font-size: 40px;
   font-family: "Montserrat", sans-serif;
   color: white;
@@ -27902,7 +27902,7 @@ a.custom-btn:hover::after {
   gap: 40px;
   align-items: center;
 }
-.S3 .slutn-div h1 {
+.S3 .slutn-div h2 {
   font-size: 40px;
   font-family: "Montserrat", sans-serif;
   color: white;
@@ -27918,14 +27918,14 @@ a.custom-btn:hover::after {
 .Sec-4 {
   padding: 80px 0;
 }
-.Sec-4 .Inner-S4 h1 {
+.Sec-4 .Inner-S4 h2 {
   text-align: center;
   font-size: 40px;
   font-family: "Montserrat", sans-serif;
   color: #161616;
   position: relative;
 }
-.Sec-4 .Inner-S4 h1::after {
+.Sec-4 .Inner-S4 h2::after {
   content: "";
   position: absolute;
   width: 12%;
@@ -27946,7 +27946,7 @@ a.custom-btn:hover::after {
   background: #f8f8f8;
   padding: 60px 0 0 0;
 }
-.Sec-5 .Inner-Sec-5 h1 {
+.Sec-5 .Inner-Sec-5 h2 {
   font-size: 40px;
   text-align: center;
   font-family: "Montserrat", sans-serif;
@@ -27954,7 +27954,7 @@ a.custom-btn:hover::after {
   margin-bottom: 30px;
   position: relative;
 }
-.Sec-5 .Inner-Sec-5 h1::after {
+.Sec-5 .Inner-Sec-5 h2::after {
   content: "";
   position: absolute;
   width: 10%;
@@ -28006,22 +28006,22 @@ a.custom-btn:hover::after {
   padding: 60px 0 80px 0;
 }
 
-.Sec-6 .Inner-Sec-6 h1,
-.Sec-7 .Inner-Sec-6 h1,
-.Sec-8 .Inner-Sec-6 h1,
-.Sec-9 .Inner-Sec-6 h1,
-.Sec-10 .Inner-Sec-6 h1 {
+.Sec-6 .Inner-Sec-6 h2,
+.Sec-7 .Inner-Sec-6 h2,
+.Sec-8 .Inner-Sec-6 h2,
+.Sec-9 .Inner-Sec-6 h2,
+.Sec-10 .Inner-Sec-6 h2 {
   font-size: 40px;
   font-family: "Montserrat", sans-serif;
   text-align: center;
   color: black;
   position: relative;
 }
-.Sec-6 .Inner-Sec-6 h1::after,
-.Sec-7 .Inner-Sec-6 h1::after,
-.Sec-8 .Inner-Sec-6 h1::after,
-.Sec-9 .Inner-Sec-6 h1::after,
-.Sec-10 .Inner-Sec-6 h1::after {
+.Sec-6 .Inner-Sec-6 h2::after,
+.Sec-7 .Inner-Sec-6 h2::after,
+.Sec-8 .Inner-Sec-6 h2::after,
+.Sec-9 .Inner-Sec-6 h2::after,
+.Sec-10 .Inner-Sec-6 h2::after {
   content: "";
   position: absolute;
   width: 12%;
@@ -28139,14 +28139,14 @@ a.custom-btn:hover::after {
   .S2-fivesphere .S2-Inner .stru-content h2 {
     font-size: 40px;
   }
-  .S2-fivesphere .S2-Inner .stru-content h1 {
+  .S2-fivesphere .S2-Inner .stru-content h2 {
     font-size: 60px;
     line-height: 40px;
   }
-  .S3 .slutn-div h1 {
+  .S3 .slutn-div h2 {
     font-size: 30px;
   }
-  .S3 .theprblm-dev h1 {
+  .S3 .theprblm-dev h2 {
     font-size: 30px;
   }
 }
@@ -28244,21 +28244,21 @@ a.custom-btn:hover::after {
   .S2-fivesphere .S2-Inner .stru-content h2 {
     font-size: 40px;
   }
-  .S2-fivesphere .S2-Inner .stru-content h1 {
+  .S2-fivesphere .S2-Inner .stru-content h2 {
     font-size: 60px;
     line-height: 40px;
   }
   .S3 .slutn-div {
     display: block;
   }
-  .S3 .slutn-div h1 {
+  .S3 .slutn-div h2 {
     font-size: 30px;
     padding-bottom: 6px;
   }
   .S3 .theprblm-dev {
     display: block;
   }
-  .S3 .theprblm-dev h1 {
+  .S3 .theprblm-dev h2 {
     font-size: 30px;
     padding-bottom: 6px;
   }
@@ -28299,14 +28299,14 @@ a.custom-btn:hover::after {
   .S2-fivesphere .S2-Inner .stru-content h2 {
     font-size: 30px;
   }
-  .S2-fivesphere .S2-Inner .stru-content h1 {
+  .S2-fivesphere .S2-Inner .stru-content h2 {
     font-size: 40px;
     line-height: 40px;
   }
-  .Sec-4 .Inner-S4 h1 {
+  .Sec-4 .Inner-S4 h2 {
     font-size: 34px;
   }
-  .Sec-5 .Inner-Sec-5 h1 {
+  .Sec-5 .Inner-Sec-5 h2 {
     font-size: 34px;
   }
   .Sec-6 {
@@ -28324,11 +28324,11 @@ a.custom-btn:hover::after {
   .Sec-10 {
     padding: 30px 0;
   }
-  .Sec-6 .Inner-Sec-6 h1,
-  .Sec-7 .Inner-Sec-6 h1,
-  .Sec-8 .Inner-Sec-6 h1,
-  .Sec-9 .Inner-Sec-6 h1,
-  .Sec-10 .Inner-Sec-6 h1 {
+  .Sec-6 .Inner-Sec-6 h2,
+  .Sec-7 .Inner-Sec-6 h2,
+  .Sec-8 .Inner-Sec-6 h2,
+  .Sec-9 .Inner-Sec-6 h2,
+  .Sec-10 .Inner-Sec-6 h2 {
     font-size: 34px;
     margin-bottom: 40px;
   }
@@ -28368,10 +28368,10 @@ a.custom-btn:hover::after {
   .Section-sphere-1 .Baner-inner .content-side p {
     font-size: 18px;
   }
-  .Sec-4 .Inner-S4 h1 {
+  .Sec-4 .Inner-S4 h2 {
     font-size: 30px;
   }
-  .Sec-5 .Inner-Sec-5 h1 {
+  .Sec-5 .Inner-Sec-5 h2 {
     font-size: 30px;
   }
   .Sec-6 .Inner-Sec-6 .Image-Box .Img-Heading h3,
@@ -28411,7 +28411,7 @@ a.custom-btn:hover::after {
 .whiteTail .banner-info .logo {
   margin: 35px 0;
 }
-.whiteTail .banner-info h2 {
+.whiteTail .banner-info h1 {
   font-size: 40px;
   color: #221f20;
   font-weight: bold;
@@ -28766,7 +28766,7 @@ a.custom-btn:hover::after {
     height: 40%;
     bottom: 15%;
   }
-  .whiteTail .banner-info h2 {
+  .whiteTail .banner-info h1 {
     font-size: 32px;
     width: 60%;
   }
@@ -28856,7 +28856,7 @@ a.custom-btn:hover::after {
     width: 50%;
     height: auto;
   }
-  .whiteTail .banner-info h2 {
+  .whiteTail .banner-info h1 {
     font-size: 30px;
     width: 60%;
   }
@@ -28963,7 +28963,7 @@ a.custom-btn:hover::after {
     width: 50%;
     height: auto;
   }
-  .whiteTail .banner-info h2 {
+  .whiteTail .banner-info h1 {
     font-size: 28px;
     width: 60%;
   }
@@ -29089,7 +29089,7 @@ a.custom-btn:hover::after {
     width: 50%;
     height: auto;
   }
-  .whiteTail .banner-info h2 {
+  .whiteTail .banner-info h1 {
     font-size: 24px;
     line-height: 1.6;
   }
@@ -29217,7 +29217,7 @@ a.custom-btn:hover::after {
     width: 50%;
     height: auto;
   }
-  .whiteTail .banner-info h2 {
+  .whiteTail .banner-info h1 {
     font-size: 22px;
     line-height: 1.6;
   }
@@ -29423,7 +29423,7 @@ a.custom-btn:hover::after {
   }
 }
 @media (max-width: 479px) {
-  .whiteTail .banner-info h2 {
+  .whiteTail .banner-info h1 {
     font-size: 20px;
     line-height: 1.6;
   }
@@ -29469,7 +29469,7 @@ a.custom-btn:hover::after {
   }
 }
 @media (max-width: 400px) {
-  .whiteTail .banner-info h2 {
+  .whiteTail .banner-info h1 {
     font-size: 18px;
     line-height: 1.6;
   }
@@ -29556,13 +29556,13 @@ a.custom-btn:hover::after {
 .wedding-app .content {
   text-align: center;
 }
-.wedding-app .content h2 {
+.wedding-app .content h1, .wedding-app .content h2 {
   color: #000;
   font-weight: bold;
   font-size: 55px;
   margin: 20px 0 30px;
 }
-.wedding-app .content h2 span {
+.wedding-app .content h1 span {
   color: #a49786;
 }
 .wedding-app .content p {
@@ -29614,7 +29614,7 @@ a.custom-btn:hover::after {
   display: none;
 }
 @media (max-width: 1024px) {
-  .wedding-app .content h2 {
+  .wedding-app .content h1, .wedding-app .content h2 {
     font-size: 45px;
   }
   .wedding-app .content p {
@@ -29625,7 +29625,7 @@ a.custom-btn:hover::after {
   }
 }
 @media (max-width: 768px) {
-  .wedding-app .content h2 {
+  .wedding-app .content h1, .wedding-app .content h2 {
     font-size: 35px;
   }
   .wedding-app .content p {
@@ -29640,10 +29640,10 @@ a.custom-btn:hover::after {
   }
 }
 @media (max-width: 575px) {
-  .wedding-app .content h2 {
+  .wedding-app .content h1, .wedding-app .content h2 {
     font-size: 22px;
   }
-  .wedding-app .content h2 br {
+  .wedding-app .content h1 br {
     display: none;
   }
   .wedding-app .content p {
@@ -30356,14 +30356,14 @@ a.custom-btn:hover::after {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-.tatt-banner .main .text h2 {
+.tatt-banner .main .text h1 {
   color: #fff;
   font-size: 45px;
   font-weight: bold;
   line-height: 1.2;
   margin: 10px 0 0;
 }
-.tatt-banner .main .text h2 span {
+.tatt-banner .main .text h1 span {
   color: #c51e06;
 }
 .tatt-banner .main .text p {
@@ -30800,7 +30800,7 @@ a.custom-btn:hover::after {
   .tatt-banner {
     padding-bottom: 100px;
   }
-  .tatt-banner .main .text h2 {
+  .tatt-banner .main .text h1 {
     font-size: 35px;
   }
   .tatt-banner .main .image img {
@@ -30859,7 +30859,7 @@ a.custom-btn:hover::after {
   }
 }
 @media (max-width: 1024px) {
-  .tatt-banner .main .text h2 {
+  .tatt-banner .main .text h1 {
     font-size: 35px;
   }
   .tatt-banner .main .text p {
@@ -30878,7 +30878,7 @@ a.custom-btn:hover::after {
   .tatt-banner .main .text {
     text-align: center;
   }
-  .tatt-banner .main .text h2 {
+  .tatt-banner .main .text h1 {
     font-size: 35px;
   }
   .tatt-banner .main .text button {
@@ -30956,7 +30956,7 @@ a.custom-btn:hover::after {
   .tatt-banner .main .text {
     text-align: center;
   }
-  .tatt-banner .main .text h2 {
+  .tatt-banner .main .text h1 {
     font-size: 28px;
   }
   .tatt-banner .main .image {
@@ -31596,7 +31596,7 @@ a.custom-btn:hover::after {
   grid-template-columns: 1fr 1fr;
   align-items: center;
 }
-.contact-banner-grid h2 {
+.contact-banner-grid h1 {
   margin: 0;
   color: #000;
   font-size: 35px;
@@ -31677,7 +31677,7 @@ a.custom-btn:hover::after {
   .contact-banner-grid {
     grid-template-columns: 1.5fr 1fr;
   }
-  .contact-banner-grid h2 {
+  .contact-banner-grid h1 {
     font-size: 35px;
   }
 }
@@ -31685,7 +31685,7 @@ a.custom-btn:hover::after {
   .contact-banner-grid {
     grid-template-columns: 1fr 1fr;
   }
-  .contact-banner-grid h2 {
+  .contact-banner-grid h1 {
     font-size: 30px;
   }
   .contact-info {
@@ -31723,7 +31723,7 @@ a.custom-btn:hover::after {
     justify-items: center;
     gap: 50px;
   }
-  .contact-banner-grid h2 {
+  .contact-banner-grid h1 {
     font-size: 28px;
   }
   .contact-info h3 {
@@ -31751,7 +31751,7 @@ a.custom-btn:hover::after {
     justify-items: center;
     gap: 50px;
   }
-  .contact-banner-grid h2 {
+  .contact-banner-grid h1 {
     font-size: 25px;
   }
 }
@@ -37353,6 +37353,8 @@ a.ih-engage-card:hover {
   text-decoration: none;
   transition: all 0.25s ease;
   cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
 }
 .hd-btn-primary {
   background: #ec1c24;

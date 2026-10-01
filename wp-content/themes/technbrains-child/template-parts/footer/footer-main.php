@@ -80,24 +80,24 @@ $rating_list = array(
 
 					<div class="form-grid">
 						<div class="inputField">
-							<input type="text" name="firstName" placeholder="First Name" autocomplete="given-name" required>
+							<input type="text" name="firstName" placeholder="First Name" aria-label="First Name" autocomplete="given-name" required>
 						</div>
 						<div class="inputField">
-							<input type="text" name="lastName" placeholder="Last Name" autocomplete="family-name" required>
+							<input type="text" name="lastName" placeholder="Last Name" aria-label="Last Name" autocomplete="family-name" required>
 						</div>
 					</div>
 
 					<div class="form-grid">
 						<div class="inputField">
-							<input type="email" name="cemail" placeholder="Email Address" autocomplete="email" required>
+							<input type="email" name="cemail" placeholder="Email Address" aria-label="Email Address" autocomplete="email" required>
 						</div>
 						<div class="inputField">
-							<input type="tel" id="footer-phone" name="cnumber" placeholder="Phone Number (optional)" autocomplete="tel">
+							<input type="tel" id="footer-phone" name="cnumber" placeholder="Phone Number (optional)" aria-label="Phone Number (optional)" autocomplete="tel">
 						</div>
 					</div>
 
 					<div class="inputField">
-						<textarea name="message" rows="6" placeholder="About your project"></textarea>
+						<textarea name="message" rows="6" placeholder="About your project" aria-label="About your project"></textarea>
 					</div>
 
 					<div id="tnb-footer-form-msg" aria-live="polite"></div>

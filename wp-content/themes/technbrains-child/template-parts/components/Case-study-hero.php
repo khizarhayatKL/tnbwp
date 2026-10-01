@@ -74,6 +74,7 @@ $cs_logo_ratio = rtrim( rtrim( number_format( $cs_logo_scale / 100, 2, '.', '' )
 	</div>
 	<div class="cs-wrap cs-hero-layout">
 		<div class="cs-hero-col-text cs-hero-centered">
+			<?php tnb_breadcrumb_html(); // SEO-G6: visible trail is the BreadcrumbList source ?>
 			<h1 class="cs-h1 cs-reveal d1"><?php
 			if ( $cs_logo ) :
 				?><span class="cs-h1-lead cs-h1-lead--logo" style="--cs-lead-logo: <?php echo esc_attr( $cs_logo_ratio ); ?>"><?php

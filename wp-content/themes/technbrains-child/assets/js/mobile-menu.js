@@ -52,6 +52,58 @@
       overlay.addEventListener('click', closeMenu);
     }
 
+    // ── Hydrate a level-1/level-2 target from its <template> the first time
+    //    it's opened, so unopened nav text isn't sitting hidden in the DOM.
+    function hydrate(target, key) {
+      if (target.childElementCount) return;
+      var tpl = document.getElementById('mob-' + key + '-tpl');
+      if (!tpl) return;
+      target.appendChild(tpl.content.cloneNode(true));
+      bindInnerHandlers(target);
+    }
+
+    // ── Level-2 accordion: data-inner — bind click handlers to whatever
+    //    [data-inner] triggers exist under root (static or just-hydrated).
+    function bindInnerHandlers(root) {
+      root.querySelectorAll('[data-inner]').forEach(function (trigger) {
+        if (trigger.dataset.bound) return;
+        trigger.dataset.bound = '1';
+        trigger.addEventListener('click', function (e) {
+          e.preventDefault();
+          var key    = trigger.getAttribute('data-inner');
+          var target = document.getElementById('mob-' + key);
+          var parent = trigger.closest('.has-child');
+          if (!target) return;
+
+          hydrate(target, key);
+
+          var isOpen = !target.hidden;
+
+          // close sibling inner menus in same parent ul
+          var parentUl = trigger.closest('ul');
+          if (parentUl) {
+            parentUl.querySelectorAll('[data-inner]').forEach(function (other) {
+              var otherKey    = other.getAttribute('data-inner');
+              var otherTarget = document.getElementById('mob-' + otherKey);
+              if (otherTarget && otherKey !== key) {
+                otherTarget.hidden = true;
+                other.classList.remove('open');
+                other.setAttribute('aria-expanded', 'false');
+                var otherParent = other.closest('.has-child');
+                if (otherParent) otherParent.classList.remove('active');
+              }
+            });
+          }
+
+          // toggle current
+          target.hidden = isOpen;
+          trigger.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+          trigger.classList.toggle('open', !isOpen);
+          if (parent) parent.classList.toggle('active', !isOpen);
+        });
+      });
+    }
+
     // ── Level-1 accordion: data-toggle ──────────────────────────────────────
     // Toggles child ul[id="mob-{key}"]
     if (panel) {
@@ -63,6 +115,8 @@
           var parent = trigger.closest('.has-child');
           var dropdown = trigger.closest('.menuDropdown');
           if (!target) return;
+
+          hydrate(target, key);
 
           var isOpen = !target.hidden;
 
@@ -95,67 +149,33 @@
       });
     }
 
-    // ── Level-2 accordion: data-inner ───────────────────────────────────────
-    if (panel) {
-      panel.querySelectorAll('[data-inner]').forEach(function (trigger) {
-        trigger.addEventListener('click', function (e) {
-          e.preventDefault();
-          var key    = trigger.getAttribute('data-inner');
-          var target = document.getElementById('mob-' + key);
-          var parent = trigger.closest('.has-child');
-          if (!target) return;
-
-          var isOpen = !target.hidden;
-
-          // close sibling inner menus in same parent ul
-          var parentUl = trigger.closest('ul');
-          if (parentUl) {
-            parentUl.querySelectorAll('[data-inner]').forEach(function (other) {
-              var otherKey    = other.getAttribute('data-inner');
-              var otherTarget = document.getElementById('mob-' + otherKey);
-              if (otherTarget && otherKey !== key) {
-                otherTarget.hidden = true;
-                other.classList.remove('open');
-                other.setAttribute('aria-expanded', 'false');
-                var otherParent = other.closest('.has-child');
-                if (otherParent) otherParent.classList.remove('active');
-              }
-            });
-          }
-
-          // toggle current
-          target.hidden = isOpen;
-          trigger.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
-          trigger.classList.toggle('open', !isOpen);
-          if (parent) parent.classList.toggle('active', !isOpen);
-        });
-      });
-    }
-
     // ── Close on navigation (link click inside panel) ────────────────────────
+    // Delegated on `panel` since level-2 links are cloned in from <template>
+    // on demand and wouldn't otherwise pick up a per-element listener.
     if (panel) {
-      panel.querySelectorAll('a[href]:not([href="#"]):not([data-toggle]):not([data-inner])').forEach(function (a) {
-        a.addEventListener('click', function () {
-          closeMenu();
-          // reset all open states
-          panel.querySelectorAll('[data-toggle]').forEach(function (trigger) {
-            var key = trigger.getAttribute('data-toggle');
-            var t   = document.getElementById('mob-' + key);
-            if (t) t.hidden = true;
-            var dd = trigger.closest('.menuDropdown');
-            if (dd) dd.classList.remove('open');
-            trigger.setAttribute('aria-expanded', 'false');
-          });
-          panel.querySelectorAll('[data-inner]').forEach(function (trigger) {
-            var key = trigger.getAttribute('data-inner');
-            var t   = document.getElementById('mob-' + key);
-            if (t) t.hidden = true;
-            trigger.classList.remove('open');
-            trigger.setAttribute('aria-expanded', 'false');
-          });
-          panel.querySelectorAll('.has-child.active').forEach(function (li) {
-            li.classList.remove('active');
-          });
+      panel.addEventListener('click', function (e) {
+        var a = e.target.closest('a[href]');
+        if (!a || a.getAttribute('href') === '#' || a.hasAttribute('data-toggle') || a.hasAttribute('data-inner')) return;
+
+        closeMenu();
+        // reset all open states
+        panel.querySelectorAll('[data-toggle]').forEach(function (trigger) {
+          var key = trigger.getAttribute('data-toggle');
+          var t   = document.getElementById('mob-' + key);
+          if (t) t.hidden = true;
+          var dd = trigger.closest('.menuDropdown');
+          if (dd) dd.classList.remove('open');
+          trigger.setAttribute('aria-expanded', 'false');
+        });
+        panel.querySelectorAll('[data-inner]').forEach(function (trigger) {
+          var key = trigger.getAttribute('data-inner');
+          var t   = document.getElementById('mob-' + key);
+          if (t) t.hidden = true;
+          trigger.classList.remove('open');
+          trigger.setAttribute('aria-expanded', 'false');
+        });
+        panel.querySelectorAll('.has-child.active').forEach(function (li) {
+          li.classList.remove('active');
         });
       });
     }

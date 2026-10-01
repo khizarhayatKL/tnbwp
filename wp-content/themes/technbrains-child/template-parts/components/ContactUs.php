@@ -9,7 +9,7 @@ $mod = get_query_var( 'component_modifier_classes', '' );
 	<div class="container">
 		<?php tnb_breadcrumb_html(); ?>
 		<div class="contact-banner-grid">
-			<h2>Contact Us</h2>
+			<h1>Contact Us</h1>
 			<img src="<?php echo esc_url( $img . '/contact-img.png' ); ?>" width="685" height="723" alt="contact-banner" loading="eager" decoding="async">
 		</div>
 	</div>

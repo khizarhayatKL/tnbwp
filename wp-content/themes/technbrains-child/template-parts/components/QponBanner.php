@@ -14,7 +14,8 @@ $allowed    = array( 'br' => array() );
 		<div class="main-baner-grid">
 			<div class="banner-content">
 				<img src="<?php echo esc_url( $img . '/case-studies/qpon/logo.webp' ); ?>" width="183" height="183" alt="logo" loading="lazy" decoding="async">
-				<h1>QPON</h1>
+				<h1 class="screen-reader-text">QPon: Unlock Savings, Discover Deals, and Get More with QPon</h1>
+				<p class="qpon-logotype">QPON</p>
 				<h2>Unlock Savings, Discover Deals, and Get More with QPon</h2>
 				<h3>Your Monthly Pass to Discount Galore!</h3>
 				<div class="info-upper">

@@ -27,6 +27,12 @@ function output_page_post_schema()
 		$schema = get_field('head_schema');
 
 		if ($schema) {
+			// SEO-G6: breadcrumbs are theme-owned (tnb_breadcrumb_schema) — drop
+			// any hand-written BreadcrumbList so the list always matches the trail.
+			$schema = tnb_head_schema_strip_breadcrumbs( (string) $schema );
+			if ( '' === trim( $schema ) ) {
+				return;
+			}
 			echo "\n";
 
 			if (strpos($schema, '<script') === false) {
@@ -41,6 +47,72 @@ function output_page_post_schema()
 }
 
 defined('ABSPATH') || exit;
+
+/**
+ * SEO-G6: drop every BreadcrumbList node from a hand-written head_schema value.
+ * Handles a bare JSON object, a JSON array of nodes, a @graph, and any number of
+ * <script type="application/ld+json"> blocks in one textarea. A block that fails
+ * json_decode is passed through untouched. The theme's own list (built from the
+ * visible trail) is the only BreadcrumbList a page emits.
+ */
+function tnb_head_schema_strip_breadcrumbs( string $schema ): string {
+	if ( false === stripos( $schema, 'BreadcrumbList' ) ) {
+		return $schema;
+	}
+	if ( false === stripos( $schema, '<script' ) ) {
+		return (string) tnb_strip_breadcrumb_json( $schema );
+	}
+	return (string) preg_replace_callback(
+		'#<script\b[^>]*>(.*?)</script>\s*#is',
+		static function ( array $m ): string {
+			$inner = trim( $m[1] );
+			$json  = tnb_strip_breadcrumb_json( $inner );
+			if ( null === $json ) {
+				return ''; // the block was a BreadcrumbList
+			}
+			if ( $json === $inner ) {
+				return $m[0]; // untouched (no list inside, or undecodable)
+			}
+			return str_replace( $m[1], "\n" . $json . "\n", $m[0] );
+		},
+		$schema
+	);
+}
+
+/** @return string|null  null = the whole document was breadcrumb(s) and must be dropped. */
+function tnb_strip_breadcrumb_json( string $json ) {
+	if ( false === stripos( $json, 'BreadcrumbList' ) ) {
+		return $json;
+	}
+	$data = json_decode( $json, true );
+	if ( ! is_array( $data ) ) {
+		return $json;
+	}
+	$is_bc = static function ( $node ): bool {
+		if ( ! is_array( $node ) || ! isset( $node['@type'] ) ) {
+			return false;
+		}
+		return is_array( $node['@type'] )
+			? in_array( 'BreadcrumbList', $node['@type'], true )
+			: 'BreadcrumbList' === $node['@type'];
+	};
+	$is_list = array_keys( $data ) === range( 0, count( $data ) - 1 );
+
+	if ( $is_bc( $data ) ) {
+		return null;
+	}
+	if ( $is_list ) {
+		$data = array_values( array_filter( $data, static function ( $n ) use ( $is_bc ) { return ! $is_bc( $n ); } ) );
+		if ( empty( $data ) ) {
+			return null;
+		}
+	} elseif ( isset( $data['@graph'] ) && is_array( $data['@graph'] ) ) {
+		$data['@graph'] = array_values( array_filter( $data['@graph'], static function ( $n ) use ( $is_bc ) { return ! $is_bc( $n ); } ) );
+	} else {
+		return $json; // the word only appears in prose — leave alone
+	}
+	return (string) wp_json_encode( $data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+}
 
 // ─── Layout toggle ───────────────────────────────────────────────────────────
 // true  = new header/footer on ALL pages (only header-footer.css/js loaded — no other changes)
@@ -90,6 +162,7 @@ require_once get_stylesheet_directory() . '/inc/case-study-cpt.php';
 require_once get_stylesheet_directory() . '/inc/case-study-helpers.php';
 require_once get_stylesheet_directory() . '/inc/acf-case-study.php';
 require_once get_stylesheet_directory() . '/inc/case-studies.php';
+require_once get_stylesheet_directory() . '/inc/perf-query-cache.php';
 //helpers
 require_once get_stylesheet_directory() . '/inc/mobile-app-helpers.php';
 require_once get_stylesheet_directory() . '/inc/lg-helpers.php';
@@ -97,48 +170,22 @@ require_once get_stylesheet_directory() . '/inc/lg-helpers.php';
 require_once get_stylesheet_directory() . '/inc/rest-hardening.php';
 require_once get_stylesheet_directory() . '/inc/comments-off.php';
 
-// ─── Breadcrumb JSON-LD Schema ────────────────────────────────────────────────
-add_action( 'wp_head', 'tnb_breadcrumb_schema', 12 );
+// ─── Breadcrumb JSON-LD Schema (SEO-G6) ───────────────────────────────────────
+// Emitted from wp_footer, built from the SAME items the visible trail printed
+// (tnb_breadcrumb_html), and only when it printed — a template with no visible
+// trail gets no BreadcrumbList, so markup can never disagree with the page.
+// JSON-LD is valid anywhere in the document. Hand-written BreadcrumbList nodes
+// in ACF head_schema are stripped in output_page_post_schema() so this is the
+// only list on any page; @id <url>#breadcrumb keeps their WebPage refs resolving.
+add_action( 'wp_footer', 'tnb_breadcrumb_schema', 1 );
 function tnb_breadcrumb_schema() {
-	if ( is_front_page() ) {
-		return;
-	}
-	// single posts get a richer 4-level breadcrumb (Home > Blog > Category >
-	// Post) from inc/blog-schema.php — don't emit a second BreadcrumbList
-	if ( is_singular( 'post' ) ) {
-		return;
-	}
-	// pages whose ACF head_schema (output_page_post_schema, priority 2) already
-	// ships its own BreadcrumbList — don't emit a duplicate
-	if ( is_singular( array( 'page', 'case_study' ) ) && function_exists( 'get_field' ) ) {
-		$page_schema = (string) get_field( 'head_schema' );
-		if ( '' !== $page_schema && false !== strpos( $page_schema, 'BreadcrumbList' ) ) {
-			return;
-		}
-	}
-	$items = tnb_get_breadcrumbs();
+	$items = tnb_breadcrumb_printed();
 	if ( count( $items ) < 2 ) {
 		return;
 	}
-	$list = array();
-	foreach ( $items as $i => $item ) {
-		$el = array(
-			'@type'    => 'ListItem',
-			'position' => $i + 1,
-			'name'     => $item['label'],
-		);
-		if ( ! empty( $item['url'] ) ) {
-			$el['item'] = $item['url'];
-		}
-		$list[] = $el;
-	}
 	echo '<script type="application/ld+json">' .
 		wp_json_encode(
-			array(
-				'@context'        => 'https://schema.org',
-				'@type'           => 'BreadcrumbList',
-				'itemListElement' => $list,
-			),
+			tnb_breadcrumb_schema_array( $items, tnb_breadcrumb_current_url() . '#breadcrumb' ),
 			JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
 		) .
 		"</script>\n";
@@ -356,14 +403,18 @@ function tnb_enqueue_assets()
 		true
 	);
 
-	// Google reCAPTCHA v2 — only when site key is configured
+	// Google reCAPTCHA v2 — lazy-loaded on first interaction with a form that
+	// has one, and rendered only for that form (see captcha-lazyload.js), not
+	// enqueued eagerly on every page.
+	// PERF-5: was ~345KB x 7-10 widgets on every page load regardless of
+	// whether the visitor ever touched a form.
 	$recaptcha_site_key = get_option('tnb_recaptcha_site_key', '');
 	if (! empty($recaptcha_site_key)) {
 		wp_enqueue_script(
-			'google-recaptcha',
-			'https://www.google.com/recaptcha/api.js',
+			'tnb-captcha-lazyload',
+			get_stylesheet_directory_uri() . '/assets/js/captcha-lazyload.js',
 			array(),
-			null,
+			filemtime(get_stylesheet_directory() . '/assets/js/captcha-lazyload.js'),
 			true
 		);
 	}
@@ -633,10 +684,6 @@ function tnb_script_loader_attributes(string $tag, string $handle, string $src):
 		return $tag;
 	}
 
-	if ('google-recaptcha' === $handle) {
-		return str_replace(' src=', ' async defer src=', $tag);
-	}
-
 	static $defer = array(
 		'jquery',
 		'jquery-core',
@@ -679,7 +726,6 @@ add_filter('rocket_delay_js_exclusions', function (array $exclusions): array {
 	$exclusions[] = 'bootstrap.bundle.min.js';
 	$exclusions[] = 'fancybox.umd.js';
 	$exclusions[] = 'intlTelInput.min.js';
-	$exclusions[] = 'live-chat-script';
 	$exclusions[] = 'swift-sales-loader';
 	return $exclusions;
 });
@@ -721,11 +767,11 @@ function tnb_output_resource_hints(): void
 {
 	echo "<link rel='preconnect' href='https://cdn.jsdelivr.net' crossorigin>\n";
 
-	// www.gstatic.com is only requested by reCAPTCHA. That script is async+defer and
-	// WP Rocket's Delay JS holds it until a user interaction, so it never runs during
-	// page load — Lighthouse correctly reports the preconnect as unused, and the idle
-	// connection is closed long before reCAPTCHA needs it. dns-prefetch keeps the DNS
-	// resolution warm at no connection cost. Guard matches the 'google-recaptcha'
+	// www.gstatic.com is only requested by reCAPTCHA. captcha-lazyload.js now
+	// only injects that script on first interaction with a form that has a
+	// widget (PERF-5), so it never runs during page load either way — a full
+	// preconnect would just open an idle connection. dns-prefetch keeps the
+	// DNS resolution warm at no connection cost. Guard matches the recaptcha
 	// enqueue in tnb_enqueue_assets().
 	if ( ! empty( get_option( 'tnb_recaptcha_site_key', '' ) ) ) {
 		echo "<link rel='dns-prefetch' href='//www.gstatic.com'>\n";
@@ -835,11 +881,21 @@ function tnb_render_exit_popup(): void
 	get_template_part('template-parts/components/exit-popup');
 }
 
-// ─── SwiftSales SDK — async queue loader (matches Next.js ExternalScripts.js) ─
-// Must run BEFORE the external script loads so swiftSales.queries exists.
+// ─── Form-interaction third-party loaders: SwiftSales SDK + HubSpot ──────────
+// Neither is fetched on page load. Both are exposed as window.tnbLoad* and
+// fired by captcha-lazyload.js on the first focus/click/touch/submit inside a
+// form, so visitors who never touch a form load neither. This inline block is
+// exempt from WP Rocket Delay-JS via rocket_delay_js_exclusions
+// ('swift-sales-loader'), so the trigger functions exist immediately.
+//
+// SwiftSales: async queue loader (matches Next.js ExternalScripts.js). Must run
+// BEFORE the external script loads so swiftSales.queries exists —
 // wp_enqueue_script loads synchronously, bypassing queue setup → crash.
-// Instead: output the same IIFE Next.js uses, which creates the queue function
-// first, then injects the script as async. Delayed 5 s like Next.js.
+//
+// HubSpot (PERF-6c): tracking-only script (analytics / banner / collected
+// forms). Was a hard-coded <head> tag in header.php on every page; lead
+// submissions go server-side via tnb_submit_to_hubspot() and never read its
+// cookie, so nothing depends on it before a form is used.
 add_action('wp_footer', 'tnb_inject_swift_sales', 25);
 function tnb_inject_swift_sales(): void
 {
@@ -851,10 +907,17 @@ function tnb_inject_swift_sales(): void
 	if (empty($swift_id)) {
 		$swift_id  = '482';
 	}
+	$hs_portal = get_option('tnb_hubspot_portal_id', '');
+	if (empty($hs_portal)) {
+		$hs_portal = '19591491';
+	}
 ?>
 	<script id="swift-sales-loader">
 		(function() {
+			var loaded = false;
 			function loadSwiftSales() {
+				if (loaded) return;
+				loaded = true;
 				(function(scope, doc, tagName, src, objectName, newEl, firstEl) {
 					Array.isArray(scope['SwiftSalesObject']) ? scope['SwiftSalesObject'].push(objectName) : (scope['SwiftSalesObject'] = [objectName]);
 					scope[objectName] = scope[objectName] || function() {
@@ -871,7 +934,21 @@ function tnb_inject_swift_sales(): void
 				})(window, document, 'script', <?php echo wp_json_encode(esc_url_raw($swift_url)); ?>, 'swiftSales');
 				swiftSales('Init', <?php echo wp_json_encode((string) $swift_id); ?>);
 			}
-			setTimeout(loadSwiftSales, 5000);
+			var hsLoaded = false;
+			function loadHubSpot() {
+				if (hsLoaded) return;
+				hsLoaded = true;
+				var s = document.createElement('script');
+				s.id = 'hs-script-loader';
+				s.async = true;
+				s.defer = true;
+				s.src = 'https://js.hs-scripts.com/' + <?php echo wp_json_encode((string) $hs_portal); ?> + '.js';
+				document.head.appendChild(s);
+			}
+			// Only loaded when reCAPTCHA fires on first form interaction — see
+			// captcha-lazyload.js. No eager/timed auto-show.
+			window.tnbLoadSwiftSales = loadSwiftSales;
+			window.tnbLoadHubSpot = loadHubSpot;
 		})();
 	</script>
 <?php
@@ -2306,9 +2383,9 @@ function tnb_construction_rucss_safelist($safelist)
 // Emitted from here rather than from Platform-faqs.php on purpose. That component is
 // shared by every platform page, so making it output schema would start emitting a
 // FAQPage site-wide — a behaviour change on pages nobody asked to change, and a
-// duplicate wherever a page already ships its own. Gated the same way
-// tnb_breadcrumb_schema() guards BreadcrumbList: if the page's own head_schema
-// already carries a FAQPage, this stays quiet.
+// duplicate wherever a page already ships its own. Gated on head_schema: if the
+// page's own head_schema already carries a FAQPage, this stays quiet. (Breadcrumbs
+// work the other way round since SEO-G6 — theme-owned, hand-written ones stripped.)
 add_action('wp_head', 'tnb_construction_faq_schema', 12);
 function tnb_construction_faq_schema()
 {

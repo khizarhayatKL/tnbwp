@@ -35,7 +35,7 @@ $icon_chevron = '<svg class="icon-chevron" xmlns="http://www.w3.org/2000/svg" vi
               }
               ?>
               <div class="tnb-byline-text">
-                <span class="tnb-byline-name"><?php the_author(); ?></span>
+                <a class="tnb-byline-name" href="<?php echo esc_url( get_author_posts_url( $tnb_author_id ) ); ?>"><?php the_author(); ?></a>
                 <?php if ( $tnb_role ) : ?>
                   <span class="tnb-byline-role"><?php echo esc_html( $tnb_role ); ?></span>
                 <?php endif; ?>
@@ -63,7 +63,7 @@ $icon_chevron = '<svg class="icon-chevron" xmlns="http://www.w3.org/2000/svg" vi
                   <div class="tnb-author-pop-content">
                   <div class="tnb-author-pop-head">
                     <div class="tnb-author-pop-id">
-                      <div class="tnb-author-pop-name"><?php the_author(); ?></div>
+                      <a class="tnb-author-pop-name" href="<?php echo esc_url( get_author_posts_url( $tnb_author_id ) ); ?>"><?php the_author(); ?></a>
                       <?php if ( $tnb_hb_focus || $tnb_role ) : ?>
                         <div class="tnb-author-pop-sub"><?php echo esc_html( $tnb_hb_focus ? $tnb_hb_focus : $tnb_role ); ?></div>
                       <?php endif; ?>
@@ -83,10 +83,6 @@ $icon_chevron = '<svg class="icon-chevron" xmlns="http://www.w3.org/2000/svg" vi
                   <?php if ( $tnb_hb_bio ) : ?>
                     <p class="tnb-author-pop-bio"><?php echo esc_html( $tnb_hb_bio ); ?></p>
                   <?php endif; ?>
-                  <a class="tnb-author-pop-more" href="<?php echo esc_url( get_author_posts_url( $tnb_author_id ) ); ?>">
-                    View Full Profile
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                  </a>
                   </div>
                 </div>
               </div>
@@ -247,7 +243,7 @@ $icon_chevron = '<svg class="icon-chevron" xmlns="http://www.w3.org/2000/svg" vi
               <div class="tnb-authorcard-top">
                 <div>
                   <div class="tnb-authorcard-k">Written by</div>
-                  <div class="tnb-authorcard-n"><?php the_author(); ?></div>
+                  <a class="tnb-authorcard-n" href="<?php echo esc_url( get_author_posts_url( $tnb_ac_id ) ); ?>"><?php the_author(); ?></a>
                 </div>
                 <div class="tnb-author-social">
                   <?php if ( $tnb_ac_linkedin ) : ?>
@@ -271,10 +267,6 @@ $icon_chevron = '<svg class="icon-chevron" xmlns="http://www.w3.org/2000/svg" vi
                 <?php if ( $tnb_ac_bio ) : ?>
                   <p><?php echo esc_html( $tnb_ac_bio ); ?></p>
                 <?php endif; ?>
-                <a class="tnb-author-more" href="<?php echo esc_url( get_author_posts_url( $tnb_ac_id ) ); ?>">
-                  Read More
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </a>
               </div>
             </div>
           </div>
@@ -296,8 +288,26 @@ $icon_chevron = '<svg class="icon-chevron" xmlns="http://www.w3.org/2000/svg" vi
             $tnb_bp_text         = $tnb_bp( 'bp_promo_text', 'Senior developers who build, fix, and ship — without slowing your team down.' );
             $tnb_bp_primary_text = $tnb_bp( 'bp_promo_primary_text', 'Start Your Project' );
             $tnb_bp_primary_link = $tnb_bp( 'bp_promo_primary_link' );
-            $tnb_bp_ghost_text   = $tnb_bp( 'bp_promo_ghost_text', 'Add Developers' );
-            $tnb_bp_ghost_link   = $tnb_bp( 'bp_promo_ghost_link', '/hire-software-developers/' );
+
+            // F4 Fix 4: default ghost-CTA text/link is derived from the post's
+            // primary category instead of a single hard-coded pair, so 176/178
+            // posts stop pointing the same anchor at the same URL. Per-post and
+            // options-page overrides (above) still take precedence unchanged.
+            $tnb_bp_cta_map = array(
+              'app-development'      => array( 'Hire mobile app developers', '/hire-dedicated-team/' ),
+              'ai'                    => array( 'Hire AI engineers', '/hire-software-developers/' ),
+              'software-development'  => array( 'Hire software developers', '/hire-software-developers/' ),
+              'tech-talent'           => array( 'Hire dedicated developers', '/hire-dedicated-team/' ),
+              'industry-insights'     => array( 'Hire industry software engineers', '/hire-software-developers/' ),
+              'news'                  => array( 'Hire vetted engineers', '/hire-software-developers/' ),
+            );
+            $tnb_bp_cat         = function_exists( 'tnb_blog_schema_primary_category' ) ? tnb_blog_schema_primary_category( get_the_ID() ) : null;
+            $tnb_bp_cta_default = ( $tnb_bp_cat && isset( $tnb_bp_cta_map[ $tnb_bp_cat->slug ] ) )
+              ? $tnb_bp_cta_map[ $tnb_bp_cat->slug ]
+              : array( 'Hire vetted engineers', '/hire-software-developers/' );
+
+            $tnb_bp_ghost_text   = $tnb_bp( 'bp_promo_ghost_text', $tnb_bp_cta_default[0] );
+            $tnb_bp_ghost_link   = $tnb_bp( 'bp_promo_ghost_link', $tnb_bp_cta_default[1] );
             ?>
             <div class="rightCta bp-promo">
               <div class="bp-promo-inner">
@@ -307,7 +317,7 @@ $icon_chevron = '<svg class="icon-chevron" xmlns="http://www.w3.org/2000/svg" vi
                   <?php if ( $tnb_bp_primary_link ) : ?>
                     <a class="hd-btn hd-btn-primary" href="<?php echo esc_url( $tnb_bp_primary_link ); ?>"><?php echo esc_html( $tnb_bp_primary_text ); ?></a>
                   <?php else : ?>
-                    <a class="hd-btn hd-btn-primary tnb-popup-trigger" href="#" data-toggle="modal" data-target="#customPopup"><?php echo esc_html( $tnb_bp_primary_text ); ?></a>
+                    <button type="button" class="hd-btn hd-btn-primary tnb-popup-trigger"><?php echo esc_html( $tnb_bp_primary_text ); ?></button>
                   <?php endif; ?>
                   <a class="hd-btn bp-promo-btn-ghost" href="<?php echo esc_url( $tnb_bp_ghost_link ); ?>"><?php echo esc_html( $tnb_bp_ghost_text ); ?></a>
                 </div>

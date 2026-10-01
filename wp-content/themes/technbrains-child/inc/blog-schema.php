@@ -1,11 +1,13 @@
 <?php
 /**
- * Blog post structured data — Article, BreadcrumbList, FAQPage.
+ * Blog post structured data — Article, FAQPage.
  *
  * Emitted only on single blog posts (is_singular('post')). Organization
  * schema is site-wide and printed elsewhere; this file must not duplicate it.
- * The 4-level breadcrumb here (Home > Blog > Category > Post) supersedes the
- * generic tnb_breadcrumb_schema() output, which bails on single posts.
+ * SEO-G6: the BreadcrumbList is not built here any more — tnb_breadcrumb_schema()
+ * (wp_footer) emits it from the same items the visible trail printed
+ * (Home > Blog > Category > Post via inc/breadcrumbs.php); the Article only
+ * references it by @id.
  *
  * Data sources (all auto-fetched per post):
  *   headline      post title
@@ -81,42 +83,13 @@ function tnb_blog_schema_output() {
 			'@type' => 'WebPage',
 			'@id'   => $permalink,
 		),
+		'breadcrumb'    => array( '@id' => $permalink . '#breadcrumb' ),
 	);
 
 	$image = get_the_post_thumbnail_url( $post_id, 'full' );
 	if ( $image ) {
 		$article['image'] = $image;
 	}
-
-	// ── BreadcrumbList: Home > Blog > Category > Post ─────────────────────
-	$crumbs = array(
-		array( 'name' => 'Home', 'item' => home_url( '/' ) ),
-		array( 'name' => 'Blog', 'item' => home_url( '/blog/' ) ),
-	);
-	$category = tnb_blog_schema_primary_category( $post_id );
-	if ( $category ) {
-		$cat_link = get_category_link( $category );
-		if ( $cat_link && ! is_wp_error( $cat_link ) ) {
-			$crumbs[] = array( 'name' => $category->name, 'item' => $cat_link );
-		}
-	}
-	
-	$crumbs[] = array( 'name' => get_the_title( $post_id ), 'item' => $permalink );
-
-	$list = array();
-	foreach ( $crumbs as $i => $crumb ) {
-		$list[] = array(
-			'@type'    => 'ListItem',
-			'position' => $i + 1,
-			'name'     => $crumb['name'],
-			'item'     => $crumb['item'],
-		);
-	}
-	$breadcrumbs = array(
-		'@context'        => 'https://schema.org',
-		'@type'           => 'BreadcrumbList',
-		'itemListElement' => $list,
-	);
 
 	// ── FAQPage: ACF `faqs` repeater ───────────────────────────────────────
 	
@@ -145,7 +118,7 @@ function tnb_blog_schema_output() {
 		}
 	}
 
-	$blocks = array( $article, $breadcrumbs );
+	$blocks = array( $article );
 	
 	if ( $faq_entities ) {
 		$blocks[] = array(

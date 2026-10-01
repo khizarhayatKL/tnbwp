@@ -27,7 +27,7 @@ $uid = 'cs-' . $cs_instance;
 				<span
 					data-counter-target="<?php echo esc_attr( $item['count'] ?? '0' ); ?>"
 					data-counter-sign="<?php echo esc_attr( $item['sign'] ?? '' ); ?>"
-				>0<?php echo esc_html( $item['sign'] ?? '' ); ?></span>
+				><?php echo esc_html( $item['count'] ?? '0' ); ?><?php echo esc_html( $item['sign'] ?? '' ); ?></span>
 				<p><?php echo esc_html( $item['content'] ?? '' ); ?></p>
 			</div>
 			<?php endforeach; ?>

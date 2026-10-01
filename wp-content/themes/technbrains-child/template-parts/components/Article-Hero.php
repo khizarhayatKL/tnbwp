@@ -20,8 +20,9 @@
  *
  * Breadcrumb reuses the site's own tnb_breadcrumb_html() rather than the prototype's bespoke
  * PA_CRUMB array — that system is already wired to this page's actual ancestry and already
- * carries its own BreadcrumbList schema (tnb_breadcrumb_schema() in functions.php), so a second,
- * hand-authored crumb trail here would just be a duplicate with no schema behind it.
+ * carries its own BreadcrumbList schema (tnb_breadcrumb_schema() in functions.php, emitted from
+ * wp_footer from exactly the items this trail printed), so a second, hand-authored crumb trail
+ * here would just be a duplicate with no schema behind it.
  *
  * The background is a single full-bleed image behind a dark overlay the copy sits on — not a
  * decorative photo beside the text, so it is not marked alt="": role="img" + aria-label carries
@@ -151,7 +152,7 @@ $art_bg_url = ! empty( $art_bg['id'] ) ? (string) wp_get_attachment_image_url( (
 									<div class="art-byline-pop-content">
 										<div class="art-byline-pop-head">
 											<div class="art-byline-pop-id">
-												<div class="art-byline-pop-name"><?php echo esc_html( $art_author_name ); ?></div>
+												<a class="art-byline-pop-name" href="<?php echo esc_url( $art_pop['profile'] ); ?>"><?php echo esc_html( $art_author_name ); ?></a>
 												<?php if ( '' !== $art_pop['sub'] ) : ?>
 													<div class="art-byline-pop-sub"><?php echo esc_html( $art_pop['sub'] ); ?></div>
 												<?php endif; ?>
@@ -169,10 +170,6 @@ $art_bg_url = ! empty( $art_bg['id'] ) ? (string) wp_get_attachment_image_url( (
 											</div>
 										</div>
 										<p class="art-byline-pop-bio"><?php echo esc_html( $art_pop['bio'] ); ?></p>
-										<a class="art-byline-pop-more" href="<?php echo esc_url( $art_pop['profile'] ); ?>">
-											<?php esc_html_e( 'View Full Profile', 'technbrains-child' ); ?>
-											<?php echo wp_kses( tnb_art_icon( 'arrow' ), tnb_art_svg_html() ); ?>
-										</a>
 									</div>
 								</div>
 							</div>

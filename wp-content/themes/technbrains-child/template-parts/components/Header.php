@@ -83,7 +83,8 @@ $ico_pls = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="
               </div>
             </div>
 
-            <div class="hp-panel hp-panel--hidden" id="hp-hire-frontend">
+            <div class="hp-panel hp-panel--hidden" id="hp-hire-frontend"></div>
+            <template id="tpl-hire-frontend">
               <div class="hp-panel-head">
                 <span class="hp-panel-badge"><img src="<?php echo esc_url($nav . '/hire-developers/mob-2.png'); ?>" width="52" height="52" alt=""></span>
                 <span class="hp-panel-label">Frontend Developers</span>
@@ -94,9 +95,10 @@ $ico_pls = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="
                 <a href="<?php echo esc_url(home_url('/hire-javascript-developer/')); ?>" class="hp-role-card"><span class="hp-card-label">Hire JavaScript Developer</span><?php echo $cc; ?></a>
                 <a href="<?php echo esc_url(home_url('/hire-angularjs-developer/')); ?>" class="hp-role-card"><span class="hp-card-label">Hire AngularJS Developer</span><?php echo $cc; ?></a>
               </div>
-            </div>
+            </template>
 
-            <div class="hp-panel hp-panel--hidden" id="hp-hire-backend">
+            <div class="hp-panel hp-panel--hidden" id="hp-hire-backend"></div>
+            <template id="tpl-hire-backend">
               <div class="hp-panel-head">
                 <span class="hp-panel-badge"><img src="<?php echo esc_url($nav . '/hire-developers/mob-3.png'); ?>" width="52" height="52" alt=""></span>
                 <span class="hp-panel-label">Backend Developers</span>
@@ -109,7 +111,7 @@ $ico_pls = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="
                 <a href="<?php echo esc_url(home_url('/hire-java-developer/')); ?>" class="hp-role-card"><span class="hp-card-label">Hire Java Developer</span><?php echo $cc; ?></a>
                 <a href="<?php echo esc_url(home_url('/hire-php-developer/')); ?>" class="hp-role-card"><span class="hp-card-label">Hire PHP Developer</span><?php echo $cc; ?></a>
               </div>
-            </div>
+            </template>
             <a href="<?php echo esc_url(home_url('/hire-software-developers/')); ?>" class="hp-view-all"><span>Hire Software Developers</span><?php echo $vaa; ?></a>
 
           </div>
@@ -184,7 +186,8 @@ $ico_pls = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="
               <!--               <a href="<?php echo esc_url(home_url('/services/')); ?>" class="hp-view-all"><span>View All Services</span><?php echo $vaa; ?></a> -->
             </div>
 
-            <div class="hp-panel hp-panel--hidden" id="hp-svc-platforms">
+            <div class="hp-panel hp-panel--hidden" id="hp-svc-platforms"></div>
+            <template id="tpl-svc-platforms">
               <div class="hp-flat-grid">
                 <div class="hp-flat-col">
                   <a href="<?php echo esc_url(home_url('/platforms/salesforce-consultants/')); ?>" class="hp-flat-card"><span class="hp-flat-icon"><img src="<?php echo esc_url($nav . '/services/plat-1.png'); ?>" width="42" height="42" alt=""></span><span class="hp-flat-title">Salesforce Consulting</span><?php echo $cc; ?></a>
@@ -200,10 +203,10 @@ $ico_pls = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="
                 </div>
               </div>
                             <a href="<?php echo esc_url(home_url('/platforms/')); ?>" class="hp-view-all"><span>View All Platforms</span><?php echo $vaa; ?></a>
-              <!--               <a href="<?php echo esc_url(home_url('/platforms/')); ?>" class="hp-view-all"><span>View All Platforms</span><?php echo $vaa; ?></a> -->
-            </div>
+            </template>
 
-            <div class="hp-panel hp-panel--hidden" id="hp-svc-engagement">
+            <div class="hp-panel hp-panel--hidden" id="hp-svc-engagement"></div>
+            <template id="tpl-svc-engagement">
               <div class="hp-flat-grid">
                 <div class="hp-flat-col">
                   <a href="<?php echo esc_url(home_url('/staff-augmentation/')); ?>" class="hp-flat-card"><span class="hp-flat-icon"><img src="<?php echo esc_url($nav . '/services/em-1.png'); ?>" width="42" height="42" alt=""></span><span class="hp-flat-title">Staff Augmentation</span><?php echo $cc; ?></a>
@@ -213,10 +216,10 @@ $ico_pls = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="
                   <a href="<?php echo esc_url(home_url('/software-outsourcing/')); ?>" class="hp-flat-card"><span class="hp-flat-icon"><img src="<?php echo esc_url($nav . '/services/em-2.png'); ?>" width="42" height="42" alt=""></span><span class="hp-flat-title">Software Outsourcing</span><?php echo $cc; ?></a>
                 </div>
               </div>
-              <!--               <a href="<?php echo esc_url(home_url('/engagement-models/')); ?>" class="hp-view-all"><span>View All Models</span><?php echo $vaa; ?></a> -->
-            </div>
+            </template>
 
-            <div class="hp-panel hp-panel--hidden" id="hp-svc-emerging">
+            <div class="hp-panel hp-panel--hidden" id="hp-svc-emerging"></div>
+            <template id="tpl-svc-emerging">
               <div class="hp-flat-grid">
                 <div class="hp-flat-col">
                   <a href="<?php echo esc_url(home_url('/iot-services/')); ?>" class="hp-flat-card"><span class="hp-flat-icon"><img src="<?php echo esc_url($nav . '/services/tech-1.png'); ?>" width="42" height="42" alt=""></span><span class="hp-flat-title">Internet of Things (IoT)</span><?php echo $cc; ?></a>
@@ -231,7 +234,7 @@ $ico_pls = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="
                   <a href="<?php echo esc_url(home_url('/digital-marketing/')); ?>" class="hp-flat-card"><span class="hp-flat-icon"><img src="<?php echo esc_url($nav . '/services/tech-8.png'); ?>" width="42" height="42" alt=""></span><span class="hp-flat-title">Digital Marketing</span><?php echo $cc; ?></a>
                 </div>
               </div>
-            </div>
+            </template>
 
           </div>
         </div>
@@ -343,7 +346,8 @@ $ico_pls = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="
               </div>
             </div>
 
-            <div class="hp-panel hp-panel--hidden" id="hp-about-locations">
+            <div class="hp-panel hp-panel--hidden" id="hp-about-locations"></div>
+            <template id="tpl-about-locations">
               <div class="hp-loc-grid">
                 <a href="<?php echo esc_url(home_url('/locations/mobile-app-development-company-new-york-city/')); ?>" class="hp-loc-card"><span class="hp-loc-img"><img src="<?php echo esc_url($nav . '/location/loc1.png'); ?>" alt="New York" width="160" height="100" loading="lazy"></span><span class="hp-loc-footer"><span class="hp-loc-name">New York</span><?php echo $cc; ?></span></a>
                 <a href="<?php echo esc_url(home_url('/locations/mobile-app-development-company-dallas/')); ?>" class="hp-loc-card"><span class="hp-loc-img"><img src="<?php echo esc_url($nav . '/location/loc2.png'); ?>" alt="Dallas" width="160" height="100" loading="lazy"></span><span class="hp-loc-footer"><span class="hp-loc-name">Dallas</span><?php echo $cc; ?></span></a>
@@ -352,20 +356,20 @@ $ico_pls = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="
                 <a href="<?php echo esc_url(home_url('/locations/mobile-app-development-company-houston/')); ?>" class="hp-loc-card"><span class="hp-loc-img"><img src="<?php echo esc_url($nav . '/location/loc5.png'); ?>" alt="Houston" width="160" height="100" loading="lazy"></span><span class="hp-loc-footer"><span class="hp-loc-name">Houston</span><?php echo $cc; ?></span></a>
               </div>
                             <a href="<?php echo esc_url(home_url('/locations/')); ?>" class="hp-view-all"><span>View All Locations</span><?php echo $vaa; ?></a>
-              <!--               <a href="<?php echo esc_url(home_url('/locations/')); ?>" class="hp-view-all"><span>View All Locations</span><?php echo $vaa; ?></a> -->
-            </div>
+            </template>
 
-            <div class="hp-panel hp-panel--hidden" id="hp-about-contact">
+            <div class="hp-panel hp-panel--hidden" id="hp-about-contact"></div>
+            <template id="tpl-about-contact">
               <div class="hp-offices-card">
                 <div class="hp-offices-head">
                   <span class="hp-offices-icon"><?php echo $ico_bld; ?></span>
                   <span class="hp-offices-label">Our Offices</span>
-                  <a href="<?php echo esc_url(home_url('/contact-us/')); ?>" class="hp-flat-card"><span class="hp-chev-c"><?php echo $rchev; ?></span></a>
+                  <a href="<?php echo esc_url(home_url('/contact-us/')); ?>" class="hp-flat-card" aria-label="Contact our offices"><span class="hp-flat-label screen-reader-text">Contact our offices</span><span class="hp-chev-c"><?php echo $rchev; ?></span></a>
                 </div>
                 <span class="hp-offices-rule" role="separator"></span>
                 <div class="hp-offices-grid">
                   <div class="hp-office">
-                    <span class="hp-office-city">Dallas</span>
+                    <span class="hp-office-city">Addison, TX (Dallas Metro)</span>
                     <span class="hp-office-note">Headquarters</span>
                     <p class="hp-office-addr">15305 Dallas Pkwy, 12th Floor, Suite 1257, Addison, TX 75001 &#183; USA</p>
                     <a href="tel:+18338886032" class="hp-office-line"><span class="hp-line-icon"><?php echo $ico_tel; ?></span> +1 (833) 888-6032</a>
@@ -378,7 +382,7 @@ $ico_pls = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="
                   </div>
                 </div>
               </div>
-            </div>
+            </template>
 
           </div>
         </div>
@@ -403,6 +407,7 @@ $ico_pls = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="
           <div class="hp-mi-right" style="display:flow-root;">
             <div class="hp-blog-grid">
               <?php
+              // Sitewide query (this menu renders on every non-lp_hero page) — runs uncached.
               $hp_blogs = new WP_Query(array(
                 'post_type'      => 'post',
                 'post_status'    => 'publish',
@@ -411,17 +416,24 @@ $ico_pls = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="
                 'order'          => 'DESC',
                 'no_found_rows'  => true,
               ));
+              $hp_blogs_data = array();
               while ($hp_blogs->have_posts()) : $hp_blogs->the_post();
-                $hp_thumb = get_the_post_thumbnail_url(get_the_ID(), array(320, 200));
+                $hp_blogs_data[] = array(
+                  'permalink' => get_permalink(),
+                  'title'     => get_the_title(),
+                  'thumb'     => get_the_post_thumbnail_url(get_the_ID(), array(320, 200)),
+                );
+              endwhile;
+              wp_reset_postdata();
+              foreach ($hp_blogs_data as $hp_blog) :
               ?>
-                <a href="<?php echo esc_url(get_permalink()); ?>" class="hp-blog-card">
-                  <?php if ($hp_thumb) : ?>
-                    <span class="hp-blog-img"><img src="<?php echo esc_url($hp_thumb); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" width="320" height="200" loading="lazy"></span>
+                <a href="<?php echo esc_url($hp_blog['permalink']); ?>" class="hp-blog-card">
+                  <?php if ($hp_blog['thumb']) : ?>
+                    <span class="hp-blog-img"><img src="<?php echo esc_url($hp_blog['thumb']); ?>" alt="<?php echo esc_attr($hp_blog['title']); ?>" width="320" height="200" loading="lazy"></span>
                   <?php endif; ?>
-                  <span class="hp-blog-title"><?php echo esc_html(get_the_title()); ?></span>
+                  <span class="hp-blog-title"><?php echo esc_html($hp_blog['title']); ?></span>
                 </a>
-              <?php endwhile;
-              wp_reset_postdata(); ?>
+              <?php endforeach; ?>
             </div>
             <a href="<?php echo esc_url(home_url('/blog/')); ?>" class="hp-view-all"><span>View All Blogs</span><?php echo $vaa; ?></a>
           </div>
@@ -434,7 +446,7 @@ $ico_pls = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="
 
   <!-- CTA — unchanged -->
   <div class="hp-cta">
-    <a class="hp-btn tnb-popup-trigger" href="#">Start Your Project</a>
+    <button type="button" class="hp-btn tnb-popup-trigger">Start Your Project</button>
   </div>
 
 </nav>

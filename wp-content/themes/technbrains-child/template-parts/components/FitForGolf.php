@@ -32,7 +32,7 @@ $swiper_config = wp_json_encode( array(
 		<?php tnb_breadcrumb_html(); ?>
 		<div class="banner-info">
 			<img src="<?php echo esc_url( $img . '/case-studies/fitforgolf/logo.png' ); ?>" width="256" height="224" alt="Fit For Golf logo" class="logo-img" loading="eager" decoding="async">
-			<h2>Revolutionize Your Golf Game At 50+ With Fit For Golf:<br> One Day At A Time</h2>
+			<h1>Revolutionize Your Golf Game At 50+ With Fit For Golf:<br> One Day At A Time</h1>
 			<img src="<?php echo esc_url( $img . '/case-studies/fitforgolf/devices.webp' ); ?>" width="1184" height="665" alt="devices" class="devices-img" loading="eager" decoding="async">
 		</div>
 	</div>

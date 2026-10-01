@@ -136,6 +136,8 @@
   border-radius: 5px;
   font-weight: 500;
   font-size: 14px;
+  appearance: none;
+  -webkit-appearance: none;
   letter-spacing: 0.01em;
   cursor: pointer;
   border: 1.5px solid transparent;

@@ -42,7 +42,15 @@
       /* Show matching panel */
       var target = tab.dataset.target;
       var panel  = drop.querySelector('#hp-' + target);
-      if (panel) panel.classList.remove('hp-panel--hidden');
+      if (!panel) return;
+
+      /* Hydrate from <template> the first time this panel is opened */
+      if (!panel.childElementCount) {
+        var tpl = document.getElementById('tpl-' + target);
+        if (tpl) panel.appendChild(tpl.content.cloneNode(true));
+      }
+
+      panel.classList.remove('hp-panel--hidden');
     });
   }
 

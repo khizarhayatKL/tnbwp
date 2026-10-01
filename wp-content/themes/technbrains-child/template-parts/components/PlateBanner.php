@@ -11,7 +11,7 @@ $mod = get_query_var( 'component_modifier_classes', '' );
 			<div class="left">
 				<?php tnb_breadcrumb_html(); ?>
 				<h4>PlateTalk</h4>
-				<h2>App Bridging Communication and Transportation</h2>
+				<h1>App Bridging Communication and Transportation</h1>
 				<p>PlateTalk is an innovative application that redefines how individuals interact with transportation systems. Designed to simplify vehicle management and enhance real-time communication, the app allows users to register their vehicles, track locations, and create a connected social ecosystem for drivers. Built by TechnBrains, PlateTalk introduces a unique fusion of transportation technology and social media, empowering users to take control of their vehicle data while promoting public safety.</p>
 				<button type="button" class="plateBtn popup-trigger">Talk to Our Experts</button>
 			</div>

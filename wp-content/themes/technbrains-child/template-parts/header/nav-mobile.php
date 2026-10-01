@@ -166,7 +166,8 @@ $chev10 = '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBo
 										Hire Developers <?php echo $chev12; ?>
 									</a>
 								</div>
-								<ul class="child" id="mob-hire" hidden>
+								<ul class="child" id="mob-hire" hidden></ul>
+								<template id="mob-hire-tpl">
 <li class="mob-view-all"><a href="<?php echo esc_url(home_url('/hire-software-developers/')); ?>">Hire Software Developers</a></li>
 									<li class="has-child">
 										<a href="#" class="link" data-inner="hire-mobile" aria-expanded="false">
@@ -188,10 +189,7 @@ $chev10 = '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBo
 										</a>
 										<ul id="mob-hire-backend" hidden><?php tnb_mobile_nav_list($hire_backend, $current_path); ?></ul>
 									</li>
-																		
-
-
-								</ul>
+								</template>
 							</li>
 
 							<!-- ── Services ─────────────────────────────────────────────── -->
@@ -201,7 +199,8 @@ $chev10 = '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBo
 										Services <?php echo $chev12; ?>
 									</a>
 								</div>
-								<ul class="child" id="mob-services" hidden>
+								<ul class="child" id="mob-services" hidden></ul>
+								<template id="mob-services-tpl">
 
 									<li class="has-child">
 										<a href="#" class="link" data-inner="svc-services" aria-expanded="false">
@@ -231,7 +230,7 @@ $chev10 = '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBo
 										<ul id="mob-svc-emerging" hidden><?php tnb_mobile_nav_list($svc_emerging, $current_path); ?></ul>
 									</li>
 
-								</ul>
+								</template>
 							</li>
 
 							<!-- ── Industries ───────────────────────────────────────────── -->
@@ -241,11 +240,11 @@ $chev10 = '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBo
 										Industries <?php echo $chev12; ?>
 									</a>
 								</div>
-								<ul class="child" id="mob-industries" hidden>
+								<ul class="child" id="mob-industries" hidden></ul>
+								<template id="mob-industries-tpl">
 									<?php tnb_mobile_nav_list($industry_menu, $current_path); ?>
-																		<li><a href="<?php echo esc_url(home_url('/industries/')); ?>">View All Industries</a></li>
-									<!-- <li><a href="<?php // echo esc_url(home_url('/industries/')); ?>">View All Industries</a></li> -->
-								</ul>
+									<li><a href="<?php echo esc_url(home_url('/industries/')); ?>">View All Industries</a></li>
+								</template>
 							</li>
 
 							<!-- ── Case Studies ──────────────────────────────────────────── -->
@@ -255,17 +254,16 @@ $chev10 = '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBo
 										Case Studies <?php echo $chev12; ?>
 									</a>
 								</div>
-								<ul class="child" id="mob-cases" hidden>
+								<ul class="child" id="mob-cases" hidden></ul>
+								<template id="mob-cases-tpl">
 									<li><a href="<?php echo esc_url(home_url('/case-studies/qpon/')); ?>">Qpon</a></li>
 									<li><a href="<?php echo esc_url(home_url('/case-studies/fixcarsharer/')); ?>">FixCarSharer</a></li>
 									<li><a href="<?php echo esc_url(home_url('/case-studies/built-by-determination/')); ?>">BuiltByDetermination</a></li>
 									<li><a href="<?php echo esc_url(home_url('/case-studies/white-tail/')); ?>">White Tail Almanac</a></li>
 									<li><a href="<?php echo esc_url(home_url('/case-studies/the-wedding-app/')); ?>">The Wedding App</a></li>
 									<li><a href="<?php echo esc_url(home_url('/case-studies/plate-talk/')); ?>">Plate Talk</a></li>
-									<!-- <li><a href="#">Preferred Ride</a></li>
-									<li><a href="#">Pure&#8217;d</a></li> -->
 									<li><a href="<?php echo esc_url(home_url('/case-studies/')); ?>">View All Case Studies</a></li>
-								</ul>
+								</template>
 							</li>
 
 							<!-- ── About ────────────────────────────────────────────────── -->
@@ -275,7 +273,8 @@ $chev10 = '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBo
 										About <?php echo $chev12; ?>
 									</a>
 								</div>
-								<ul class="child" id="mob-about" hidden>
+								<ul class="child" id="mob-about" hidden></ul>
+								<template id="mob-about-tpl">
 
 									<li>
 										<a href="<?php echo esc_url(home_url('/about-us/')); ?>" <?php echo (strpos($current_path, '/about-us') !== false) ? ' class="active"' : ''; ?>>About Us</a>
@@ -292,7 +291,7 @@ $chev10 = '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBo
 										<a href="<?php echo esc_url(home_url('/contact-us/')); ?>" <?php echo (strpos($current_path, '/contact-us') !== false) ? ' class="active"' : ''; ?>>Contact Us</a>
 									</li>
 
-								</ul>
+								</template>
 							</li>
 
 							<!-- ── Blogs ────────────────────────────────────────────────── -->

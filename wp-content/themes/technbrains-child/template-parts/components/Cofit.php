@@ -47,6 +47,7 @@ $screen_cfg = wp_json_encode( array(
 			<div class="Main-box">
 				<div class="Inner-box1">
 					<img src="<?php echo esc_url( $img . '/case-studies/cofit/Case-logo.webp' ); ?>" width="192" height="172" alt="CoFit365 logo" loading="eager" decoding="async">
+					<h1 class="screen-reader-text">CoFit365: A Health &amp; Fitness Social Network App</h1>
 					<p>Tackle the dual challenges of isolation and inactivity exacerbated by technology</p>
 				</div>
 				<div class="Inner-box2">
@@ -55,7 +56,7 @@ $screen_cfg = wp_json_encode( array(
 			</div>
 			<div class="Intro-sec">
 				<div class="Intro-Hdng">
-					<h1>Introduction</h1>
+					<h2>Introduction</h2>
 				</div>
 				<div class="Intro-decs">
 					<div class="Main-boxes">
@@ -111,7 +112,7 @@ $screen_cfg = wp_json_encode( array(
 				<img src="<?php echo esc_url( $img . '/case-studies/cofit/Second-Sec-leftimg.webp' ); ?>" width="900" height="450" alt="Business goal" loading="lazy" decoding="async">
 			</div>
 			<div class="Busi-Contect-box">
-				<h1 class="Comm-heding">Business<span> Goal</span></h1>
+				<h2 class="Comm-heding">Business<span> Goal</span></h2>
 				<p>With our app, CoFit365 successfully achieved multiple business goals. We enhanced community engagement, combating isolation. We promoted healthier lifestyles through exercise and wellness. We facilitated connections, strengthening relationships. Additionally, we supported local businesses, fostering economic growth. Our app has proven instrumental in achieving these objectives.</p>
 			</div>
 		</div>
@@ -122,7 +123,7 @@ $screen_cfg = wp_json_encode( array(
 <section class="cofit-sec-4">
 	<div class="container">
 		<div class="Fourth-Inner">
-			<h1 class="Comm-heding">Pain <span>Areas</span></h1>
+			<h2 class="Comm-heding">Pain <span>Areas</span></h2>
 			<div class="F-Sec-descri">
 				<div>
 					<p>User Adoption</p>
@@ -143,7 +144,7 @@ $screen_cfg = wp_json_encode( array(
 	<div class="container">
 		<div class="Approach">
 			<div class="Approach-Contect-box">
-				<h1 class="Comm-heding">TechnBrains <span>Approach</span></h1>
+				<h2 class="Comm-heding">TechnBrains <span>Approach</span></h2>
 				<p>Technbrain's approach to building the CoFit365 app is impressive. They excel in design, development, and cloud support, leveraging technologies like Google Firebase, LEMP Stack, React Native, and Laravel. With AWS hosting, they ensure reliability for a global audience on iOS and Android. Their commitment to combating isolation and promoting well-being, including support for local businesses and communities, is commendable.</p>
 			</div>
 			<div class="Approach-Image-box">
@@ -158,7 +159,7 @@ $screen_cfg = wp_json_encode( array(
 	<div class="container">
 		<div class="Sec-six-Inner">
 			<div class="top-hding">
-				<h1>Professional Hybird<span> App Development </span></h1>
+				<h2>Professional Hybird<span> App Development </span></h2>
 				<p>Professional Hybird App Development As a professional Hybrid App Development company, TechnBrains excelled in creating the CoFit365 app with the following key strategies</p>
 			</div>
 			<div class="Imagebox-Content">
@@ -237,15 +238,28 @@ $screen_cfg = wp_json_encode( array(
 		<div class="Sec-Eight-Inner">
 			<img src="<?php echo esc_url( $img . '/case-studies/cofit/Sec-Eight-Left.webp' ); ?>" width="630" height="603" alt="Results and Achievements" loading="lazy" decoding="async">
 			<div class="Content-Side">
-				<h1>Results &amp; <br><span>Achievements</span></h1>
+				<h2>Results &amp; <br><span>Achievements</span></h2>
 				<div class="counters">
-					<?php for ( $i = 0; $i < 5; $i++ ) : ?>
 					<div class="counter-box">
-						<span class="counterNo" data-counter-target="100">0</span>
+						<span class="counterNo" data-counter-target="100">100</span>
 						<span>k+</span>
 						<h4>App Downloads</h4>
 					</div>
-					<?php endfor; ?>
+					<div class="counter-box">
+						<span class="counterNo" data-counter-target="50">50</span>
+						<span>k+</span>
+						<h4>Active Users</h4>
+					</div>
+					<div class="counter-box">
+						<span class="counterNo" data-counter-target="95">95</span>
+						<span>%</span>
+						<h4>User Satisfaction</h4>
+					</div>
+					<div class="counter-box">
+						<span class="counterNo" data-counter-target="30">30</span>
+						<span>+</span>
+						<h4>Countries Reached</h4>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -14,6 +14,7 @@ $mod = get_query_var( 'component_modifier_classes', '' );
 			<div class="ban-logo">
 				<img src="<?php echo esc_url( $img . '/case-studies/fixcarsharer/fix-logo.png' ); ?>" width="262" height="201" alt="FixCarSharer logo" loading="eager" decoding="async">
 			</div>
+			<h1 class="screen-reader-text">FixCarSharer: A User-Centric Carpooling App</h1>
 		</div>
 	</div>
 </section>

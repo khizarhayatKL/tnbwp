@@ -64,7 +64,7 @@ $flow_img_thumb = esc_url( $img . '/case-studies/tatt-ai/user-flow-2.webp' );
 		<div class="main">
 			<div class="text">
 				<img src="<?php echo esc_url( $img . '/case-studies/tatt-ai/logo-2x.png' ); ?>" width="192" height="47" alt="Tatt.AI logo" loading="eager" decoding="async">
-				<h2>Transforming <br> <span>Tattoo Artistry</span> with AI-Powered Innovation</h2>
+				<h1>Transforming <br> <span>Tattoo Artistry</span> with AI-Powered Innovation</h1>
 				<p>Tatt.ai is a cutting-edge mobile application revolutionizing the tattoo industry by seamlessly integrating AI and creativity. Designed for tattoo artists and enthusiasts, the app leverages AI-driven text-to-image generation and intuitive customization tools to bring imaginative tattoo ideas to life. From designing tattoos to on-hand placements and direct artist connections, Tatt.ai enhances the entire tattoo creation process.</p>
 				<button class="tnb-popup-trigger slideHOv">Talk to Our Experts</button>
 			</div>

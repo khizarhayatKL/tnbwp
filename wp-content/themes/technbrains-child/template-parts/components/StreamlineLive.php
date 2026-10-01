@@ -10,7 +10,7 @@ $img = get_stylesheet_directory_uri() . '/assets/images';
 		<div class="banner-grid">
 			<div class="left-info">
 				<img src="<?php echo esc_url( $img . '/case-studies/streamlive/stream-logo.png' ); ?>" width="140" height="140" alt="Streamline Live logo" class="logo-img" loading="eager" decoding="async">
-				<h2>Streamline Live</h2>
+				<h1>Streamline Live</h1>
 				<h4>By TechnBrains</h4>
 				<p>A groundbreaking location-based social media platform for content sharing. Amplify your content, engage in real-time, and grow your network. Tailored for success in the USA market.</p>
 				<img src="<?php echo esc_url( $img . '/case-studies/streamlive/appstore.png' ); ?>" width="185" height="50" class="app-logo" alt="App store logo" loading="lazy" decoding="async">

@@ -27,80 +27,90 @@ $custom_class = get_sub_field( 'cshg_custom_class' );
 $title        = get_sub_field( 'cshg_title' );
 $description  = get_sub_field( 'cshg_description' );
 
-$posts = get_posts( array(
-	'post_type'              => 'case_study',
-	'post_status'            => 'publish',
-	'posts_per_page'         => -1,
-	'orderby'                => 'date',
-	'order'                  => 'DESC',
-	'no_found_rows'          => true,
-	'update_post_meta_cache' => false,
-) );
+// PERF-6: cache the fully hydrated cards + industry terms, not just the query —
+// the real per-request cost here is the N+1 get_field()/get_the_terms() calls
+// per card. See inc/perf-query-cache.php.
+$csh_grid_data = tnb_perf_cache_remember( 'tnb_cs_filtered_grid_data', 6 * HOUR_IN_SECONDS, function () {
+	$posts = get_posts( array(
+		'post_type'              => 'case_study',
+		'post_status'            => 'publish',
+		'posts_per_page'         => -1,
+		'orderby'                => 'date',
+		'order'                  => 'DESC',
+		'no_found_rows'          => true,
+		'update_post_meta_cache' => false,
+	) );
 
-if ( empty( $posts ) ) {
-	return;
-}
-
-$plain = static function ( $html ): string {
-	$text = wp_strip_all_tags( (string) $html );
-	return trim( preg_replace( '/\s+/', ' ', $text ) );
-};
-
-// Same 4-color palette used by the Coverflow slider's default gradient
-// (case-studies-coverflow.php) — rotated by position since case_study posts
-// have no per-post color field.
-$palette = array(
-	array( 'start' => '#ff0004', 'end' => '#a60103' ),
-	array( 'start' => '#17324f', 'end' => '#0c2340' ),
-	array( 'start' => '#2f6f68', 'end' => '#17403c' ),
-	array( 'start' => '#3a7bd5', 'end' => '#1b3d6d' ),
-);
-
-$cards = array();
-foreach ( $posts as $i => $post ) {
-	$id = $post->ID;
-
-	$card_title = $plain( get_field( 'cs_hero_headline', $id ) );
-	if ( '' === $card_title ) {
-		continue; // no headline — nothing to show on a card
+	if ( empty( $posts ) ) {
+		return array( 'cards' => array(), 'industry_terms' => array() );
 	}
 
-	$terms   = get_the_terms( $id, 'case_study_industry' );
-	$terms   = is_array( $terms ) ? $terms : array();
-	$eyebrow = implode( ' / ', wp_list_pluck( $terms, 'name' ) );
-	$tags    = implode( ',', wp_list_pluck( $terms, 'slug' ) );
+	$plain = static function ( $html ): string {
+		$text = wp_strip_all_tags( (string) $html );
+		return trim( preg_replace( '/\s+/', ' ', $text ) );
+	};
 
-	// Featured image only for the grid card — unlike the coverflow slider,
-	// this grid wants the real per-post photo, not the generic hero banner
-	// (cs_hero_bg is intentionally not used here).
-	$image_url = get_the_post_thumbnail_url( $id, 'large' );
-
-	$manual_start = get_field( 'cs_card_color_start', $id );
-	$manual_end   = get_field( 'cs_card_color_end', $id );
-	$color        = ( $manual_start && $manual_end )
-		? array( 'start' => $manual_start, 'end' => $manual_end )
-		: $palette[ $i % count( $palette ) ];
-
-	$cards[] = array(
-		'title'    => $card_title,
-		'desc'     => $plain( get_field( 'cs_hero_lede', $id ) ),
-		'image'    => $image_url,
-		'eyebrow'  => $eyebrow,
-		'tags'     => $tags,
-		'url'      => get_permalink( $id ),
-		'color'    => $color,
+	// Same 4-color palette used by the Coverflow slider's default gradient
+	// (case-studies-coverflow.php) — rotated by position since case_study posts
+	// have no per-post color field.
+	$palette = array(
+		array( 'start' => '#ff0004', 'end' => '#a60103' ),
+		array( 'start' => '#17324f', 'end' => '#0c2340' ),
+		array( 'start' => '#2f6f68', 'end' => '#17403c' ),
+		array( 'start' => '#3a7bd5', 'end' => '#1b3d6d' ),
 	);
-}
+
+	$cards = array();
+	foreach ( $posts as $i => $post ) {
+		$id = $post->ID;
+
+		$card_title = $plain( get_field( 'cs_hero_headline', $id ) );
+		if ( '' === $card_title ) {
+			continue; // no headline — nothing to show on a card
+		}
+
+		$terms   = get_the_terms( $id, 'case_study_industry' );
+		$terms   = is_array( $terms ) ? $terms : array();
+		$eyebrow = implode( ' / ', wp_list_pluck( $terms, 'name' ) );
+		$tags    = implode( ',', wp_list_pluck( $terms, 'slug' ) );
+
+		// Featured image only for the grid card — unlike the coverflow slider,
+		// this grid wants the real per-post photo, not the generic hero banner
+		// (cs_hero_bg is intentionally not used here).
+		$image_url = get_the_post_thumbnail_url( $id, 'large' );
+
+		$manual_start = get_field( 'cs_card_color_start', $id );
+		$manual_end   = get_field( 'cs_card_color_end', $id );
+		$color        = ( $manual_start && $manual_end )
+			? array( 'start' => $manual_start, 'end' => $manual_end )
+			: $palette[ $i % count( $palette ) ];
+
+		$cards[] = array(
+			'title'    => $card_title,
+			'desc'     => $plain( get_field( 'cs_hero_lede', $id ) ),
+			'image'    => $image_url,
+			'eyebrow'  => $eyebrow,
+			'tags'     => $tags,
+			'url'      => get_permalink( $id ),
+			'color'    => $color,
+		);
+	}
+
+	$industry_terms = get_terms( array(
+		'taxonomy'   => 'case_study_industry',
+		'hide_empty' => true,
+	) );
+	$industry_terms = is_wp_error( $industry_terms ) ? array() : $industry_terms;
+
+	return array( 'cards' => $cards, 'industry_terms' => $industry_terms );
+} );
+
+$cards           = $csh_grid_data['cards'];
+$industry_terms  = $csh_grid_data['industry_terms'];
 
 if ( empty( $cards ) ) {
 	return;
 }
-
-$industry_terms = get_terms( array(
-	'taxonomy'   => 'case_study_industry',
-	'hide_empty' => true,
-) );
-$industry_terms = is_wp_error( $industry_terms ) ? array() : $industry_terms;
 ?>
 <section class="csh-section<?php echo $custom_class ? ' ' . esc_attr( $custom_class ) : ''; ?>" data-csh-filter-wrap>
 	<div class="csh-container">

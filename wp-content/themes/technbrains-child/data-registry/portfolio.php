@@ -5,7 +5,7 @@ return array(
 	'schemas'    => array(),
 	'mock_data'  => array(
 		'portfolio_banner'    => array(
-			'head_text' => 'Our <span>Portfolio</span>',
+			'head_text' => 'Case Studies: <span>Real Projects</span>, Real Results Across Industries',
 			'content'   => 'TechnBrains specializes in providing solutions that deliver tangible results across various industries. Every project we embark upon is aimed at enhancing our clients\' profitability. Reach out to us today to kickstart your next major endeavor!',
 		),
 		'case_study_card_list' => array(

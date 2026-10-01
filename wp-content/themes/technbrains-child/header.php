@@ -29,14 +29,26 @@ if ( defined( 'TNB_USE_NEW_LAYOUT' ) && TNB_USE_NEW_LAYOUT ) : ?>
   "@type": "Organization",
   "name": "TechnBrains",
   "legalName": "KoderLabs LLC",
-  "url": "https://www.technbrains.com",
+  "url": "https://www.technbrains.com/",
   "description": "TechnBrains is a software development and IT staff augmentation company that helps businesses build production-ready digital products and scale teams with pre-vetted senior developers. Services include mobile app development, web platforms, AI systems, custom software, dedicated teams, and staff augmentation across healthcare, fintech, logistics, SaaS, and enterprise platforms.",
   "foundingDate": "2013",
+  "telephone": "+1-833-888-6032",
+  "email": "contact@technbrains.com",
   "address": {
     "@type": "PostalAddress",
-    "addressLocality": "Dallas",
+    "streetAddress": "15305 Dallas Pkwy, 12th Floor, Suite 1257",
+    "addressLocality": "Addison",
     "addressRegion": "TX",
+    "postalCode": "75001",
     "addressCountry": "US"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+1-833-888-6032",
+    "email": "contact@technbrains.com",
+    "contactType": "sales",
+    "areaServed": "US",
+    "availableLanguage": "English"
   },
   "areaServed": [
     { "@type": "Country", "name": "United States" },
@@ -82,7 +94,7 @@ if ( defined( 'TNB_USE_NEW_LAYOUT' ) && TNB_USE_NEW_LAYOUT ) : ?>
         "itemOffered": {
           "@type": "Service",
           "name": "Mobile App Development",
-          "url": "https://www.technbrains.com/mobile-app-development"
+          "url": "https://www.technbrains.com/mobile-app-development/"
         }
       },
       {
@@ -90,7 +102,7 @@ if ( defined( 'TNB_USE_NEW_LAYOUT' ) && TNB_USE_NEW_LAYOUT ) : ?>
         "itemOffered": {
           "@type": "Service",
           "name": "Custom Software Development",
-          "url": "https://www.technbrains.com/custom-software-development"
+          "url": "https://www.technbrains.com/custom-software-development/"
         }
       },
       {
@@ -106,7 +118,7 @@ if ( defined( 'TNB_USE_NEW_LAYOUT' ) && TNB_USE_NEW_LAYOUT ) : ?>
         "itemOffered": {
           "@type": "Service",
           "name": "Staff Augmentation",
-          "url": "https://www.technbrains.com/staff-augmentation"
+          "url": "https://www.technbrains.com/staff-augmentation/"
         }
       },
       {
@@ -114,7 +126,7 @@ if ( defined( 'TNB_USE_NEW_LAYOUT' ) && TNB_USE_NEW_LAYOUT ) : ?>
         "itemOffered": {
           "@type": "Service",
           "name": "Dedicated Development Teams",
-          "url": "https://www.technbrains.com/hire-dedicated-team"
+          "url": "https://www.technbrains.com/hire-dedicated-team/"
         }
       },
       {
@@ -122,7 +134,7 @@ if ( defined( 'TNB_USE_NEW_LAYOUT' ) && TNB_USE_NEW_LAYOUT ) : ?>
         "itemOffered": {
           "@type": "Service",
           "name": "Web App Development",
-          "url": "https://www.technbrains.com/web-app-development"
+          "url": "https://www.technbrains.com/web-app-development/"
         }
       }
     ]
@@ -159,9 +171,6 @@ if ( defined( 'TNB_USE_NEW_LAYOUT' ) && TNB_USE_NEW_LAYOUT ) : ?>
 			}, <?php echo ( function_exists( 'tnb_page_has_layout' ) && tnb_page_has_layout( 'lp_hero' ) ) ? '0' : '3500'; ?>);  
 		});
 	</script>
-	<script id="hs-script-loader"
-            strategy="lazyOnload"
-            src="//js.hs-scripts.com/19591491.js"></script>
 <!-- End Google Tag Manager -->
 </head>
   <body <?php body_class( is_front_page() ? 'homepage-revamp page-homepage' : 'homepage-revamp' ); ?>><?php wp_body_open(); ?>

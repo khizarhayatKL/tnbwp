@@ -64,9 +64,13 @@ function tnb_register_case_study_cpt(): void {
  * Registers the Industry taxonomy for case_study posts.
  *
  * Flat/tag-like (not hierarchical) — powers the filter tabs on the "Browse Case
- * Studies By Industry" grid (case-studies-filtered-grid.php). rewrite is false:
- * this taxonomy has no public archive/permalink of its own, so no rewrite-rule
- * flush is needed when adding it (unlike the CPT's own slug above).
+ * Studies By Industry" grid (case-studies-filtered-grid.php) via get_the_terms()/
+ * get_terms() server-side lookups only. rewrite is false and public is false:
+ * this taxonomy has no public archive/permalink of its own — public was previously
+ * true, which contradicted that intent by exposing a real, indexable
+ * ?case_study_industry={slug} archive (crawlable, sitemapped, no meta description
+ * of its own — SMAP-2). show_ui/show_in_rest stay true so it's still manageable
+ * in wp-admin and Gutenberg; only the public-facing archive is disabled.
  */
 add_action( 'init', 'tnb_register_case_study_industry_tax' );
 function tnb_register_case_study_industry_tax(): void {
@@ -86,7 +90,8 @@ function tnb_register_case_study_industry_tax(): void {
 				'menu_name'     => 'Industry',
 			),
 			'hierarchical'      => false,
-			'public'            => true,
+			'public'            => false,
+			'publicly_queryable' => false,
 			'show_ui'           => true,
 			'show_admin_column' => true,
 			'show_in_nav_menus' => false,
@@ -103,11 +108,15 @@ function tnb_register_case_study_industry_tax(): void {
  * every request is expensive, and register_post_type() alone does not regenerate the
  * stored rules. Bump the version string to force a re-flush.
  * Version 2: rewrite slug changed from singular case-study to plural case-studies.
+ * Version 3: live's rewrite rules had gone stale (every /case-studies/{legacy-slug}/
+ * page — cofit, fixcarsharer, soccerfy, etc. — was falling through to redirect_canonical()
+ * and 301ing to the homepage instead of resolving via the request filter in
+ * inc/case-studies.php), even though the guard already read '2'. Forcing one more flush.
  */
 add_action( 'init', 'tnb_case_study_flush_rewrite', 1000 );
 function tnb_case_study_flush_rewrite(): void {
-	if ( '2' !== get_option( 'tnb_case_study_rw_version' ) ) {
+	if ( '3' !== get_option( 'tnb_case_study_rw_version' ) ) {
 		flush_rewrite_rules( false );
-		update_option( 'tnb_case_study_rw_version', '2' );
+		update_option( 'tnb_case_study_rw_version', '3' );
 	}
 }

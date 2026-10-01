@@ -10,7 +10,7 @@ $img = get_stylesheet_directory_uri() . '/assets/images';
 			<div class="left-info">
 				<?php tnb_breadcrumb_html(); ?>
 				<img src="<?php echo esc_url( $img . '/case-studies/support-xdr/Logo.png' ); ?>" width="240" height="65" alt="Support XDR logo" loading="eager" decoding="async">
-				<h2>Empower your web browsing experience</h2>
+				<h1>Empower your web browsing experience</h1>
 				<p>Support XDR – the ultimate solution for intelligent bookmark management and automated keyword crawling</p>
 				<div class="tech-grid">
 					<div class="tech-info">

@@ -14,7 +14,7 @@ $img = get_stylesheet_directory_uri() . '/assets/images';
 			<div class="logo">
 				<img src="<?php echo esc_url( $img . '/case-studies/white-tail/Whitetail-Almanac-Logo.webp' ); ?>" width="701" height="201" alt="Whitetail Almanac banner" loading="eager" decoding="async">
 			</div>
-			<h2>Whitetail Almanac The Ultimate Deer Hunting Toolbox You Need</h2>
+			<h1>Whitetail Almanac The Ultimate Deer Hunting Toolbox You Need</h1>
 		</div>
 
 		<div class="banner-grid">
